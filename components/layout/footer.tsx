@@ -167,6 +167,19 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <button
+                  onClick={() => {
+                    if (typeof window !== "undefined" && window.showCookieConsent) {
+                      window.showCookieConsent()
+                    }
+                  }}
+                  className="text-sm text-muted-foreground hover:text-brand transition-colors inline-flex items-center gap-1 group"
+                >
+                  Gestionare cookie-uri
+                  <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                </button>
+              </li>
             </ul>
           </div>
         </div>

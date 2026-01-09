@@ -1,11 +1,12 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Inter, Manrope } from "next/font/google"
-import Script from "next/script"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
+import { CookieConsent } from "@/components/cookie-consent"
+import { AnalyticsLoader } from "@/components/analytics-loader"
 import "./globals.css"
 
 const inter = Inter({
@@ -107,46 +108,9 @@ export default function RootLayout({
   return (
     <html lang="ro" suppressHydrationWarning>
       <body className={`${inter.variable} ${manrope.variable} font-sans antialiased`}>
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-95D6D580HV"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-95D6D580HV');
-          `}
-        </Script>
-        {/* Meta Pixel */}
-        <Script id="meta-pixel" strategy="afterInteractive">
-          {`
-            !function (f, b, e, v, n, t, s) {
-              if (f.fbq) return; n = f.fbq = function () {
-                n.callMethod ?
-                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-              };
-              if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
-              n.queue = []; t = b.createElement(e); t.async = !0;
-              t.src = v; s = b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t, s)
-            }(window, document, 'script',
-              'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '1056620019544195');
-            fbq('track', 'PageView');
-          `}
-        </Script>
-        <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: "none" }}
-            src="https://www.facebook.com/tr?id=1056620019544195&ev=PageView&noscript=1"
-            alt=""
-          />
-        </noscript>
+        {/* Analytics - Only loaded after consent */}
+        <AnalyticsLoader />
+        
         <ThemeProvider>
           {/* Skip to content link for accessibility */}
           <a
@@ -159,6 +123,11 @@ export default function RootLayout({
           <main id="main-content">{children}</main>
           <Footer />
         </ThemeProvider>
+        
+        {/* Cookie Consent Banner */}
+        <CookieConsent />
+        
+        {/* Vercel Analytics - Privacy-focused, always enabled */}
         <Analytics />
       </body>
     </html>
