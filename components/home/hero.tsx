@@ -91,7 +91,7 @@ export function Hero() {
 
       {/* Main Content - Left aligned on desktop, centered on mobile */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 relative z-10">
-        <div className="max-w-3xl lg:max-w-2xl mx-auto lg:mx-0 text-center lg:text-left">
+        <div className="max-w-3xl lg:max-w-2xl mx-auto lg:mx-0 text-center lg:text-left py-2">
           {/* Badge */}
           <div
             ref={badgeRef}
@@ -102,11 +102,11 @@ export function Hero() {
           >
             <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand animate-pulse" />
             <span className="text-xs sm:text-sm font-medium text-foreground/80">
-              Web design in Timisoara - din 2021
+              Web design in Timisoara
             </span>
           </div>
 
-          <h1 className="font-heading text-5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-extrabold tracking-tight leading-[1.1]">
+          <h1 className="font-heading text-5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-extrabold tracking-tight leading-tight">
             <AnimatedText text="De la idee la soluție" className="block text-foreground" delay={200} />
             <AnimatedText text="digitală pentru" className="block mt-1 sm:mt-2 text-foreground" delay={500} />
             <span
@@ -147,7 +147,7 @@ export function Hero() {
           </h1>
 
           {/* Subtitle */}
-          <div className="mt-5 sm:mt-6 md:mt-8 max-w-xl mx-auto lg:mx-0 overflow-hidden">
+          <div className="mt-5 sm:mt-6 md:mt-8 max-w-xl mx-auto lg:mx-0">
             <p
               className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed text-pretty"
               style={{
@@ -156,8 +156,7 @@ export function Hero() {
                 transform: "translateY(20px)",
               }}
             >
-              Transformăm viziunea ta într-un site web care atrage clienți, convertește vizitatori și domină rezultatele
-              Google.
+              Transformăm viziunea ta într-un site care atrage clienți, convertește vizitatori și crește vizibilitatea în Google.
             </p>
           </div>
 
@@ -202,7 +201,7 @@ export function Hero() {
           >
             <span className="flex items-center gap-1.5 sm:gap-2">
               <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-500 animate-pulse" />
-              SEO-first approach
+              SEO - în prim plan
             </span>
             <span className="flex items-center gap-1.5 sm:gap-2">
               <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-brand" />

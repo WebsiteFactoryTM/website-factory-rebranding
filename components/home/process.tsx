@@ -15,19 +15,19 @@ const processSteps = [
   {
     step: 2,
     title: "Design & Prototip",
-    description: "Creăm wireframe-uri și design-uri interactive. Validăm fiecare decizie înainte de implementare.",
+    description: "Creăm wireframe-uri și design-uri interactive. Validăm deciziile importante înainte de implementare.",
     icon: PenTool,
   },
   {
     step: 3,
     title: "Dezvoltare",
-    description: "Construim site-ul cu tehnologii moderne, cod curat și optimizare SEO din prima zi.",
+    description: "Construim site-ul cu tehnologii moderne, cod curat și optimizare SEO în prim plan.",
     icon: Code,
   },
   {
     step: 4,
     title: "Testare & QA",
-    description: "Testăm pe toate dispozitivele, optimizăm performanța și verificăm securitatea.",
+    description: "Testăm pe toate dispozitivele împreună cu clientul, optimizăm performanța și verificăm securitatea.",
     icon: CheckCircle,
   },
   {
@@ -39,7 +39,7 @@ const processSteps = [
   {
     step: 6,
     title: "Suport & Creștere",
-    description: "Oferim mentenanță continuă, monitorizare și optimizări bazate pe date reale.",
+    description: "Unde e cazul, oferim mentenanță continuă, monitorizare și optimizări bazate pe date reale.",
     icon: TrendingUp,
   },
 ]

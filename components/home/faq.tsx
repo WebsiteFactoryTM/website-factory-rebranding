@@ -9,12 +9,12 @@ const faqs = [
   {
     question: "Cât costă crearea unui site web în Timișoara?",
     answer:
-      "Prețul variază în funcție de complexitate. Un site de prezentare începe de la 1500 EUR, iar un magazin online de la 3000 EUR. Oferim consultanță gratuită pentru a stabili exact ce ai nevoie și un preț personalizat.",
+      "Prețul variază în funcție de complexitate. Un site de prezentare poate începe de la 650 EUR, iar un magazin online de la 1000 EUR. Oferim consultanță gratuită pentru a stabili exact ce ai nevoie și un preț în funcție de specificațiile proiectului.",
   },
   {
     question: "Cât durează să creați un website?",
     answer:
-      "Un site de prezentare standard este gata în 2-4 săptămâni. Proiectele complexe precum magazinele online sau aplicațiile custom pot dura 6-12 săptămâni. Respectăm întotdeauna deadline-urile agreate.",
+      "Un site de prezentare standard este gata în 2-4 săptămâni. Proiectele complexe precum magazinele online sau aplicațiile custom pot dura 5-12 săptămâni. Respectăm întotdeauna deadline-urile agreate.",
   },
   {
     question: "Oferiți servicii SEO pentru site-uri în Timișoara?",
@@ -24,12 +24,12 @@ const faqs = [
   {
     question: "Pot să îmi administrez singur site-ul după lansare?",
     answer:
-      "Absolut. Predăm site-uri cu panou de administrare intuitiv și oferim training gratuit. Dacă preferi, avem și pachete de mentenanță lunară pentru gestionarea completă.",
+      "Absolut. Predăm site-uri cu panou de administrare intuitiv și prezentarea platformei. Dacă preferi, avem și pachete de mentenanță lunară pentru gestionarea completă.",
   },
   {
     question: "Ce tehnologii folosiți pentru dezvoltare?",
     answer:
-      "Folosim tehnologii moderne: Next.js, React, TypeScript pentru frontend, și diverse soluții backend în funcție de proiect. Alegem întotdeauna stack-ul optim pentru obiectivele tale specifice.",
+      "Folosim tehnologii moderne: Next.js, React, TypeScript pentru frontend, și diverse soluții backend în funcție de proiect. De asemenea, putem folosi si WordPress pentru proiecte unde nu este nevoie de o platforma custom. Alegem întotdeauna stack-ul optim pentru obiectivele tale specifice.",
   },
 ]
 

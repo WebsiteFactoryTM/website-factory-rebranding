@@ -6,19 +6,19 @@ import { cn } from "@/lib/utils"
 
 const metrics = [
   { value: 150, suffix: "+", label: "Proiecte livrate" },
-  { value: 8, suffix: "+", label: "Ani experiență" },
-  { value: 100, suffix: "%", label: "SEO-first approach" },
-  { value: 50, suffix: "+", label: "Clienți mulțumiți" },
+  { value: 5, suffix: "+", label: "Ani experiență" },
+  { value: 100, suffix: "%", label: "SEO - în prim plan" },
+  { value: 150, suffix: "+", label: "Clienți mulțumiți" },
 ]
 
 const marqueeWords = [
   "Web Design",
   "E-Commerce",
-  "SEO Optimization",
+  "Optimizare SEO",
   "UI/UX Design",
-  "Mobile Apps",
-  "Brand Identity",
-  "Performance",
+  "Aplicații mobile",
+  "Identitate de brand",
+  "Performanță",
   "Conversii",
   "Timișoara",
   "România",

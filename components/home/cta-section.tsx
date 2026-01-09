@@ -122,8 +122,7 @@ export function CTASection() {
           </h2>
 
           <p className="mt-6 text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
-            Hai să discutăm despre proiectul tău. Oferim consultanță gratuită și fără obligații pentru a stabili ce ai
-            nevoie.
+            Hai să povestim despre proiectul tău. Abia așteptăm să te cunoaștem!
           </p>
 
           {/* CTAs */}
@@ -154,7 +153,7 @@ export function CTASection() {
             </span>
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-glow-cyan shadow-lg shadow-glow-cyan/50" />
-              Răspuns în 24h
+              Răspuns în maxim 24h
             </span>
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-glow-violet shadow-lg shadow-glow-violet/50" />

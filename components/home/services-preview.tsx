@@ -11,30 +11,30 @@ const services = [
     id: "creare-website",
     title: "Creare website",
     description:
-      "Site-uri de prezentare care convertesc vizitatori în clienți. Design modern, SEO optimizat, performanță excepțională.",
+      "Site-uri de prezentare structurate clar, rapide, optimizate SEO și construite să aducă cereri și clienți — nu doar să arate bine.",
     href: "/servicii/creare-website",
     icon: Globe,
-    outcomes: ["Vizibilitate în Google", "Design responsive", "Încărcare rapidă"],
+    outcomes: ["Vizibilitate crescută în Google", "Design responsive", "Încărcare rapidă"],
     gradient: "from-brand to-brand-light",
   },
   {
     id: "magazin-online",
     title: "Magazin online",
     description:
-      "E-commerce complet funcțional cu plăți integrate, gestiune stocuri și optimizare pentru vânzări maxime.",
+      "E-commerce complet funcțional cu plăți integrate, sisteme de loializare, gestiune stocuri și gândit pentru vânzări și administrare ușoară.",
     href: "/servicii/magazin-online",
     icon: ShoppingCart,
-    outcomes: ["Plăți securizate", "Gestiune ușoară", "Conversii optimizate"],
+    outcomes: ["Plăți + livrare + facturare", "Filtre, căutare, variante produse", "Checkout optimizat pentru conversii"],
     gradient: "from-glow-violet to-brand",
   },
   {
     id: "aplicatie-mobile",
     title: "Aplicație mobilă",
     description:
-      "Aplicații native și cross-platform pentru iOS și Android. Experiență utilizator perfectă pe orice dispozitiv.",
+      "Aplicații mobile native sau web și cross-platform pentru iOS și Android. UX curat și performanță bună — de la MVP la produs scalabil.",
     href: "/servicii/aplicatie-mobile",
     icon: Smartphone,
-    outcomes: ["iOS & Android", "Performanță nativă", "UX premium"],
+    outcomes: ["iOS & Android (cross-platform)", "Push, conturi, plăți (la nevoie)", "Publicare în store + mentenanță"],
     gradient: "from-glow-cyan to-glow-violet",
   },
 ]
@@ -92,8 +92,7 @@ export function ServicesPreview() {
             Soluții complete pentru <span className="gradient-text">prezența ta digitală</span>
           </h2>
           <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
-            De la site-uri de prezentare la aplicații mobile complexe. Alegem tehnologia potrivită pentru fiecare
-            proiect.
+            De la site-uri de prezentare și magazine online la aplicații mobile complexe. Alegem tehnologia potrivită în funcție de proiectul tău.
           </p>
         </div>
 

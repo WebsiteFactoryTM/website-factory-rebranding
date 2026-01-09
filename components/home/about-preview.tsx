@@ -2,16 +2,16 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight, Users, Award, Clock, Zap } from "lucide-react"
+import { ArrowRight, Users, Award, Clock, Zap, Code2 } from "lucide-react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 
 const stats = [
   { icon: Users, value: "150+", label: "Clienți mulțumiți" },
-  { icon: Award, value: "8+", label: "Ani experiență" },
+  { icon: Award, value: "5+", label: "Ani experiență" },
   { icon: Clock, value: "24h", label: "Timp răspuns" },
-  { icon: Zap, value: "99%", label: "Proiecte livrate la timp" },
+  { icon: Zap, value: "+95%", label: "Proiecte livrate la timp" },
 ]
 
 export function AboutPreview() {
@@ -37,7 +37,7 @@ export function AboutPreview() {
           >
             {/* Main image container with glass effect */}
             <div className="relative aspect-[4/3] rounded-3xl overflow-hidden glass-premium">
-              <Image src="/modern-web-design-agency-team-working-together-in-.jpg" alt="Echipa Website Factory" fill className="object-cover" />
+              <Image src="/despre-websitefactory-timisoara.webp" alt="Echipa Website Factory" fill className="object-cover" />
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-tr from-brand/40 via-transparent to-glow-violet/20" />
 
@@ -45,11 +45,11 @@ export function AboutPreview() {
               <div className="absolute bottom-6 left-6 right-6">
                 <div className="glass-premium rounded-2xl p-4 flex items-center gap-4">
                   <div className="w-12 h-12 rounded-xl bg-brand/20 flex items-center justify-center">
-                    <Award className="w-6 h-6 text-brand" />
+                    <Code2 className="w-6 h-6 text-brand" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-foreground">Top Web Agency</p>
-                    <p className="text-xs text-muted-foreground">Vest România 2024</p>
+                    <p className="text-sm font-semibold text-black">Web Design & Development</p>
+                    <p className="text-xs text-black">Timișoara, România</p>
                   </div>
                 </div>
               </div>
@@ -78,15 +78,13 @@ export function AboutPreview() {
               Despre noi
             </span>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance leading-tight">
-              Creăm experiențe digitale <span className="gradient-text">care transformă afaceri</span>
+              Soluții <span className="gradient-text">personalizate</span> pentru ideile tale
             </h2>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-              Din 2016, ajutăm companii din România și Europa să-și digitalizeze prezența online. Nu suntem doar
-              dezvoltatori - suntem parteneri în creșterea afacerii tale.
+              Suntem o echipă din Timișoara, iar de peste 5 ani ajutăm companii din România și Europa să-și digitalizeze prezența online.
             </p>
             <p className="mt-4 text-muted-foreground leading-relaxed">
-              Fiecare proiect începe cu înțelegerea obiectivelor tale de business. Apoi construim soluții tehnice care
-              nu doar arată bine, ci și <strong className="text-foreground">generează rezultate măsurabile</strong>.
+              Lucrăm transparent, îți explicăm pe înțeles fiecare etapă și te ținem la curent cu progresul. Avem un <strong className="text-foreground">proces clar pentru fiecare proiect, </strong>astfel încât să știi mereu ce urmează și de ce..
             </p>
 
             {/* CTA Button */}
