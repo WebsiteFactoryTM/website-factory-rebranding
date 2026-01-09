@@ -94,7 +94,7 @@ export function FloatingCTA() {
           )}
         >
           <Phone className={cn("w-5 h-5", !isExpanded && "animate-bounce")} />
-          <span className="hidden sm:inline">Vorbește cu noi</span>
+          <span className="hidden sm:inline">Hai să povestim!</span>
         </button>
       </div>
     </div>

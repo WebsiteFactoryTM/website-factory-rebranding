@@ -118,7 +118,7 @@ export function ServiceHero() {
           <p className="mt-6 text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-2xl text-pretty">
             Transformăm ideile în website-uri care <strong className="text-foreground">atrag clienți</strong>,{" "}
             <strong className="text-foreground">convertesc vizitatori</strong> și{" "}
-            <strong className="text-foreground">domină Google</strong>. Design modern, performanță excepțională,
+            <strong className="text-foreground"> cu vizibilitate crescută în motoarele de căutare</strong>. Design modern, performanță excepțională,
             rezultate măsurabile.
           </p>
 
@@ -161,12 +161,12 @@ export function ServiceHero() {
 
             <Link
               href="/portofoliu"
-              className="group flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-border/50 hover:border-brand/50 glass-premium transition-all duration-300"
+              className="group flex items-center justify-center gap-2.5 px-8 py-4 rounded-full border border-border/50 hover:border-brand/50 glass-premium transition-all duration-300"
             >
-              <span className="flex items-center justify-center w-10 h-10 rounded-full bg-brand/10 group-hover:bg-brand/20 transition-colors">
-                <Play className="w-4 h-4 text-brand ml-0.5" />
+              <span className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand/10 group-hover:bg-brand/20 transition-colors">
+                <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand ml-0.5" />
               </span>
-              <span className="font-medium">Vezi exemple</span>
+              <span className="font-medium text-base">Vezi exemple</span>
             </Link>
           </div>
 

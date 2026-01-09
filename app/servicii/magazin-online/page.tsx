@@ -10,7 +10,6 @@ import { EcommerceTechStack } from "@/components/services/ecommerce/ecommerce-te
 import { EcommercePortfolio } from "@/components/services/ecommerce/ecommerce-portfolio"
 import { EcommerceFaq } from "@/components/services/ecommerce/ecommerce-faq"
 import { EcommerceCta } from "@/components/services/ecommerce/ecommerce-cta"
-import { FloatingCtaEcommerce } from "@/components/services/ecommerce/floating-cta-ecommerce"
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Creare Magazin Online Timișoara | eCommerce WooCommerce & Next.js | Website Factory",
@@ -107,7 +106,6 @@ export default function MagazinOnlinePage() {
         <EcommercePortfolio />
         <EcommerceFaq faqs={ecommerceFaqs} />
         <EcommerceCta />
-        <FloatingCtaEcommerce />
       </main>
     </>
   )

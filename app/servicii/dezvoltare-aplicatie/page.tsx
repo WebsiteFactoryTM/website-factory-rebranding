@@ -7,7 +7,6 @@ import { AppProcess } from "@/components/services/apps/app-process"
 import { AppTechStack } from "@/components/services/apps/app-tech-stack"
 import { AppFaq } from "@/components/services/apps/app-faq"
 import { AppCta } from "@/components/services/apps/app-cta"
-import { FloatingCtaApps } from "@/components/services/apps/floating-cta-apps"
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Dezvoltare Aplicații Mobile & Web | React Native, Next.js, SaaS | Website Factory",
@@ -101,7 +100,6 @@ export default function DezvoltareAplicatiePage() {
         <AppTechStack />
         <AppFaq faqs={appFaqs} />
         <AppCta />
-        <FloatingCtaApps />
       </main>
     </>
   )

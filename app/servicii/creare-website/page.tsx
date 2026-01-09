@@ -9,7 +9,6 @@ import { ROICalculator } from "@/components/services/website/roi-calculator"
 import { WebsitePortfolio } from "@/components/services/website/website-portfolio"
 import { ServiceFAQ } from "@/components/services/website/service-faq"
 import { ServiceCTA } from "@/components/services/website/service-cta"
-import { FloatingCTA } from "@/components/services/website/floating-cta"
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Creare Website Timișoara | Web Design Profesional | Website Factory",
@@ -105,7 +104,6 @@ export default function CreareWebsitePage() {
         <WebsitePortfolio />
         <ServiceFAQ faqs={serviceFaqs} />
         <ServiceCTA />
-        <FloatingCTA />
       </main>
     </>
   )

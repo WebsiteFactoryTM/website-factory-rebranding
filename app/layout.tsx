@@ -7,6 +7,7 @@ import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import { CookieConsent } from "@/components/cookie-consent"
 import { AnalyticsLoader } from "@/components/analytics-loader"
+import { FloatingCTA } from "@/components/services/website/floating-cta"
 import "./globals.css"
 
 const inter = Inter({
@@ -126,6 +127,9 @@ export default function RootLayout({
         
         {/* Cookie Consent Banner */}
         <CookieConsent />
+        
+        {/* Floating Contact CTA - Appears on all pages */}
+        <FloatingCTA />
         
         {/* Vercel Analytics - Privacy-focused, always enabled */}
         <Analytics />
