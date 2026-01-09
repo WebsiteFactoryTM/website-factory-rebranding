@@ -33,7 +33,7 @@ const processSteps = [
     icon: Palette,
     title: "Design UX/UI",
     shortTitle: "Design",
-    duration: "Ziua 4-10",
+    duration: "Ziua 4-12",
     description:
       "Creăm un design orientat pe conversie: homepage atractiv, pagini de produs optimizate, coș de cumpărături intuitiv și checkout simplificat pentru mobile.",
     deliverables: ["Wireframes UX", "Design complet", "Prototip interactiv"],
@@ -44,7 +44,7 @@ const processSteps = [
     icon: Database,
     title: "Setup Catalog",
     shortTitle: "Catalog",
-    duration: "Ziua 11-15",
+    duration: "Ziua 13-20",
     description:
       "Structurăm catalogul de produse, setăm categorii, filtre și atribute. Importăm produsele și optimizăm descrierile pentru SEO și conversie.",
     deliverables: ["Structură categorii", "Import produse", "SEO produse"],
@@ -55,7 +55,7 @@ const processSteps = [
     icon: CreditCard,
     title: "Plăți & Livrare",
     shortTitle: "Integrări",
-    duration: "Ziua 16-20",
+    duration: "Ziua 21-25",
     description:
       "Integrăm procesatorii de plăți (card, ramburs, rate), curierii (FanCourier, Sameday, DPD) și sistemele de facturare. Totul automatizat.",
     deliverables: ["Gateway plăți", "Integrare curieri", "Facturare automată"],
@@ -66,7 +66,7 @@ const processSteps = [
     icon: ShoppingBag,
     title: "Funcționalități Extra",
     shortTitle: "Features",
-    duration: "Ziua 21-25",
+    duration: "Ziua 26-30",
     description:
       "Implementăm funcțiile de loializare: puncte de fidelitate, programe referral, wishlist smart, notificări stoc, subscripții și marketing automation.",
     deliverables: ["Sistem loializare", "Marketing automation", "Notificări email"],
@@ -77,7 +77,7 @@ const processSteps = [
     icon: TestTube,
     title: "Testare & QA",
     shortTitle: "Test",
-    duration: "Ziua 26-28",
+    duration: "Ziua 31-35",
     description:
       "Testăm riguros fluxul complet de cumpărare pe toate dispozitivele. Verificăm plățile, livrările, email-urile automate și performanța.",
     deliverables: ["Teste checkout", "Teste plăți", "Optimizare viteză"],
@@ -88,7 +88,7 @@ const processSteps = [
     icon: Rocket,
     title: "Lansare",
     shortTitle: "Launch",
-    duration: "Ziua 29-30",
+    duration: "Ziua 36-37",
     description:
       "Lansăm magazinul live, configurăm Google Analytics eCommerce, setăm tracking conversii și te instruim cum să gestionezi comenzile zilnice.",
     deliverables: ["Magazin live", "Analytics eCommerce", "Training complet"],

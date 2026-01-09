@@ -4,7 +4,6 @@ import * as React from "react"
 import Link from "next/link"
 import { ArrowRight, Play, Sparkles } from "lucide-react"
 import { MagneticButton } from "@/components/ui/magnetic-button"
-import { AnimatedText } from "@/components/ui/animated-text"
 import { FloatingElement } from "@/components/ui/floating-element"
 import { LiquidBlob } from "@/components/ui/liquid-blob"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
@@ -106,11 +105,13 @@ export function Hero() {
             </span>
           </div>
 
-          <h1 className="font-heading text-5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-extrabold tracking-tight leading-tight">
-            <AnimatedText text="De la idee la soluție" className="block text-foreground" delay={200} />
-            <AnimatedText text="digitală pentru" className="block mt-1 sm:mt-2 text-foreground" delay={500} />
+          <h1 className="font-heading text-5xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight">
+            <span className="text-foreground">De la idee la soluție</span>
+            <br />
+            <span className="text-foreground">digitală pentru</span>
+            <br />
             <span
-              className="block mt-1 sm:mt-2 gradient-text-animated"
+              className="gradient-text-animated"
               style={{
                 animation: "fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards",
                 opacity: 0,

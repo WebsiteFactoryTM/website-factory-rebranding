@@ -33,12 +33,12 @@ const serviceFaqs = [
   {
     question: "Cât costă crearea unui website în Timișoara?",
     answer:
-      "Prețurile pentru un website profesional încep de la 450€ pentru un site one-page și ajung la 650€+ pentru site-uri de prezentare complete. Prețul final depinde de numărul de pagini, funcționalități speciale și complexitatea design-ului. Oferim consultanță gratuită pentru a stabili exact ce ai nevoie.",
+      "Prețul variază în funcție de complexitate. Un pagină de prezentare simplă (one-page) poate începe de la 450 EUR, iar un website de prezentare complet (multi-page) de la 650 EUR. Oferim consultanță gratuită pentru a stabili exact ce ai nevoie și un preț în funcție de specificațiile proiectului.",
   },
   {
     question: "Cât durează să creați un website?",
     answer:
-      "Un site de prezentare standard este gata în 2-3 săptămâni. Proiectele mai complexe cu funcționalități custom pot dura 4-6 săptămâni. Lucrăm cu timeline-uri clare și te ținem la curent cu progresul în fiecare etapă.",
+      "Un site de prezentare standard este gata în 2-4 săptămâni. Proiectele complexe precum magazinele online sau aplicațiile custom pot dura 5-12 săptămâni. Respectăm întotdeauna deadline-urile agreate.",
   },
   {
     question: "Site-ul meu va fi optimizat pentru Google (SEO)?",
@@ -63,12 +63,12 @@ const serviceFaqs = [
   {
     question: "Oferiți hosting și domeniu?",
     answer:
-      "Da, ne ocupăm de tot! Includem hosting premium pe servere rapide, certificat SSL gratuit și putem achiziționa domeniul dorit în numele tău. Prețul hosting-ului este de aproximativ 10-15€/lună.",
+      "Da, lucrăm cu parteneri testați și de încredere pentru hosting și domeniu. Oferim o ofertă transparentă și personalizată pentru fiecare proiect.",
   },
   {
     question: "Ce tehnologii folosiți pentru dezvoltare?",
     answer:
-      "Folosim cele mai moderne tehnologii: Next.js, React pentru frontend performant, Tailwind CSS pentru design, și diverse soluții backend în funcție de nevoi. Alegem întotdeauna stack-ul optim pentru obiectivele tale specifice.",
+      "Folosim cele mai moderne tehnologii: Next.js, React pentru frontend performant, Tailwind CSS pentru design, și diverse soluții backend în funcție de nevoi. De asemenea, putem folosi si WordPress pentru proiecte unde nu este nevoie de o platforma custom. Alegem întotdeauna stack-ul optim pentru obiectivele tale specifice.",
   },
 ]
 

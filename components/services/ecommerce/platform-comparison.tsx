@@ -10,15 +10,15 @@ const platforms = [
     id: "woocommerce",
     name: "WooCommerce",
     subtitle: "WordPress + WooCommerce",
-    description: "Soluția clasică, stabilă și dovedită pentru magazine online. Ecosistem vast de plugin-uri și teme.",
+    description: "Soluția clasică, stabilă și dovedită pentru magazine online. Ecosistem vast de plugin-uri si teme testate si verificate.",
     icon: Layers,
     color: "from-purple-500 to-indigo-600",
     idealFor: "Magazine mici-medii, buget controlat",
     features: [
-      { name: "Timp implementare", value: "2-4 săptămâni", positive: true },
+      { name: "Timp implementare", value: "5-8 săptămâni", positive: true },
       { name: "Cost inițial", value: "Accesibil", positive: true },
       { name: "Ecosistem plugin-uri", value: "50,000+", positive: true },
-      { name: "Scalabilitate", value: "Până la ~5000 produse", positive: true },
+      { name: "Scalabilitate", value: "Până la ~7000 produse", positive: true },
       { name: "Performanță", value: "Bună (cu optimizare)", positive: true },
       { name: "Personalizare", value: "Extensivă", positive: true },
       { name: "Mentenanță", value: "Necesită actualizări", positive: false },
@@ -39,9 +39,9 @@ const platforms = [
       "Tehnologie de ultimă generație pentru magazine care cer performanță și scalabilitate enterprise-level.",
     icon: Rocket,
     color: "from-brand to-glow-violet",
-    idealFor: "Magazine mari, high-traffic, custom features",
+    idealFor: "Magazine mari, high-traffic, funcționalități avansate",
     features: [
-      { name: "Timp implementare", value: "4-8 săptămâni", positive: true },
+      { name: "Timp implementare", value: "8-12 săptămâni", positive: true },
       { name: "Cost inițial", value: "Investiție mai mare", positive: false },
       { name: "Ecosistem", value: "Modern, în creștere", positive: true },
       { name: "Scalabilitate", value: "Nelimitată", positive: true },
@@ -230,7 +230,7 @@ export function PlatformComparison() {
               </div>
               <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                 {activePlatform === "woocommerce"
-                  ? "WooCommerce este alegerea ideală pentru magazine cu până la 5000 de produse și buget controlat. Oferă flexibilitate excelentă și o curbă de învățare redusă pentru administrare."
+                  ? "WooCommerce este alegerea ideală pentru magazine cu până la 7000 de produse și buget controlat. Oferă flexibilitate excelentă și o curbă de învățare redusă pentru administrare."
                   : "Next.js + Payload este recomandat pentru branduri care vizează creștere rapidă, volume mari de trafic și doresc o experiență de cumpărare ultra-rapidă pe orice dispozitiv."}
               </p>
               <div className="mt-3 sm:mt-4 flex items-center gap-2 text-xs sm:text-sm text-brand font-medium">

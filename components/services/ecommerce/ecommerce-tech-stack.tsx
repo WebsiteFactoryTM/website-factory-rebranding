@@ -48,17 +48,17 @@ const integrations = [
   },
   {
     category: "Curieri",
-    items: ["FanCourier", "Sameday", "DPD", "Cargus", "GLS", "Urgent"],
+    items: ["FanCourier", "Sameday", "DPD", "Cargus", "GLS"],
     icon: "📦",
   },
   {
     category: "ERP & Facturare",
-    items: ["SmartBill", "Facturis", "Saga", "SAGA", "Oblio", "FacturaStart"],
+    items: ["SmartBill", "Facturis", "SAGA", "Oblio", "FGO"],
     icon: "📊",
   },
   {
     category: "Marketing",
-    items: ["Klaviyo", "Mailchimp", "Facebook Pixel", "Google Ads", "TikTok Pixel", "Hotjar"],
+    items: ["Klaviyo", "Mailchimp", "Meta Pixel", "Google Ads", "TikTok Pixel", "Hotjar"],
     icon: "📈",
   },
 ]

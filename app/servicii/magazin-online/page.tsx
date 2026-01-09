@@ -34,12 +34,12 @@ const ecommerceFaqs = [
   {
     question: "Cât costă să creez un magazin online?",
     answer:
-      "Prețurile pentru un magazin online încep de la 1100€ pentru un shop startup cu până la 100 de produse. Magazinele business cu funcționalități avansate (loializare, ERP, marketing automation) pornesc de la 2500€, iar soluțiile enterprise cu arhitectură headless sunt cotate individual. Oferim consultanță gratuită pentru a stabili exact ce ai nevoie.",
+      "Prețurile pentru un magazin online încep de la 1100€ pentru un shop startup cu până la 100 de produse. Magazinele business cu funcționalități avansate (loializare, ERP, marketing automation) pornesc de la 1700€, iar soluțiile enterprise cu arhitectură headless sunt cotate individual. Oferim consultanță gratuită pentru a stabili exact ce ai nevoie.",
   },
   {
     question: "WooCommerce sau Next.js - ce să aleg?",
     answer:
-      "WooCommerce este ideal pentru magazine mici-medii (până la 5000 produse), cu buget controlat și nevoie de administrare simplă. Next.js + Payload CMS este recomandat pentru magazine mari, high-traffic, care cer performanță sub 1 secundă și scalabilitate nelimitată. Te ajutăm să alegi varianta potrivită în funcție de obiectivele tale.",
+      "WooCommerce este ideal pentru magazine mici-medii (până la 7000 produse), cu buget controlat și nevoie de administrare simplă. Next.js + Payload CMS este recomandat pentru magazine mari, high-traffic, care cer performanță sub 1 secundă și scalabilitate nelimitată. Te ajutăm să alegi varianta potrivită în funcție de obiectivele tale.",
   },
   {
     question: "Ce metode de plată pot integra?",
@@ -49,7 +49,7 @@ const ecommerceFaqs = [
   {
     question: "Cât durează să fie gata magazinul?",
     answer:
-      "Un magazin startup este gata în 2-3 săptămâni. Magazinele business cu funcționalități avanzate necesită 4-6 săptămâni. Proiectele enterprise cu arhitectură custom durează 8-12 săptămâni. Respectăm deadline-urile și te ținem la curent cu progresul.",
+      "Un magazin startup este gata în 3-4 săptămâni. Magazinele business cu funcționalități avanzate necesită 6-8 săptămâni. Proiectele enterprise cu arhitectură custom durează 8-12 săptămâni. Respectăm deadline-urile și te ținem la curent cu progresul.",
   },
   {
     question: "Pot să adaug funcții de loializare clienți?",
@@ -64,12 +64,12 @@ const ecommerceFaqs = [
   {
     question: "Ce curieri pot integra?",
     answer:
-      "Integrăm nativ cei mai populari curieri din România: FanCourier, Sameday (easybox), Cargus, DPD, GLS, Urgent Cargus. Sistemul calculează automat costul livrării și generează AWB-uri direct din dashboard.",
+      "Integrăm nativ cei mai populari curieri din România: FanCourier, Sameday (easybox), Cargus, DPD, GLS. Sistemul calculează automat costul livrării și generează AWB-uri direct din dashboard.",
   },
   {
     question: "Oferiți suport și mentenanță după lansare?",
     answer:
-      "Da! Oferim 30 de zile suport gratuit post-lansare, apoi pachete de mentenanță lunară care includ: actualizări de securitate, backup-uri, monitorizare uptime, suport tehnic și consultanță pentru optimizări. Prețurile pornesc de la 50€/lună.",
+      "Da! Oferim 60 de zile suport gratuit post-lansare, apoi, (dacă e nevoie) pachete de mentenanță lunară care includ: actualizări de securitate, backup-uri, monitorizare uptime, suport tehnic și consultanță pentru optimizări. Prețurile pornesc de la 70€/lună.",
   },
 ]
 

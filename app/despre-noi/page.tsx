@@ -17,7 +17,7 @@ export const metadata: Metadata = generatePageMetadata({
     "agenție web design timișoara",
     "echipa web design",
     "Ernest Slach",
-    "Alex Nedelia-Kereks",
+    "Alex Nedelia-Kerekeș",
     "creare site timișoara",
   ],
 })

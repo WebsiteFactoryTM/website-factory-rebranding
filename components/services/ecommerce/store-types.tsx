@@ -21,7 +21,7 @@ const storeTypes = [
       "SSL & GDPR incluse",
     ],
     idealFor: "Afaceri noi, testare piață, produse de nișă",
-    timeline: "2-3 săptămâni",
+    timeline: "3-4 săptămâni",
     platform: "WooCommerce",
   },
   {
@@ -40,7 +40,7 @@ const storeTypes = [
       "Email marketing integrat",
     ],
     idealFor: "Afaceri în creștere, multiple categorii, echipă dedicată",
-    timeline: "4-6 săptămâni",
+    timeline: "6-8 săptămâni",
     platform: "WooCommerce / Next.js",
     popular: true,
   },
@@ -60,7 +60,7 @@ const storeTypes = [
       "Infrastructură cloud scalabilă",
       "SLA & suport dedicat",
     ],
-    idealFor: "Corporații, marketplace-uri, volume mari de tranzacții",
+    idealFor: "Companii cu vechime, marketplace-uri, volume mari de tranzacții",
     timeline: "8-12 săptămâni",
     platform: "Next.js + Payload CMS",
   },
@@ -72,12 +72,12 @@ export function StoreTypes() {
   const [expandedMobile, setExpandedMobile] = useState<string | null>("growth")
 
   return (
-    <section ref={ref} className="py-16 sm:py-24 lg:py-32 bg-muted/30 relative overflow-hidden">
+    <section ref={ref} className="pt-20 sm:pt-28 lg:pt-36 pb-16 sm:pb-24 lg:pb-32 bg-muted/30 relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute top-0 right-0 w-72 sm:w-96 h-72 sm:h-96 bg-brand/5 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-48 sm:w-72 h-48 sm:h-72 bg-glow-violet/10 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+      <div className="container mx-auto px-4 lg:px-8 relative z-10 overflow-visible">
         {/* Header */}
         <div
           className={cn(
@@ -101,7 +101,7 @@ export function StoreTypes() {
 
         <div
           className={cn(
-            "grid md:grid-cols-3 gap-4 sm:gap-6 transition-all duration-1000 delay-200",
+            "grid md:grid-cols-3 gap-4 sm:gap-6 transition-all duration-1000 delay-200 overflow-visible",
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
           )}
         >
@@ -113,7 +113,8 @@ export function StoreTypes() {
               <div
                 key={type.id}
                 className={cn(
-                  "group relative bg-card rounded-2xl sm:rounded-3xl border p-5 sm:p-8 transition-all duration-500 cursor-pointer card-metallic",
+                  "group relative bg-card rounded-2xl sm:rounded-3xl border transition-all duration-500 cursor-pointer card-metallic overflow-visible",
+                  type.popular ? "pt-7 sm:pt-8 pb-5 sm:pb-8 px-5 sm:px-8" : "p-5 sm:p-8",
                   isActive
                     ? "border-brand/50 shadow-xl shadow-brand/10 md:scale-[1.02]"
                     : "border-border/50 hover:border-brand/30",
@@ -129,7 +130,7 @@ export function StoreTypes() {
               >
                 {/* Popular badge */}
                 {type.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 sm:px-4 py-1 rounded-full bg-brand text-brand-foreground text-[10px] sm:text-xs font-semibold whitespace-nowrap">
+                  <div className="absolute -top-2.5 sm:-top-3 left-1/2 -translate-x-1/2 px-3 sm:px-4 py-1 rounded-full bg-brand text-brand-foreground text-[10px] sm:text-xs font-semibold whitespace-nowrap z-20 shadow-lg">
                     Cel mai popular
                   </div>
                 )}
