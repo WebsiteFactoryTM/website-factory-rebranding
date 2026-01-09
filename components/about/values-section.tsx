@@ -8,37 +8,37 @@ const values = [
   {
     icon: Zap,
     title: "Performanță",
-    description: "Site-uri rapide, optimizate pentru Core Web Vitals și experiență utilizator impecabilă.",
+    description: "Site-uri rapide și stabile, optimizate pentru Core Web Vitals, SEO tehnic și o experiență fluentă mobile-first.",
     color: "from-yellow-500/20 to-orange-500/20",
   },
   {
     icon: Shield,
     title: "Transparență",
-    description: "Comunicare deschisă, prețuri clare, fără surprize. Știi exact ce primești.",
+    description: "Comunicare deschisă și livrabile clare. Știi ce facem, de ce facem și cât costă — fără costuri ascunse..",
     color: "from-green-500/20 to-emerald-500/20",
   },
   {
     icon: Users,
     title: "Parteneriat",
-    description: "Nu suntem furnizori, suntem parteneri. Succesul tău este și succesul nostru.",
+    description: "Nu „livrăm și plecăm”. Gândim împreună soluția, prioritizăm corect și te ghidăm în decizii.",
     color: "from-blue-500/20 to-cyan-500/20",
   },
   {
     icon: TrendingUp,
     title: "Rezultate",
-    description: "Măsurăm tot ce facem. Fiecare decizie e bazată pe date și orientată spre ROI.",
+    description: "Setăm obiective și măsurăm impactul: trafic relevant, cereri, conversii. Deciziile sunt ghidate de date, nu de presupuneri.",
     color: "from-brand/20 to-glow-violet/20",
   },
   {
     icon: Code,
     title: "Inovație",
-    description: "Adoptăm cele mai noi tehnologii pentru a-ți oferi avantaj competitiv.",
+    description: "Folosim tehnologiile potrivite proiectului — nu trenduri. Alegem ce e stabil, scalabil și ușor de întreținut.",
     color: "from-pink-500/20 to-rose-500/20",
   },
   {
     icon: Palette,
     title: "Creativitate",
-    description: "Design unic și memorabil care îți diferențiază brandul de competiție.",
+    description: "Design coerent cu brandul tău: clar, memorabil și construit să comunice rapid valoarea.",
     color: "from-purple-500/20 to-indigo-500/20",
   },
 ]

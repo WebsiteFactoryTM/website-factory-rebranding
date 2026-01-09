@@ -1,44 +1,46 @@
 "use client"
 
+import Link from "next/link"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 import { Rocket, Users, Award, Globe, Target, Zap } from "lucide-react"
 
 const milestones = [
   {
-    year: "2021",
+    year: "2023",
     title: "Începutul",
-    description: "Website Factory ia naștere în Timișoara. Primele 10 proiecte livrate.",
+    description: "Website Factory ia naștere în Timișoara. Primele 21 proiecte livrate.",
     icon: Rocket,
   },
   {
-    year: "2022",
-    title: "Creștere",
-    description: "Echipa se extinde. 50+ proiecte finalizate și primii clienți din străinătate.",
-    icon: Users,
-  },
-  {
-    year: "2023",
-    title: "Recunoaștere",
-    description: "Top agenție web design din vestul României. Parteneriate strategice cu platforme internaționale.",
-    icon: Award,
-  },
-  {
     year: "2024",
-    title: "Expansiune",
-    description: "Prezență națională: clienți din toate orașele mari. 100+ proiecte în portofoliu.",
-    icon: Globe,
+    title: "Creștere",
+    description: "Echipa se extinde. Cifra de afaceri crește cu 171%. Primii clienți din străinătate.",
+    icon: Users,
   },
   {
     year: "2025",
     title: "Inovație",
-    description: "Lansăm servicii de AI integration și automatizări. 150+ proiecte livrate.",
+    description: (
+      <>
+        Menținem proiectele, continuăm să livrăm proiecte de calitate. Lansăm{" "}
+        <Link
+          href="https://unevent.ro"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-brand hover:underline font-medium"
+        >
+          UN:EVENT - Platforma de evenimente
+        </Link>
+        .
+      </>
+    ),
     icon: Target,
   },
   {
     year: "Viitor",
     title: "Viziune",
-    description: "Continuăm să inovăm și să ajutăm afacerile să domine spațiul digital.",
+    description: "Continuăm să inovăm și să ajutăm afacerile să își dezvolte proiectele în spațiul digital.",
     icon: Zap,
   },
 ]
@@ -117,7 +119,9 @@ function TimelineItem({
         >
           <span className="font-heading text-2xl font-bold gradient-text">{milestone.year}</span>
           <h3 className="font-heading text-lg font-semibold text-foreground mt-2 mb-2">{milestone.title}</h3>
-          <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">{milestone.description}</p>
+          <div className="text-sm text-muted-foreground leading-relaxed max-w-xs">
+            {milestone.description}
+          </div>
         </div>
       </div>
 

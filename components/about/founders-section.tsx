@@ -11,22 +11,20 @@ const founders = [
   {
     name: "Ernest Slach",
     role: "Co-Founder & CEO",
-    bio: "Cu peste 8 ani de experiență în antreprenoriat digital și strategie de business, Ernest conduce viziunea și dezvoltarea Website Factory. Pasionat de inovație și orientat spre rezultate, el se asigură că fiecare proiect depășește așteptările clienților.",
+    bio: "Ernest, CEO și co-fondator Website Factory, conduce direcția strategică a proiectelor și aliniază fiecare site la obiectivele de business ale clientului. Datorită experienței în antreprenoriat digital, combină strategia, web design-ul și o abordare creativă orientată spre claritate, diferențiere și rezultate.",
     expertise: ["Business Strategy", "Client Relations", "Project Management"],
-    image: "/professional-young-man-entrepreneur-in-modern-offi.jpg",
-    linkedin: "#",
-    twitter: "#",
-    email: "ernest@websitefactory.ro",
+    image: "/Ernest.webp",
+    linkedin: "https://www.linkedin.com/in/ernest-slach-949771106/",
+    email: "office@websitefactory.ro",
   },
   {
-    name: "Alex Nedelia-Kereks",
+    name: "Alex Nedelia-Kerekes",
     role: "Co-Founder & CTO",
-    bio: "Alex este mintea tehnică din spatele Website Factory. Cu expertiză în dezvoltare full-stack, arhitectură software și optimizare performanță, el transformă cele mai complexe cerințe în soluții elegante și scalabile.",
+    bio: "Alex este mintea tehnică din spatele Website Factory. Cu expertiză în dezvoltare full-stack, arhitectură software și optimizare performanță, el transformă cerințele complexe în soluții elegante și scalabile.",
     expertise: ["Full-Stack Development", "Technical Architecture", "Performance Optimization"],
-    image: "/professional-young-man-tech-developer-in-modern-of.jpg",
-    linkedin: "#",
-    twitter: "#",
-    email: "alex@websitefactory.ro",
+    image: "/Alex-CTO.webp",
+    linkedin: "https://www.linkedin.com/in/alex-nedelia-7a6780b3/",
+    email: "office@websitefactory.ro",
   },
 ]
 
@@ -50,7 +48,7 @@ export function FoundersSection() {
         >
           <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">Echipa</span>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-            Oamenii din spatele <span className="gradient-text">Website Factory</span>
+            Oamenii de la butoanele <br></br><span className="gradient-text">Website Factory</span>
           </h2>
           <p className="mt-6 text-lg text-muted-foreground">
             Doi antreprenori cu viziune comună: să aducem web design-ul românesc la standarde internaționale.
@@ -67,7 +65,7 @@ export function FoundersSection() {
         {/* CTA */}
         <div className="mt-16 lg:mt-20 text-center">
           <p className="text-lg text-muted-foreground mb-6">
-            Vrei să ne cunoști mai bine? Hai să discutăm despre proiectul tău.
+            Vrei să ne cunoști mai bine? Hai să povestim despre proiectul tău.
           </p>
           <Button
             asChild
@@ -100,7 +98,7 @@ function FounderCard({ founder, index }: { founder: (typeof founders)[0]; index:
     >
       <div className="relative rounded-3xl overflow-hidden bg-card border border-border/50">
         {/* Image container */}
-        <div className="relative aspect-[4/5] overflow-hidden">
+        <div className="relative aspect-[1/1] overflow-hidden">
           <Image
             src={founder.image || "/placeholder.svg"}
             alt={founder.name}
@@ -108,7 +106,7 @@ function FounderCard({ founder, index }: { founder: (typeof founders)[0]; index:
             className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
           {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
 
           {/* Social links overlay */}
           <div className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-4 group-hover:translate-x-0">
@@ -118,13 +116,6 @@ function FounderCard({ founder, index }: { founder: (typeof founders)[0]; index:
               aria-label={`${founder.name} LinkedIn`}
             >
               <Linkedin className="w-4 h-4 text-foreground" />
-            </a>
-            <a
-              href={founder.twitter}
-              className="w-10 h-10 rounded-full glass-premium flex items-center justify-center hover:bg-brand/20 transition-colors"
-              aria-label={`${founder.name} Twitter`}
-            >
-              <Twitter className="w-4 h-4 text-foreground" />
             </a>
             <a
               href={`mailto:${founder.email}`}
