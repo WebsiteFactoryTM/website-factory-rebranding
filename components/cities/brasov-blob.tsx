@@ -24,15 +24,15 @@ export function BrasovBlob({ className, size = "lg" }: BrasovBlobProps) {
   // Size configurations - Larger images like other cities
   const sizeConfig = {
     sm: {
-      imageSize: 280,
+      imageSize: 450,
       showDetails: false,
     },
     md: {
-      imageSize: 400,
+      imageSize: 450,
       showDetails: true,
     },
     lg: {
-      imageSize: 550,
+      imageSize: 750,
       showDetails: true,
     },
   }

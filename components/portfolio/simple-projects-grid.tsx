@@ -8,7 +8,7 @@ import { simpleProjects } from "@/lib/portfolio-data"
 import Image from "next/image"
 
 export function SimpleProjectsGrid() {
-  const { ref: sectionRef, isVisible: sectionVisible } = useScrollReveal()
+  const { ref: sectionRef, isVisible: sectionVisible } = useScrollReveal<HTMLDivElement>()
 
   return (
     <section className="relative py-24 md:py-32 overflow-hidden">
@@ -22,7 +22,9 @@ export function SimpleProjectsGrid() {
           className="absolute top-20 right-1/4 w-64 h-64 rounded-full bg-glow-cyan/10 blur-[80px]"
           delay={1}
           duration={10}
-        />
+        >
+          <div />
+        </FloatingElement>
         <div className="absolute bottom-20 left-10 w-24 h-24">
           <div
             className="w-full h-full metallic-surface rounded-2xl opacity-30"
@@ -68,7 +70,7 @@ function SimpleProjectCard({
   project: (typeof simpleProjects)[0]
   index: number
 }) {
-  const { ref, isVisible } = useScrollReveal({ threshold: 0.1 })
+  const { ref, isVisible } = useScrollReveal<HTMLDivElement>({ threshold: 0.1 })
 
   return (
     <article
@@ -85,13 +87,13 @@ function SimpleProjectCard({
           {/* Glow effect on hover */}
           <div className="absolute -inset-2 bg-gradient-to-br from-brand/30 via-glow-violet/20 to-glow-cyan/30 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl -z-10" />
 
-          {/* Image container with device frame aesthetic */}
-          <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-muted to-muted/50">
+          {/* Image container with device frame aesthetic - optimized for 4000x2500px PNG */}
+          <div className="relative aspect-[8/5] overflow-hidden" style={{ backgroundColor: "#F3F3F3" }}>
             <Image
               src={project.image || "/placeholder.svg"}
               alt={project.title}
               fill
-              className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              className="object-contain transition-transform duration-700 group-hover:scale-105"
             />
 
             {/* Subtle overlay */}

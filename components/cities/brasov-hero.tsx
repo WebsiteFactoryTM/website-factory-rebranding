@@ -54,7 +54,7 @@ export function BrasovHero() {
       </div>
 
       {/* Desktop: Full size on right side */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[55%] h-[80%] hidden lg:flex items-center justify-center pointer-events-auto">
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[55%] h-[60%] hidden lg:flex items-center justify-center pointer-events-auto">
         <BrasovBlob className="w-full h-full" size="lg" />
       </div>
 
