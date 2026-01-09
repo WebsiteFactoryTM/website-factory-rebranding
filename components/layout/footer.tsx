@@ -9,11 +9,10 @@ const footerLinks = {
   servicii: [
     { href: "/servicii/creare-website", label: "Creare website" },
     { href: "/servicii/magazin-online", label: "Magazin online" },
-    { href: "/servicii/aplicatie-mobile", label: "Aplicație mobilă" },
+    { href: "/servicii/dezvoltare-aplicatie", label: "Dezvoltare aplicație" },
   ],
   companie: [
     { href: "/despre-noi", label: "Despre noi" },
-    { href: "/echipa", label: "Echipa" },
     { href: "/portofoliu", label: "Portofoliu" },
     { href: "/contact", label: "Contact" },
   ],
@@ -23,12 +22,12 @@ const footerLinks = {
     { href: "/politica-cookie", label: "Politică cookie" },
   ],
   cities: [
-    { href: "/creare-site-timisoara", label: "Creare site Timișoara" },
-    { href: "/creare-site-bucuresti", label: "Creare site București" },
-    { href: "/creare-site-cluj-napoca", label: "Creare site Cluj-Napoca" },
-    { href: "/creare-site-brasov", label: "Creare site Brașov" },
-    { href: "/creare-site-iasi", label: "Creare site Iași" },
-    { href: "/creare-site-constanta", label: "Creare site Constanța" },
+    { href: "/", label: "Timișoara" },
+    { href: "/creare-site-bucuresti", label: "București" },
+    { href: "/creare-site-cluj", label: "Cluj-Napoca" },
+    { href: "/creare-site-brasov", label: "Brașov" },
+    { href: "/creare-site-iasi", label: "Iași" },
+    { href: "/creare-site-constanta", label: "Constanța" },
   ],
 }
 
@@ -129,17 +128,16 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* City Pages */}
           <div>
             <h3 className="font-heading font-semibold text-foreground mb-5">Locații</h3>
             <ul className="space-y-3">
-              {footerLinks.cities.slice(0, 4).map((link) => (
+              {footerLinks.cities.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
                     className="text-sm text-muted-foreground hover:text-brand transition-colors inline-flex items-center gap-1 group"
                   >
-                    {link.label.replace("Creare site ", "")}
+                    {link.label}
                     <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
                   </Link>
                 </li>

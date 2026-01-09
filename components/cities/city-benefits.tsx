@@ -1,0 +1,108 @@
+"use client"
+
+import { TrendingUp, Clock, Shield, Users } from "lucide-react"
+import { useScrollReveal } from "@/hooks/use-scroll-reveal"
+import { useCounter } from "@/hooks/use-counter"
+import { cn } from "@/lib/utils"
+
+const benefits = [
+  {
+    icon: TrendingUp,
+    stat: 340,
+    suffix: "%",
+    label: "Creștere trafic organic",
+    description: "Media clienților noștri din București în primele 6 luni",
+  },
+  {
+    icon: Clock,
+    stat: 1.2,
+    suffix: "s",
+    decimals: 1,
+    label: "Timp de încărcare",
+    description: "Site-uri ultra-rapide optimizate pentru Core Web Vitals",
+  },
+  {
+    icon: Shield,
+    stat: 99.9,
+    suffix: "%",
+    decimals: 1,
+    label: "Uptime garantat",
+    description: "Hosting premium pe servere din Europa",
+  },
+  {
+    icon: Users,
+    stat: 50,
+    suffix: "+",
+    label: "Clienți București",
+    description: "Afaceri din capitală care ne-au acordat încrederea",
+  },
+]
+
+interface CityBenefitsProps {
+  cityName: string
+}
+
+function AnimatedStat({ end, decimals = 0, suffix = "" }: { end: number; decimals?: number; suffix?: string }) {
+  const { count, ref } = useCounter({ start: 0, end, duration: 2000, startOnView: true })
+
+  return (
+    <span ref={ref} className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold gradient-text tabular-nums">
+      {typeof count === "number" ? count.toFixed(decimals) : count}
+      {suffix}
+    </span>
+  )
+}
+
+export function CityBenefits({ cityName }: CityBenefitsProps) {
+  const { ref, isVisible } = useScrollReveal()
+
+  return (
+    <section className="py-20 sm:py-28 relative overflow-hidden bg-muted/30">
+      {/* Decorative elements */}
+      <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-brand/10 blur-[80px]" />
+      <div className="absolute bottom-20 right-10 w-40 h-40 rounded-full bg-glow-violet/10 blur-[100px]" />
+
+      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+        <div
+          ref={ref}
+          className={cn(
+            "text-center max-w-3xl mx-auto mb-12 sm:mb-16 transition-all duration-700",
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
+          )}
+        >
+          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold">
+            De ce să alegi <span className="gradient-text">Website Factory</span> în {cityName}?
+          </h2>
+          <p className="mt-4 text-muted-foreground text-base sm:text-lg">
+            Rezultate măsurabile și garanții concrete pentru afacerea ta din capitală.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {benefits.map((benefit, index) => {
+            const Icon = benefit.icon
+            return (
+              <div
+                key={benefit.label}
+                className={cn(
+                  "relative p-6 sm:p-8 rounded-2xl glass-premium border border-border/30 text-center transition-all duration-500",
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
+                )}
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                <div className="w-14 h-14 rounded-xl bg-brand/10 flex items-center justify-center mx-auto mb-4">
+                  <Icon className="w-7 h-7 text-brand" />
+                </div>
+
+                <AnimatedStat end={benefit.stat} decimals={benefit.decimals || 0} suffix={benefit.suffix} />
+
+                <h3 className="font-semibold text-foreground mt-2 mb-1">{benefit.label}</h3>
+                <p className="text-sm text-muted-foreground">{benefit.description}</p>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+  )
+}
