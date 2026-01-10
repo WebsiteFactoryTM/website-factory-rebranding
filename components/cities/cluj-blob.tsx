@@ -245,27 +245,27 @@ export function ClujBlob({ className, size = "lg" }: ClujBlobProps) {
           >
             <div
               className={cn(
-                "rounded-xl bg-[#1a1a2e]/95 backdrop-blur-xl border border-brand/20 shadow-2xl font-mono p-4",
+                "rounded-xl bg-white/95 dark:bg-[#1a1a2e]/95 backdrop-blur-xl border border-brand/30 dark:border-brand/20 shadow-2xl font-mono p-4",
                 size === "lg" ? "text-[11px]" : "text-[9px]",
               )}
             >
-              <div className="flex items-center gap-2 mb-2 pb-2 border-b border-white/10">
+              <div className="flex items-center gap-2 mb-2 pb-2 border-b border-border/20 dark:border-white/10">
                 <div className="w-2 h-2 rounded-full bg-brand" />
                 <span className="text-muted-foreground text-[9px]">cluj.config.ts</span>
               </div>
-              <div className="text-purple-400">
-                {"const"} <span className="text-cyan-400">startup</span> = {"{"}
+              <div className="text-purple-600 dark:text-purple-400">
+                {"const"} <span className="text-cyan-600 dark:text-cyan-400">startup</span> = {"{"}
               </div>
               <div className="pl-3 text-foreground/80">
-                city: <span className="text-green-400">"Cluj-Napoca"</span>,
+                city: <span className="text-green-600 dark:text-green-400">"Cluj-Napoca"</span>,
               </div>
               <div className="pl-3 text-foreground/80">
-                hub: <span className="text-yellow-400">"Silicon Valley"</span>,
+                hub: <span className="text-yellow-600 dark:text-yellow-400">"Silicon Valley"</span>,
               </div>
               <div className="pl-3 text-foreground/80">
-                tech: <span className="text-cyan-400">"cutting-edge"</span>
+                tech: <span className="text-cyan-600 dark:text-cyan-400">"cutting-edge"</span>
               </div>
-              <div className="text-purple-400">{"}"}</div>
+              <div className="text-purple-600 dark:text-purple-400">{"}"}</div>
             </div>
           </div>
 
