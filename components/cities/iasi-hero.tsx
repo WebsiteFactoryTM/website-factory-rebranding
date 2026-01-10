@@ -8,7 +8,12 @@ import { IasiBlob } from "@/components/cities/iasi-blob"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 
-const trustBadges = ["SEO optimizat Iași", "Design premium", "Suport dedicat"]
+const trustBadges = [
+  "SEO Local Iași & Moldova",
+  "Design Premium & Responsive",
+  "Livrare Rapidă",
+  "Suport Dedicat 24/7",
+]
 
 export function IasiHero() {
   const { ref: contentRef, isVisible: contentVisible } = useScrollReveal()
@@ -81,9 +86,11 @@ export function IasiHero() {
 
           {/* Subtitle */}
           <p className="mt-4 sm:mt-6 text-base sm:text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-2xl text-pretty">
-            Agenție de web design specializată în soluții digitale pentru{" "}
-            <strong className="text-foreground">afaceri și instituții din Iași și Moldova</strong>. Site-uri moderne,
-            performante și optimizate SEO pentru capitala culturală a României.
+            Agenție de <strong className="text-foreground">web design specializată</strong> în soluții digitale pentru{" "}
+            <strong className="text-foreground">afaceri și instituții din Iași și Moldova</strong>. Creăm{" "}
+            <strong className="text-foreground">site-uri web moderne</strong> pentru clinici medicale, business local,
+            educație și cultură,{" "}
+            <strong className="text-foreground">optimizate SEO</strong> pentru top poziții Google Iași.
           </p>
 
           {/* Stats */}

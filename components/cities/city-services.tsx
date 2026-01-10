@@ -13,6 +13,8 @@ const getServices = (cityName: string) => {
   const isBrasov = cityName === "Brașov"
   const isBucharest = cityName === "București"
   const isCluj = cityName.includes("Cluj")
+  const isConstanta = cityName === "Constanța"
+  const isIasi = cityName === "Iași"
 
   return [
     {
@@ -22,7 +24,11 @@ const getServices = (cityName: string) => {
         ? "Site-uri profesionale pentru pensiuni, restaurante și afaceri locale din Brașov și zona Poiană."
         : isBucharest
           ? "Site-uri profesionale pentru afaceri din București care doresc o prezență online de impact."
-          : "Site-uri profesionale pentru startup-uri și companii tech din Cluj-Napoca.",
+          : isCluj
+            ? "Site-uri profesionale pentru startup-uri și companii tech din Cluj-Napoca."
+            : isConstanta
+              ? "Site-uri profesionale pentru hoteluri, restaurante și afaceri de pe litoral."
+              : "Site-uri profesionale pentru clinici medicale, afaceri și instituții culturale din Iași.",
       href: "/servicii/creare-website",
       features: ["Design responsive", "SEO on-page", "CMS integrat"],
     },
@@ -33,31 +39,46 @@ const getServices = (cityName: string) => {
         ? "Magazine online pentru produse tradiționale, suveniruri și comercianți locali din Brașov."
         : isBucharest
           ? "Soluții eCommerce performante pentru comercianți din capitală, cu integrări complete."
-          : "Platforme eCommerce scalabile pentru startup-uri și business-uri tech din Cluj.",
+          : isCluj
+            ? "Platforme eCommerce scalabile pentru startup-uri și business-uri tech din Cluj."
+            : isConstanta
+              ? "Magazine online pentru produse maritime, suveniruri și comercianți de pe litoral."
+              : "Magazine online pentru retaileri locali din Iași, cu integrări complete de plată și transport.",
       href: "/servicii/magazin-online",
       features: ["WooCommerce / Next.js", "Plăți online", "Integrare curier"],
     },
     {
       icon: Smartphone,
-      title: isBrasov ? "Site-uri pentru Turism" : "Aplicații Mobile",
+      title: isBrasov || isConstanta ? "Site-uri pentru Turism" : isIasi ? "Site-uri Medicale" : "Aplicații Mobile",
       description: isBrasov
         ? "Site-uri specializate pentru pensiuni, hoteluri, agenții de turism și activități outdoor în Brașov."
         : isBucharest
           ? "Aplicații native și cross-platform pentru startup-uri și companii din București."
-          : "Aplicații web moderne și MVP-uri pentru startup-uri tech din ecosistemul Cluj.",
-      href: isBrasov ? "/contact" : "/servicii/dezvoltare-aplicatie",
-      features: isBrasov
-        ? ["Sistem rezervări", "Galerii foto", "Google Maps"]
-        : ["React Native", "iOS & Android", "Backend scalabil"],
+          : isCluj
+            ? "Aplicații web moderne și MVP-uri pentru startup-uri tech din ecosistemul Cluj."
+            : isConstanta
+              ? "Site-uri specializate pentru hoteluri, pensiuni, restaurante și afaceri turistice pe litoral."
+              : "Site-uri pentru clinici medicale, cabinete stomatologice și centre de diagnostic din Iași.",
+      href: isBrasov || isConstanta || isIasi ? "/contact" : "/servicii/dezvoltare-aplicatie",
+      features:
+        isBrasov || isConstanta
+          ? ["Sistem rezervări", "Galerii foto", "Google Maps"]
+          : isIasi
+            ? ["Programări online", "Prezentare medici", "Istoric pacienți"]
+            : ["React Native", "iOS & Android", "Backend scalabil"],
     },
     {
       icon: Search,
-      title: `SEO ${isBrasov ? "Brașov" : isBucharest ? "București" : "Cluj"}`,
+      title: `SEO ${isBrasov ? "Brașov" : isBucharest ? "București" : isCluj ? "Cluj" : isConstanta ? "Constanța" : "Iași"}`,
       description: isBrasov
         ? "Optimizare SEO locală pentru Brașov - apari în top când turiștii caută cazare și servicii."
         : isBucharest
           ? "Optimizare pentru motoarele de căutare, targetat pe piața din București și România."
-          : "Optimizare SEO avansată pentru piața tech și business din Cluj-Napoca.",
+          : isCluj
+            ? "Optimizare SEO avansată pentru piața tech și business din Cluj-Napoca."
+            : isConstanta
+              ? "Optimizare SEO pentru litoral - fii găsit când turiștii caută hoteluri și restaurante pe litoral."
+              : "Optimizare SEO locală pentru Iași și Moldova - domină rezultatele pentru clinici și servicii.",
       href: "/contact",
       features: ["Audit SEO", "Link building", "Content strategy"],
     },
@@ -74,7 +95,9 @@ const getServices = (cityName: string) => {
       title: "Branding & Identitate",
       description: isBrasov
         ? "Identitate vizuală pentru pensiuni, restaurante și branduri locale din zona Brașov."
-        : `Identitate vizuală completă pentru branduri care vor să iasă în evidență în ${cityName}.`,
+        : isIasi
+          ? "Identitate vizuală pentru clinici medicale și branduri locale din Iași."
+          : `Identitate vizuală completă pentru branduri care vor să iasă în evidență în ${cityName}.`,
       href: "/contact",
       features: ["Logo design", "Brand guidelines", "Materiale grafice"],
     },

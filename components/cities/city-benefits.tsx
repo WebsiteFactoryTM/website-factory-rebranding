@@ -13,6 +13,8 @@ const getBenefits = (cityName: string) => {
   const isBrasov = cityName === "Brașov"
   const isBucharest = cityName === "București"
   const isCluj = cityName.includes("Cluj")
+  const isConstanta = cityName === "Constanța"
+  const isIasi = cityName === "Iași"
 
   return [
     {
@@ -40,14 +42,18 @@ const getBenefits = (cityName: string) => {
     },
     {
       icon: Users,
-      stat: isBrasov ? 35 : isBucharest ? 50 : 40,
+      stat: isBrasov ? 35 : isBucharest ? 50 : isCluj ? 40 : isConstanta ? 30 : 35,
       suffix: "+",
       label: `Clienți ${cityName}`,
       description: isBrasov
         ? "Pensiuni, restaurante și afaceri locale din Brașov"
         : isBucharest
           ? "Afaceri din capitală care ne-au acordat încrederea"
-          : "Startup-uri și companii tech din Cluj",
+          : isCluj
+            ? "Startup-uri și companii tech din Cluj"
+            : isConstanta
+              ? "Hoteluri, restaurante și afaceri de pe litoral"
+              : "Clinici medicale, afaceri și instituții din Iași",
     },
   ]
 }
@@ -88,7 +94,13 @@ export function CityBenefits({ cityName }: CityBenefitsProps) {
           <p className="mt-4 text-muted-foreground text-base sm:text-lg">
             {isBrasov
               ? "Rezultate măsurabile pentru afacerea ta din inima Transilvaniei."
-              : "Rezultate măsurabile și garanții concrete pentru afacerea ta din capitală."}
+              : cityName === "București"
+                ? "Rezultate măsurabile și garanții concrete pentru afacerea ta din capitală."
+                : cityName.includes("Cluj")
+                  ? "Rezultate măsurabile pentru startup-uri și companii tech din Cluj."
+                  : cityName === "Constanța"
+                    ? "Rezultate măsurabile pentru afaceri turistice de pe litoralul românesc."
+                    : "Rezultate măsurabile pentru clinici medicale și afaceri din Iași și Moldova."}
           </p>
         </div>
 
