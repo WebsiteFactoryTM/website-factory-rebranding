@@ -88,7 +88,10 @@ export function IasiBlob({ className, size = "lg" }: IasiBlobProps) {
   const parallaxOffset = scrollY * 0.08
 
   return (
-    <div ref={containerRef} className={cn("relative w-full h-full touch-none cursor-pointer select-none", className)}>
+    <div
+      ref={containerRef}
+      className={cn("relative w-full h-full touch-none cursor-pointer select-none overflow-hidden", className)}
+    >
       {/* Background glow */}
       <div
         className="absolute inset-0 flex items-center justify-center pointer-events-none will-change-transform"
@@ -189,7 +192,7 @@ export function IasiBlob({ className, size = "lg" }: IasiBlobProps) {
             className="absolute will-change-transform"
             style={{
               top: size === "lg" ? "5%" : "10%",
-              right: size === "lg" ? "0%" : "-5%",
+              right: size === "lg" ? "2%" : "5%", // Adjusted from negative
               transform: `translate(${mousePos.x * 0.6}px, ${mousePos.y * 0.5 - parallaxOffset * 0.3}px)`,
             }}
           >
@@ -223,7 +226,7 @@ export function IasiBlob({ className, size = "lg" }: IasiBlobProps) {
             className="absolute will-change-transform"
             style={{
               bottom: size === "lg" ? "15%" : "20%",
-              left: size === "lg" ? "-2%" : "-8%",
+              left: size === "lg" ? "2%" : "5%", // Adjusted from negative
               transform: `translate(${mousePos.x * 0.7}px, ${mousePos.y * 0.6 - parallaxOffset * 0.4}px)`,
             }}
           >
@@ -258,7 +261,7 @@ export function IasiBlob({ className, size = "lg" }: IasiBlobProps) {
             className="absolute will-change-transform"
             style={{
               top: size === "lg" ? "50%" : "45%",
-              right: size === "lg" ? "-8%" : "-10%",
+              right: size === "lg" ? "2%" : "5%", // Adjusted from negative
               transform: `translate(${mousePos.x * 0.5}px, ${mousePos.y * 0.4}px)`,
             }}
           >
@@ -275,7 +278,7 @@ export function IasiBlob({ className, size = "lg" }: IasiBlobProps) {
             className="absolute will-change-transform"
             style={{
               bottom: size === "lg" ? "28%" : "32%",
-              right: size === "lg" ? "5%" : "0%",
+              right: size === "lg" ? "5%" : "8%",
               transform: `translate(${mousePos.x * 0.4}px, ${mousePos.y * 0.35}px)`,
             }}
           >
@@ -299,7 +302,7 @@ export function IasiBlob({ className, size = "lg" }: IasiBlobProps) {
             className="absolute will-change-transform"
             style={{
               top: size === "lg" ? "18%" : "22%",
-              left: size === "lg" ? "3%" : "-2%",
+              left: size === "lg" ? "8%" : "10%", // Adjusted positioning
               transform: `translate(${mousePos.x * 0.55}px, ${mousePos.y * 0.45}px)`,
             }}
           >

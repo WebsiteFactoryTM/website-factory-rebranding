@@ -20,22 +20,18 @@ export function BrasovHero() {
       <div className="absolute inset-0 grid-pattern" />
       <div className="absolute inset-0 noise-overlay pointer-events-none" />
 
-      {/* Animated gradient orbs */}
+      {/* Animated gradient orbs - amber/gold themed */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <FloatingElement
-          className="absolute top-1/4 right-1/4 w-64 sm:w-96 h-64 sm:h-96 rounded-full bg-brand/15 blur-[120px]"
+          className="absolute top-1/4 right-1/4 w-64 sm:w-96 h-64 sm:h-96 rounded-full bg-amber-500/15 blur-[120px]"
           delay={0}
           duration={12}
-        >
-          <div />
-        </FloatingElement>
+        />
         <FloatingElement
-          className="absolute bottom-1/4 left-1/4 w-48 sm:w-72 h-48 sm:h-72 rounded-full bg-glow-violet/20 blur-[100px]"
+          className="absolute bottom-1/4 left-1/4 w-48 sm:w-72 h-48 sm:h-72 rounded-full bg-brand/20 blur-[100px]"
           delay={2}
           duration={10}
-        >
-          <div />
-        </FloatingElement>
+        />
       </div>
 
       {/* Decorative metallic shapes */}
@@ -46,15 +42,13 @@ export function BrasovHero() {
         />
       </div>
 
-      {/* Mobile/Tablet: Behind content */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none lg:hidden">
         <div className="w-full h-full max-w-md opacity-30">
           <BrasovBlob className="w-full h-full" size="sm" />
         </div>
       </div>
 
-      {/* Desktop: Full size on right side */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[55%] h-[60%] hidden lg:flex items-center justify-center pointer-events-auto">
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[55%] h-[80%] hidden lg:flex items-center justify-center pointer-events-auto">
         <BrasovBlob className="w-full h-full" size="lg" />
       </div>
 
@@ -69,9 +63,9 @@ export function BrasovHero() {
         >
           {/* Location Badge */}
           <div className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full glass-premium mb-6 sm:mb-8">
-            <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand" />
+            <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-500" />
             <span className="text-xs sm:text-sm font-medium">Servicii web design pentru Brașov</span>
-            <Mountain className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-muted-foreground" />
+            <Mountain className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-500" />
           </div>
 
           {/* Main Heading - SEO H1 */}
@@ -81,15 +75,15 @@ export function BrasovHero() {
             <span className="gradient-text-animated">Brașov</span>
             <br />
             <span className="text-foreground/80 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
-              Web Design Premium
+              Web Design Transilvania
             </span>
           </h1>
 
           {/* Subtitle */}
           <p className="mt-4 sm:mt-6 text-base sm:text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-2xl text-pretty">
             Agenție de web design specializată în soluții digitale pentru{" "}
-            <strong className="text-foreground">afaceri din Brașov</strong>. Site-uri moderne pentru turism,
-            HoReCa și business local, optimizate SEO pentru a atrage clienți din inima Transilvaniei.
+            <strong className="text-foreground">afaceri din Brașov și zona Transilvaniei</strong>. Site-uri moderne
+            pentru turism, HoReCa, pensiuni și business local, optimizate SEO.
           </p>
 
           {/* Stats */}
@@ -99,8 +93,8 @@ export function BrasovHero() {
               <div className="text-xs sm:text-sm text-muted-foreground">Proiecte Brașov</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold gradient-text">97%</div>
-              <div className="text-xs sm:text-sm text-muted-foreground">Clienți mulțumiți</div>
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold gradient-text">98%</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">Satisfacție</div>
             </div>
             <div className="text-center">
               <div className="text-2xl sm:text-3xl lg:text-4xl font-bold gradient-text">Top 3</div>
@@ -123,10 +117,10 @@ export function BrasovHero() {
 
             <Link
               href="/portofoliu"
-              className="group flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full border border-border/50 hover:border-brand/50 glass-premium transition-all duration-300"
+              className="group flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full border border-border/50 hover:border-amber-500/50 glass-premium transition-all duration-300"
             >
-              <span className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand/10 group-hover:bg-brand/20 transition-colors">
-                <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand ml-0.5" />
+              <span className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-amber-500/10 group-hover:bg-amber-500/20 transition-colors">
+                <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-500 ml-0.5" />
               </span>
               <span className="font-medium text-sm sm:text-base">Vezi portofoliu</span>
             </Link>
@@ -154,7 +148,7 @@ export function BrasovHero() {
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 hidden sm:flex">
         <span className="text-xs text-muted-foreground tracking-widest uppercase">Descoperă</span>
-        <div className="w-px h-12 bg-gradient-to-b from-brand to-transparent" />
+        <div className="w-px h-12 bg-gradient-to-b from-amber-500 to-transparent" />
       </div>
 
       <style jsx>{`
@@ -168,4 +162,3 @@ export function BrasovHero() {
     </section>
   )
 }
-

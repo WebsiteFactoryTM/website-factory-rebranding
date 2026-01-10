@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState, useCallback } from "react"
 import Image from "next/image"
-import { useTheme } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 
 interface BrasovBlobProps {
@@ -16,34 +15,18 @@ export function BrasovBlob({ className, size = "lg" }: BrasovBlobProps) {
   const [targetPos, setTargetPos] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
   const [scrollY, setScrollY] = useState(0)
-  const [particles, setParticles] = useState<Array<{ top: number; left: number; duration: number; delay: number }>>([])
   const animationRef = useRef<number>()
 
-  const { resolvedTheme } = useTheme()
-  
-  // Size configurations - Larger images like other cities
   const sizeConfig = {
-    sm: {
-      imageSize: 450,
-      showDetails: false,
-    },
-    md: {
-      imageSize: 450,
-      showDetails: true,
-    },
-    lg: {
-      imageSize: 750,
-      showDetails: true,
-    },
+    sm: { imageSize: 280, showDetails: false },
+    md: { imageSize: 400, showDetails: true },
+    lg: { imageSize: 520, showDetails: true },
   }
 
   const config = sizeConfig[size]
 
-  // Smooth lerp animation
   useEffect(() => {
-    const lerp = (start: number, end: number, factor: number) => {
-      return start + (end - start) * factor
-    }
+    const lerp = (start: number, end: number, factor: number) => start + (end - start) * factor
 
     const animate = () => {
       setMousePos((prev) => ({
@@ -55,34 +38,16 @@ export function BrasovBlob({ className, size = "lg" }: BrasovBlobProps) {
 
     animationRef.current = requestAnimationFrame(animate)
     return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current)
-      }
+      if (animationRef.current) cancelAnimationFrame(animationRef.current)
     }
   }, [targetPos])
 
-  // Parallax scroll effect
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
+    const handleScroll = () => setScrollY(window.scrollY)
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Generate random particle positions on client only
-  useEffect(() => {
-    const particleCount = size === "sm" ? 5 : 10
-    const generatedParticles = Array.from({ length: particleCount }, (_, i) => ({
-      top: 10 + Math.random() * 80,
-      left: 5 + Math.random() * 90,
-      duration: 4 + Math.random() * 5,
-      delay: i * 0.4,
-    }))
-    setParticles(generatedParticles)
-  }, [size])
-
-  // Mouse/touch interaction handler
   const handleInteraction = useCallback((x: number, y: number) => {
     if (!containerRef.current) return
     const rect = containerRef.current.getBoundingClientRect()
@@ -92,16 +57,10 @@ export function BrasovBlob({ className, size = "lg" }: BrasovBlobProps) {
   }, [])
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      handleInteraction(e.clientX, e.clientY)
-    }
-
+    const handleMouseMove = (e: MouseEvent) => handleInteraction(e.clientX, e.clientY)
     const handleTouchMove = (e: TouchEvent) => {
-      if (e.touches.length > 0) {
-        handleInteraction(e.touches[0].clientX, e.touches[0].clientY)
-      }
+      if (e.touches.length > 0) handleInteraction(e.touches[0].clientX, e.touches[0].clientY)
     }
-
     const handleMouseEnter = () => setIsHovering(true)
     const handleMouseLeave = () => {
       setIsHovering(false)
@@ -129,35 +88,36 @@ export function BrasovBlob({ className, size = "lg" }: BrasovBlobProps) {
   const parallaxOffset = scrollY * 0.08
 
   return (
-    <div ref={containerRef} className={cn("relative w-full h-full touch-none cursor-pointer select-none", className)}>
-      {/* Background glow */}
+    <div
+      ref={containerRef}
+      className={cn("relative w-full h-full touch-none cursor-pointer select-none overflow-hidden", className)}
+    >
+      {/* Background glow - amber/gold for Transylvania medieval vibe */}
       <div
         className="absolute inset-0 flex items-center justify-center pointer-events-none will-change-transform"
-        style={{
-          transform: `translate(${mousePos.x * 0.1}px, ${mousePos.y * 0.1 - parallaxOffset * 0.5}px)`,
-        }}
+        style={{ transform: `translate(${mousePos.x * 0.1}px, ${mousePos.y * 0.1 - parallaxOffset * 0.5}px)` }}
       >
         <div
           className={cn(
             "rounded-full blur-[100px] transition-all duration-700",
-            isHovering ? "bg-brand/50" : "bg-brand/30",
-            size === "sm" ? "w-48 h-48" : size === "md" ? "w-72 h-72" : "w-[500px] h-[500px]",
+            isHovering ? "bg-amber-500/40" : "bg-amber-500/25",
+            size === "sm" ? "w-56 h-56" : size === "md" ? "w-80 h-80" : "w-[500px] h-[500px]",
           )}
         />
       </div>
 
-      {/* Secondary glow - violet for Transylvania mystique */}
+      {/* Secondary glow - brand indigo */}
       <div
         className="absolute inset-0 flex items-center justify-center pointer-events-none will-change-transform"
         style={{
-          transform: `translate(${mousePos.x * 0.15 + 30}px, ${mousePos.y * 0.12 - parallaxOffset * 0.3 - 20}px)`,
+          transform: `translate(${mousePos.x * 0.15 + 40}px, ${mousePos.y * 0.12 - parallaxOffset * 0.3 - 30}px)`,
         }}
       >
         <div
           className={cn(
             "rounded-full blur-[80px] transition-all duration-700",
-            isHovering ? "bg-glow-violet/40" : "bg-glow-violet/20",
-            size === "sm" ? "w-32 h-32" : size === "md" ? "w-48 h-48" : "w-[300px] h-[300px]",
+            isHovering ? "bg-brand/40" : "bg-brand/20",
+            size === "sm" ? "w-40 h-40" : size === "md" ? "w-56 h-56" : "w-[350px] h-[350px]",
           )}
         />
       </div>
@@ -170,8 +130,8 @@ export function BrasovBlob({ className, size = "lg" }: BrasovBlobProps) {
         <div
           className={cn(
             "rounded-full border transition-all duration-500",
-            isHovering ? "border-brand/30" : "border-brand/15",
-            size === "sm" ? "w-72 h-72" : size === "md" ? "w-[420px] h-[420px]" : "w-[600px] h-[600px]",
+            isHovering ? "border-amber-400/30" : "border-amber-400/15",
+            size === "sm" ? "w-72 h-72" : size === "md" ? "w-[420px] h-[420px]" : "w-[580px] h-[580px]",
           )}
         />
       </div>
@@ -182,8 +142,8 @@ export function BrasovBlob({ className, size = "lg" }: BrasovBlobProps) {
         <div
           className={cn(
             "rounded-full border border-dashed transition-all duration-500",
-            isHovering ? "border-glow-violet/25" : "border-glow-violet/10",
-            size === "sm" ? "w-64 h-64" : size === "md" ? "w-[380px] h-[380px]" : "w-[540px] h-[540px]",
+            isHovering ? "border-brand/25" : "border-brand/10",
+            size === "sm" ? "w-64 h-64" : size === "md" ? "w-[380px] h-[380px]" : "w-[520px] h-[520px]",
           )}
         />
       </div>
@@ -196,14 +156,7 @@ export function BrasovBlob({ className, size = "lg" }: BrasovBlobProps) {
           transition: "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
         }}
       >
-        {/* Biserica Neagră Image - Larger size */}
-        <div
-          className="relative"
-          style={{
-            width: config.imageSize,
-            height: config.imageSize * 1.1, // Slightly taller for vertical church architecture
-          }}
-        >
+        <div className="relative" style={{ width: config.imageSize, height: config.imageSize * 1.1 }}>
           <Image
             src="/biserica-neagra-brasov.webp"
             alt="Biserica Neagră Brașov - simbol iconic al orașului"
@@ -211,14 +164,14 @@ export function BrasovBlob({ className, size = "lg" }: BrasovBlobProps) {
             className="object-contain drop-shadow-2xl"
             style={{
               filter: isHovering
-                ? "drop-shadow(0 0 50px oklch(0.5 0.2 270 / 0.6))"
-                : "drop-shadow(0 0 25px oklch(0.5 0.2 270 / 0.4))",
+                ? "drop-shadow(0 0 60px oklch(0.7 0.15 45 / 0.5))"
+                : "drop-shadow(0 0 30px oklch(0.7 0.15 45 / 0.3))",
               transition: "filter 0.5s ease",
             }}
             priority
           />
 
-          {/* Reflection highlight following mouse */}
+          {/* Reflection highlight */}
           <div
             className="absolute inset-0 pointer-events-none rounded-full"
             style={{
@@ -231,15 +184,15 @@ export function BrasovBlob({ className, size = "lg" }: BrasovBlobProps) {
         </div>
       </div>
 
-      {/* Floating web/tourism elements */}
+      {/* Floating web/code elements */}
       {config.showDetails && (
         <>
-          {/* Browser window - Tourism website */}
+          {/* Browser window */}
           <div
             className="absolute will-change-transform"
             style={{
-              top: size === "lg" ? "8%" : "12%",
-              right: size === "lg" ? "2%" : "-2%",
+              top: size === "lg" ? "8%" : "10%",
+              right: size === "lg" ? "2%" : "5%",
               transform: `translate(${mousePos.x * 0.6}px, ${mousePos.y * 0.5 - parallaxOffset * 0.3}px)`,
             }}
           >
@@ -268,46 +221,38 @@ export function BrasovBlob({ className, size = "lg" }: BrasovBlobProps) {
             </div>
           </div>
 
-          {/* Code snippet - Brașov tourism theme with theme-aware styling */}
+          {/* Code snippet - Brașov tourism theme */}
           <div
             className="absolute will-change-transform"
             style={{
-              bottom: size === "lg" ? "12%" : "18%",
-              left: size === "lg" ? "0%" : "-5%",
+              bottom: size === "lg" ? "18%" : "22%",
+              left: size === "lg" ? "2%" : "5%",
               transform: `translate(${mousePos.x * 0.7}px, ${mousePos.y * 0.6 - parallaxOffset * 0.4}px)`,
             }}
           >
             <div
               className={cn(
-                "rounded-xl backdrop-blur-xl border shadow-2xl font-mono p-4",
+                "rounded-xl bg-[#1a1a2e]/95 backdrop-blur-xl border border-amber-500/20 shadow-2xl font-mono p-4",
                 size === "lg" ? "text-[11px]" : "text-[9px]",
-                resolvedTheme === "dark"
-                  ? "bg-[#1a1a2e]/95 border-amber-500/20"
-                  : "bg-white/95 border-amber-500/30",
               )}
             >
-              <div
-                className={cn(
-                  "flex items-center gap-2 mb-2 pb-2 border-b",
-                  resolvedTheme === "dark" ? "border-white/10" : "border-gray-200",
-                )}
-              >
-                <div className="w-2 h-2 rounded-full bg-amber-500" />
-                <span className="text-muted-foreground text-[9px]">brasov.config.tsx</span>
+              <div className="flex items-center gap-2 mb-2 pb-2 border-b border-white/10">
+                <div className="w-2 h-2 rounded-full bg-amber-400" />
+                <span className="text-muted-foreground text-[9px]">brasov.config.ts</span>
               </div>
-              <div className={resolvedTheme === "dark" ? "text-purple-400" : "text-purple-600"}>
-                {"const"} <span className={resolvedTheme === "dark" ? "text-cyan-400" : "text-cyan-600"}>destination</span> = {"{"}
+              <div className="text-purple-400">
+                {"const"} <span className="text-amber-400">destination</span> = {"{"}
               </div>
-              <div className={cn("pl-3", resolvedTheme === "dark" ? "text-foreground/80" : "text-gray-700")}>
-                city: <span className={resolvedTheme === "dark" ? "text-green-400" : "text-green-600"}>"Brașov"</span>,
+              <div className="pl-3 text-foreground/80">
+                city: <span className="text-green-400">"Brașov"</span>,
               </div>
-              <div className={cn("pl-3", resolvedTheme === "dark" ? "text-foreground/80" : "text-gray-700")}>
-                vibe: <span className={resolvedTheme === "dark" ? "text-amber-400" : "text-amber-600"}>"Medieval ✨"</span>,
+              <div className="pl-3 text-foreground/80">
+                region: <span className="text-yellow-400">"Transilvania"</span>,
               </div>
-              <div className={cn("pl-3", resolvedTheme === "dark" ? "text-foreground/80" : "text-gray-700")}>
-                tourism: <span className={resolvedTheme === "dark" ? "text-cyan-400" : "text-cyan-600"}>"outstanding"</span>
+              <div className="pl-3 text-foreground/80">
+                industry: <span className="text-amber-400">"turism"</span>
               </div>
-              <div className={resolvedTheme === "dark" ? "text-purple-400" : "text-purple-600"}>{"}"}</div>
+              <div className="text-purple-400">{"}"}</div>
             </div>
           </div>
 
@@ -315,34 +260,25 @@ export function BrasovBlob({ className, size = "lg" }: BrasovBlobProps) {
           <div
             className="absolute will-change-transform"
             style={{
-              top: size === "lg" ? "55%" : "50%",
-              right: size === "lg" ? "-5%" : "-8%",
+              top: size === "lg" ? "45%" : "40%",
+              right: size === "lg" ? "2%" : "5%",
               transform: `translate(${mousePos.x * 0.5}px, ${mousePos.y * 0.4}px)`,
             }}
           >
             <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/20 border border-amber-500/30 backdrop-blur-sm shadow-lg">
-              <svg
-                className="w-3.5 h-3.5 text-amber-400"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                <polyline points="9 22 9 12 15 12 15 22" />
-              </svg>
+              <div className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse" />
               <span className={cn("font-bold text-amber-400", size === "lg" ? "text-sm" : "text-xs")}>
-                HoReCa Pro
+                Inima Transilvaniei
               </span>
             </div>
           </div>
 
-          {/* Booking Badge */}
+          {/* SEO Badge */}
           <div
             className="absolute will-change-transform"
             style={{
-              bottom: size === "lg" ? "25%" : "30%",
-              right: size === "lg" ? "8%" : "5%",
+              bottom: size === "lg" ? "35%" : "38%",
+              right: size === "lg" ? "5%" : "8%",
               transform: `translate(${mousePos.x * 0.4}px, ${mousePos.y * 0.35}px)`,
             }}
           >
@@ -354,23 +290,19 @@ export function BrasovBlob({ className, size = "lg" }: BrasovBlobProps) {
                 stroke="currentColor"
                 strokeWidth="2"
               >
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                <line x1="16" y1="2" x2="16" y2="6" />
-                <line x1="8" y1="2" x2="8" y2="6" />
-                <line x1="3" y1="10" x2="21" y2="10" />
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
               </svg>
-              <span className={cn("font-medium text-brand", size === "lg" ? "text-xs" : "text-[10px]")}>
-                Rezervări Online
-              </span>
+              <span className={cn("font-medium text-brand", size === "lg" ? "text-xs" : "text-[10px]")}>SEO Local</span>
             </div>
           </div>
 
-          {/* Location Pin - Transilvania */}
+          {/* Location Pin */}
           <div
             className="absolute will-change-transform"
             style={{
-              top: size === "lg" ? "20%" : "25%",
-              left: size === "lg" ? "5%" : "0%",
+              top: size === "lg" ? "15%" : "18%",
+              left: size === "lg" ? "8%" : "10%",
               transform: `translate(${mousePos.x * 0.55}px, ${mousePos.y * 0.45}px)`,
             }}
           >
@@ -383,8 +315,8 @@ export function BrasovBlob({ className, size = "lg" }: BrasovBlobProps) {
                   stroke="currentColor"
                   strokeWidth="2"
                 >
-                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                  <polyline points="9 22 9 12 15 12 15 22" />
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
                 </svg>
               </div>
               <div>
@@ -392,56 +324,63 @@ export function BrasovBlob({ className, size = "lg" }: BrasovBlobProps) {
                   Brașov
                 </div>
                 <div className={cn("text-muted-foreground", size === "lg" ? "text-[10px]" : "text-[8px]")}>
-                  Inima Transilvaniei
+                  Transilvania, România
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Multilingual Badge */}
+          {/* HoReCa Badge */}
           <div
             className="absolute will-change-transform"
             style={{
-              top: size === "lg" ? "38%" : "40%",
-              left: size === "lg" ? "-3%" : "-5%",
+              bottom: size === "lg" ? "5%" : "8%",
+              left: size === "lg" ? "25%" : "20%",
               transform: `translate(${mousePos.x * 0.45}px, ${mousePos.y * 0.5}px)`,
             }}
           >
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-violet-500/20 border border-violet-500/30 backdrop-blur-sm shadow-lg">
-              <span className="text-[10px]">🇬🇧</span>
-              <span className="text-[10px]">🇩🇪</span>
-              <span className="text-[10px]">🇷🇴</span>
-              <span className={cn("font-medium text-violet-400 ml-1", size === "lg" ? "text-[10px]" : "text-[8px]")}>
-                Multilingv
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/20 border border-violet-500/30 backdrop-blur-sm shadow-lg">
+              <svg
+                className="w-3.5 h-3.5 text-violet-400"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+              <span className={cn("font-medium text-violet-400", size === "lg" ? "text-xs" : "text-[10px]")}>
+                HoReCa Pro
               </span>
             </div>
           </div>
         </>
       )}
 
-      {/* Floating particles */}
+      {/* Floating particles - amber/gold themed colors */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {particles.map((particle, i) => (
+        {[...Array(size === "sm" ? 5 : 12)].map((_, i) => (
           <div
             key={i}
             className={cn(
               "absolute rounded-full",
               i % 4 === 0
-                ? "bg-amber-500/70 w-1.5 h-1.5"
+                ? "bg-amber-400/70 w-1.5 h-1.5"
                 : i % 4 === 1
                   ? "bg-brand/60 w-1 h-1"
                   : i % 4 === 2
-                    ? "bg-glow-violet/50 w-2 h-2"
-                    : "bg-rose-400/50 w-1 h-1",
+                    ? "bg-violet-400/50 w-2 h-2"
+                    : "bg-yellow-400/50 w-1 h-1",
             )}
             style={{
-              top: `${particle.top}%`,
-              left: `${particle.left}%`,
+              top: `${10 + Math.random() * 80}%`,
+              left: `${5 + Math.random() * 90}%`,
               animationName: "float",
-              animationDuration: `${particle.duration}s`,
+              animationDuration: `${4 + Math.random() * 5}s`,
               animationTimingFunction: "ease-in-out",
               animationIterationCount: "infinite",
-              animationDelay: `${particle.delay}s`,
+              animationDelay: `${i * 0.4}s`,
             }}
           />
         ))}
@@ -449,23 +388,12 @@ export function BrasovBlob({ className, size = "lg" }: BrasovBlobProps) {
 
       <style jsx>{`
         @keyframes spin {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
         @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px) scale(1);
-            opacity: 0.6;
-          }
-          50% {
-            transform: translateY(-20px) scale(1.1);
-            opacity: 1;
-          }
+          0%, 100% { transform: translateY(0px) scale(1); opacity: 0.6; }
+          50% { transform: translateY(-20px) scale(1.1); opacity: 1; }
         }
       `}</style>
     </div>

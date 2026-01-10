@@ -36,7 +36,7 @@
 
 **Status:** ⚠️ NECESITĂ ÎMBUNĂTĂȚIRI
 
-```javascript
+\`\`\`javascript
 // next.config.mjs - PROBLEME IDENTIFICATE
 const nextConfig = {
   typescript: {
@@ -46,7 +46,7 @@ const nextConfig = {
     unoptimized: true, // ❌ CRITIC - pierde optimizări automate Next.js
   },
 }
-```
+\`\`\`
 
 **Recomandări:**
 - ✅ Elimină `ignoreBuildErrors: true`
@@ -78,7 +78,7 @@ Toate paginile folosesc **Server Components** by default în Next.js App Router:
 **Status:** ✅ BINE IMPLEMENTAT, dar cu lipsuri
 
 #### Root Layout (`app/layout.tsx`)
-```typescript
+\`\`\`typescript
 export const metadata: Metadata = {
   metadataBase: new URL("https://websitefactory.ro"), // ✅
   title: {
@@ -91,7 +91,7 @@ export const metadata: Metadata = {
   openGraph: { ... }, // ✅
   alternates: { canonical: "https://websitefactory.ro" }, // ✅
 }
-```
+\`\`\`
 
 **Probleme:**
 - ❌ `generator: 'v0.app'` - ar trebui eliminat (nu adaugă valoare SEO)
@@ -116,7 +116,7 @@ export const metadata: Metadata = {
 
 #### Implementat:
 ✅ **LocalBusiness Schema** (homepage)
-```json
+\`\`\`json
 {
   "@type": "LocalBusiness",
   "name": "Website Factory",
@@ -125,7 +125,7 @@ export const metadata: Metadata = {
   "areaServed": ["Timișoara", "Cluj-Napoca", "București", ...],
   "sameAs": [social media links]
 }
-```
+\`\`\`
 
 ✅ **Breadcrumb Schema** (toate paginile)
 ✅ **FAQ Schema** (pagini cu întrebări frecvente)
@@ -161,7 +161,7 @@ export const metadata: Metadata = {
 
 **Status:** ✅ CORECT SEMANTIC
 
-```html
+\`\`\`html
 <!-- Homepage -->
 <h1>De la idee la soluție digitală pentru afacerea ta.</h1>
 <h2>Soluții complete pentru prezența ta digitală</h2>
@@ -174,7 +174,7 @@ export const metadata: Metadata = {
 <h2>Tipuri de website-uri</h2>
 <h2>Beneficii măsurabile</h2>
 <h2>Întrebări frecvente</h2>
-```
+\`\`\`
 
 **Observații:**
 - ✅ Un singur H1 per pagină
@@ -211,7 +211,7 @@ export const metadata: Metadata = {
 
 **Status:** ✅ EXCELENT
 
-```
+\`\`\`
 ✅ websitefactory.ro/
 ✅ websitefactory.ro/servicii/creare-website
 ✅ websitefactory.ro/servicii/magazin-online
@@ -224,7 +224,7 @@ export const metadata: Metadata = {
 ✅ websitefactory.ro/creare-site-cluj
 ✅ websitefactory.ro/creare-site-iasi
 ✅ websitefactory.ro/creare-site-constanta
-```
+\`\`\`
 
 **Probleme:**
 - ❌ `/creare-site-brasov` - menționat în footer dar pagina nu există
@@ -264,12 +264,12 @@ export const metadata: Metadata = {
 
 **Status:** ❌ CRITIC - NECESITĂ ATENȚIE IMEDIATĂ
 
-```javascript
+\`\`\`javascript
 // next.config.mjs
 images: {
   unoptimized: true, // ❌ ELIMINĂ TOATE OPTIMIZĂRILE NEXT.JS
 }
-```
+\`\`\`
 
 **Probleme:**
 - ❌ Imagini nu sunt comprimate automat
@@ -287,13 +287,13 @@ images: {
 
 **Status:** ✅ BINE OPTIMIZAT
 
-```typescript
+\`\`\`typescript
 const inter = Inter({
   subsets: ["latin", "latin-ext"],
   variable: "--font-inter",
   display: "swap", // ✅ Previne FOIT
 })
-```
+\`\`\`
 
 ### 5.3 JavaScript & CSS
 
@@ -424,7 +424,7 @@ const inter = Inter({
 **Impact:** Google nu poate indexa eficient toate paginile
 
 **Soluție:** Creează `app/sitemap.ts`:
-```typescript
+\`\`\`typescript
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -444,7 +444,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ... toate paginile
   ]
 }
-```
+\`\`\`
 
 ### 9.2 Robots.txt
 
@@ -453,7 +453,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 **Impact:** Nu există directive pentru crawlere
 
 **Soluție:** Creează `app/robots.ts`:
-```typescript
+\`\`\`typescript
 import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
@@ -466,7 +466,7 @@ export default function robots(): MetadataRoute.Robots {
     sitemap: 'https://websitefactory.ro/sitemap.xml',
   }
 }
-```
+\`\`\`
 
 ### 9.3 OG Images
 
@@ -640,4 +640,3 @@ Metadata referențiază `/og-image.jpg` dar fișierul nu există în `/public`
 **Analiză realizată de:** AI Assistant  
 **Contact pentru implementare:** office@websitefactory.ro  
 **Următoarea revizuire:** După implementarea acțiunilor urgente
-

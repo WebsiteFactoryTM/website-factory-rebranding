@@ -69,10 +69,10 @@ Pagina a fost construită urmând aceleași standarde SEO ca și celelalte pagin
 ## 📊 SEO Implementation
 
 ### Metadata:
-```typescript
+\`\`\`typescript
 title: "Creare Site Brașov | Web Design Brașov | Website Factory"
 description: "Servicii profesionale de creare site-uri web în Brașov. Web design modern pentru turism, HoReCa și afaceri locale. Site-uri optimizate SEO în inima Transilvaniei."
-```
+\`\`\`
 
 ### Keywords Target:
 - creare site brasov
@@ -202,4 +202,3 @@ description: "Servicii profesionale de creare site-uri web în Brașov. Web desi
 ## 🎉 Status: COMPLET ȘI FUNCȚIONAL
 
 Pagina `/creare-site-brasov` este complet implementată, SEO-optimizată și gata de utilizare!
-

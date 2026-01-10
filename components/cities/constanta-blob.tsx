@@ -88,7 +88,10 @@ export function ConstantaBlob({ className, size = "lg" }: ConstantaBlobProps) {
   const parallaxOffset = scrollY * 0.08
 
   return (
-    <div ref={containerRef} className={cn("relative w-full h-full touch-none cursor-pointer select-none", className)}>
+    <div
+      ref={containerRef}
+      className={cn("relative w-full h-full touch-none cursor-pointer select-none overflow-hidden", className)}
+    >
       {/* Background glow - turquoise for sea/coastal identity */}
       <div
         className="absolute inset-0 flex items-center justify-center pointer-events-none will-change-transform"
@@ -189,7 +192,7 @@ export function ConstantaBlob({ className, size = "lg" }: ConstantaBlobProps) {
             className="absolute will-change-transform"
             style={{
               top: size === "lg" ? "5%" : "10%",
-              right: size === "lg" ? "5%" : "0%",
+              right: size === "lg" ? "2%" : "5%", // Adjusted from negative to positive
               transform: `translate(${mousePos.x * 0.6}px, ${mousePos.y * 0.5 - parallaxOffset * 0.3}px)`,
             }}
           >
@@ -222,8 +225,8 @@ export function ConstantaBlob({ className, size = "lg" }: ConstantaBlobProps) {
           <div
             className="absolute will-change-transform"
             style={{
-              bottom: size === "lg" ? "20%" : "25%",
-              left: size === "lg" ? "-5%" : "-8%",
+              bottom: size === "lg" ? "18%" : "22%",
+              left: size === "lg" ? "2%" : "5%", // Adjusted from negative to positive
               transform: `translate(${mousePos.x * 0.7}px, ${mousePos.y * 0.6 - parallaxOffset * 0.4}px)`,
             }}
           >
@@ -258,7 +261,7 @@ export function ConstantaBlob({ className, size = "lg" }: ConstantaBlobProps) {
             className="absolute will-change-transform"
             style={{
               top: size === "lg" ? "45%" : "40%",
-              right: size === "lg" ? "-5%" : "-8%",
+              right: size === "lg" ? "2%" : "5%", // Adjusted from negative to positive
               transform: `translate(${mousePos.x * 0.5}px, ${mousePos.y * 0.4}px)`,
             }}
           >
@@ -274,8 +277,8 @@ export function ConstantaBlob({ className, size = "lg" }: ConstantaBlobProps) {
           <div
             className="absolute will-change-transform"
             style={{
-              bottom: size === "lg" ? "32%" : "35%",
-              right: size === "lg" ? "8%" : "5%",
+              bottom: size === "lg" ? "35%" : "38%",
+              right: size === "lg" ? "5%" : "8%",
               transform: `translate(${mousePos.x * 0.4}px, ${mousePos.y * 0.35}px)`,
             }}
           >
@@ -299,7 +302,7 @@ export function ConstantaBlob({ className, size = "lg" }: ConstantaBlobProps) {
             className="absolute will-change-transform"
             style={{
               top: size === "lg" ? "15%" : "18%",
-              left: size === "lg" ? "5%" : "0%",
+              left: size === "lg" ? "8%" : "10%", // Adjusted positioning
               transform: `translate(${mousePos.x * 0.55}px, ${mousePos.y * 0.45}px)`,
             }}
           >
@@ -331,8 +334,8 @@ export function ConstantaBlob({ className, size = "lg" }: ConstantaBlobProps) {
           <div
             className="absolute will-change-transform"
             style={{
-              bottom: size === "lg" ? "8%" : "12%",
-              left: size === "lg" ? "20%" : "15%",
+              bottom: size === "lg" ? "5%" : "8%",
+              left: size === "lg" ? "25%" : "20%",
               transform: `translate(${mousePos.x * 0.45}px, ${mousePos.y * 0.5}px)`,
             }}
           >

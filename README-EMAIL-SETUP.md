@@ -6,17 +6,17 @@
 
 Creează fișierul `.env.local` în directorul rădăcină și adaugă:
 
-```env
+\`\`\`env
 RESEND_API_KEY=re_CfudKxEW_DbEWpJ4vPHkMPvAzRwP93vut
-```
+\`\`\`
 
 ### 2. Restart Development Server
 
 După adăugarea API key-ului, restart server-ul de development:
 
-```bash
+\`\`\`bash
 npm run dev
-```
+\`\`\`
 
 ### 3. Funcționalități Implementate
 
@@ -75,9 +75,9 @@ Pentru testare locală:
 
 În producție, adaugă variabila de mediu în Vercel/platform-ul tău:
 
-```
+\`\`\`
 RESEND_API_KEY=re_CfudKxEW_DbEWpJ4vPHkMPvAzRwP93vut
-```
+\`\`\`
 
 ### 10. Rate Limits
 
@@ -86,4 +86,3 @@ Resend Free Tier:
 - 3,000 emails/month
 
 Pentru volum mai mare, upgrade la plan paid.
-

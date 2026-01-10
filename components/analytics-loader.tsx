@@ -22,4 +22,3 @@ export function AnalyticsLoader() {
   // It only initializes scripts on the client side
   return null
 }
-

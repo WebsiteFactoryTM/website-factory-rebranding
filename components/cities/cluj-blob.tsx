@@ -88,7 +88,10 @@ export function ClujBlob({ className, size = "lg" }: ClujBlobProps) {
   const parallaxOffset = scrollY * 0.08
 
   return (
-    <div ref={containerRef} className={cn("relative w-full h-full touch-none cursor-pointer select-none", className)}>
+    <div
+      ref={containerRef}
+      className={cn("relative w-full h-full touch-none cursor-pointer select-none overflow-hidden", className)}
+    >
       {/* Background glow */}
       <div
         className="absolute inset-0 flex items-center justify-center pointer-events-none will-change-transform"
@@ -189,7 +192,7 @@ export function ClujBlob({ className, size = "lg" }: ClujBlobProps) {
             className="absolute will-change-transform"
             style={{
               top: size === "lg" ? "8%" : "12%",
-              right: size === "lg" ? "2%" : "-2%",
+              right: size === "lg" ? "2%" : "5%", // Adjusted from negative
               transform: `translate(${mousePos.x * 0.6}px, ${mousePos.y * 0.5 - parallaxOffset * 0.3}px)`,
             }}
           >
@@ -223,7 +226,7 @@ export function ClujBlob({ className, size = "lg" }: ClujBlobProps) {
             className="absolute will-change-transform"
             style={{
               bottom: size === "lg" ? "12%" : "18%",
-              left: size === "lg" ? "0%" : "-5%",
+              left: size === "lg" ? "2%" : "5%", // Adjusted from negative
               transform: `translate(${mousePos.x * 0.7}px, ${mousePos.y * 0.6 - parallaxOffset * 0.4}px)`,
             }}
           >
@@ -258,7 +261,7 @@ export function ClujBlob({ className, size = "lg" }: ClujBlobProps) {
             className="absolute will-change-transform"
             style={{
               top: size === "lg" ? "55%" : "50%",
-              right: size === "lg" ? "-5%" : "-8%",
+              right: size === "lg" ? "2%" : "5%", // Adjusted from negative
               transform: `translate(${mousePos.x * 0.5}px, ${mousePos.y * 0.4}px)`,
             }}
           >
@@ -273,7 +276,7 @@ export function ClujBlob({ className, size = "lg" }: ClujBlobProps) {
             className="absolute will-change-transform"
             style={{
               bottom: size === "lg" ? "25%" : "30%",
-              right: size === "lg" ? "8%" : "5%",
+              right: size === "lg" ? "5%" : "8%",
               transform: `translate(${mousePos.x * 0.4}px, ${mousePos.y * 0.35}px)`,
             }}
           >
@@ -298,7 +301,7 @@ export function ClujBlob({ className, size = "lg" }: ClujBlobProps) {
             className="absolute will-change-transform"
             style={{
               top: size === "lg" ? "20%" : "25%",
-              left: size === "lg" ? "5%" : "0%",
+              left: size === "lg" ? "8%" : "10%", // Adjusted positioning
               transform: `translate(${mousePos.x * 0.55}px, ${mousePos.y * 0.45}px)`,
             }}
           >

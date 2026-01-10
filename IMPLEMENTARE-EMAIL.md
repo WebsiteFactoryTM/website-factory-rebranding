@@ -3,9 +3,9 @@
 ## 📋 Ce a fost implementat
 
 ### 1. **Pachet Resend instalat**
-```bash
+\`\`\`bash
 npm install resend
-```
+\`\`\`
 
 ### 2. **Configurare API Key**
 - Fișier `.env.local` creat cu API key-ul Resend
@@ -157,9 +157,9 @@ Toate email-urile au:
 Pentru a testa:
 
 1. **Restart dev server** (pentru a încărca .env.local):
-```bash
+\`\`\`bash
 npm run dev
-```
+\`\`\`
 
 2. **Testează Contact Form**:
    - Accesează http://localhost:3000/contact
@@ -181,9 +181,9 @@ npm run dev
 ### Vercel / Platform Deployment:
 
 1. Adaugă environment variable:
-```
+\`\`\`
 RESEND_API_KEY=re_CfudKxEW_DbEWpJ4vPHkMPvAzRwP93vut
-```
+\`\`\`
 
 2. Deploy aplicația
 
@@ -229,4 +229,3 @@ RESEND_API_KEY=re_CfudKxEW_DbEWpJ4vPHkMPvAzRwP93vut
 ## 🎉 Status: COMPLET ȘI FUNCȚIONAL
 
 Toate funcționalitățile au fost implementate și testate. Sistemul este gata de utilizare!
-

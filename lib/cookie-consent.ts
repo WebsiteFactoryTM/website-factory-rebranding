@@ -153,4 +153,3 @@ declare global {
     showCookieConsent?: () => void
   }
 }
-
