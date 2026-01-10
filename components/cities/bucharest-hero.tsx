@@ -8,7 +8,12 @@ import { BucharestBlob } from "@/components/cities/bucharest-blob"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 
-const trustBadges = ["SEO optimizat București", "Design premium", "Suport dedicat"]
+const trustBadges = [
+  "SEO Local București",
+  "Design Premium & Responsive",
+  "Livrare Rapidă",
+  "Suport Dedicat 24/7",
+]
 
 export function BucharestHero() {
   const { ref: contentRef, isVisible: contentVisible } = useScrollReveal()
@@ -81,9 +86,10 @@ export function BucharestHero() {
 
           {/* Subtitle */}
           <p className="mt-4 sm:mt-6 text-base sm:text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-2xl text-pretty">
-            Agenție de web design cu experiență în crearea de{" "}
-            <strong className="text-foreground">site-uri profesionale pentru afaceri din București</strong>. Soluții
-            digitale moderne, optimizate SEO, care domină rezultatele Google în capitală.
+            Agenție de <strong className="text-foreground">web design specializată</strong> în crearea de{" "}
+            <strong className="text-foreground">site-uri profesionale pentru afaceri din București</strong>. Creăm{" "}
+            <strong className="text-foreground">soluții digitale moderne</strong>, magazine online și aplicații web,{" "}
+            <strong className="text-foreground">optimizate SEO</strong> pentru top poziții Google București.
           </p>
 
           {/* Stats */}
