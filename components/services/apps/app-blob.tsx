@@ -16,7 +16,7 @@ export function AppBlob({ className, size = "lg" }: AppBlobProps) {
   const [isHovering, setIsHovering] = useState(false)
   const [scrollY, setScrollY] = useState(0)
   const [activeNotification, setActiveNotification] = useState(0)
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number | undefined>(undefined)
 
   // Smooth lerp animation
   useEffect(() => {

@@ -14,7 +14,7 @@ export function WebsiteBlob({ className, size = "lg" }: WebsiteBlobProps) {
   const [targetPos, setTargetPos] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
   const [scrollY, setScrollY] = useState(0)
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number | undefined>(undefined)
 
   // Smooth lerp animation
   useEffect(() => {

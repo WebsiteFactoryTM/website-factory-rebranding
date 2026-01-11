@@ -16,7 +16,7 @@ export function EcommerceBlob({ className, size = "lg" }: EcommerceBlobProps) {
   const [isHovering, setIsHovering] = useState(false)
   const [scrollY, setScrollY] = useState(0)
   const [cartItems, setCartItems] = useState(3)
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number | undefined>(undefined)
 
   // Smooth lerp animation
   useEffect(() => {

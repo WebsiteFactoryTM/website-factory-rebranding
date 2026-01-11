@@ -15,7 +15,7 @@ export function IasiBlob({ className, size = "lg" }: IasiBlobProps) {
   const [targetPos, setTargetPos] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
   const [scrollY, setScrollY] = useState(0)
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number | undefined>(undefined)
   const [particles, setParticles] = useState<Array<{ top: number; left: number; duration: number }>>([])
 
   // Initialize particles on client-side only to prevent hydration errors

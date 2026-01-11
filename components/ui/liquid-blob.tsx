@@ -16,7 +16,7 @@ export function LiquidBlob({ className, interactive = true }: LiquidBlobProps) {
   const [isTouching, setIsTouching] = useState(false)
   const [scrollY, setScrollY] = useState(0)
   const [isPulsing, setIsPulsing] = useState(false)
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number | undefined>(undefined)
 
   useEffect(() => {
     const lerp = (start: number, end: number, factor: number) => {
