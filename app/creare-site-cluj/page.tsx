@@ -19,8 +19,8 @@ const cityName = "Cluj-Napoca"
 const citySlug = "cluj"
 
 export const metadata: Metadata = generatePageMetadata({
-  title: `Creare Site Cluj-Napoca | Agenție Web Design Cluj 2026`,
-  description: `⭐ Creare site-uri web Cluj-Napoca ✓ Web Design pentru Startup-uri & IT ✓ Aplicații Web ✓ MVP Rapid ✓ SEO Local Cluj ✓ Magazine online ✓ Prețuri competitive ✓ Portofoliu 40+ proiecte Cluj`,
+  title: `Creare Site Cluj - Web Design Cluj-Napoca - Website Factory`,
+  description: `Creare site Cluj: servicii personalizate de web design, magazin online și optimizare SEO pentru vizibilitate locală și națională.`,
   path: `/creare-site-${citySlug}`,
   keywords: [
     "creare site cluj",

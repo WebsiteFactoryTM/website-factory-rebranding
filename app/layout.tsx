@@ -25,15 +25,15 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL("https://websitefactory.ro"),
   title: {
-    default: "Creare site Timișoara | Web design Timișoara | Website Factory",
+    default: "Creare Site Timișoara - Web Design Timișoara - Website Factory",
     template: "%s | Website Factory",
   },
   description:
-    "De la idee la soluție digitală, creăm site-uri și magazine online în Timișoara: web design modern, viteză, SEO local și conversii.",
+    "Servicii profesionale de web design, magazin online si optimizare SEO, vizibilitate locală și națională - De la idee la soluție digitală",
   keywords: [
     "creare site Timișoara",
     "web design Timișoara",
-    "dezvoltare web",
+    "dezvoltare site web",
     "site-uri profesionale",
     "magazin online",
     "aplicații mobile",
@@ -58,36 +58,37 @@ export const metadata: Metadata = {
     locale: "ro_RO",
     url: "https://websitefactory.ro",
     siteName: "Website Factory",
-    title: "Creare site Timișoara | Web design Timișoara | Website Factory",
+    title: "Creare Site Timișoara - Web Design Timișoara - Website Factory",
     description:
-      "De la idee la soluție digitală, creăm site-uri și magazine online în Timișoara: web design modern, viteză, SEO local și conversii.",
+      "Servicii profesionale de web design, magazin online si optimizare SEO, vizibilitate locală și națională - De la idee la soluție digitală",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/website-factory-og.webp",
         width: 1200,
         height: 630,
         alt: "Website Factory - Web Design Timișoara",
+        type: "image/webp",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Creare site Timișoara | Web design Timișoara | Website Factory",
-    description: "De la idee la soluție digitală, creăm site-uri și magazine online în Timișoara: web design modern, viteză, SEO local și conversii.",
-    images: ["/og-image.jpg"],
+    title: "Creare Site Timișoara - Web Design Timișoara - Website Factory",
+    description: "Servicii profesionale de web design, magazin online si optimizare SEO, vizibilitate locală și națională - De la idee la soluție digitală",
+    images: ["/website-factory-og.webp"],
   },
   alternates: {
     canonical: "https://websitefactory.ro",
   },
   icons: {
     icon: [
-      { url: "/website-factory-logo-bright-blue-svg.svg", type: "image/svg+xml" },
-      { url: "/website-factory-logo-bright-blue-svg.svg", type: "image/svg+xml", sizes: "any" },
+      { url: "/website-factory-favicon.ico", type: "image/x-icon" },
+      { url: "/website-factory-favicon.ico", sizes: "any" },
     ],
     apple: [
-      { url: "/website-factory-logo-bright-blue-svg.svg", type: "image/svg+xml" },
+      { url: "/website-factory-favicon.ico", type: "image/x-icon" },
     ],
-    shortcut: "/website-factory-logo-bright-blue-svg.svg",
+    shortcut: "/website-factory-favicon.ico",
   },
   generator: 'v0.app'
 }

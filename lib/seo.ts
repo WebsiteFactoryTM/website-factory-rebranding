@@ -26,7 +26,7 @@ export function generatePageMetadata({
   description,
   path = "",
   keywords = [],
-  image = "/og-image.jpg",
+  image = "/website-factory-og.webp",
 }: {
   title: string
   description: string
@@ -39,7 +39,7 @@ export function generatePageMetadata({
   return {
     title,
     description,
-    keywords: [...keywords, "web design", "creare site", "Website Factory", "dezvoltare website"],
+    keywords: [...keywords, "web design", "creare site", "Website Factory", "dezvoltare website", "creare magazin online"],
     alternates: {
       canonical: url,
     },
@@ -56,6 +56,7 @@ export function generatePageMetadata({
           width: 1200,
           height: 630,
           alt: title,
+          type: "image/webp",
         },
       ],
     },
@@ -78,7 +79,7 @@ export function generateLocalBusinessSchema() {
     description: siteConfig.description,
     url: siteConfig.url,
     logo: `${siteConfig.url}/logo.png`,
-    image: `${siteConfig.url}/og-image.jpg`,
+    image: `${siteConfig.url}/website-factory-og.webp`,
     telephone: siteConfig.contact.telephone,
     email: siteConfig.contact.email,
     address: {

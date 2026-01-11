@@ -19,8 +19,8 @@ const cityName = "Brașov"
 const citySlug = "brasov"
 
 export const metadata: Metadata = generatePageMetadata({
-  title: `Creare Site Brașov | Agenție Web Design Brașov 2026`,
-  description: `⭐ Creare site-uri web Brașov ✓ Web Design Premium pentru turism, HoReCa, pensiuni ✓ SEO Local Brașov ✓ Magazine online ✓ Prețuri competitive ✓ Portofoliu 35+ proiecte Brașov`,
+  title: `Creare Site Brașov - Web Design Brașov - Website Factory`,
+  description: `Creare site Brașov: servicii personalizate de web design, magazin online și optimizare SEO pentru vizibilitate locală și națională.`,
   path: `/creare-site-${citySlug}`,
   keywords: [
     "creare site brasov",

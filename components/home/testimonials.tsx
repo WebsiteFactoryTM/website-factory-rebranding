@@ -1,10 +1,12 @@
 "use client"
 
+import { useRef, useState, useEffect, useCallback } from "react"
 import Image from "next/image"
-import { Quote, Star } from "lucide-react"
+import { Quote, Star, ChevronLeft, ChevronRight } from "lucide-react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { FloatingElement } from "@/components/ui/floating-element"
 import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 
 const testimonials = [
   {
@@ -13,7 +15,7 @@ const testimonials = [
     role: "Administrator, Ornella Design",
     content:
       "Oameni faini, au înțeles rapid ce ne dorim și ne-au ajutat imediat. Echipa a fost super ok și a găsit soluții rapid la orice problemă. Recomandăm cu drag!",
-    avatar: "/professional-man-suit-corporate.jpg",
+    logo: "/partners/ornella.webp",
     rating: 5,
   },
   {
@@ -22,23 +24,168 @@ const testimonials = [
     role: "fondator The Radar – boutique consultancy",
     content:
       "Colaborarea cu Website Factory a fost una extrem de fluentă, chiar dacă am lucrat 100% remote. Comunicarea a fost clară, structurată și eficientă de la început până la livrarea finală. Echipa a integrat rapid feedback-ul meu privind specificul unui website de portofoliu – cu elemente atipice, prin comparație cu un site comercial – inclusiv utilizarea de elemente video frecvent întâlnite pe piețele internaționale, dar mai puțin uzuale în România. Suportul post-livrare a fost la fel de eficient și prompt, motiv pentru care am planificat deja un upgrade al site-ului, pe care îl voi realiza tot împreună cu Website Factory.",
-    avatar: "/professional-businessman-portrait-confident.jpg",
+    logo: "/partners/logo-no-background-2-copy.webp", // Placeholder - poate fi adăugat mai târziu
     rating: 5,
   },
   {
     id: 3,
+    name: "Radu Voinescu",
+    role: "Director, Maravo Clinic",
+    content:
+      "Am avut o colaborare foarte bună cu Website Factory și cu Ernest în procesul de creare a site-ului nostru. Ernest a înțeles clar direcția dorită, a livrat conform brief-ului și a integrat constant feedbackul primit, ajustând rapid detaliile necesare. Am apreciat promptitudinea, deschiderea și implicarea, inclusiv disponibilitatea de a face modificări chiar în etapa finală, cu obiectivul clar de a livra exact rezultatul dorit. Mulțumim pentru colaborare și profesionalism. Mult succes în continuare!",
+    logo: "/partners/maravo-logo-landscape.webp", // Placeholder - poate fi adăugat mai târziu
+    rating: 5,
+  },
+  {
+    id: 4,
     name: "Nicolae Chirteș",
     role: "Co-fondator, artimm.digital",
     content:
       "Am lucrat cu Website Factory la realizarea website-ului nostru și, per total, a fost o experiență de succes. Au înțeles ce ne dorim, au venit cu soluții clare și au livrat un site modern, curat și ușor de folosit. Mi-a plăcut că au fost deschiși la feedback și am reusit sa oglindim intr-o forma autentica viziunea noastra de business.  Dacă ai nevoie de o echipă serioasă pentru web design și dezvoltare, Website Factory este alegerea potrivita.",
-    avatar: "/professional-businesswoman-portrait-elegant.jpg",
+    logo: "/partners/Logo-artimm-scaled.webp", // Placeholder - poate fi adăugat mai târziu
+    rating: 5,
+  },
+  {
+    id: 5,
+    name: "Adrian Dascălu",
+    role: "Administrator, Geonordica",
+    content:
+      "Am colaborat cu societatea Website Factory pentru realizarea paginii web a societatii noastre. Au dat dovada de seriozitate, profesionalism si atentie la detalii. Au fost receptivi la modificarile solcitate pe parcursul dezvoltarii website-ului, au analizat si corectat/imbunatatit propunerile cu care am venit. Totodata, ne-au oferit asistenta si mentenanta si dupa incarcarea site-ului in versiune live. Recomandam cu incredere societatea Website Factory intrucat au adus un plus valoare imaginii firmei noastre.",
+    logo: "/partners/geonordica-black-color.webp", // Placeholder - poate fi adăugat mai târziu
     rating: 5,
   },
 ]
 
 export function Testimonials() {
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal<HTMLDivElement>()
-  const { ref: gridRef, isVisible: gridVisible } = useScrollReveal<HTMLDivElement>()
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isDragging, setIsDragging] = useState(false)
+  const [startX, setStartX] = useState(0)
+  const [scrollLeft, setScrollLeft] = useState(0)
+
+  // Calculate items per view based on screen size
+  const getItemsPerView = useCallback(() => {
+    if (typeof window === "undefined") return 3
+    return window.innerWidth >= 768 ? 3 : 1
+  }, [])
+
+  const [itemsPerView, setItemsPerView] = useState(getItemsPerView)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setItemsPerView(getItemsPerView())
+    }
+
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [getItemsPerView])
+
+  const maxIndex = Math.max(0, testimonials.length - itemsPerView)
+
+  // Scroll to specific index
+  const scrollToIndex = useCallback(
+    (index: number) => {
+      if (!scrollRef.current) return
+      const newIndex = Math.max(0, Math.min(index, maxIndex))
+      setCurrentIndex(newIndex)
+
+      const cardWidth = scrollRef.current.scrollWidth / testimonials.length
+      const gap = 24 // gap-6 = 1.5rem = 24px
+      const scrollPosition = newIndex * (cardWidth + gap)
+
+      scrollRef.current.scrollTo({
+        left: scrollPosition,
+        behavior: "smooth",
+      })
+    },
+    [maxIndex],
+  )
+
+  // Handle scroll event to update current index
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!scrollRef.current || isDragging) return
+
+      const scrollLeft = scrollRef.current.scrollLeft
+      const cardWidth = scrollRef.current.scrollWidth / testimonials.length
+      const gap = 24
+      const newIndex = Math.round(scrollLeft / (cardWidth + gap))
+
+      if (newIndex !== currentIndex && newIndex >= 0 && newIndex <= maxIndex) {
+        setCurrentIndex(newIndex)
+      }
+    }
+
+    const scrollContainer = scrollRef.current
+    if (scrollContainer) {
+      scrollContainer.addEventListener("scroll", handleScroll)
+      return () => scrollContainer.removeEventListener("scroll", handleScroll)
+    }
+  }, [currentIndex, maxIndex, isDragging])
+
+  // Navigation handlers
+  const handlePrev = () => {
+    scrollToIndex(currentIndex - 1)
+  }
+
+  const handleNext = () => {
+    scrollToIndex(currentIndex + 1)
+  }
+
+  // Touch/Mouse drag handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!scrollRef.current) return
+    setIsDragging(true)
+    setStartX(e.pageX - scrollRef.current.offsetLeft)
+    setScrollLeft(scrollRef.current.scrollLeft)
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !scrollRef.current) return
+    e.preventDefault()
+    const x = e.pageX - scrollRef.current.offsetLeft
+    const walk = (x - startX) * 1.5
+    scrollRef.current.scrollLeft = scrollLeft - walk
+  }
+
+  const handleMouseUp = () => {
+    setIsDragging(false)
+    // Snap to nearest card
+    if (scrollRef.current) {
+      const scrollLeft = scrollRef.current.scrollLeft
+      const cardWidth = scrollRef.current.scrollWidth / testimonials.length
+      const gap = 24
+      const newIndex = Math.round(scrollLeft / (cardWidth + gap))
+      scrollToIndex(newIndex)
+    }
+  }
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!scrollRef.current) return
+    setIsDragging(true)
+    setStartX(e.touches[0].pageX - scrollRef.current.offsetLeft)
+    setScrollLeft(scrollRef.current.scrollLeft)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || !scrollRef.current) return
+    const x = e.touches[0].pageX - scrollRef.current.offsetLeft
+    const walk = (x - startX) * 1.5
+    scrollRef.current.scrollLeft = scrollLeft - walk
+  }
+
+  const handleTouchEnd = () => {
+    setIsDragging(false)
+    // Snap to nearest card
+    if (scrollRef.current) {
+      const scrollLeft = scrollRef.current.scrollLeft
+      const cardWidth = scrollRef.current.scrollWidth / testimonials.length
+      const gap = 24
+      const newIndex = Math.round(scrollLeft / (cardWidth + gap))
+      scrollToIndex(newIndex)
+    }
+  }
 
   return (
     <section className="py-24 lg:py-32 relative overflow-hidden bg-secondary/20">
@@ -50,17 +197,23 @@ export function Testimonials() {
           className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full bg-brand/8 blur-[100px]"
           delay={0}
           duration={11}
-        />
+        >
+          <div />
+        </FloatingElement>
         <FloatingElement
           className="absolute bottom-1/3 right-1/3 w-64 h-64 rounded-full bg-glow-violet/10 blur-[80px]"
           delay={2}
           duration={9}
-        />
+        >
+          <div />
+        </FloatingElement>
         <FloatingElement
           className="absolute top-1/2 right-1/4 w-48 h-48 rounded-full bg-glow-cyan/8 blur-[60px]"
           delay={1}
           duration={13}
-        />
+        >
+          <div />
+        </FloatingElement>
       </div>
 
       <div
@@ -95,73 +248,150 @@ export function Testimonials() {
           </p>
         </div>
 
-        {/* Testimonials Grid */}
-        <div ref={gridRef} className="grid md:grid-cols-3 gap-6 lg:gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={testimonial.id}
+        {/* Carousel Container */}
+        <div className="relative">
+          {/* Navigation Buttons */}
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={handlePrev}
+              disabled={currentIndex === 0}
               className={cn(
-                "group relative p-8 rounded-3xl",
-                "bg-card/80 backdrop-blur-sm border border-border/50",
-                "transition-all duration-500",
-                "hover:border-brand/30 hover:shadow-2xl hover:shadow-brand/5",
-                "card-lift card-metallic",
-                gridVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12",
+                "rounded-full w-12 h-12 border-border/50 hover:border-brand/50 hover:bg-brand/5",
+                "disabled:opacity-50 disabled:cursor-not-allowed",
+                "transition-all duration-300",
               )}
-              style={{ transitionDelay: `${index * 150}ms` }}
             >
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-brand/5 via-transparent to-glow-violet/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <ChevronLeft className="w-5 h-5" />
+            </Button>
 
-              {/* Quote icon with gradient background */}
-              <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-brand to-brand-light flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-brand/30 transition-all duration-500">
-                <Quote className="w-5 h-5 text-white" />
-              </div>
+            {/* Dots indicator */}
+            <div className="flex gap-2">
+              {Array.from({ length: maxIndex + 1 }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => scrollToIndex(index)}
+                  className={cn(
+                    "w-2 h-2 rounded-full transition-all duration-300",
+                    currentIndex === index
+                      ? "bg-brand w-8"
+                      : "bg-border/50 hover:bg-border/70",
+                  )}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
 
-              {/* Rating stars */}
-              <div className="relative flex gap-1 mb-4">
-                {Array.from({ length: testimonial.rating }).map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-brand text-brand" />
-                ))}
-              </div>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={handleNext}
+              disabled={currentIndex >= maxIndex}
+              className={cn(
+                "rounded-full w-12 h-12 border-border/50 hover:border-brand/50 hover:bg-brand/5",
+                "disabled:opacity-50 disabled:cursor-not-allowed",
+                "transition-all duration-300",
+              )}
+            >
+              <ChevronRight className="w-5 h-5" />
+            </Button>
+          </div>
 
-              {/* Content */}
-              <p className="relative text-foreground leading-relaxed mb-8 text-balance">
-                &ldquo;{testimonial.content}&rdquo;
-              </p>
+          {/* Testimonials Carousel */}
+          <div
+            ref={scrollRef}
+            className={cn(
+              "flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory",
+              "cursor-grab active:cursor-grabbing",
+              "scroll-smooth",
+            )}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            style={{
+              WebkitOverflowScrolling: "touch",
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+            }}
+          >
+            {testimonials.map((testimonial) => (
+              <div
+                key={testimonial.id}
+                className={cn(
+                  "group relative p-8 rounded-3xl shrink-0 snap-start",
+                  "bg-card/80 backdrop-blur-sm border border-border/50",
+                  "transition-all duration-500",
+                  "hover:border-brand/30 hover:shadow-2xl hover:shadow-brand/5",
+                  "card-lift card-metallic",
+                  // Mobile: full width minus padding, Desktop: 3 cards per view
+                  "w-[calc(100%-3rem)] md:w-[calc((100%-3rem)/3)]",
+                )}
+              >
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-brand/5 via-transparent to-glow-violet/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              {/* Author */}
-              <div className="relative flex items-center gap-4">
-                <div className="relative">
-                  <Image
-                    src={testimonial.avatar || "/placeholder.svg"}
-                    alt={testimonial.name}
-                    width={56}
-                    height={56}
-                    className="rounded-full object-cover ring-2 ring-border group-hover:ring-brand/50 transition-all duration-300"
-                  />
-                  <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-green-500 border-2 border-card flex items-center justify-center">
-                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                {/* Quote icon with gradient background */}
+                <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-brand to-brand-light flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-brand/30 transition-all duration-500">
+                  <Quote className="w-5 h-5 text-white" />
+                </div>
+
+                {/* Rating stars */}
+                <div className="relative flex gap-1 mb-4">
+                  {Array.from({ length: testimonial.rating }).map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-brand text-brand" />
+                  ))}
+                </div>
+
+                {/* Content */}
+                <p className="relative text-foreground leading-relaxed mb-8 text-balance">
+                  &ldquo;{testimonial.content}&rdquo;
+                </p>
+
+                {/* Partner Logo */}
+                <div className="relative mb-4 flex justify-start">
+                  <div
+                    className={cn(
+                      "relative w-28 h-16 rounded-lg p-2 flex items-center justify-center",
+                      "bg-white dark:bg-gray-800",
+                      "border border-border/30 dark:border-gray-700",
+                      "shadow-sm group-hover:shadow-md",
+                      "transition-all duration-300",
+                    )}
+                  >
+                    <Image
+                      src={testimonial.logo || "/placeholder.svg"}
+                      alt={`${testimonial.name} - ${testimonial.role}`}
+                      width={100}
+                      height={56}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                 </div>
-                <div>
-                  <div className="font-semibold text-foreground group-hover:text-brand transition-colors">
+
+                {/* Author */}
+                <div className="relative text-left">
+                  <div className="font-semibold text-foreground group-hover:text-brand transition-colors mb-1">
                     {testimonial.name}
                   </div>
                   <div className="text-sm text-muted-foreground">{testimonial.role}</div>
                 </div>
-              </div>
 
-              <div className="absolute -top-4 -right-4 w-20 h-20 rounded-full opacity-0 group-hover:opacity-40 transition-opacity duration-500 pointer-events-none bg-gradient-to-br from-brand to-brand-light blur-2xl" />
-            </div>
-          ))}
+                <div className="absolute -top-4 -right-4 w-20 h-20 rounded-full opacity-0 group-hover:opacity-40 transition-opacity duration-500 pointer-events-none bg-gradient-to-br from-brand to-brand-light blur-2xl" />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
+
+      <style jsx>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </section>
   )
 }

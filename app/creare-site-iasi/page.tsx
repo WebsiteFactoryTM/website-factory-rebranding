@@ -19,14 +19,14 @@ const cityName = "Iași"
 const citySlug = "iasi"
 
 export const metadata: Metadata = generatePageMetadata({
-  title: `Creare Site Iași | Agenție Web Design Moldova 2026`,
-  description: `⭐ Creare site-uri web Iași ✓ Web Design pentru Business, Medicină, Educație ✓ SEO Local Iași ✓ Magazine online ✓ Prețuri competitive ✓ Portofoliu 35+ proiecte Iași & Moldova`,
+  title: `Creare Site Iași - Web Design Iași - Website Factory`,
+  description: `Creare site Iași: servicii personalizate de web design, magazin online și optimizare SEO pentru vizibilitate locală și națională.`,
   path: `/creare-site-${citySlug}`,
   keywords: [
     "creare site iasi",
     "web design iasi",
-    "creare site iași",
-    "web design iași",
+    "creare site iasi",
+    "web design iasi",
     "agentie web iasi",
     "firma web design iasi",
     "creare website iasi",

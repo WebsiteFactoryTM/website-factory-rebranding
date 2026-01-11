@@ -9,6 +9,7 @@ const partners = [
   { name: "Merpano", logo: "/partners/design-logo-merpano.webp" },
   { name: "OrneBlue Phoenix", logo: "/partners/blue-phoenix-partner.webp" },
   { name: "Ornella", logo: "/partners/ornella.webp" },
+  { name: "You Plus Agency", logo: "/partners/youplus-partner.webp" },
   { name: "Frentzy", logo: "/partners/frentzy.webp" },
   { name: "Pinocchio", logo: "/partners/pinocchio.webp" },
   { name: "The Permanent", logo: "/partners/the-permanent-partner.webp" },

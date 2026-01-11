@@ -1,7 +1,6 @@
-1. Aranjare Portofoliu
-2. Recenzii
-3. Adaugare recenzii pe cities
-4. Adaugare portofoliu carusel pe cities
+
+2. Recenzii - de adaugat restul
+
 5. TOP SEO
 6. Verificari finale
 7. Live
