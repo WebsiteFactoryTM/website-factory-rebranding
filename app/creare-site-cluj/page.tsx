@@ -7,6 +7,7 @@ import { CityFaq } from "@/components/cities/city-faq"
 import { CityCTA } from "@/components/cities/city-cta"
 import { FeaturedWork } from "@/components/home/featured-work"
 import { Testimonials } from "@/components/home/testimonials"
+import { Process } from "@/components/home/process"
 import {
   generatePageMetadata,
   generateLocalBusinessSchema,
@@ -130,6 +131,7 @@ export default function CreareSiteClujPage() {
       <main>
         <ClujHero />
         <CityServices cityName={cityName} />
+        <Process />
         <FeaturedWork />
         <ClujContent />
         <Testimonials />
