@@ -103,6 +103,15 @@ export function Footer() {
           <div>
             <h3 className="font-heading font-semibold text-foreground mb-5">Servicii</h3>
             <ul className="space-y-3">
+              <li>
+                <Link
+                  href="/servicii"
+                  className="text-sm font-medium text-foreground hover:text-brand transition-colors inline-flex items-center gap-1 group"
+                >
+                  Toate serviciile
+                  <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                </Link>
+              </li>
               {footerLinks.servicii.map((link) => (
                 <li key={link.href}>
                   <Link

@@ -197,3 +197,75 @@ export function generatePersonSchema({
     sameAs,
   }
 }
+
+// Review Schema for testimonials
+export interface Testimonial {
+  id: number
+  name: string
+  role: string
+  content: string
+  rating: number
+  datePublished?: string
+}
+
+export function generateReviewSchema(testimonial: Testimonial) {
+  // Extract company name from role if available
+  const companyMatch = testimonial.role.match(/(?:,|–|-)\s*(.+)/)
+  const companyName = companyMatch ? companyMatch[1].trim() : undefined
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    author: {
+      "@type": "Person",
+      name: testimonial.name,
+      jobTitle: testimonial.role.split(/,|–|-/)[0]?.trim() || testimonial.role,
+      ...(companyName && {
+        worksFor: {
+          "@type": "Organization",
+          name: companyName,
+        },
+      }),
+    },
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue: testimonial.rating,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    reviewBody: testimonial.content,
+    datePublished: testimonial.datePublished || new Date().toISOString().split("T")[0],
+    itemReviewed: {
+      "@type": "LocalBusiness",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+  }
+}
+
+export function generateAggregateRatingSchema(testimonials: Testimonial[]) {
+  if (testimonials.length === 0) return null
+
+  const totalRating = testimonials.reduce((sum, t) => sum + t.rating, 0)
+  const averageRating = totalRating / testimonials.length
+  const reviewCount = testimonials.length
+
+  return {
+    "@type": "AggregateRating",
+    ratingValue: averageRating.toFixed(1),
+    bestRating: "5",
+    worstRating: "1",
+    ratingCount: reviewCount,
+  }
+}
+
+// Updated LocalBusiness schema with aggregateRating
+export function generateLocalBusinessSchemaWithReviews(testimonials: Testimonial[] = []) {
+  const baseSchema = generateLocalBusinessSchema()
+  const aggregateRating = generateAggregateRatingSchema(testimonials)
+
+  return {
+    ...baseSchema,
+    ...(aggregateRating && { aggregateRating }),
+  }
+}

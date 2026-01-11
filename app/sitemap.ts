@@ -39,6 +39,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     // Services pages
     {
+      url: `${baseUrl}/servicii`,
+      lastModified: currentDate,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/servicii/creare-website`,
       lastModified: currentDate,
       changeFrequency: "weekly",

@@ -90,7 +90,6 @@ export const metadata: Metadata = {
     ],
     shortcut: "/website-factory-favicon.ico",
   },
-  generator: 'v0.app'
 }
 
 export const viewport: Viewport = {
