@@ -33,9 +33,9 @@ const storyPoints = [
 ]
 
 export function CompanyStory() {
-  const { ref: headerRef, isVisible: headerVisible } = useScrollReveal()
-  const { ref: imageRef, isVisible: imageVisible } = useScrollReveal()
-  const { ref: pointsRef, isVisible: pointsVisible } = useScrollReveal()
+  const { ref: headerRef, isVisible: headerVisible } = useScrollReveal<HTMLDivElement>()
+  const { ref: imageRef, isVisible: imageVisible } = useScrollReveal<HTMLDivElement>()
+  const { ref: pointsRef, isVisible: pointsVisible } = useScrollReveal<HTMLDivElement>()
 
   return (
     <section className="pt-16 sm:pt-20 md:pt-24 pb-24 lg:pb-32 relative overflow-hidden">

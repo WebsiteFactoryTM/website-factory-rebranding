@@ -5,7 +5,7 @@ import { FloatingElement } from "@/components/ui/floating-element"
 import { cn } from "@/lib/utils"
 
 export function AboutHero() {
-  const { ref: titleRef, isVisible: titleVisible } = useScrollReveal()
+  const { ref: titleRef, isVisible: titleVisible } = useScrollReveal<HTMLDivElement>()
 
   return (
     <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-24 pb-24 md:pb-32">
@@ -20,17 +20,23 @@ export function AboutHero() {
           className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full bg-brand/10 blur-[100px]"
           delay={0}
           duration={10}
-        />
+        >
+          <div />
+        </FloatingElement>
         <FloatingElement
           className="absolute bottom-1/3 left-1/3 w-64 h-64 rounded-full bg-glow-violet/15 blur-[80px]"
           delay={2}
           duration={8}
-        />
+        >
+          <div />
+        </FloatingElement>
         <FloatingElement
           className="absolute top-1/2 left-1/4 w-48 h-48 rounded-full bg-glow-cyan/10 blur-[60px]"
           delay={1}
           duration={12}
-        />
+        >
+          <div />
+        </FloatingElement>
       </div>
 
       {/* Decorative metallic shapes */}

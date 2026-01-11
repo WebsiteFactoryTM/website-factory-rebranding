@@ -105,7 +105,7 @@ const getServices = (cityName: string) => {
 }
 
 export function CityServices({ cityName }: CityServicesProps) {
-  const { ref, isVisible } = useScrollReveal()
+  const { ref, isVisible } = useScrollReveal<HTMLDivElement>()
   const services = getServices(cityName)
 
   return (

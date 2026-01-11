@@ -12,7 +12,7 @@ interface CityCTAProps {
 }
 
 export function CityCTA({ cityName }: CityCTAProps) {
-  const { ref, isVisible } = useScrollReveal()
+  const { ref, isVisible } = useScrollReveal<HTMLDivElement>()
 
   return (
     <section className="py-20 sm:py-28 relative overflow-hidden">
@@ -25,12 +25,16 @@ export function CityCTA({ cityName }: CityCTAProps) {
         className="absolute top-10 left-10 w-64 h-64 rounded-full bg-brand/20 blur-[100px]"
         delay={0}
         duration={10}
-      />
+      >
+        <div />
+      </FloatingElement>
       <FloatingElement
         className="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-glow-cyan/15 blur-[80px]"
         delay={1}
         duration={12}
-      />
+      >
+        <div />
+      </FloatingElement>
 
       {/* Metallic shapes */}
       <div className="absolute top-20 right-20 w-24 h-24 pointer-events-none hidden lg:block">

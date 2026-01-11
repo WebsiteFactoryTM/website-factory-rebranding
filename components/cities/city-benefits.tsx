@@ -70,7 +70,7 @@ function AnimatedStat({ end, decimals = 0, suffix = "" }: { end: number; decimal
 }
 
 export function CityBenefits({ cityName }: CityBenefitsProps) {
-  const { ref, isVisible } = useScrollReveal()
+  const { ref, isVisible } = useScrollReveal<HTMLDivElement>()
   const benefits = getBenefits(cityName)
   const isBrasov = cityName === "Brașov"
 

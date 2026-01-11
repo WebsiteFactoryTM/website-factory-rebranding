@@ -46,7 +46,7 @@ const milestones = [
 ]
 
 export function TimelineSection() {
-  const { ref: headerRef, isVisible: headerVisible } = useScrollReveal()
+  const { ref: headerRef, isVisible: headerVisible } = useScrollReveal<HTMLDivElement>()
 
   return (
     <section className="py-24 lg:py-32 relative overflow-hidden bg-muted/30">
@@ -94,7 +94,7 @@ function TimelineItem({
   milestone: (typeof milestones)[0]
   index: number
 }) {
-  const { ref, isVisible } = useScrollReveal()
+  const { ref, isVisible } = useScrollReveal<HTMLDivElement>()
   const Icon = milestone.icon
   const isEven = index % 2 === 0
 

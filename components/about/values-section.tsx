@@ -44,8 +44,8 @@ const values = [
 ]
 
 export function ValuesSection() {
-  const { ref: headerRef, isVisible: headerVisible } = useScrollReveal()
-  const { ref: gridRef, isVisible: gridVisible } = useScrollReveal()
+  const { ref: headerRef, isVisible: headerVisible } = useScrollReveal<HTMLDivElement>()
+  const { ref: gridRef, isVisible: gridVisible } = useScrollReveal<HTMLDivElement>()
 
   return (
     <section className="py-24 lg:py-32 relative overflow-hidden bg-muted/30">

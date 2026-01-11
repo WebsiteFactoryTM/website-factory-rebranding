@@ -28,7 +28,7 @@ const founders = [
 ]
 
 export function FoundersSection() {
-  const { ref: headerRef, isVisible: headerVisible } = useScrollReveal()
+  const { ref: headerRef, isVisible: headerVisible } = useScrollReveal<HTMLDivElement>()
 
   return (
     <section className="py-24 lg:py-32 relative overflow-hidden">
@@ -83,7 +83,7 @@ export function FoundersSection() {
 }
 
 function FounderCard({ founder, index }: { founder: (typeof founders)[0]; index: number }) {
-  const { ref, isVisible } = useScrollReveal()
+  const { ref, isVisible } = useScrollReveal<HTMLDivElement>()
 
   return (
     <div

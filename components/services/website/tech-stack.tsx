@@ -35,7 +35,7 @@ const technologies = [
 ]
 
 export function TechStack() {
-  const { ref, isVisible } = useScrollReveal()
+  const { ref, isVisible } = useScrollReveal<HTMLDivElement>()
 
   return (
     <section className="relative py-24 lg:py-32 overflow-hidden bg-muted/30">
@@ -43,7 +43,9 @@ export function TechStack() {
 
       {/* Decorative blob */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none hidden lg:block">
-        <FloatingElement className="w-full h-full rounded-full bg-brand/5 blur-[150px]" delay={0} duration={20} />
+        <FloatingElement className="w-full h-full rounded-full bg-brand/5 blur-[150px]" delay={0} duration={20}>
+          <div />
+        </FloatingElement>
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">

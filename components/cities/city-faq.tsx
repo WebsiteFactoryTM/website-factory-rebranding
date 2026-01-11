@@ -10,7 +10,7 @@ interface CityFaqProps {
 }
 
 export function CityFaq({ cityName, faqs }: CityFaqProps) {
-  const { ref, isVisible } = useScrollReveal()
+  const { ref, isVisible } = useScrollReveal<HTMLDivElement>()
 
   return (
     <section className="py-20 sm:py-28 relative overflow-hidden">
