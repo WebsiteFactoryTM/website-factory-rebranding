@@ -5,11 +5,11 @@ import Link from "next/link"
 import { ArrowUpRight, ExternalLink } from "lucide-react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
-import { featuredProjects } from "@/lib/portfolio-data"
+import { featuredProjects, simpleProjects } from "@/lib/portfolio-data"
 import { generatePortfolioShowcaseAltText } from "@/lib/image-alt-text"
 
 // Get website projects from featured projects
-const websiteProjects = featuredProjects
+const featuredWebsiteProjects = featuredProjects
   .filter((project) => project.category === "website")
   .slice(0, 3)
   .map((project) => {
@@ -22,8 +22,30 @@ const websiteProjects = featuredProjects
       results: firstResult?.value || "Rezultate măsurabile",
       href: `/portofoliu/${project.slug}`,
       altText: generatePortfolioShowcaseAltText(project.title, project.category, outcome),
+      isFeatured: true,
     }
   })
+
+// Get secondary projects from simpleProjects (sorted by order, max 3)
+const secondaryWebsiteProjects = simpleProjects
+  .filter((project) => project.category === "website")
+  .sort((a, b) => (a.order || 999) - (b.order || 999))
+  .slice(0, 3)
+  .map((project) => {
+    return {
+      title: project.title,
+      category: project.categoryLabel,
+      image: project.image,
+      results: project.year || "Proiect recent",
+      href: project.liveUrl || "#",
+      altText: generatePortfolioShowcaseAltText(project.title, project.category, project.year || "Proiect recent"),
+      isFeatured: false,
+      isExternal: !!project.liveUrl,
+    }
+  })
+
+// Combine featured and secondary projects
+const websiteProjects = [...featuredWebsiteProjects, ...secondaryWebsiteProjects]
 
 export function WebsitePortfolio() {
   const { ref, isVisible } = useScrollReveal()
@@ -59,8 +81,9 @@ export function WebsitePortfolio() {
           </Link>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-          {websiteProjects.map((project, index) => (
+        {/* Featured Projects */}
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-12">
+          {featuredWebsiteProjects.map((project, index) => (
             <Link
               key={project.title}
               href={project.href}
@@ -100,6 +123,56 @@ export function WebsitePortfolio() {
             </Link>
           ))}
         </div>
+
+        {/* Secondary Projects */}
+        {secondaryWebsiteProjects.length > 0 && (
+          <div className="mt-8">
+            <h3 className="text-lg font-semibold text-muted-foreground mb-6">Alte proiecte</h3>
+            <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+              {secondaryWebsiteProjects.map((project, index) => (
+                <a
+                  key={project.title}
+                  href={project.href}
+                  target={project.isExternal ? "_blank" : undefined}
+                  rel={project.isExternal ? "noopener noreferrer" : undefined}
+                  className="group relative rounded-3xl overflow-hidden bg-card border border-border/50 hover:border-brand/30 transition-all duration-500 hover:shadow-xl"
+                  style={{
+                    animation: isVisible ? `fadeInUp 0.6s ease-out ${(featuredWebsiteProjects.length + index) * 0.15}s forwards` : "none",
+                    opacity: isVisible ? undefined : 0,
+                  }}
+                >
+                  {/* Image */}
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image
+                      src={project.image || "/placeholder.svg"}
+                      alt={project.altText || project.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-50 group-hover:opacity-30 transition-opacity" />
+
+                    {/* Year badge */}
+                    <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-muted/90 backdrop-blur-sm text-foreground text-sm font-medium">
+                      {project.results}
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-6">
+                    <p className="text-sm text-muted-foreground font-medium mb-2">{project.category}</p>
+                    <h3 className="font-heading text-lg font-bold group-hover:text-brand transition-colors flex items-center gap-2">
+                      {project.title}
+                      <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </h3>
+                  </div>
+
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-brand/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       <style jsx>{`

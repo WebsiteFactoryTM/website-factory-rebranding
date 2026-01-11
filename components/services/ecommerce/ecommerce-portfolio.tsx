@@ -5,11 +5,11 @@ import { cn } from "@/lib/utils"
 import { ArrowRight, ExternalLink, TrendingUp, ShoppingCart } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { featuredProjects } from "@/lib/portfolio-data"
+import { featuredProjects, simpleProjects } from "@/lib/portfolio-data"
 import { generatePortfolioShowcaseAltText } from "@/lib/image-alt-text"
 
 // Get ecommerce projects from featured projects
-const ecommerceProjects = featuredProjects
+const featuredEcommerceProjects = featuredProjects
   .filter((project) => project.category === "ecommerce")
   .slice(0, 3)
   .map((project) => {
@@ -21,8 +21,29 @@ const ecommerceProjects = featuredProjects
       category: project.categoryLabel,
       image: project.image,
       results: firstResult?.value || "Rezultate măsurabile",
-      platform: project.technologies[0] || "Custom",
+      platform: project.technologies[0] || "Magazin online",
       altText: generatePortfolioShowcaseAltText(project.title, project.category, outcome),
+      isFeatured: true,
+    }
+  })
+
+// Get secondary projects from simpleProjects (sorted by order, max 3)
+const secondaryEcommerceProjects = simpleProjects
+  .filter((project) => project.category === "ecommerce")
+  .sort((a, b) => (a.order || 999) - (b.order || 999))
+  .slice(0, 3)
+  .map((project) => {
+    return {
+      slug: project.id,
+      name: project.title,
+      category: project.categoryLabel,
+      image: project.image,
+      results: project.year || "Proiect recent",
+      platform: "Wordpress",
+      altText: generatePortfolioShowcaseAltText(project.title, project.category, project.year || "Proiect recent"),
+      isFeatured: false,
+      isExternal: !!project.liveUrl,
+      liveUrl: project.liveUrl,
     }
   })
 
@@ -65,8 +86,9 @@ export function EcommercePortfolio() {
           </Link>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {ecommerceProjects.map((project, index) => (
+        {/* Featured Projects */}
+        <div className="grid md:grid-cols-3 gap-8 mb-12">
+          {featuredEcommerceProjects.map((project, index) => (
             <Link
               key={project.slug}
               href={`/portofoliu/${project.slug}`}
@@ -115,6 +137,64 @@ export function EcommercePortfolio() {
             </Link>
           ))}
         </div>
+
+        {/* Secondary Projects */}
+        {secondaryEcommerceProjects.length > 0 && (
+          <div className="mt-8">
+            <h3 className="text-lg font-semibold text-muted-foreground mb-6">Alte proiecte</h3>
+            <div className="grid md:grid-cols-3 gap-8">
+              {secondaryEcommerceProjects.map((project, index) => (
+                <a
+                  key={project.slug}
+                  href={project.liveUrl || "#"}
+                  target={project.isExternal ? "_blank" : undefined}
+                  rel={project.isExternal ? "noopener noreferrer" : undefined}
+                  className="group relative"
+                  style={{
+                    animation: isVisible ? `fadeInUp 0.6s ease-out ${(featuredEcommerceProjects.length + index) * 0.15}s forwards` : "none",
+                    opacity: isVisible ? undefined : 0,
+                  }}
+                >
+                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-4">
+                    <Image
+                      src={project.image || "/placeholder.svg"}
+                      alt={project.altText || project.name}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                    {/* Year badge */}
+                    <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-muted/90 backdrop-blur-sm text-foreground text-sm font-medium">
+                      {project.results}
+                    </div>
+
+                    {/* Platform badge */}
+                    <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-sm text-white text-xs font-medium flex items-center gap-1.5">
+                      <ShoppingCart className="w-3 h-3" />
+                      {project.platform}
+                    </div>
+
+                    {/* View project */}
+                    <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0">
+                      <span className="text-white font-semibold">Vezi proiectul</span>
+                      <ExternalLink className="w-5 h-5 text-white" />
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className="text-sm text-muted-foreground font-medium mb-1">{project.category}</p>
+                    <h3 className="font-heading text-lg font-bold group-hover:text-brand transition-colors">
+                      {project.name}
+                    </h3>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       <style jsx>{`

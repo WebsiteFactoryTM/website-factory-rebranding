@@ -57,11 +57,12 @@ export function CityContent({
   specialFeature,
   ctaText,
 }: CityContentProps) {
-  const { ref: heroRef, isVisible: heroVisible } = useScrollReveal<HTMLDivElement>()
-  const { ref: industriesRef, isVisible: industriesVisible } = useScrollReveal<HTMLDivElement>()
-  const { ref: servicesRef, isVisible: servicesVisible } = useScrollReveal<HTMLDivElement>()
-  const { ref: seoRef, isVisible: seoVisible } = useScrollReveal<HTMLDivElement>()
-  const { ref: whyUsRef, isVisible: whyUsVisible } = useScrollReveal<HTMLDivElement>()
+  // SEO-friendly: conținutul este vizibil inițial, animațiile se aplică după mount
+  const { ref: heroRef, isVisible: heroVisible, mounted: heroMounted } = useScrollReveal<HTMLDivElement>({ seoFriendly: true })
+  const { ref: industriesRef, isVisible: industriesVisible, mounted: industriesMounted } = useScrollReveal<HTMLDivElement>({ seoFriendly: true })
+  const { ref: servicesRef, isVisible: servicesVisible, mounted: servicesMounted } = useScrollReveal<HTMLDivElement>({ seoFriendly: true })
+  const { ref: seoRef, isVisible: seoVisible, mounted: seoMounted } = useScrollReveal<HTMLDivElement>({ seoFriendly: true })
+  const { ref: whyUsRef, isVisible: whyUsVisible, mounted: whyUsMounted } = useScrollReveal<HTMLDivElement>({ seoFriendly: true })
 
   return (
     <section className="py-24 lg:py-32 relative overflow-hidden">
@@ -90,8 +91,14 @@ export function CityContent({
         <div
           ref={heroRef}
           className={cn(
-            "max-w-4xl mx-auto text-center mb-20 transition-all duration-700",
-            heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
+            "max-w-4xl mx-auto text-center mb-20",
+            // Conținutul este întotdeauna vizibil pentru SEO
+            // Animațiile se aplică doar după ce JavaScript-ul se încarcă
+            heroMounted && heroVisible
+              ? "opacity-100 translate-y-0 transition-all duration-700"
+              : heroMounted
+                ? "opacity-100 translate-y-4 transition-all duration-700"
+                : "opacity-100 translate-y-0", // Vizibil inițial pentru crawlers
           )}
         >
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
@@ -106,8 +113,13 @@ export function CityContent({
         <div
           ref={industriesRef}
           className={cn(
-            "grid sm:grid-cols-2 gap-6 lg:gap-8 mb-20 transition-all duration-700",
-            industriesVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12",
+            "grid sm:grid-cols-2 gap-6 lg:gap-8 mb-20",
+            // Conținutul este întotdeauna vizibil pentru SEO
+            industriesMounted && industriesVisible
+              ? "opacity-100 translate-y-0 transition-all duration-700"
+              : industriesMounted
+                ? "opacity-100 translate-y-4 transition-all duration-700"
+                : "opacity-100 translate-y-0", // Vizibil inițial pentru crawlers
           )}
         >
           {industries.map((industry, index) => {
@@ -185,8 +197,13 @@ export function CityContent({
         <div
           ref={servicesRef}
           className={cn(
-            "mb-20 transition-all duration-700",
-            servicesVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12",
+            "mb-20",
+            // Conținutul este întotdeauna vizibil pentru SEO
+            servicesMounted && servicesVisible
+              ? "opacity-100 translate-y-0 transition-all duration-700"
+              : servicesMounted
+                ? "opacity-100 translate-y-4 transition-all duration-700"
+                : "opacity-100 translate-y-0", // Vizibil inițial pentru crawlers
           )}
         >
           <div className="max-w-4xl mx-auto mb-12 text-center">
@@ -228,8 +245,13 @@ export function CityContent({
         <div
           ref={seoRef}
           className={cn(
-            "mb-20 transition-all duration-700",
-            seoVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12",
+            "mb-20",
+            // Conținutul este întotdeauna vizibil pentru SEO
+            seoMounted && seoVisible
+              ? "opacity-100 translate-y-0 transition-all duration-700"
+              : seoMounted
+                ? "opacity-100 translate-y-4 transition-all duration-700"
+                : "opacity-100 translate-y-0", // Vizibil inițial pentru crawlers
           )}
         >
           <div className="max-w-4xl mx-auto">
@@ -281,8 +303,13 @@ export function CityContent({
         <div
           ref={whyUsRef}
           className={cn(
-            "mb-12 transition-all duration-700",
-            whyUsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12",
+            "mb-12",
+            // Conținutul este întotdeauna vizibil pentru SEO
+            whyUsMounted && whyUsVisible
+              ? "opacity-100 translate-y-0 transition-all duration-700"
+              : whyUsMounted
+                ? "opacity-100 translate-y-4 transition-all duration-700"
+                : "opacity-100 translate-y-0", // Vizibil inițial pentru crawlers
           )}
         >
           <div className="max-w-4xl mx-auto">
