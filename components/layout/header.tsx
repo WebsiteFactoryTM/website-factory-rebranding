@@ -83,7 +83,7 @@ export function Header() {
                     ? "/logo-website-factory-horizontal-white.webp"
                     : "/logo-website-factory-horizontal-webp.webp"
                 }
-                alt="Website Factory"
+                alt="Website Factory - Logo - Creare site și web design Timișoara"
                 width={144}
                 height={32}
                 className="h-7 sm:h-8 w-auto transition-transform duration-300 group-hover:scale-105"

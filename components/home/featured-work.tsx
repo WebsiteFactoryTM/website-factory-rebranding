@@ -8,6 +8,7 @@ import { FloatingElement } from "@/components/ui/floating-element"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { featuredProjects } from "@/lib/portfolio-data"
+import { generatePortfolioShowcaseAltText } from "@/lib/image-alt-text"
 
 // Map category to color gradient
 const getColorByCategory = (category: string): string => {
@@ -41,6 +42,11 @@ const caseStudies = featuredProjects.slice(0, 3).map((project) => {
     image: project.image,
     href: `/portofoliu/${project.slug}`,
     color: getColorByCategory(project.category),
+    altText: generatePortfolioShowcaseAltText(
+      project.title,
+      project.category,
+      outcome,
+    ),
   }
 })
 
@@ -131,7 +137,7 @@ export function FeaturedWork() {
               <div className="aspect-[4/3] relative overflow-hidden">
                 <Image
                   src={study.image || "/placeholder.svg"}
-                  alt={study.title}
+                  alt={study.altText || study.title}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />

@@ -6,6 +6,7 @@ import { ArrowRight, Users, Award, Clock, Zap, Code2 } from "lucide-react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { generateTeamImageAltText } from "@/lib/image-alt-text"
 
 const stats = [
   { icon: Users, value: "150+", label: "Clienți mulțumiți" },
@@ -37,7 +38,12 @@ export function AboutPreview() {
           >
             {/* Main image container with glass effect */}
             <div className="relative aspect-[4/3] rounded-3xl overflow-hidden glass-premium">
-              <Image src="/despre-websitefactory-timisoara.webp" alt="Echipa Website Factory" fill className="object-cover" />
+              <Image
+                src="/despre-websitefactory-timisoara.webp"
+                alt={generateTeamImageAltText("Echipa Website Factory la lucru", "Timișoara")}
+                fill
+                className="object-cover"
+              />
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-tr from-brand/40 via-transparent to-glow-violet/20" />
 

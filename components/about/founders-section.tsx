@@ -100,7 +100,7 @@ function FounderCard({ founder, index }: { founder: (typeof founders)[0]; index:
         <div className="relative aspect-[1/1] overflow-hidden">
           <Image
             src={founder.image || "/placeholder.svg"}
-            alt={founder.name}
+            alt={`${founder.name} - ${founder.role} - Co-fondator Website Factory Timișoara`}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105"
           />

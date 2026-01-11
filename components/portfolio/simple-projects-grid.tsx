@@ -6,6 +6,7 @@ import { FloatingElement } from "@/components/ui/floating-element"
 import { cn } from "@/lib/utils"
 import { simpleProjects } from "@/lib/portfolio-data"
 import Image from "next/image"
+import { generateProjectAltText } from "@/lib/image-alt-text"
 
 export function SimpleProjectsGrid() {
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollReveal<HTMLDivElement>()
@@ -101,7 +102,12 @@ function SimpleProjectCard({
           <div className="relative aspect-[8/5] overflow-hidden" style={{ backgroundColor: "#F3F3F3" }}>
             <Image
               src={project.image || "/placeholder.svg"}
-              alt={project.title}
+              alt={generateProjectAltText({
+                title: project.title,
+                client: project.client,
+                category: project.category,
+                categoryLabel: project.categoryLabel,
+              })}
               fill
               className="object-contain transition-transform duration-700 group-hover:scale-105"
             />

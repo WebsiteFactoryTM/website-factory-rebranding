@@ -8,7 +8,7 @@ import { TimelineSection } from "@/components/about/timeline-section"
 import { AboutCTA } from "@/components/about/about-cta"
 
 export const metadata: Metadata = generatePageMetadata({
-  title: "Despre Noi | Website Factory - Agenție Web Design Timișoara",
+  title: "Despre Noi - Website Factory - Web design",
   description:
     "Descoperiți povestea Website Factory - agenție de web design din Timișoara fondată în 2021. Cunoașteți echipa noastră și valorile care ne ghidează în fiecare proiect.",
   path: "/despre-noi",

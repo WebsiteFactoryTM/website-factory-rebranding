@@ -4,6 +4,7 @@ import Image from "next/image"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { Target, Lightbulb, Rocket, Heart } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { generateTeamImageAltText } from "@/lib/image-alt-text"
 
 const storyPoints = [
   {
@@ -68,7 +69,12 @@ export function CompanyStory() {
             )}
           >
             <div className="relative aspect-[3/4] rounded-3xl overflow-hidden">
-              <Image src="/Alex-Ernest-Website-Factory.webp" alt="Biroul Website Factory" fill className="object-cover" />
+              <Image
+                src="/Alex-Ernest-Website-Factory.webp"
+                alt={generateTeamImageAltText("Co-fondatorii Website Factory - Ernest și Alex", "Timișoara")}
+                fill
+                className="object-cover"
+              />
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-tr from-brand/30 via-transparent to-glow-violet/20" />
             </div>

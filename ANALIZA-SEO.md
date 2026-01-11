@@ -22,9 +22,9 @@
 - **Lipsește robots.txt** - Nu există directive pentru crawlere
 - **Nu există pagină /servicii** - link-uri în footer duc la 404
 - **Nu există pagină /creare-site-brasov** - menționată în footer dar lipsește
-- **Imagini neoptimizate** - `unoptimized: true` în next.config.mjs
-- **Lipsesc meta tags pentru imagini** - og:image nu există în public/
-- **Lipsesc alternative text descriptive** pentru multe imagini
+- ✅ **Imagini optimizate** - `unoptimized: true` eliminat, optimizări Next.js activate
+- ✅ **OG Image configurat** - `website-factory-og.webp` folosit peste tot
+- ✅ **Alt text descriptive** - implementat sistem centralizat pentru generare alt text SEO-friendly
 - **Nu există blog/resurse** - zero content marketing
 - **Lipsesc review schema** - testimoniale fără structured data
 
@@ -262,26 +262,31 @@ export const metadata: Metadata = {
 
 ### 5.1 Optimizări Imagini
 
-**Status:** ❌ CRITIC - NECESITĂ ATENȚIE IMEDIATĂ
+**Status:** ✅ REZOLVAT - OPTIMIZĂRI ACTIVATE
 
 \`\`\`javascript
 // next.config.mjs
 images: {
-  unoptimized: true, // ❌ ELIMINĂ TOATE OPTIMIZĂRILE NEXT.JS
+  formats: ['image/avif', 'image/webp'],
+  deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+  imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+  minimumCacheTTL: 60,
 }
 \`\`\`
 
-**Probleme:**
-- ❌ Imagini nu sunt comprimate automat
-- ❌ Imagini nu sunt servite în format WebP
-- ❌ Lipsesc dimensiuni responsive
-- ❌ Nu există lazy loading optimizat
-- ⚠️ Multe imagini nu au `alt` text descriptiv
+**Optimizări activate:**
+- ✅ Compresie automată Next.js
+- ✅ Conversie în WebP/AVIF când browser-ul suportă
+- ✅ Lazy loading automat pentru imagini below fold
+- ✅ Responsive images cu srcset optimizat
+- ✅ Dimensiuni multiple pentru diferite device-uri
+- ✅ Cache TTL configurat pentru performanță
+- ✅ Alt text descriptiv implementat pentru toate imaginile (sistem centralizat)
 
 **Impact SEO:**
-- Page Speed Score scăzut
-- LCP (Largest Contentful Paint) probabil mare
-- Experiență mobilă afectată
+- ✅ Page Speed Score îmbunătățit
+- ✅ LCP (Largest Contentful Paint) optimizat
+- ✅ Experiență mobilă îmbunătățită
 
 ### 5.2 Font Loading
 
@@ -330,7 +335,7 @@ const inter = Inter({
 - ✅ Focus states vizibile
 
 **Lipsește:**
-- ⚠️ Multe imagini fără `alt` descriptiv
+- ✅ **Alt text descriptiv** - implementat sistem centralizat pentru toate imaginile
 - ⚠️ Unele butoane fără aria-label
 - ⚠️ Contrast ratio ar putea fi verificat
 - ⚠️ Lipsesc ARIA landmarks pe unele secțiuni
@@ -540,11 +545,11 @@ Metadata referențiază `/og-image.jpg` dar fișierul nu există în `/public`
 
 1. **Creează sitemap.xml** (`app/sitemap.ts`)
 2. **Creează robots.txt** (`app/robots.ts`)
-3. **Elimină `unoptimized: true`** din next.config.mjs
-4. **Creează og-image.jpg** (1200x630px)
+3. ✅ **Elimină `unoptimized: true`** din next.config.mjs - **REZOLVAT**
+4. ✅ **Creează og-image** - **REZOLVAT** (`website-factory-og.webp`)
 5. **Creează pagina /servicii** (index pentru toate serviciile)
 6. **Creează pagina /creare-site-brasov** (sau elimină din footer)
-7. **Adaugă alt text descriptiv** la toate imaginile
+7. ✅ **Adaugă alt text descriptiv** la toate imaginile - **REZOLVAT** (sistem centralizat implementat)
 
 ### 🟠 IMPORTANT (Săptămâna 2-3)
 

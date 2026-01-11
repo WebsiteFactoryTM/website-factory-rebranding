@@ -9,6 +9,7 @@ import { FloatingElement } from "@/components/ui/floating-element"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { featuredProjects, categoryFilters } from "@/lib/portfolio-data"
+import { generateProjectAltText } from "@/lib/image-alt-text"
 
 export function FeaturedProjects() {
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollReveal()
@@ -113,7 +114,12 @@ function FeaturedProjectCard({
 
           <Image
             src={project.image || "/placeholder.svg"}
-            alt={project.title}
+            alt={generateProjectAltText({
+              title: project.title,
+              client: project.client,
+              category: project.category,
+              categoryLabel: project.categoryLabel,
+            })}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105"
           />

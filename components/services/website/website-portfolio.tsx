@@ -6,18 +6,24 @@ import { ArrowUpRight, ExternalLink } from "lucide-react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 import { featuredProjects } from "@/lib/portfolio-data"
+import { generatePortfolioShowcaseAltText } from "@/lib/image-alt-text"
 
 // Get website projects from featured projects
 const websiteProjects = featuredProjects
   .filter((project) => project.category === "website")
   .slice(0, 3)
-  .map((project) => ({
-    title: project.title,
-    category: project.categoryLabel,
-    image: project.image,
-    results: project.results[0]?.value || "Rezultate măsurabile",
-    href: `/portofoliu/${project.slug}`,
-  }))
+  .map((project) => {
+    const firstResult = project.results[0]
+    const outcome = firstResult ? `${firstResult.value} ${firstResult.label}` : "Rezultate măsurabile"
+    return {
+      title: project.title,
+      category: project.categoryLabel,
+      image: project.image,
+      results: firstResult?.value || "Rezultate măsurabile",
+      href: `/portofoliu/${project.slug}`,
+      altText: generatePortfolioShowcaseAltText(project.title, project.category, outcome),
+    }
+  })
 
 export function WebsitePortfolio() {
   const { ref, isVisible } = useScrollReveal()
@@ -68,7 +74,7 @@ export function WebsitePortfolio() {
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
                   src={project.image || "/placeholder.svg"}
-                  alt={project.title}
+                  alt={project.altText || project.title}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />

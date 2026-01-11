@@ -7,6 +7,7 @@ import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { FloatingElement } from "@/components/ui/floating-element"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { generateTestimonialLogoAltText } from "@/lib/image-alt-text"
 
 const testimonials = [
   {
@@ -364,7 +365,11 @@ export function Testimonials() {
                   >
                     <Image
                       src={testimonial.logo || "/placeholder.svg"}
-                      alt={`${testimonial.name} - ${testimonial.role}`}
+                      alt={generateTestimonialLogoAltText(
+                        testimonial.name,
+                        testimonial.role,
+                        testimonial.role.match(/(?:,|–|-)\s*(.+)/)?.[1]?.trim(),
+                      )}
                       width={100}
                       height={56}
                       className="w-full h-full object-contain"

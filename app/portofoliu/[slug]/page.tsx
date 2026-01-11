@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight, ExternalLink, Quote, CheckCircle2 } from "lucide
 import { generatePageMetadata, generateBreadcrumbSchema, siteConfig } from "@/lib/seo"
 import { featuredProjects } from "@/lib/portfolio-data"
 import { Button } from "@/components/ui/button"
+import { generateProjectAltText } from "@/lib/image-alt-text"
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -136,7 +137,12 @@ export default async function CaseStudyPage({ params }: Props) {
                   <div className="absolute inset-0 border-2 border-brand/20 rounded-2xl z-10 pointer-events-none" />
                   <Image
                     src={project.image || "/placeholder.svg"}
-                    alt={project.title}
+                    alt={generateProjectAltText({
+                      title: project.title,
+                      client: project.client,
+                      category: project.category,
+                      categoryLabel: project.categoryLabel,
+                    })}
                     fill
                     className="object-cover"
                     priority
