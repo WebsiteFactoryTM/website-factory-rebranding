@@ -116,14 +116,14 @@ export function initializeAnalytics(): void {
   // Meta Pixel
   if (consent.marketing && !window.fbq) {
     // Initialize Meta Pixel function first
-    window.fbq =
-      window.fbq ||
-      function (...args: unknown[]) {
-        ;(window.fbq.q = window.fbq.q || []).push(args)
-      }
-    window.fbq.l = true
-    window.fbq("init", "1056620019544195")
-    window.fbq("track", "PageView")
+    const fbq = function (...args: unknown[]) {
+      ;(fbq.q = fbq.q || []).push(args)
+    } as ((...args: unknown[]) => void) & { q?: unknown[]; l?: boolean }
+    
+    window.fbq = fbq
+    fbq.l = true
+    fbq("init", "1056620019544195")
+    fbq("track", "PageView")
 
     // Load Meta Pixel script
     const fbScript = document.createElement("script")

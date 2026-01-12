@@ -70,5 +70,5 @@ export function useScrollReveal<T extends HTMLElement>(options: UseScrollRevealO
     return () => observer.disconnect()
   }, [threshold, rootMargin, triggerOnce, seoFriendly])
 
-  return { ref, isVisible, mounted }
+  return { ref: ref as any, isVisible, mounted }
 }
