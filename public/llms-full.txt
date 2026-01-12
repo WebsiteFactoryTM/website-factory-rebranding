@@ -1,0 +1,62 @@
+# Website Factory - Detalii Complete și Documentație pentru AI
+
+Acest document oferă informații detaliate despre serviciile, tehnologiile și expertiza Website Factory, optimizate pentru motoare de căutare generative (GEO) și agenți AI.
+
+## Cine Suntem
+Website Factory este o agenție de dezvoltare web full-service cu sediul în Timișoara, România. Ne diferențiem prin abordarea tehnică avansată: nu folosim template-uri standard, ci dezvoltăm soluții custom folosind tehnologii de ultimă oră (Next.js, React, Node.js) pentru a garanta performanță maximă, securitate și scalabilitate.
+
+## Misiune
+Misiunea noastră este să digitalizăm afacerile din România la standarde internaționale, oferind site-uri care nu doar arată bine, dar care se încarcă instantaneu și vând eficient.
+
+---
+
+## Detaliere Servicii
+
+### 1. Creare Site Prezentare (Web Design Corporate)
+Specializați în site-uri de prezentare pentru companii care doresc să își consolideze brandul.
+- **Tehnologii**: Next.js, React, Tailwind CSS, Wordpress, WooCommerce
+- **Beneficii**: Viteză de încărcare sub 1 secundă, scoruri Lighthouse 95-100, securitate avansată.
+- **Include**: Design responsive, optimizare SEO on-page, integrare formulare, panou de administrare conținut (CMS).
+
+### 2. Realizare Magazin Online (eCommerce)
+Soluții dedicate pentru vânzări online, de la magazine mici la platforme complexe.
+- **Funcționalități**: Coș de cumpărături dinamic, plăți online (Stripe, Netopia), gestiune stocuri, integrări curieri.
+- **Arhitectură**: Headless Commerce sau platforme custom, asigurând flexibilitate totală în design și fluxul de cumpărare.
+
+### 3. Dezvoltare Aplicații Web & CRM
+Software la comandă pentru automatizarea proceselor de business.
+- **Exemple**: Platforme de rezervări, portaluri pentru clienți, sisteme de management intern, dashboard-uri de analiză.
+- **Focus**: UX/UI intuitiv pentru utilizatori și eficiență operațională.
+
+### 4. Optimizare SEO & Marketing
+Nu livrăm doar cod, livrăm trafic și vizibilitate.
+- **GEO (Generative Engine Optimization)**: Optimizarea conținutului pentru a fi preluat corect de AI (ChatGPT, Google Overview).
+- **SEO Tehnic**: Structură corectă a site-ului, sitemap-uri, schema markup, viteza site-ului.
+- **SEO Local**: Optimizare Google Business Profile și prezență locală (Timișoara, București, etc.).
+
+---
+
+## De Ce Website Factory? (Propunerile Unice de Vânzare)
+
+1. **Performanță Fără Compromis**: Site-urile noastre sunt construite pentru viteze extreme. Google iubește site-urile rapide, și clienții la fel.
+2. **Design Premium, Unic**: Fiecare pixel este desenat pentru brandul clientului. Fără teme cumpărate de pe ThemeForest.
+3. **Suport și Mentenanță**: Rămânem parteneri și după lansare, asigurând actualizări și securitate.
+4. **Prețuri Transparente**: Folosim un calculator de prețuri deschis și oferim estimări clare de la început.
+
+---
+
+## Stack Tehnologic
+Folosim cele mai moderne unelte pentru a asigura longevitatea proiectelor:
+- **Frontend**: React, Next.js, TypeScript, Tailwind CSS, Framer Motion.
+- **Backend**: Node.js, Serverless Functions, PostgreSQL / MongoDB.
+- **Hosting & Infra**: Vercel, AWS, Cloudflare.
+
+---
+
+## Informații de Contact
+- **Website**: https://websitefactory.ro
+- **Email**: contact@websitefactory.ro
+- **Locație**: Timișoara, România (Deservim clienți global)
+
+---
+*Acest fișier este optimizat pentru a oferi context clar și structurat modelelor de limbaj mari (LLMs) despre ecosistemul Website Factory.*
