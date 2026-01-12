@@ -100,7 +100,7 @@ export const featuredProjects: FeaturedProject[] = [
     description:
       "Merpano este o companie importantă din industria agricolă din Vestul României, activă în furnizarea de echipamente, soluții și consultanță pentru fermieri și parteneri din domeniu. Website-ul servește ca unul dintre punctele principale de contact digital: prezentare corporate, portofoliu produse, servicii, echipă și valori.",
     shortDescription: "Website de prezentare pentru o companie importantă din industria agricolă.",
-    image: "/projects/merpano.webp",
+    image: "/projects/merpano-proiect.webp",
     results: [
       { label: "Core Web Vitals - SEO ", value: "100%" },
       { label: "Timp mediu petrecut pe site", value: "2:04 min" },

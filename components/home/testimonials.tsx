@@ -211,6 +211,7 @@ export function Testimonials() {
               size="icon"
               onClick={handlePrev}
               disabled={currentIndex === 0}
+              aria-label="Previous testimonial"
               className={cn(
                 "rounded-full w-12 h-12 border-border/50 hover:border-brand/50 hover:bg-brand/5",
                 "disabled:opacity-50 disabled:cursor-not-allowed",
@@ -220,17 +221,24 @@ export function Testimonials() {
               <ChevronLeft className="w-5 h-5" />
             </Button>
 
+
             {/* Dots indicator */}
-            <div className="flex gap-2">
+            <div className="flex gap-1">
               {Array.from({ length: maxIndex + 1 }).map((_, index) => (
                 <button
                   key={index}
                   onClick={() => scrollToIndex(index)}
                   className={cn(
-                    "w-2 h-2 rounded-full transition-all duration-300",
+                    // Inner dot visual: w-2 h-2 (8px)
+                    // Touch target: p-3 = 12px padding on all sides = 8px + 24px = 32px
+                    // Total touch area: 48px x 48px (meets accessibility requirements)
+                    "p-3 rounded-full transition-all duration-300",
+                    "relative inline-flex items-center justify-center",
+                    // Creates the visible dot as a pseudo-element
+                    "before:content-[''] before:block before:rounded-full before:transition-all before:duration-300",
                     currentIndex === index
-                      ? "bg-brand w-8"
-                      : "bg-border/50 hover:bg-border/70",
+                      ? "before:bg-brand before:w-8 before:h-2"
+                      : "before:bg-border/50 before:w-2 before:h-2 hover:before:bg-border/70",
                   )}
                   aria-label={`Go to slide ${index + 1}`}
                 />
@@ -242,6 +250,7 @@ export function Testimonials() {
               size="icon"
               onClick={handleNext}
               disabled={currentIndex >= maxIndex}
+              aria-label="Next testimonial"
               className={cn(
                 "rounded-full w-12 h-12 border-border/50 hover:border-brand/50 hover:bg-brand/5",
                 "disabled:opacity-50 disabled:cursor-not-allowed",

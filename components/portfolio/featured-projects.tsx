@@ -100,10 +100,10 @@ function FeaturedProjectCard({
     <article
       ref={ref}
       className={cn(
-        "group relative grid md:grid-cols-2 gap-8 items-center transition-all duration-1000",
+        "group relative grid md:grid-cols-2 gap-8 items-center transition-all duration-700",
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12",
       )}
-      style={{ transitionDelay: `${index * 100}ms` }}
+      style={{ transitionDelay: `${(index % 3) * 100}ms` }}
     >
       {/* Image */}
       <div className={cn("relative", !isEven && "md:order-2")}>

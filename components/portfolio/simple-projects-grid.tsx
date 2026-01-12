@@ -79,10 +79,10 @@ function SimpleProjectCard({
     <article
       ref={ref}
       className={cn(
-        "group relative transition-all duration-700",
+        "group relative transition-all duration-500",
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
       )}
-      style={{ transitionDelay: `${index * 80}ms` }}
+      style={{ transitionDelay: `${(index % 4) * 80}ms` }}
     >
       <a
         href={project.liveUrl && project.liveUrl !== "#" ? project.liveUrl : undefined}
