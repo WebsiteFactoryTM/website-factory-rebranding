@@ -1,0 +1,144 @@
+components/contact/contact-faq.tsx(48,11): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/contact/contact-faq.tsx(67,11): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/contact/contact-hero.tsx(19,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/contact/contact-hero.tsx(24,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/contact/contact-hero.tsx(48,11): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/contact/contact-info.tsx(82,7): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/contact/contact-map.tsx(14,11): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/home/cta-section.tsx(20,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/home/cta-section.tsx(25,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/home/cta-section.tsx(30,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/home/cta-section.tsx(63,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; distance: number; }' but required in type 'FloatingElementProps'.
+components/home/cta-section.tsx(69,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; distance: number; }' but required in type 'FloatingElementProps'.
+components/home/cta-section.tsx(75,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; distance: number; }' but required in type 'FloatingElementProps'.
+components/home/cta-section.tsx(81,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; distance: number; }' but required in type 'FloatingElementProps'.
+components/home/featured-work.tsx(63,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/home/featured-work.tsx(68,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/home/hero.tsx(59,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/home/hero.tsx(64,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/home/hero.tsx(80,13): error TS2322: Type '{ key: number; className: string; style: { top: string; left: string; }; delay: number; duration: number; distance: number; }' is not assignable to type 'IntrinsicAttributes & FloatingElementProps'.
+  Property 'style' does not exist on type 'IntrinsicAttributes & FloatingElementProps'.
+components/home/hero.tsx(96,13): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/home/hero.tsx(166,13): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/home/process.tsx(54,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/home/process.tsx(59,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/home/services-preview.tsx(49,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/home/services-preview.tsx(54,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/home/services-preview.tsx(59,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/portfolio/featured-projects.tsx(29,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/portfolio/featured-projects.tsx(34,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/portfolio/featured-projects.tsx(43,11): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/portfolio/portfolio-cta.tsx(24,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/portfolio/portfolio-cta.tsx(29,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/portfolio/portfolio-cta.tsx(34,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/portfolio/portfolio-cta.tsx(57,11): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/portfolio/portfolio-hero.tsx(21,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/portfolio/portfolio-hero.tsx(26,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/portfolio/portfolio-hero.tsx(31,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/portfolio/portfolio-hero.tsx(55,11): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/price-estimator/price-hero.tsx(26,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/price-estimator/price-hero.tsx(31,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/price-estimator/price-hero.tsx(55,11): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/services/apps/app-cta.tsx(22,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/services/apps/app-cta.tsx(27,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/services/apps/app-hero.tsx(41,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/services/apps/app-hero.tsx(46,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/services/apps/app-hero.tsx(51,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/services/apps/app-hero.tsx(87,11): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/services/ecommerce/ecommerce-hero.tsx(41,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/services/ecommerce/ecommerce-hero.tsx(46,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/services/ecommerce/ecommerce-hero.tsx(51,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/services/ecommerce/ecommerce-hero.tsx(87,11): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/services/ecommerce/ecommerce-portfolio.tsx(63,11): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/services/ecommerce/ecommerce-process.tsx(125,11): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/services/ecommerce/ecommerce-tech-stack.tsx(79,11): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/services/website/benefits-showcase.tsx(105,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/services/website/benefits-showcase.tsx(110,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/services/website/benefits-showcase.tsx(127,11): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/services/website/interactive-process.tsx(88,11): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/services/website/roi-calculator.tsx(30,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/services/website/roi-calculator.tsx(45,11): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/services/website/service-cta.tsx(22,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/services/website/service-cta.tsx(27,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/services/website/service-cta.tsx(50,11): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/services/website/service-faq.tsx(21,11): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/services/website/service-hero.tsx(41,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/services/website/service-hero.tsx(46,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/services/website/service-hero.tsx(51,10): error TS2741: Property 'children' is missing in type '{ className: string; delay: number; duration: number; }' but required in type 'FloatingElementProps'.
+components/services/website/service-hero.tsx(83,11): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/services/website/website-portfolio.tsx(57,11): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+components/services/website/website-types.tsx(87,11): error TS2322: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+lib/cookie-consent.ts(122,11): error TS18048: 'window.fbq' is possibly 'undefined'.
+lib/cookie-consent.ts(122,26): error TS18048: 'window.fbq' is possibly 'undefined'.

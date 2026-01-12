@@ -1,0 +1,31 @@
+
+> my-v0-project@0.1.0 build C:\PixelFactory\Website Factory Renew\last git update\website-factory-rebranding
+> next build
+
+ ⚠ Invalid next.config.mjs options detected: 
+ ⚠     Unrecognized key(s) in object: 'turbo' at "experimental"
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+   ▲ Next.js 16.0.10 (Turbopack)
+   - Experiments (use with caution):
+     ? turbo (invalid experimental key)
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 3.7s
+   Running TypeScript ...
+Failed to compile.
+
+./components/contact/contact-faq.tsx:48:11
+Type error: Type 'RefObject<HTMLElement | null>' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
+  Type 'RefObject<HTMLElement | null>' is not assignable to type 'RefObject<HTMLDivElement | null>'.
+    Type 'HTMLElement | null' is not assignable to type 'HTMLDivElement | null'.
+      Property 'align' is missing in type 'HTMLElement' but required in type 'HTMLDivElement'.
+
+[0m [90m 46 |[39m       [33m<[39m[33mdiv[39m className[33m=[39m[32m"container mx-auto px-4 lg:px-8 relative z-10"[39m[33m>[39m
+ [90m 47 |[39m         [33m<[39m[33mdiv[39m
+[31m[1m>[22m[39m[90m 48 |[39m           ref[33m=[39m{titleRef}
+ [90m    |[39m           [31m[1m^[22m[39m
+ [90m 49 |[39m           className[33m=[39m{cn(
+ [90m 50 |[39m             [32m"text-center mb-12 transition-all duration-700"[39m[33m,[39m
+ [90m 51 |[39m             titleVisible [33m?[39m [32m"opacity-100 translate-y-0"[39m [33m:[39m [32m"opacity-0 translate-y-8"[39m[33m,[39m[0m
+Next.js build worker exited with code: 1 and signal: null
+ ELIFECYCLE  Command failed with exit code 1.

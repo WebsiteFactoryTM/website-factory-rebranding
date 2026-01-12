@@ -162,8 +162,7 @@ export function CityContent({
                                   : "rgba(48, 40, 178, 0.1)",
                     }}
                   >
-                    <Icon
-                      className="w-8 h-8"
+                    <span
                       style={{
                         color:
                           industry.iconColor === "amber-500"
@@ -178,7 +177,9 @@ export function CityContent({
                                     ? "#06b6d4"
                                     : "#3028b2",
                       }}
-                    />
+                    >
+                      <Icon className="w-8 h-8" />
+                    </span>
                   </div>
                   <h3 className="font-heading text-xl lg:text-2xl font-bold text-foreground mb-3 group-hover:text-brand transition-colors">
                     {industry.title}
@@ -348,8 +349,7 @@ export function CityContent({
                   {(() => {
                     const Icon = specialFeature.icon
                     return (
-                      <Icon
-                        className="w-8 h-8"
+                      <span
                         style={{
                           color:
                             specialFeature.iconColor === "amber-500"
@@ -362,7 +362,9 @@ export function CityContent({
                                     ? "#06b6d4"
                                     : "#3028b2",
                         }}
-                      />
+                      >
+                        <Icon className="w-8 h-8" />
+                      </span>
                     )
                   })()}
                 </div>
