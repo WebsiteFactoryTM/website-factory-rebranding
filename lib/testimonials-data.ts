@@ -41,8 +41,18 @@ export const testimonials: Testimonial[] = [
     rating: 5,
     datePublished: "2024-08-10",
   },
-  {
+    {
     id: 4,
+    name: "Cristina Eros",
+    role: "Fondator, YouPlus Agency",
+    content:
+      "Lucrez cu cei de la Website Factory încă din 2023 și sunt foarte mulțumită de parteneriatul cu ei! Sunt foarte prompți și implementează rapid ce avem noi nevoie, dar vin și cu idei extra, care ar ajuta la creșterea user experience sau pt un flow mai bun.  Am colaborat cu ei atât pentru site-ul nostru, cât și pentru al câtorva clienți din agenție și întotdeauna îi recomand când cineva are nevoie să își construiască un site sau să facă un upgrade la cel existent.  Îmi place ca sunt oameni faini în spatele brandului și nu se axează doar pe a livra tehnic, ci și pe a construi o relație, un parteneriat. Îi recomand cu drag oricând!",
+    logo: "/partners/youplus-partner.webp",
+    rating: 5,
+    datePublished: "2024-08-10",
+  },
+  {
+    id: 5,
     name: "Nicolae Chirteș",
     role: "Co-fondator, artimm.digital",
     content:
@@ -52,7 +62,7 @@ export const testimonials: Testimonial[] = [
     datePublished: "2024-09-05",
   },
   {
-    id: 5,
+    id: 6,
     name: "Adrian Dascălu",
     role: "Administrator, Geonordica",
     content:
