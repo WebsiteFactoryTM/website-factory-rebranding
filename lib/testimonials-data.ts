@@ -101,5 +101,15 @@ export const testimonials: Testimonial[] = [
     rating: 5,
     datePublished: "2024-10-12",
   },
+  {
+    id: 10,
+    name: "Dan Brad",
+    role: "Administrator, Bradluc și Piscine Timiș",
+    content:
+      "Recomand cu încredere colaborarea cu Website Factory. Au fost foarte atenți la detalii, deschis la idei și implicați de la început până la final.Comunicarea a fost clară, termenele respectate, iar rezultatul exact ce ne-am dorit.Datorită lor avem acum două site-uri funcționale și bine structurate: 👉 www.bradluc.ro și👉 www.piscinetimis.ro. Mulțumim pentru profesionalism și răbdare. Cu siguranță vom mai colabora!",
+    logo: "/partners/bradluc-shop-logo.webp",
+    rating: 5,
+    datePublished: "2024-10-12",
+  },
 ]
 

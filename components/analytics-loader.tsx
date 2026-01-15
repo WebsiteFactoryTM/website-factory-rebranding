@@ -11,10 +11,8 @@ export function AnalyticsLoader() {
     const hasMarketing = hasCategoryConsent("marketing")
 
     if (hasAnalytics || hasMarketing) {
-      // Small delay to ensure DOM is ready
-      setTimeout(() => {
-        initializeAnalytics()
-      }, 100)
+      // Initialize immediately - no delay needed
+      initializeAnalytics()
     }
   }, [])
 

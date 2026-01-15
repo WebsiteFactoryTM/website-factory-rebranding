@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { X, Settings, Check, Cookie } from "lucide-react"
-import { getCookieConsent, setCookieConsent, hasConsent, type CookieCategory } from "@/lib/cookie-consent"
+import { getCookieConsent, setCookieConsent, hasConsent, initializeAnalytics, type CookieCategory } from "@/lib/cookie-consent"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 
@@ -55,9 +55,23 @@ export function CookieConsent() {
     setCookieConsent(newConsent)
     setConsentState(newConsent)
     setIsVisible(false)
-    // Reload to initialize analytics
+    
+    // Initialize analytics immediately without page reload
     if (typeof window !== "undefined") {
-      window.location.reload()
+      // Small delay to ensure consent is saved to localStorage
+      setTimeout(() => {
+        initializeAnalytics()
+        
+        // Track the current page view after GA initializes
+        setTimeout(() => {
+          if (window.gtag) {
+            window.gtag('event', 'page_view', {
+              page_path: window.location.pathname,
+              page_title: document.title
+            })
+          }
+        }, 500)
+      }, 50)
     }
   }
 
@@ -75,9 +89,23 @@ export function CookieConsent() {
   const handleSavePreferences = () => {
     setCookieConsent(consent)
     setIsVisible(false)
-    // Reload to apply changes
+    
+    // Initialize analytics immediately without page reload
     if (typeof window !== "undefined") {
-      window.location.reload()
+      // Small delay to ensure consent is saved to localStorage
+      setTimeout(() => {
+        initializeAnalytics()
+        
+        // Track the current page view after GA initializes
+        setTimeout(() => {
+          if (window.gtag) {
+            window.gtag('event', 'page_view', {
+              page_path: window.location.pathname,
+              page_title: document.title
+            })
+          }
+        }, 500)
+      }, 50)
     }
   }
 

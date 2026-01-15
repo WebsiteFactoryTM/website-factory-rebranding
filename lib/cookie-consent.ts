@@ -95,12 +95,35 @@ export function initializeAnalytics(): void {
   const consent = getCookieConsent()
   if (!consent) return
 
+  const isDev = process.env.NODE_ENV === 'development'
+
     // Google Analytics (GA4)
     if (consent.analytics && !window.gtag) {
+      if (isDev) {
+        console.log('[Analytics] Initializing Google Analytics (dev mode)...')
+      }
+      
       // Load Google Analytics script
       const gaScript = document.createElement("script")
       gaScript.async = true
       gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-95D6D580HV"
+      gaScript.onload = () => {
+        if (isDev) {
+          console.log('[Analytics] ✅ Google Analytics script loaded successfully')
+        }
+      }
+      gaScript.onerror = () => {
+        if (isDev) {
+          console.warn(
+            '[Analytics] ⚠️ Failed to load Google Analytics script.\n' +
+            'This is normal in development if you have:\n' +
+            '  • Ad blockers enabled\n' +
+            '  • Browser privacy extensions\n' +
+            '  • Strict Content Security Policy\n' +
+            'GA will work correctly in production.'
+          )
+        }
+      }
       document.head.appendChild(gaScript)
 
       // Initialize Google Analytics
@@ -110,7 +133,13 @@ export function initializeAnalytics(): void {
       }
       window.gtag = gtag
       gtag("js", new Date())
-      gtag("config", "G-95D6D580HV")
+      gtag("config", "G-95D6D580HV", {
+        send_page_view: false // We'll manually send page view to avoid duplicates
+      })
+      
+      if (isDev) {
+        console.log('[Analytics] Google Analytics initialized (dataLayer ready)')
+      }
     }
 
   // Meta Pixel
