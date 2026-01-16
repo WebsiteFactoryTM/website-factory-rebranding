@@ -20,7 +20,7 @@ const cityName = "Constanța"
 const citySlug = "constanta"
 
 export const metadata: Metadata = generatePageMetadata({
-  title: `Creare Site Constanța - Web Design Constanța - Website Factory`,
+  title: `Creare Site Constanța - Web Design Constanța`,
   description: `Creare site Constanța: servicii personalizate de web design, magazin online și optimizare SEO pentru vizibilitate locală și națională.`,
   path: `/creare-site-${citySlug}`,
   keywords: [

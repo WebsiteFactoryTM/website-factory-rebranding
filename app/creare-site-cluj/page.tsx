@@ -20,7 +20,7 @@ const cityName = "Cluj-Napoca"
 const citySlug = "cluj"
 
 export const metadata: Metadata = generatePageMetadata({
-  title: `Creare Site Cluj - Web Design Cluj-Napoca - Website Factory`,
+  title: `Creare Site Cluj - Web Design Cluj-Napoca`,
   description: `Creare site Cluj: servicii personalizate de web design, magazin online și optimizare SEO pentru vizibilitate locală și națională.`,
   path: `/creare-site-${citySlug}`,
   keywords: [

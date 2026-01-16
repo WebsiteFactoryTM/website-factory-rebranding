@@ -5,7 +5,7 @@ import { PriceEstimatorWizard } from "@/components/price-estimator/price-wizard"
 
 export const metadata: Metadata = {
   ...generatePageMetadata({
-    title: "Preț Website - Website Factory - Web design",
+    title: "Preț Website - Web design",
     description:
       "Calculează prețul site-ului tău în 60 de secunde. Estimator gratuit pentru website de prezentare, magazin online sau aplicație web. Obține o cotație personalizată instant.",
     path: "/pret-website",

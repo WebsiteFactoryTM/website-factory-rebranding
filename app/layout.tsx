@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://websitefactory.ro"),
   title: {
     default: "Creare Site Timișoara - Web Design Timișoara - Website Factory",
-    template: "%s | Website Factory",
+    template: "%s - Website Factory",
   },
   description:
     "Servicii profesionale de web design, magazin online si optimizare SEO, vizibilitate locală și națională - De la idee la soluție digitală",

@@ -12,7 +12,7 @@ import { EcommerceFaq } from "@/components/services/ecommerce/ecommerce-faq"
 import { EcommerceCta } from "@/components/services/ecommerce/ecommerce-cta"
 
 export const metadata: Metadata = generatePageMetadata({
-  title: "Creare Magazin Online Timișoara - Website Factory - Web design",
+  title: "Creare Magazin Online Timișoara - Web design",
   description:
     "Dezvoltare magazin online performant. Funcționalități de loializare clienți, checkout optimizat, plăți securizate, ușor de administrat.",
   path: "/servicii/magazin-online",

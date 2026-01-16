@@ -3,7 +3,7 @@ import { generatePageMetadata, generateBreadcrumbSchema } from "@/lib/seo"
 import { Mail, Phone, MapPin } from "lucide-react"
 
 export const metadata: Metadata = generatePageMetadata({
-  title: "Termeni și Condiții - Website Factory - Web design",
+  title: "Termeni și Condiții",
   description:
     "Termeni și condiții de utilizare pentru website-ul Website Factory. Informații despre proprietatea intelectuală, confidențialitate și utilizarea serviciilor noastre.",
   path: "/termeni-si-conditii",

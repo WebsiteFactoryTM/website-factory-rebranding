@@ -7,7 +7,7 @@ import { ContactMap } from "@/components/contact/contact-map"
 import { ContactFaq } from "@/components/contact/contact-faq"
 
 export const metadata: Metadata = generatePageMetadata({
-  title: "Contact | Website Factory - Creare Site Timișoara",
+  title: "Contact",
   description:
     "Contactează-ne pentru o ofertă gratuită. Suntem aici să transformăm viziunea ta digitală în realitate. Creare site-uri web, magazine online și aplicații mobile în Timișoara.",
   path: "/contact",

@@ -11,7 +11,7 @@ import { ServiceFAQ } from "@/components/services/website/service-faq"
 import { ServiceCTA } from "@/components/services/website/service-cta"
 
 export const metadata: Metadata = generatePageMetadata({
-  title: "Creare Website Timișoara - Website Factory - Web design",
+  title: "Creare Website Timișoara - Web design",
   description:
     "Servicii profesionale de creare website în Timișoara. Design modern, SEO optimizat, performanță excepțională. Site-uri de prezentare care convertesc vizitatori în clienți. Solicită ofertă gratuită!",
   path: "/servicii/creare-website",

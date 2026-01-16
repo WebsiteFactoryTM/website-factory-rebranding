@@ -20,7 +20,7 @@ const cityName = "Brașov"
 const citySlug = "brasov"
 
 export const metadata: Metadata = generatePageMetadata({
-  title: `Creare Site Brașov - Web Design Brașov - Website Factory`,
+  title: `Creare Site Brașov - Web Design Brașov`,
   description: `Creare site Brașov: servicii personalizate de web design, magazin online și optimizare SEO pentru vizibilitate locală și națională.`,
   path: `/creare-site-${citySlug}`,
   keywords: [

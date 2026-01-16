@@ -20,7 +20,7 @@ const cityName = "București"
 const citySlug = "bucuresti"
 
 export const metadata: Metadata = generatePageMetadata({
-  title: `Creare Site București - Web Design București - Website Factory`,
+  title: `Creare Site București - Web Design București`,
   description: `Creare site București: servicii personalizate de web design, magazin online și optimizare SEO pentru vizibilitate locală și națională.`,
   path: `/creare-site-${citySlug}`,
   keywords: [

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = generatePageMetadata({
-  title: "Servicii Web Design Timișoara - Website Factory",
+  title: "Servicii Web Design Timișoara",
   description:
     "Servicii complete de web design și dezvoltare în Timișoara: creare website, magazin online, aplicații mobile. Soluții profesionale pentru afacerea ta digitală.",
   path: "/servicii",

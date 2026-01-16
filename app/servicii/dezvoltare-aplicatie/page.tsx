@@ -9,7 +9,7 @@ import { AppFaq } from "@/components/services/apps/app-faq"
 import { AppCta } from "@/components/services/apps/app-cta"
 
 export const metadata: Metadata = generatePageMetadata({
-  title: "Dezvoltare Aplicație Mobilă & Web - React Native, Next.js, SaaS - Website Factory",
+  title: "Dezvoltare Aplicație Mobilă & Web - React Native, Next.js, SaaS",
   description:
     "Dezvoltăm aplicații mobile cu React Native, web apps cu Next.js & Payload CMS, platforme SaaS scalabile și soluții de digitalizare. Consultanță gratuită!",
   path: "/servicii/dezvoltare-aplicatie",
