@@ -97,70 +97,128 @@ export function initializeAnalytics(): void {
 
   const isDev = process.env.NODE_ENV === 'development'
 
-    // Google Analytics (GA4)
-    if (consent.analytics && !window.gtag) {
-      if (isDev) {
-        console.log('[Analytics] Initializing Google Analytics (dev mode)...')
-      }
-      
-      // Load Google Analytics script
-      const gaScript = document.createElement("script")
-      gaScript.async = true
-      gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-95D6D580HV"
-      gaScript.onload = () => {
-        if (isDev) {
-          console.log('[Analytics] ✅ Google Analytics script loaded successfully')
-        }
-      }
-      gaScript.onerror = () => {
-        if (isDev) {
-          console.warn(
-            '[Analytics] ⚠️ Failed to load Google Analytics script.\n' +
-            'This is normal in development if you have:\n' +
-            '  • Ad blockers enabled\n' +
-            '  • Browser privacy extensions\n' +
-            '  • Strict Content Security Policy\n' +
-            'GA will work correctly in production.'
-          )
-        }
-      }
-      document.head.appendChild(gaScript)
+  // Initialize Google Consent Mode v2 FIRST (before GA script loads)
+  if (!window.gtag) {
+    window.dataLayer = window.dataLayer || []
+    window.gtag = function gtag(...args: unknown[]) {
+      window.dataLayer.push(args)
+    }
+  }
 
-      // Initialize Google Analytics
-      window.dataLayer = window.dataLayer || []
-      function gtag(...args: unknown[]) {
-        window.dataLayer.push(args)
-      }
-      window.gtag = gtag
-      gtag("js", new Date())
-      gtag("config", "G-95D6D580HV", {
-        send_page_view: true // We'll manually send page view to avoid duplicates
+  // Set default consent state (denied until user accepts)
+  try {
+    window.gtag("consent", "default", {
+      ad_storage: "denied",
+      analytics_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+      wait_for_update: 500,
+    })
+    if (isDev) {
+      console.log('[Analytics] ✅ Google Consent Mode v2 default set (all denied)')
+    }
+  } catch (error) {
+    if (isDev) {
+      console.warn('[Analytics] ⚠️ Failed to set consent default:', error)
+    }
+  }
+
+  // Update consent based on user preferences
+  try {
+    window.gtag("consent", "update", {
+      analytics_storage: consent.analytics ? "granted" : "denied",
+      ad_storage: consent.marketing ? "granted" : "denied",
+      ad_user_data: consent.marketing ? "granted" : "denied",
+      ad_personalization: consent.marketing ? "granted" : "denied",
+    })
+    if (isDev) {
+      console.log('[Analytics] ✅ Consent updated based on user preferences', {
+        analytics_storage: consent.analytics ? "granted" : "denied",
+        ad_storage: consent.marketing ? "granted" : "denied",
       })
-      
+    }
+  } catch (error) {
+    if (isDev) {
+      console.warn('[Analytics] ⚠️ Failed to update consent:', error)
+    }
+  }
+
+  // Google Analytics (GA4)
+  if (consent.analytics && !document.querySelector('script[src*="googletagmanager.com/gtag"]')) {
+    if (isDev) {
+      console.log('[Analytics] Initializing Google Analytics (dev mode)...')
+    }
+
+    // Load Google Analytics script
+    const gaScript = document.createElement("script")
+    gaScript.async = true
+    gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-95D6D580HV"
+    gaScript.onload = () => {
       if (isDev) {
-        console.log('[Analytics] Google Analytics initialized (dataLayer ready)')
+        console.log('[Analytics] ✅ Google Analytics script loaded successfully')
       }
     }
+    gaScript.onerror = () => {
+      if (isDev) {
+        console.warn(
+          '[Analytics] ⚠️ Failed to load Google Analytics script.\n' +
+          'This is normal in development if you have:\n' +
+          '  • Ad blockers enabled\n' +
+          '  • Browser privacy extensions\n' +
+          '  • Strict Content Security Policy\n' +
+          'GA will work correctly in production.'
+        )
+      }
+    }
+    document.head.appendChild(gaScript)
+
+    // Configure Google Analytics
+    try {
+      window.gtag("js", new Date())
+      window.gtag("config", "G-95D6D580HV", {
+        send_page_view: true,
+        anonymize_ip: true,
+        debug_mode: true
+      })
+      if (isDev) {
+        console.log('[Analytics] Google Analytics configured successfully')
+      }
+    } catch (error) {
+      if (isDev) {
+        console.warn('[Analytics] ⚠️ Failed to configure GA:', error)
+      }
+    }
+  }
 
   // Meta Pixel
   if (consent.marketing && !window.fbq) {
-    // Initialize Meta Pixel function first
-    const fbq = function (...args: unknown[]) {
-      ;(fbq.q = fbq.q || []).push(args)
-    } as ((...args: unknown[]) => void) & { q?: unknown[]; l?: boolean }
-    
-    window.fbq = fbq
-    fbq.l = true
-    fbq("init", "1056620019544195")
-    fbq("track", "PageView")
+    try {
+      // Initialize Meta Pixel function first
+      const fbq = function (...args: unknown[]) {
+        ;(fbq.q = fbq.q || []).push(args)
+      } as ((...args: unknown[]) => void) & { q?: unknown[]; l?: boolean }
 
-    // Load Meta Pixel script
-    const fbScript = document.createElement("script")
-    fbScript.async = true
-    fbScript.src = "https://connect.facebook.net/en_US/fbevents.js"
-    const firstScript = document.getElementsByTagName("script")[0]
-    if (firstScript.parentNode) {
-      firstScript.parentNode.insertBefore(fbScript, firstScript)
+      window.fbq = fbq
+      fbq.l = true
+      fbq("init", "1056620019544195")
+      fbq("track", "PageView")
+
+      if (isDev) {
+        console.log('[Analytics] ✅ Meta Pixel initialized')
+      }
+
+      // Load Meta Pixel script
+      const fbScript = document.createElement("script")
+      fbScript.async = true
+      fbScript.src = "https://connect.facebook.net/en_US/fbevents.js"
+      const firstScript = document.getElementsByTagName("script")[0]
+      if (firstScript && firstScript.parentNode) {
+        firstScript.parentNode.insertBefore(fbScript, firstScript)
+      }
+    } catch (error) {
+      if (isDev) {
+        console.warn('[Analytics] ⚠️ Failed to initialize Meta Pixel:', error)
+      }
     }
   }
 }
