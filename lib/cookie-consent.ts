@@ -86,26 +86,23 @@ export function hasCategoryConsent(category: CookieCategory): boolean {
 }
 
 /**
- * Initialize analytics scripts based on consent
- * This is called after consent is given to dynamically load scripts
+ * Initialize Google Consent Mode v2 BEFORE any tracking scripts load
+ * This should be called as early as possible on page load
  */
-export function initializeAnalytics(): void {
+export function initializeConsentMode(): void {
   if (typeof window === "undefined") return
-
-  const consent = getCookieConsent()
-  if (!consent) return
 
   const isDev = process.env.NODE_ENV === 'development'
 
-  // Initialize Google Consent Mode v2 FIRST (before GA script loads)
+  // Initialize dataLayer and gtag function
+  window.dataLayer = window.dataLayer || []
   if (!window.gtag) {
-    window.dataLayer = window.dataLayer || []
     window.gtag = function gtag(...args: unknown[]) {
       window.dataLayer.push(args)
     }
   }
 
-  // Set default consent state (denied until user accepts)
+  // Set default consent state (denied until user accepts) - REQUIRED FIRST
   try {
     window.gtag("consent", "default", {
       ad_storage: "denied",
@@ -123,7 +120,45 @@ export function initializeAnalytics(): void {
     }
   }
 
+  // Check if user has existing consent preferences and update accordingly
+  const consent = getCookieConsent()
+  if (consent) {
+    try {
+      window.gtag("consent", "update", {
+        analytics_storage: consent.analytics ? "granted" : "denied",
+        ad_storage: consent.marketing ? "granted" : "denied",
+        ad_user_data: consent.marketing ? "granted" : "denied",
+        ad_personalization: consent.marketing ? "granted" : "denied",
+      })
+      if (isDev) {
+        console.log('[Analytics] ✅ Consent restored from storage', {
+          analytics_storage: consent.analytics ? "granted" : "denied",
+          ad_storage: consent.marketing ? "granted" : "denied",
+        })
+      }
+    } catch (error) {
+      if (isDev) {
+        console.warn('[Analytics] ⚠️ Failed to update consent:', error)
+      }
+    }
+  }
+}
+
+/**
+ * Load analytics scripts based on consent
+ * This is called after user accepts cookies
+ */
+export function initializeAnalytics(): void {
+  if (typeof window === "undefined") return
+
+  const consent = getCookieConsent()
+  if (!consent) return
+
+  const isDev = process.env.NODE_ENV === 'development'
+
   // Update consent based on user preferences
+  if (!window.gtag) return // Safety check
+  
   try {
     window.gtag("consent", "update", {
       analytics_storage: consent.analytics ? "granted" : "denied",
@@ -173,6 +208,8 @@ export function initializeAnalytics(): void {
     document.head.appendChild(gaScript)
 
     // Configure Google Analytics
+    if (!window.gtag) return // Safety check
+    
     try {
       window.gtag("js", new Date())
       window.gtag("config", "G-95D6D580HV", {
