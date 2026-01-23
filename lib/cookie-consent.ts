@@ -134,7 +134,7 @@ export function initializeAnalytics(): void {
       window.gtag = gtag
       gtag("js", new Date())
       gtag("config", "G-95D6D580HV", {
-        send_page_view: false // We'll manually send page view to avoid duplicates
+        send_page_view: true // We'll manually send page view to avoid duplicates
       })
       
       if (isDev) {
