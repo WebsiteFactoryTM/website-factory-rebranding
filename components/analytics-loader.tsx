@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect } from "react"
-import { hasCategoryConsent, initializeAnalytics, initializeConsentMode } from "@/lib/cookie-consent"
+import { initializeConsentMode, initializeAnalytics } from "@/lib/cookie-consent"
+import { GAScriptLoader } from "./ga-script-loader"
 
 export function AnalyticsLoader() {
   useEffect(() => {
@@ -9,21 +10,18 @@ export function AnalyticsLoader() {
     // This must happen before GA script loads to ensure proper consent handling
     initializeConsentMode()
 
-    // Then load analytics scripts if consent was already given
-    // This runs on client-side only, after component mounts
-    const hasAnalytics = hasCategoryConsent("analytics")
-    const hasMarketing = hasCategoryConsent("marketing")
+    // Small delay to allow consent mode to be set up before other analytics initialization
+    const timer = setTimeout(() => {
+      initializeAnalytics()
+    }, 100)
 
-    if (hasAnalytics || hasMarketing) {
-      // Small delay to ensure consent mode is set up
-      const timer = setTimeout(() => {
-        initializeAnalytics()
-      }, 100)
-      return () => clearTimeout(timer)
-    }
+    return () => clearTimeout(timer)
   }, [])
 
-  // This component doesn't render anything
-  // It only initializes scripts on the client side
-  return null
+  return (
+    <>
+      {/* Google Analytics Scripts - loaded via Next.js Script component */}
+      <GAScriptLoader />
+    </>
+  )
 }

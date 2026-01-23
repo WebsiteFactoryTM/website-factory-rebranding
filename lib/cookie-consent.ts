@@ -146,7 +146,7 @@ export function initializeConsentMode(): void {
 
 /**
  * Load analytics scripts based on consent
- * This is called after user accepts cookies
+ * This updates the consent mode when user accepts/changes preferences
  */
 export function initializeAnalytics(): void {
   if (typeof window === "undefined") return
@@ -158,7 +158,7 @@ export function initializeAnalytics(): void {
 
   // Update consent based on user preferences
   if (!window.gtag) return // Safety check
-  
+
   try {
     window.gtag("consent", "update", {
       analytics_storage: consent.analytics ? "granted" : "denied",
@@ -178,56 +178,7 @@ export function initializeAnalytics(): void {
     }
   }
 
-  // Google Analytics (GA4)
-  if (consent.analytics && !document.querySelector('script[src*="googletagmanager.com/gtag"]')) {
-    if (isDev) {
-      console.log('[Analytics] Initializing Google Analytics (dev mode)...')
-    }
-
-    // Load Google Analytics script
-    const gaScript = document.createElement("script")
-    gaScript.async = true
-    gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-95D6D580HV"
-    gaScript.onload = () => {
-      if (isDev) {
-        console.log('[Analytics] ✅ Google Analytics script loaded successfully')
-      }
-    }
-    gaScript.onerror = () => {
-      if (isDev) {
-        console.warn(
-          '[Analytics] ⚠️ Failed to load Google Analytics script.\n' +
-          'This is normal in development if you have:\n' +
-          '  • Ad blockers enabled\n' +
-          '  • Browser privacy extensions\n' +
-          '  • Strict Content Security Policy\n' +
-          'GA will work correctly in production.'
-        )
-      }
-    }
-    document.head.appendChild(gaScript)
-
-    // Configure Google Analytics
-    if (!window.gtag) return // Safety check
-    
-    try {
-      window.gtag("js", new Date())
-      window.gtag("config", "G-95D6D580HV", {
-        send_page_view: true,
-        anonymize_ip: true,
-        debug_mode: true
-      })
-      if (isDev) {
-        console.log('[Analytics] Google Analytics configured successfully')
-      }
-    } catch (error) {
-      if (isDev) {
-        console.warn('[Analytics] ⚠️ Failed to configure GA:', error)
-      }
-    }
-  }
-
-  // Meta Pixel
+  // Meta Pixel - still load via document.createElement since it's managed separately
   if (consent.marketing && !window.fbq) {
     try {
       // Initialize Meta Pixel function first
