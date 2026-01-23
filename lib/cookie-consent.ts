@@ -177,38 +177,6 @@ export function initializeAnalytics(): void {
       console.warn('[Analytics] ⚠️ Failed to update consent:', error)
     }
   }
-
-  // Meta Pixel - still load via document.createElement since it's managed separately
-  if (consent.marketing && !window.fbq) {
-    try {
-      // Initialize Meta Pixel function first
-      const fbq = function (...args: unknown[]) {
-        ;(fbq.q = fbq.q || []).push(args)
-      } as ((...args: unknown[]) => void) & { q?: unknown[]; l?: boolean }
-
-      window.fbq = fbq
-      fbq.l = true
-      fbq("init", "1056620019544195")
-      fbq("track", "PageView")
-
-      if (isDev) {
-        console.log('[Analytics] ✅ Meta Pixel initialized')
-      }
-
-      // Load Meta Pixel script
-      const fbScript = document.createElement("script")
-      fbScript.async = true
-      fbScript.src = "https://connect.facebook.net/en_US/fbevents.js"
-      const firstScript = document.getElementsByTagName("script")[0]
-      if (firstScript && firstScript.parentNode) {
-        firstScript.parentNode.insertBefore(fbScript, firstScript)
-      }
-    } catch (error) {
-      if (isDev) {
-        console.warn('[Analytics] ⚠️ Failed to initialize Meta Pixel:', error)
-      }
-    }
-  }
 }
 
 /**
@@ -224,7 +192,6 @@ declare global {
   interface Window {
     dataLayer: unknown[]
     gtag?: (...args: unknown[]) => void
-    fbq?: ((...args: unknown[]) => void) & { q?: unknown[]; l?: boolean }
     showCookieConsent?: () => void
   }
 }

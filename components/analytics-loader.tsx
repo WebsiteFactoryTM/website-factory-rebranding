@@ -3,6 +3,7 @@
 import { useEffect } from "react"
 import { initializeConsentMode, initializeAnalytics } from "@/lib/cookie-consent"
 import { GAScriptLoader } from "./ga-script-loader"
+import { MetaPixelScriptLoader } from "./meta-pixel-loader"
 
 export function AnalyticsLoader() {
   useEffect(() => {
@@ -22,6 +23,9 @@ export function AnalyticsLoader() {
     <>
       {/* Google Analytics Scripts - loaded via Next.js Script component */}
       <GAScriptLoader />
+      
+      {/* Meta Pixel Scripts - loaded via Next.js Script component */}
+      <MetaPixelScriptLoader />
     </>
   )
 }
