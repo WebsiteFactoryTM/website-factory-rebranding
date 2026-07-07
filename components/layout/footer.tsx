@@ -4,6 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useTheme } from "@/components/theme-provider"
+import { useConsent } from "@/components/consent/consent-provider"
 import { ArrowUpRight, MapPin, Mail, Phone } from "lucide-react"
 
 const footerLinks = {
@@ -35,6 +36,7 @@ const footerLinks = {
 export function Footer() {
   const currentYear = new Date().getFullYear()
   const { resolvedTheme } = useTheme()
+  const { openPreferences } = useConsent()
   const [mounted, setMounted] = React.useState(false)
 
   // Prevent hydration mismatch by only using theme after mount
@@ -178,11 +180,7 @@ export function Footer() {
               ))}
               <li>
                 <button
-                  onClick={() => {
-                    if (typeof window !== "undefined" && window.showCookieConsent) {
-                      window.showCookieConsent()
-                    }
-                  }}
+                  onClick={openPreferences}
                   className="text-sm text-muted-foreground hover:text-brand transition-colors inline-flex items-center gap-1 group"
                 >
                   Gestionare cookie-uri

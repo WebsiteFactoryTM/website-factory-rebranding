@@ -2,12 +2,16 @@ import type React from "react"
 import type { Metadata, Viewport } from "next"
 import Script from "next/script"
 import { Inter, Manrope } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
-import { CookieConsent } from "@/components/cookie-consent"
-import { AnalyticsLoader } from "@/components/analytics-loader"
+import { ConsentDefaultScript } from "@/components/consent/consent-default-script"
+import { ConsentProvider } from "@/components/consent/consent-provider"
+import { ConsentBanner } from "@/components/consent/consent-banner"
+import { GaLoader } from "@/components/consent/tag-loaders/ga-loader"
+import { MetaPixelLoader } from "@/components/consent/tag-loaders/meta-pixel-loader"
+import { VercelAnalyticsLoader } from "@/components/consent/tag-loaders/vercel-analytics-loader"
+import { PageViewTracker } from "@/components/consent/page-view-tracker"
 import { FloatingCTA } from "@/components/services/website/floating-cta"
 import "./globals.css"
 
@@ -110,32 +114,38 @@ export default function RootLayout({
   return (
     <html lang="ro" suppressHydrationWarning>
       <body className={`${inter.variable} ${manrope.variable} font-sans antialiased`}>
-        {/* Analytics - Only loaded after consent */}
-        <AnalyticsLoader />
-        
-        <ThemeProvider>
-          {/* Skip to content link for accessibility */}
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-brand focus:text-brand-foreground focus:rounded-md"
-          >
-            Salt la conținut
-          </a>
-          <Header />
-          <main id="main-content">{children}</main>
-          <Footer />
-        </ThemeProvider>
-        
-        {/* Cookie Consent Banner */}
-        <CookieConsent />
-        
-        {/* Floating Contact CTA - Appears on all pages */}
-        <FloatingCTA />
-        
-        {/* Vercel Analytics - Privacy-focused, always enabled */}
-        <Analytics />
+        {/* Google Consent Mode v2 — default denied + restore din cookie.
+            beforeInteractive: rulează în <head> înaintea hidratării și a oricărui tag. */}
+        <ConsentDefaultScript />
 
-        {/* AskBot chat widget - loaded on every page */}
+        <ConsentProvider>
+          <ThemeProvider>
+            {/* Skip to content link for accessibility */}
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-brand focus:text-brand-foreground focus:rounded-md"
+            >
+              Salt la conținut
+            </a>
+            <Header />
+            <main id="main-content">{children}</main>
+            <Footer />
+          </ThemeProvider>
+
+          {/* Cookie consent banner */}
+          <ConsentBanner />
+
+          {/* Trackere hard-gated — se montează doar cu consimțământul corespunzător */}
+          <GaLoader />
+          <MetaPixelLoader />
+          <VercelAnalyticsLoader />
+          <PageViewTracker />
+
+          {/* Floating Contact CTA - Appears on all pages */}
+          <FloatingCTA />
+        </ConsentProvider>
+
+        {/* AskBot chat widget - funcțional, încărcat pe fiecare pagină */}
         <Script
           src="https://askbot.ro/widget/v1/widget.min.js"
           data-api-key="wf_live_nNvWDyNhhjIGleayb-xUr89PhNCB7uFdyhCPdOA6jsw"
