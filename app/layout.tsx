@@ -1,5 +1,6 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
+import Script from "next/script"
 import { Inter, Manrope } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -25,7 +26,7 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL("https://websitefactory.ro"),
   title: {
-    default: "Creare Site Timișoara - Web Design Timișoara - Website Factory",
+    default: "Creare Site Timișoara - Web Design Timișoara",
     template: "%s - Website Factory",
   },
   description:
@@ -133,6 +134,13 @@ export default function RootLayout({
         
         {/* Vercel Analytics - Privacy-focused, always enabled */}
         <Analytics />
+
+        {/* AskBot chat widget - loaded on every page */}
+        <Script
+          src="https://askbot.ro/widget/v1/widget.min.js"
+          data-api-key="wf_live_nNvWDyNhhjIGleayb-xUr89PhNCB7uFdyhCPdOA6jsw"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   )
