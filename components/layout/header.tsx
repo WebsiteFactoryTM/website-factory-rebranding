@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, X, ArrowRight, Calculator, ChevronDown } from "lucide-react"
+import { Menu, X, ArrowRight, Calculator, ChevronDown, Bot } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
@@ -21,6 +21,8 @@ const navLinks = [
   { href: "/despre-noi", label: "Despre noi" },
   { href: "/contact", label: "Contact" },
 ]
+
+const CHATBOT_URL = "https://askbot.ro"
 
 export function Header() {
   const [isScrolled, setIsScrolled] = React.useState(false)
@@ -139,6 +141,25 @@ export function Header() {
                   <span className="absolute bottom-1 left-5 right-5 h-px bg-brand scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                 </Link>
               ))}
+
+              {/* Featured: Chatbot AI → askbot.ro (tab nou) */}
+              <a
+                href={CHATBOT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Chatbot AI (se deschide într-o filă nouă)"
+                className="group ml-2 inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/5 px-4 py-2 text-sm font-semibold text-foreground transition-all duration-300 hover:bg-brand/10 hover:border-brand/50 hover:glow-brand"
+              >
+                <span className="relative flex-shrink-0">
+                  <Bot className="w-4 h-4 text-brand transition-transform duration-300 group-hover:scale-110" />
+                  {/* punct „live" pulsant */}
+                  <span className="absolute -top-1 -right-1 flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-75" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand" />
+                  </span>
+                </span>
+                Chatbot AI
+              </a>
             </div>
 
             {/* Desktop Actions */}
@@ -238,6 +259,30 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
+
+            {/* Featured: Chatbot AI → askbot.ro (tab nou) */}
+            <a
+              href={CHATBOT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMobileMenuOpen(false)}
+              aria-label="Chatbot AI (se deschide într-o filă nouă)"
+              className="group inline-flex items-center gap-3 rounded-full border border-brand/30 bg-brand/10 px-6 py-3 text-2xl font-heading font-bold text-foreground hover:text-brand hover:border-brand/50 transition-colors"
+              style={{
+                transform: isMobileMenuOpen ? "translateY(0)" : "translateY(30px)",
+                opacity: isMobileMenuOpen ? 1 : 0,
+                transition: `all 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${(navLinks.length + 1) * 100}ms`,
+              }}
+            >
+              <span className="relative flex-shrink-0">
+                <Bot className="w-7 h-7 text-brand" />
+                <span className="absolute -top-1 -right-1 flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-brand" />
+                </span>
+              </span>
+              Chatbot AI
+            </a>
           </nav>
 
           <Button
@@ -247,7 +292,7 @@ export function Header() {
             style={{
               transform: isMobileMenuOpen ? "translateY(0)" : "translateY(30px)",
               opacity: isMobileMenuOpen ? 1 : 0,
-              transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1) 400ms",
+              transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1) 600ms",
             }}
           >
             <Link
