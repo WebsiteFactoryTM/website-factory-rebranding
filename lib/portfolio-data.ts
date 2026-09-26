@@ -39,6 +39,42 @@ export interface SimpleProject {
 export const featuredProjects: FeaturedProject[] = [
   {
     id: "1",
+    slug: "politehnica-timisoara",
+    title: "Politehnica Timișoara – Platforma digitală oficială a clubului",
+    client: "Politehnica Timișoara",
+    category: "custom",
+    categoryLabel: "Platformă digitală",
+    description:
+      "Platforma digitală oficială a clubului de fotbal Politehnica Timișoara: știri, echipe, meciuri, bilete și shop oficial, într-o singură experiență rapidă și coerentă. Rezultatele, programul competițional și clasamentul se actualizează automat printr-o integrare API dedicată, iar arhitectura Next.js livrează conținutul aproape instant, pe orice dispozitiv.",
+    shortDescription:
+      "Platforma digitală oficială a clubului Politehnica Timișoara — știri, meciuri, bilete și shop, cu rezultate și clasament actualizate automat prin API.",
+    image: "/projects/website-platforma-politehnica-timisoara.webp",
+    results: [
+      { label: "Core Web Vitals", value: "3/3" },
+      { label: "Încărcare pagină", value: "Instant" },
+      { label: "Rezultate & clasament", value: "API live" },
+    ],
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Headless CMS",
+      "Integrare API rezultate & clasament",
+      "ISR & Edge Caching",
+      "Vercel",
+      "SEO tehnic",
+      "Dezvoltare agentică",
+    ],
+    year: "2026",
+    challenge:
+      "Un club cu peste 100 de ani de istorie și zeci de mii de suporteri avea nevoie de un singur punct digital oficial: știri publicate zilnic, trei echipe, program competițional, bilete și shop — toate într-o platformă care să reziste vârfurilor de trafic din zilele de meci și să se încarce instant pe mobil, acolo unde stă majoritatea audienței.",
+    solution:
+      "Am construit platforma pe Next.js, cu randare pe server și cache la nivel de rută, astfel încât navigarea între secțiuni să fie percepută ca instantanee. Rezultatele meciurilor, programul și clasamentul sunt preluate automat printr-o integrare API dedicată, eliminând complet actualizările manuale. Editorii publică știri și conținut direct din CMS, iar structura semantică, datele structurate și optimizarea imaginilor asigură Core Web Vitals 3/3 și vizibilitate maximă în căutări. Întregul proiect a fost livrat printr-un flux de dezvoltare agentic, care a scurtat radical drumul de la concept la producție.",
+    liveUrl: "https://www.politehnicatimisoara.com/",
+  },
+  {
+    id: "2",
     slug: "un-event",
     title: "UN:EVENT – Platformă pentru locații, servicii și evenimente",
     client: "PIXEL FACTORY SRL",
@@ -68,7 +104,186 @@ export const featuredProjects: FeaturedProject[] = [
     liveUrl: "https://unevent.ro",
   },
   {
-    id: "2",
+    id: "3",
+    slug: "riders-route",
+    title: "Rider's Route – Aplicație mobilă și platformă web pentru motocicliști",
+    client: "Rider's Route S.R.L.",
+    category: "app",
+    categoryLabel: "Aplicație mobilă & website",
+    description:
+      "Ecosistem digital construit pentru motocicliști: o aplicație mobilă React Native cu navigație turn-by-turn, înregistrare GPS a turelor, garaj digital și buton SOS, dublată de o platformă web Next.js unde traseele pot fi descoperite, salvate și partajate. Comunitate, hărți și statistici de rulaj — același produs, pe iOS, Android și web.",
+    shortDescription:
+      "Aplicație mobilă React Native și platformă web pentru descoperirea, înregistrarea și partajarea traseelor moto.",
+    image: "/projects/website-si-aplicatie-mobila-riders-route.webp",
+    results: [
+      { label: "Platforme livrate", value: "3" },
+      { label: "Navigație & tracking GPS", value: "Real-time" },
+      { label: "Cod partajat iOS/Android", value: "100%" },
+    ],
+    technologies: [
+      "React Native",
+      "Expo",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Hărți & GPS tracking",
+      "OpenStreetMap",
+      "PostgreSQL",
+      "Push notifications",
+      "Vercel",
+    ],
+    year: "2026",
+    challenge:
+      "Motocicliștii folosesc aplicații de navigație generaliste, care nu înțeleg nevoile reale ale unei ture: trasee alese pentru viraje, profil de altitudine, statistici de rulaj, întreținerea motocicletei și siguranța pe drum. Provocarea a fost să construim un produs care funcționează identic pe telefon și pe web, cu hărți performante și date sincronizate în timp real.",
+    solution:
+      "Am dezvoltat aplicația mobilă în React Native — un singur cod sursă pentru iOS și Android — și platforma web în Next.js, ambele conectate la același API și la aceeași bază de date. Motociclistul pornește un Free Ride sau navighează turn-by-turn către o destinație, iar aplicația înregistrează distanța, viteza, altitudinea și traseul complet. În jurul acestui nucleu am construit garajul digital (revizii, ITP, asigurări), feed-ul de comunitate cu ture partajate și butonul SOS accesibil în timpul rulajului. Site-ul expune rutele publice optimizat pentru căutări și devine astfel principalul canal de achiziție pentru aplicație.",
+    liveUrl: "https://ridersroute.app/",
+  },
+  {
+    id: "4",
+    slug: "la-pinocchio",
+    title: "La Pinocchio – Redesign complet al magazinului online de comenzi",
+    client: "Pizza Oscar DM SRL",
+    category: "ecommerce",
+    categoryLabel: "Magazin online",
+    description:
+      "Redesign complet al platformei de comenzi online pentru La Pinocchio, restaurantul din Piața Traian, Timișoara, activ din 2004. Am mutat întreaga experiență pe un stack modern Next.js, cu meniu digital pe categorii, Meniul Zilei, oferte, coș rapid, conturi de client și plată online — gândită pentru o comandă finalizată în câteva atingeri, direct de pe telefon. În spate, un panou de control dedicat le permite celor din restaurant să dispeceze comenzile în timp real, iar noua arhitectură a adus o creștere de performanță de 60% față de vechea platformă.",
+    shortDescription:
+      "Redesign modern al magazinului online de comenzi pentru restaurantul La Pinocchio din Timișoara, cu panou de dispecerat comenzi și performanță cu 60% mai bună.",
+    image: "/projects/redesign-ecommerce-clatite-la-pinocchio.webp",
+    results: [
+      { label: "Creștere performanță", value: "+60%" },
+      { label: "Încărcare pagină", value: "Instant" },
+      { label: "Panou dispecerat comenzi", value: "Real-time" },
+    ],
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Coș & checkout custom",
+      "Netopia Payments",
+      "Conturi clienți",
+      "Panou dispecerat comenzi",
+      "SEO local",
+      "Vercel",
+    ],
+    year: "2026",
+    challenge:
+      "Vechea platformă de comenzi arăta datat și punea prea multe obstacole între client și butonul de comandă: meniu greu de parcurs pe mobil, imagini lente, checkout lung. Într-un oraș în care decizia de livrare se ia în câteva secunde, fiecare pas în plus însemna o comandă pierdută.",
+    solution:
+      "Am reconstruit platforma de la zero, cu o identitate vizuală caldă, fotografie de produs pusă în valoare și o ierarhie clară: categorii, Meniul Zilei, oferte și recomandări. Meniul este optimizat mobile-first, cu adăugare în coș dintr-un singur tap și un checkout scurt, cu plată online prin Netopia sau ramburs. Imaginile sunt servite optimizat prin Next.js, iar rescrierea completă a front-end-ului a adus o creștere de performanță de 60% față de vechea platformă, cu o încărcare percepută ca instantanee pe mobil. Pentru echipa restaurantului am construit un panou de control dedicat, din care comenzile sunt preluate, dispecerizate și urmărite în timp real, iar meniul, prețurile și ofertele se actualizează fără intervenție tehnică. Paginile de categorie și de produs sunt structurate pentru căutările locale — de la clătite în Timișoara până la livrare pizza în zona Pieței Traian.",
+    liveUrl: "https://clatite-pinochio.ro/",
+  },
+  {
+    id: "5",
+    slug: "fern-and-flow",
+    title: "Fern & Flow Hair – Website de prezentare pentru un salon din Londra",
+    client: "Fern & Flow Hair Salon, Beckenham – London",
+    category: "website",
+    categoryLabel: "Website de prezentare",
+    description:
+      "Website de prezentare pentru un salon independent din Beckenham, South London, specializat în îngrijire organică a părului. Design editorial, natural, cu programare online integrată, carduri cadou digitale, listă de prețuri, galerie de lucrări și recenzii — construit în Next.js și livrat cu 97/100 la performance și 100/100 la SEO.",
+    shortDescription:
+      "Website premium pentru un salon de coafură organic din Londra, cu programare online și carduri cadou digitale.",
+    image: "/projects/website-de-prezentare-salon-londra-fern-and-flow.webp",
+    results: [
+      { label: "Performance", value: "97/100" },
+      { label: "SEO", value: "100/100" },
+      { label: "Programări online", value: "24/7" },
+    ],
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Integrare sistem de rezervări",
+      "Stripe (e-gift cards)",
+      "Vercel",
+      "SEO local UK",
+    ],
+    year: "2026",
+    challenge:
+      "Într-o zonă cu zeci de saloane, Fern & Flow avea nevoie de o prezență online care să comunice instant poziționarea premium și filosofia organică a brandului — și, în același timp, să transforme vizitatorul în programare, fără să-l trimită într-un sistem extern greoi.",
+    solution:
+      "Am construit un website editorial, cu paletă naturală, tipografie elegantă și fotografie reală din salon, în care fiecare secțiune conduce spre o singură acțiune: rezervarea. Programarea se face prin integrarea cu sistemul de booking al salonului, iar cardurile cadou se cumpără online, cu plată securizată prin Stripe. Lista de prețuri, prezentarea echipei, galeria de lucrări și recenziile verificate construiesc încrederea înainte de rezervare. Optimizarea tehnică — imagini servite adaptiv, fonturi preîncărcate, structură semantică și date structurate LocalBusiness — a dus site-ul la 97/100 performance și 100/100 SEO.",
+    liveUrl: "https://www.fernandflowhairsalon.co.uk/",
+  },
+  {
+    id: "6",
+    slug: "daylin-nail-supply",
+    title: "Daylin Nail Supply – Magazin online de cosmetice profesionale, Dublin",
+    client: "Daylin Nail Supply, Dublin – Irlanda",
+    category: "ecommerce",
+    categoryLabel: "Magazin online",
+    description:
+      "Magazin online construit în Next.js pentru un distribuitor irlandez de produse profesionale de manichiură, fondat în 2018 de Diana, tehnician de unghii care testează personal fiecare produs din catalog. Structură pe categorii și branduri, conturi PRO cu beneficii pentru saloane, secțiune de academie și expediere în 48h din Dublin — cu 93/100 la performance pe mobil.",
+    shortDescription:
+      "Magazin online premium de cosmetice profesionale pentru manichiură, cu conturi PRO pentru saloane și livrare în Irlanda.",
+    image: "/projects/magazin-online-cosmetice-manichiura-dublin-daylin.webp",
+    results: [
+      { label: "Performance mobil", value: "93/100" },
+      { label: "Expediere comenzi", value: "48h" },
+      { label: "Conturi & prețuri", value: "B2C + B2B" },
+    ],
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Checkout & plăți online",
+      "Conturi PRO (B2B)",
+      "Gestiune catalog & stocuri",
+      "Vercel",
+      "SEO Irlanda",
+    ],
+    year: "2026",
+    challenge:
+      "Daylin vinde simultan către tehnicieni profesioniști și către clienți finali, cu un catalog amplu, împărțit pe branduri și tipuri de produse. Era nevoie de un magazin care să arate premium, să se încarce rapid pe mobil — de unde vine majoritatea comenzilor — și să servească două tipuri de public, cu prețuri și beneficii diferite, fără să complice experiența niciunuia.",
+    solution:
+      "Am construit magazinul în Next.js, cu o estetică editorială și discretă, care lasă produsele în prim-plan. Catalogul este organizat pe categorii și branduri, cu filtre și pagini de produs clare, iar conturile PRO oferă saloanelor prețuri și avantaje dedicate, separat de fluxul clientului obișnuit. Bara de anunțuri comunică livrarea gratuită peste 80€, reducerea la prima comandă și înscrierile la Daylin Academy. Optimizarea imaginilor, încărcarea progresivă și structura mobile-first au dus scorul de performance pe mobil la 93/100.",
+    liveUrl: "https://www.daylin.ie/",
+  },
+  {
+    id: "7",
+    slug: "rox-assignment-solution",
+    title: "Rox Assignment Solution – Platformă de suport academic, UK",
+    client: "Roxana Assignment Solution Ltd, Londra",
+    category: "custom",
+    categoryLabel: "Platformă digitală",
+    description:
+      "Platformă web pentru o companie britanică de suport academic: studentul trimite brief-ul și materialele, primește o ofertă personalizată, plătește securizat prin Revolut Pay sau PayPal și urmărește progresul comenzii într-un dashboard dedicat. În spate, un panou de control complet permite administrarea platformei — cereri, oferte, comenzi și conținut — fără intervenție tehnică. Construită în Next.js, cu autentificare și contact rapid prin WhatsApp — la 94/100 performance pe mobil.",
+    shortDescription:
+      "Platformă de suport academic cu panou de administrare complet, plăți securizate prin Revolut Pay și PayPal și urmărirea comenzilor în timp real.",
+    image: "/projects/platforma-online-academica-rox-assignment-solution.webp",
+    results: [
+      { label: "Performance mobil", value: "94/100" },
+      { label: "Panou de administrare", value: "Complet" },
+      { label: "Plăți securizate", value: "Revolut & PayPal" },
+    ],
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Autentificare & conturi",
+      "Upload fișiere",
+      "Revolut Pay",
+      "PayPal",
+      "Panou de administrare",
+      "Dashboard comenzi",
+      "Integrare WhatsApp",
+      "Vercel",
+    ],
+    year: "2026",
+    challenge:
+      "Întregul proces se desfășura pe canale disparate — mesaje, e-mailuri și fișiere trimise manual — ceea ce încetinea ofertarea și lăsa clientul fără vizibilitate asupra stadiului lucrării. Într-o piață în care încrederea decide totul, platforma trebuia să comunice clar legitimitatea serviciului și să aducă tot fluxul într-un singur loc.",
+    solution:
+      "Am digitalizat fluxul complet: studentul completează brief-ul, încarcă materialele și primește o ofertă detaliată, fără plată în avans. După acceptare, plata se face securizat prin Revolut Pay sau PayPal, iar comanda poate fi urmărită în timp real din contul de client, de la alocarea expertului până la livrare. Pentru echipă am construit un panou de control din care se administrează întreaga platformă: cererile primite, ofertele trimise, statusul comenzilor, conturile clienților și conținutul paginilor — totul dintr-un singur loc, fără intervenție tehnică. Am construit pagini dedicate pentru fiecare tip de serviciu și domeniu academic, optimizate pentru căutări specifice, plus contact instant prin WhatsApp. Designul dark-gold și comunicarea transparentă a politicii de utilizare susțin poziționarea premium și credibilitatea serviciului.",
+    liveUrl: "https://www.roxassignmentsolution.com/",
+  },
+  {
+    id: "8",
     slug: "blue-phoenix",
     title: "Blue Phoenix – Stil de viață indonezian în România",
     client: "Blue Phoenix Rising Thriving Blooming SRL",
@@ -91,7 +306,7 @@ export const featuredProjects: FeaturedProject[] = [
     liveUrl: "https://blue-phoenix.ro/",
   },
   {
-    id: "3",
+    id: "9",
     slug: "merpano",
     title: "Merpano - Website de prezentare companie",
     client: "Merpano SRL",
@@ -567,18 +782,7 @@ export const simpleProjects: SimpleProject[] = [
     shortDescription: "Magazin online si inchiriere scule Timișoara, Web design, Web development, Design grafic, Mentenanță, SEO",
     order: 47,
   },
-  {
-    id: "s48",
-    title: "La Pinocchio",
-    client: "Pizza Oscar DM SRL",
-    category: "ecommerce",
-    categoryLabel: "Magazin online",
-    image: "/projects/magazin-online-timisoara-Pinnochio.webp",
-    liveUrl: "https://clatite-pinochio.ro/",
-    year: "2023",
-    shortDescription: "Magazin online - restaurant comenzi la domiciliu, Mentenanță, Marketing Digital, Web Design, Web Development, Design grafic, SEO",
-    order: 16,
-  },
+  // La Pinocchio a fost promovat în studiile de caz (vezi featuredProjects → /portofoliu/la-pinocchio)
   {
     id: "s49",
     title: "Scar Influence",
@@ -778,5 +982,6 @@ export const categoryFilters = [
   { value: "all", label: "Toate proiectele" },
   { value: "website", label: "Website-uri" },
   { value: "ecommerce", label: "Magazine online" },
+  { value: "app", label: "Aplicații mobile" },
   { value: "custom", label: "Platforme custom" },
 ]

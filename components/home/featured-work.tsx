@@ -27,10 +27,10 @@ const getColorByCategory = (category: string): string => {
 }
 
 // Transform featured projects to case studies format
-const caseStudies = featuredProjects.slice(0, 3).map((project) => {
+const caseStudies = featuredProjects.slice(0, 6).map((project) => {
   const firstResult = project.results[0]
   const outcome = firstResult
-    ? `${firstResult.value} ${firstResult.label}`
+    ? `${firstResult.value} · ${firstResult.label}`
     : "Rezultate măsurabile"
 
   return {
@@ -118,7 +118,7 @@ export function FeaturedWork() {
         </div>
 
         {/* Case Studies Grid */}
-        <div ref={gridRef} className="grid lg:grid-cols-3 gap-6 lg:gap-8">
+        <div ref={gridRef} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {caseStudies.map((study, index) => (
             <Link
               key={study.id}
@@ -131,7 +131,7 @@ export function FeaturedWork() {
                 "card-lift",
                 gridVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12",
               )}
-              style={{ transitionDelay: `${index * 150}ms` }}
+              style={{ transitionDelay: `${(index % 3) * 150}ms` }}
             >
               {/* Image */}
               <div className="aspect-[4/3] relative overflow-hidden">

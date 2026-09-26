@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { generatePageMetadata, generateBreadcrumbSchema } from "@/lib/seo"
 import { Mail, MapPin, Info } from "lucide-react"
+import { CookieSettingsButton } from "@/components/consent/cookie-settings-button"
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Politică cookie",
@@ -70,7 +71,73 @@ export default function PoliticaCookiePage() {
                 <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-4">
                   2. Tipuri de cookie-uri utilizate pe site-ul nostru
                 </h2>
-                
+
+                {/* Tabel-sumar cookie-uri */}
+                <div className="not-prose mb-8 overflow-x-auto rounded-lg border border-border/50">
+                  <table className="w-full text-left text-sm">
+                    <thead className="bg-muted/50 text-foreground">
+                      <tr>
+                        <th className="px-4 py-3 font-semibold">Cookie</th>
+                        <th className="px-4 py-3 font-semibold">Furnizor</th>
+                        <th className="px-4 py-3 font-semibold">Scop</th>
+                        <th className="px-4 py-3 font-semibold">Durată</th>
+                        <th className="px-4 py-3 font-semibold">Categorie</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-muted-foreground divide-y divide-border/50">
+                      <tr>
+                        <td className="px-4 py-3 font-mono text-xs">consent_state</td>
+                        <td className="px-4 py-3">Website Factory</td>
+                        <td className="px-4 py-3">Stochează alegerea ta privind cookie-urile</td>
+                        <td className="px-4 py-3">180 zile</td>
+                        <td className="px-4 py-3">Strict necesar</td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-3 font-mono text-xs">theme</td>
+                        <td className="px-4 py-3">Website Factory</td>
+                        <td className="px-4 py-3">Reține preferința de temă (clar/întunecat)</td>
+                        <td className="px-4 py-3">Persistent</td>
+                        <td className="px-4 py-3">Strict necesar</td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-3 font-mono text-xs">_ga, _ga_*</td>
+                        <td className="px-4 py-3">Google LLC</td>
+                        <td className="px-4 py-3">Statistici de trafic și comportament (Google Analytics 4)</td>
+                        <td className="px-4 py-3">2 ani</td>
+                        <td className="px-4 py-3">Analiză</td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-3 font-mono text-xs">_gid</td>
+                        <td className="px-4 py-3">Google LLC</td>
+                        <td className="px-4 py-3">Identifică utilizatorul pe durata sesiunii</td>
+                        <td className="px-4 py-3">24 ore</td>
+                        <td className="px-4 py-3">Analiză</td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-3">(cookieless)</td>
+                        <td className="px-4 py-3">Vercel Inc.</td>
+                        <td className="px-4 py-3">Metrici agregate de performanță (Vercel Analytics)</td>
+                        <td className="px-4 py-3">Sesiune</td>
+                        <td className="px-4 py-3">Analiză</td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-3 font-mono text-xs">_fbp</td>
+                        <td className="px-4 py-3">Meta Platforms Ireland</td>
+                        <td className="px-4 py-3">Măsurare campanii și remarketing (Meta Pixel)</td>
+                        <td className="px-4 py-3">3 luni</td>
+                        <td className="px-4 py-3">Marketing</td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-3 font-mono text-xs">_fbc</td>
+                        <td className="px-4 py-3">Meta Platforms Ireland</td>
+                        <td className="px-4 py-3">Atribuire clic din reclame (Meta Pixel)</td>
+                        <td className="px-4 py-3">3 luni</td>
+                        <td className="px-4 py-3">Marketing</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
                 {/* Strictly Necessary Cookies */}
                 <div className="mb-8">
                   <h3 className="text-xl md:text-2xl font-heading font-semibold text-foreground mb-3">
@@ -248,11 +315,17 @@ export default function PoliticaCookiePage() {
                   4. Consimțământul dumneavoastră
                 </h2>
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-4">
-                  Prin continuarea navigării pe site-ul nostru după ce ați văzut banner-ul de informare despre cookie-uri sau prin utilizarea site-ului nostru, sunteți de acord cu utilizarea cookie-urilor în conformitate cu această politică.
+                  Cookie-urile de analiză și marketing sunt activate <strong className="text-foreground">doar cu consimțământul dumneavoastră explicit</strong>, exprimat prin banner-ul de cookie-uri. Până când alegeți „Acceptă" pentru o categorie, aceste cookie-uri nu sunt setate, iar scripturile aferente nu se încarcă. Continuarea navigării <strong className="text-foreground">nu</strong> reprezintă consimțământ.
                 </p>
-                <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                  Dacă nu sunteți de acord cu utilizarea cookie-urilor, vă rugăm să setați browser-ul dumneavoastră pentru a refuza cookie-urile sau să încetați utilizarea site-ului nostru. Rețineți că, dacă alegeți să refuzați cookie-urile, este posibil ca unele funcționalități ale site-ului să nu fie disponibile.
+                <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-4">
+                  Vă puteți <strong className="text-foreground">retrage consimțământul în orice moment</strong>, la fel de ușor cum l-ați acordat. Retragerea oprește imediat colectarea de date, iar cookie-urile de marketing (Meta Pixel) sunt șterse. Alegerea dumneavoastră este salvată împreună cu data și versiunea politicii și vă este re-solicitată cel mult la 6 luni sau la modificarea acestei politici.
                 </p>
+                <div className="not-prose mt-6 bg-muted/30 rounded-lg p-6 border border-border/50">
+                  <p className="text-sm md:text-base text-muted-foreground mb-4">
+                    Puteți revizui sau modifica preferințele oricând:
+                  </p>
+                  <CookieSettingsButton />
+                </div>
               </div>
 
               {/* 5. Modificări */}
