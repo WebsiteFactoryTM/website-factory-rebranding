@@ -2,7 +2,8 @@
 
 import * as React from "react"
 import { Link } from "@/i18n/navigation"
-import { useLocale, useTranslations } from "next-intl"
+import NextLink from "next/link"
+import { useTranslations } from "next-intl"
 import Image from "next/image"
 import { useTheme } from "@/components/theme-provider"
 import { useConsent } from "@/components/consent/consent-provider"
@@ -11,11 +12,6 @@ import { ArrowUpRight, MapPin, Mail, Phone } from "lucide-react"
 export function Footer() {
   const t = useTranslations("footer")
   const tNav = useTranslations("nav")
-  const locale = useLocale()
-  // next-intl's <Link> forces a `/ro` prefix whenever `locale` is passed explicitly,
-  // even if it matches the already-active locale. Only force it when actually
-  // switching away from RO, so RO pages keep unprefixed canonical hrefs.
-  const roOnlyLocale = locale === "ro" ? undefined : "ro"
   const footerLinks = {
     servicii: [
       { href: "/servicii/creare-website" as const, label: t("createWebsite") },
@@ -153,18 +149,29 @@ export function Footer() {
           <div>
             <h3 className="font-heading font-semibold text-foreground mb-5">{t("locationsHeading")}</h3>
             <ul className="space-y-3">
-              {footerLinks.cities.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    locale={link.roOnly ? roOnlyLocale : undefined}
-                    className="text-sm text-muted-foreground hover:text-brand transition-colors inline-flex items-center gap-1 group"
-                  >
-                    {link.label}
-                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
-                  </Link>
-                </li>
-              ))}
+              {footerLinks.cities.map((link) =>
+                link.roOnly ? (
+                  <li key={link.href}>
+                    <NextLink
+                      href={link.href}
+                      className="text-sm text-muted-foreground hover:text-brand transition-colors inline-flex items-center gap-1 group"
+                    >
+                      {link.label}
+                      <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                    </NextLink>
+                  </li>
+                ) : (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-muted-foreground hover:text-brand transition-colors inline-flex items-center gap-1 group"
+                    >
+                      {link.label}
+                      <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                    </Link>
+                  </li>
+                )
+              )}
             </ul>
           </div>
 
@@ -174,14 +181,13 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.href}>
-                  <Link
+                  <NextLink
                     href={link.href}
-                    locale={roOnlyLocale}
                     className="text-sm text-muted-foreground hover:text-brand transition-colors inline-flex items-center gap-1 group"
                   >
                     {link.label}
                     <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
-                  </Link>
+                  </NextLink>
                 </li>
               ))}
               <li>

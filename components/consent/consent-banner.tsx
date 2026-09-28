@@ -1,8 +1,8 @@
 "use client"
 
 import * as React from "react"
-import { useLocale, useTranslations } from "next-intl"
-import { Link } from "@/i18n/navigation"
+import { useTranslations } from "next-intl"
+import NextLink from "next/link"
 import { Cookie, Settings, Check, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useConsent } from "./consent-provider"
@@ -10,11 +10,6 @@ import { useConsent } from "./consent-provider"
 export function ConsentBanner() {
   const { state, hasDecided, isBannerOpen, acceptAll, rejectAll, save, close } = useConsent()
   const t = useTranslations("consent")
-  const locale = useLocale()
-  // next-intl's <Link> forces a `/ro` prefix whenever `locale` is passed explicitly,
-  // even if it matches the already-active locale. Only force it when actually
-  // switching away from RO, so RO pages keep an unprefixed canonical href.
-  const roOnlyLocale = locale === "ro" ? undefined : "ro"
 
   const CATEGORY_COPY = {
     analytics: {
@@ -121,9 +116,9 @@ export function ConsentBanner() {
                   </h2>
                   <p id="consent-desc" className="text-sm text-muted-foreground leading-relaxed mt-1">
                     {t("bannerText")}{" "}
-                    <Link href="/politica-cookie" locale={roOnlyLocale} className="text-brand hover:underline font-medium">
+                    <NextLink href="/politica-cookie" className="text-brand hover:underline font-medium">
                       {t("cookiePolicyLink")}
-                    </Link>
+                    </NextLink>
                     .
                   </p>
                 </div>

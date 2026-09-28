@@ -260,6 +260,10 @@ export const featuredProjects: FeaturedProject[] = [
     solution:
       "Am construit magazinul în Next.js, cu o estetică editorială și discretă, care lasă produsele în prim-plan. Catalogul este organizat pe categorii și branduri, cu filtre și pagini de produs clare, iar conturile PRO oferă saloanelor prețuri și avantaje dedicate, separat de fluxul clientului obișnuit. Bara de anunțuri comunică livrarea gratuită peste 80€, reducerea la prima comandă și înscrierile la Daylin Academy. Optimizarea imaginilor, încărcarea progresivă și structura mobile-first au dus scorul de performance pe mobil la 93/100.",
     liveUrl: "https://www.daylin.ie/",
+    en: {
+      solution:
+        "Am construit magazinul în Next.js, cu o estetică editorială și discretă, care lasă produsele în prim-plan. Catalogul este organizat pe categorii și branduri, cu filtre și pagini de produs clare, iar conturile PRO oferă saloanelor prețuri și avantaje dedicate, separat de fluxul clientului obișnuit. Bara de anunțuri comunică livrarea gratuită peste un anumit prag, reducerea la prima comandă și înscrierile la Daylin Academy. Optimizarea imaginilor, încărcarea progresivă și structura mobile-first au dus scorul de performance pe mobil la 93/100.",
+    },
   },
   {
     id: "7",
