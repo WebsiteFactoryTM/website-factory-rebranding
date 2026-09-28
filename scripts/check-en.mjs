@@ -28,11 +28,22 @@ for (const route of enRoutes) {
   if (!failures) console.log(`ok   ${route}`)
 }
 
-// RO-only route under /en → 308 to RO
-{
-  const res = await fetch(`${base}/en/termeni-si-conditii`, { redirect: "manual" })
-  if (res.status !== 308 || res.headers.get("location") !== "/termeni-si-conditii") fail("/en/termeni-si-conditii", `expected 308 → /termeni-si-conditii, got ${res.status} → ${res.headers.get("location")}`)
-  else console.log("ok   /en/termeni-si-conditii → 308 /termeni-si-conditii")
+// RO-only routes under /en → 308 to RO
+const roOnlyPaths = [
+  "/pret-website",
+  "/creare-site-bucuresti",
+  "/creare-site-brasov",
+  "/creare-site-cluj",
+  "/creare-site-constanta",
+  "/creare-site-iasi",
+  "/termeni-si-conditii",
+  "/politici-de-confidentialitate",
+  "/politica-cookie",
+]
+for (const roPath of roOnlyPaths) {
+  const res = await fetch(`${base}/en${roPath}`, { redirect: "manual" })
+  if (res.status !== 308 || res.headers.get("location") !== roPath) fail(`/en${roPath}`, `expected 308 → ${roPath}, got ${res.status} → ${res.headers.get("location")}`)
+  else console.log(`ok   /en${roPath} → 308 ${roPath}`)
 }
 // Unknown path → 404
 {
