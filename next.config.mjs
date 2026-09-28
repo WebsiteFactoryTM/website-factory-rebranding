@@ -1,3 +1,6 @@
+import createNextIntlPlugin from "next-intl/plugin"
+const withNextIntl = createNextIntlPlugin("./i18n/request.ts")
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // TypeScript errors should be fixed, not ignored
@@ -22,4 +25,4 @@ const nextConfig = {
   // No explicit compress: true needed - Next.js handles it automatically
 }
 
-export default nextConfig
+export default withNextIntl(nextConfig)
