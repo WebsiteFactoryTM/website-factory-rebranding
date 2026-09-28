@@ -1,13 +1,34 @@
 "use client"
 
-import Link from "next/link"
+import { useRouter } from "@/i18n/navigation"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { FloatingElement } from "@/components/ui/floating-element"
 import { MagneticButton } from "@/components/ui/magnetic-button"
 import { cn } from "@/lib/utils"
 import { ArrowRight, MessageSquare, Phone } from "lucide-react"
 
+const roCopy = {
+  badge: "Hai să colaborăm",
+  headingPrefix: "Pregătit să-ți",
+  headingHighlight: "transformi",
+  headingSuffix: "prezența online?",
+  paragraph:
+    "Contactează-ne pentru o consultație gratuită. Vom analiza nevoile tale și vom propune cea mai bună soluție pentru afacerea ta.",
+  ctaPrimary: "Solicită ofertă gratuită",
+  ctaSecondary: "Sună-ne direct",
+  trustResponse: "Răspundem în 24h",
+  trustConsultation: "Consultație gratuită",
+  trustNoObligation: "Fără obligații",
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
 export function AboutCTA() {
+  const locale = useLocale()
+  const t = copy[locale]
+  const router = useRouter()
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>()
 
   return (
@@ -60,56 +81,55 @@ export function AboutCTA() {
           )}
         >
           <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-6">
-            Hai să colaborăm
+            {t.badge}
           </span>
 
           <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-            Pregătit să-ți <span className="gradient-text-animated">transformi</span> prezența online?
+            {t.headingPrefix} <span className="gradient-text-animated">{t.headingHighlight}</span> {t.headingSuffix}
           </h2>
 
           <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Contactează-ne pentru o consultație gratuită. Vom analiza nevoile tale și vom propune cea mai bună soluție
-            pentru afacerea ta.
+            {t.paragraph}
           </p>
 
           {/* CTAs */}
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <MagneticButton
               className="group relative overflow-hidden w-full sm:w-auto px-8 py-4 bg-brand text-brand-foreground rounded-full font-semibold text-base glow-brand hover:glow-intense transition-all duration-300"
-              onClick={() => (window.location.href = "/contact")}
+              onClick={() => router.push("/contact")}
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
                 <MessageSquare className="w-5 h-5" />
-                Solicită ofertă gratuită
+                {t.ctaPrimary}
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-brand-light to-brand opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </MagneticButton>
 
-            <Link
-              href="tel:+40728567830"
+            <a
               className="group flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 rounded-full border border-border/50 hover:border-brand/50 glass-premium transition-all duration-300 hover:glow-subtle"
+              href="tel:+40728567830"
             >
               <span className="flex items-center justify-center w-10 h-10 rounded-full bg-brand/10 group-hover:bg-brand/20 transition-colors">
                 <Phone className="w-4 h-4 text-brand" />
               </span>
-              <span className="font-medium text-foreground">Sună-ne direct</span>
-            </Link>
+              <span className="font-medium text-foreground">{t.ctaSecondary}</span>
+            </a>
           </div>
 
           {/* Trust indicators */}
           <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              Răspundem în 24h
+              {t.trustResponse}
             </span>
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-brand" />
-              Consultație gratuită
+              {t.trustConsultation}
             </span>
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-glow-violet" />
-              Fără obligații
+              {t.trustNoObligation}
             </span>
           </div>
         </div>

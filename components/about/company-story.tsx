@@ -1,38 +1,57 @@
 "use client"
 
 import Image from "next/image"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { Target, Lightbulb, Rocket, Heart } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { generateTeamImageAltText } from "@/lib/image-alt-text"
 
-const storyPoints = [
-  {
-    icon: Lightbulb,
-    title: "Ideea",
-    description:
-      "O prezență online bună începe cu o fundație clară: obiective, structură, mesaj. Noi transformăm ideea ta într-un produs digital coerent, ușor de folosit și ușor de crescut.",
-  },
-  {
-    icon: Target,
-    title: "Misiunea",
-    description:
-      "Construim soluții web care aduc valoare măsurabilă: mai multe cereri, mai multă încredere, conversii mai bune. Fără promisiuni goale — doar pași clari și execuție solidă.",
-  },
-  {
-    icon: Rocket,
-    title: "Viziunea",
-    description:
-      "Ridicăm standardul pentru web design în România: design curat + tehnic impecabil + SEO făcut corect + comunicare clară. Un web modern, rapid, accesibil și pregătit pentru scalare.",
-  },
-  {
-    icon: Heart,
-    title: "Pasiunea",
-    description: "Ne pasă de detalii: micro-interacțiuni, performanță, securitate. Pentru noi, „gata” înseamnă testat, optimizat și livrat cu grijă — indiferent de mărimea proiectului.",
-  },
-]
+const storyIcons = [Lightbulb, Target, Rocket, Heart]
+
+const roCopy = {
+  sectionLabel: "Povestea noastră",
+  headingLine1: "O echipă din Timișoara.",
+  headingLine2: "Un standard global.",
+  teamImageAltSubject: "Co-fondatorii Website Factory - Ernest și Alex",
+  teamImageAltLocation: "Timișoara",
+  quote: '"Building the web, one dream at a time"',
+  quoteAttribution: "— Ernest & Alex, Co-fondatori",
+  paragraph1:
+    "Website Factory s-a născut în Timișoara dintr-o idee simplă: online-ul trebuie să lucreze pentru business, nu doar să arate bine. Din 2023 construim site-uri, magazine online și soluții digitale cu focus pe claritate, viteză și experiență reală pentru utilizator.",
+  paragraph2Prefix:
+    "Lucrăm transparent, explicăm tehnicul pe înțeles și urmăm un proces clar pentru fiecare proiect — de la strategie și structură, până la design, dezvoltare și lansare. Ne plac deciziile corecte, bazate pe obiective, nu pe „trenduri”.",
+  paragraph2Strong: "Fiecare pixel, fiecare linie de cod trebuie să servească un scop de business.",
+  storyPoints: [
+    {
+      title: "Ideea",
+      description:
+        "O prezență online bună începe cu o fundație clară: obiective, structură, mesaj. Noi transformăm ideea ta într-un produs digital coerent, ușor de folosit și ușor de crescut.",
+    },
+    {
+      title: "Misiunea",
+      description:
+        "Construim soluții web care aduc valoare măsurabilă: mai multe cereri, mai multă încredere, conversii mai bune. Fără promisiuni goale — doar pași clari și execuție solidă.",
+    },
+    {
+      title: "Viziunea",
+      description:
+        "Ridicăm standardul pentru web design în România: design curat + tehnic impecabil + SEO făcut corect + comunicare clară. Un web modern, rapid, accesibil și pregătit pentru scalare.",
+    },
+    {
+      title: "Pasiunea",
+      description:
+        "Ne pasă de detalii: micro-interacțiuni, performanță, securitate. Pentru noi, „gata” înseamnă testat, optimizat și livrat cu grijă — indiferent de mărimea proiectului.",
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
 
 export function CompanyStory() {
+  const locale = useLocale()
+  const t = copy[locale]
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal<HTMLDivElement>()
   const { ref: imageRef, isVisible: imageVisible } = useScrollReveal<HTMLDivElement>()
   const { ref: pointsRef, isVisible: pointsVisible } = useScrollReveal<HTMLDivElement>()
@@ -52,10 +71,10 @@ export function CompanyStory() {
           )}
         >
           <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">
-            Povestea noastră
+            {t.sectionLabel}
           </span>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-            O echipă din Timișoara.<br></br> <span className="gradient-text">Un standard global.</span>
+            {t.headingLine1}<br></br> <span className="gradient-text">{t.headingLine2}</span>
           </h2>
         </div>
 
@@ -71,7 +90,7 @@ export function CompanyStory() {
             <div className="relative aspect-[3/4] rounded-3xl overflow-hidden">
               <Image
                 src="/Alex-Ernest-Website-Factory.webp"
-                alt={generateTeamImageAltText("Co-fondatorii Website Factory - Ernest și Alex", "Timișoara")}
+                alt={generateTeamImageAltText(t.teamImageAltSubject, t.teamImageAltLocation)}
                 fill
                 className="object-cover"
               />
@@ -83,9 +102,9 @@ export function CompanyStory() {
             <div className="absolute -bottom-8 -right-4 lg:-right-8 max-w-xs">
               <div className="glass-premium rounded-2xl p-6">
                 <p className="text-sm italic text-foreground/80 leading-relaxed">
-                  "Building the web, one dream at a time"
+                  {t.quote}
                 </p>
-                <p className="mt-3 text-xs font-semibold text-blue-600">— Ernest & Alex, Co-fondatori</p>
+                <p className="mt-3 text-xs font-semibold text-blue-600">{t.quoteAttribution}</p>
               </div>
             </div>
 
@@ -105,18 +124,18 @@ export function CompanyStory() {
             )}
           >
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Website Factory s-a născut în Timișoara dintr-o idee simplă: online-ul trebuie să lucreze pentru business, nu doar să arate bine. Din 2023 construim site-uri, magazine online și soluții digitale cu focus pe claritate, viteză și experiență reală pentru utilizator.
+              {t.paragraph1}
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              Lucrăm transparent, explicăm tehnicul pe înțeles și urmăm un proces clar pentru fiecare proiect — de la strategie și structură, până la design, dezvoltare și lansare. Ne plac deciziile corecte, bazate pe obiective, nu pe „trenduri”.{" "}
+              {t.paragraph2Prefix}{" "}
               <strong className="text-foreground">
-                Fiecare pixel, fiecare linie de cod trebuie să servească un scop de business.
+                {t.paragraph2Strong}
               </strong>
             </p>
 
             <div className="grid sm:grid-cols-2 gap-4 pt-6">
-              {storyPoints.map((point, index) => {
-                const Icon = point.icon
+              {t.storyPoints.map((point, index) => {
+                const Icon = storyIcons[index]
                 return (
                   <div
                     key={point.title}

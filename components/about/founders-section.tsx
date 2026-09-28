@@ -1,34 +1,74 @@
 "use client"
 
 import Image from "next/image"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 import { Linkedin, Twitter, Mail, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-const founders = [
+const foundersMeta: { image: string; linkedin?: string; email: string }[] = [
   {
-    name: "Ernest Slach",
-    role: "Co-Founder & CEO",
-    bio: "Ernest, CEO și co-fondator Website Factory, conduce direcția strategică a proiectelor și aliniază fiecare site la obiectivele de business ale clientului. Datorită experienței în antreprenoriat digital, combină strategia, web design-ul și o abordare creativă orientată spre claritate, diferențiere și rezultate.",
-    expertise: ["Business Strategy", "Client Relations", "Project Management", "UX&UI Design", "SEO","Consultanță", "Copyrighting"],
     image: "/Ernest.webp",
     linkedin: "https://www.linkedin.com/in/ernest-slach-949771106/",
     email: "office@websitefactory.ro",
   },
   {
-    name: "Alex Nedelia-Kerekes",
-    role: "Co-Founder & CTO",
-    bio: "Alex este mintea tehnică din spatele Website Factory. Cu expertiză în dezvoltare full-stack, arhitectură software și optimizare performanță, el transformă cerințele complexe în soluții elegante și scalabile.",
-    expertise: ["Full-Stack Development", "Technical Architecture", "Performance Optimization", "Intergrări & Autorizări"],
     image: "/Alex-CTO.webp",
     email: "office@websitefactory.ro",
   },
 ]
 
+const roCopy = {
+  sectionLabel: "Echipa",
+  headingLine1: "Oamenii de la butoanele",
+  headingHighlight: "Website Factory",
+  subtitle: "Doi antreprenori cu viziune comună: să aducem web design-ul românesc la standarde internaționale.",
+  ctaText: "Vrei să ne cunoști mai bine? Hai să povestim despre proiectul tău.",
+  ctaButton: "Programează o întâlnire",
+  imageAltSuffix: "Co-fondator Website Factory Timișoara",
+  linkedinLabel: "LinkedIn",
+  emailLabel: "Email",
+  founders: [
+    {
+      name: "Ernest Slach",
+      role: "Co-Founder & CEO",
+      bio: "Ernest, CEO și co-fondator Website Factory, conduce direcția strategică a proiectelor și aliniază fiecare site la obiectivele de business ale clientului. Datorită experienței în antreprenoriat digital, combină strategia, web design-ul și o abordare creativă orientată spre claritate, diferențiere și rezultate.",
+      expertise: [
+        "Business Strategy",
+        "Client Relations",
+        "Project Management",
+        "UX&UI Design",
+        "SEO",
+        "Consultanță",
+        "Copyrighting",
+      ],
+    },
+    {
+      name: "Alex Nedelia-Kerekes",
+      role: "Co-Founder & CTO",
+      bio: "Alex este mintea tehnică din spatele Website Factory. Cu expertiză în dezvoltare full-stack, arhitectură software și optimizare performanță, el transformă cerințele complexe în soluții elegante și scalabile.",
+      expertise: ["Full-Stack Development", "Technical Architecture", "Performance Optimization", "Intergrări & Autorizări"],
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
 export function FoundersSection() {
+  const locale = useLocale()
+  const t = copy[locale]
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal<HTMLDivElement>()
+
+  const founders = t.founders.map((founder, index) => ({
+    ...founder,
+    ...foundersMeta[index],
+    imageAltSuffix: t.imageAltSuffix,
+    linkedinLabel: t.linkedinLabel,
+    emailLabel: t.emailLabel,
+  }))
 
   return (
     <section className="py-24 lg:py-32 relative overflow-hidden">
@@ -45,12 +85,12 @@ export function FoundersSection() {
             headerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
           )}
         >
-          <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">Echipa</span>
+          <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">{t.sectionLabel}</span>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-            Oamenii de la butoanele <br></br><span className="gradient-text">Website Factory</span>
+            {t.headingLine1} <br></br><span className="gradient-text">{t.headingHighlight}</span>
           </h2>
           <p className="mt-6 text-lg text-muted-foreground">
-            Doi antreprenori cu viziune comună: să aducem web design-ul românesc la standarde internaționale.
+            {t.subtitle}
           </p>
         </div>
 
@@ -64,7 +104,7 @@ export function FoundersSection() {
         {/* CTA */}
         <div className="mt-16 lg:mt-20 text-center">
           <p className="text-lg text-muted-foreground mb-6">
-            Vrei să ne cunoști mai bine? Hai să povestim despre proiectul tău.
+            {t.ctaText}
           </p>
           <Button
             asChild
@@ -72,7 +112,7 @@ export function FoundersSection() {
             className="group bg-brand hover:bg-brand-light text-brand-foreground rounded-full px-8 glow-brand hover:glow-intense transition-all duration-300"
           >
             <Link href="/contact">
-              Programează o întâlnire
+              {t.ctaButton}
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>
@@ -82,7 +122,10 @@ export function FoundersSection() {
   )
 }
 
-function FounderCard({ founder, index }: { founder: (typeof founders)[0]; index: number }) {
+type Founder = (typeof roCopy.founders)[number] &
+  (typeof foundersMeta)[number] & { imageAltSuffix: string; linkedinLabel: string; emailLabel: string }
+
+function FounderCard({ founder, index }: { founder: Founder; index: number }) {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>()
 
   return (
@@ -100,7 +143,7 @@ function FounderCard({ founder, index }: { founder: (typeof founders)[0]; index:
         <div className="relative aspect-[1/1] overflow-hidden">
           <Image
             src={founder.image || "/placeholder.svg"}
-            alt={`${founder.name} - ${founder.role} - Co-fondator Website Factory Timișoara`}
+            alt={`${founder.name} - ${founder.role} - ${founder.imageAltSuffix}`}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
@@ -112,14 +155,14 @@ function FounderCard({ founder, index }: { founder: (typeof founders)[0]; index:
             <a
               href={founder.linkedin}
               className="w-10 h-10 rounded-full glass-premium flex items-center justify-center hover:bg-brand/20 transition-colors"
-              aria-label={`${founder.name} LinkedIn`}
+              aria-label={`${founder.name} ${founder.linkedinLabel}`}
             >
               <Linkedin className="w-4 h-4 text-foreground" />
             </a>
             <a
               href={`mailto:${founder.email}`}
               className="w-10 h-10 rounded-full glass-premium flex items-center justify-center hover:bg-brand/20 transition-colors"
-              aria-label={`Email ${founder.name}`}
+              aria-label={`${founder.emailLabel} ${founder.name}`}
             >
               <Mail className="w-4 h-4 text-foreground" />
             </a>

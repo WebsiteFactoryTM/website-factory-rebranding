@@ -1,52 +1,80 @@
 "use client"
 
-import Link from "next/link"
+import type { ReactNode } from "react"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 import { Rocket, Users, Award, Globe, Target, Zap } from "lucide-react"
 
-const milestones = [
-  {
-    year: "2023",
-    title: "Începutul",
-    description: "Website Factory ia naștere în Timișoara. Primele 21 de proiecte livrate.",
-    icon: Rocket,
-  },
-  {
-    year: "2024",
-    title: "Creștere",
-    description: "Echipa se extinde. Cifra de afaceri crește cu 171%. Primii clienți din străinătate.",
-    icon: Users,
-  },
-  {
-    year: "2025",
-    title: "Inovație",
-    description: (
-      <>
-        Menținem colaborările, continuăm să livrăm proiecte de calitate. Lansăm{" "}
-        <Link
-          href="https://unevent.ro"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-brand hover:underline font-medium"
-        >
-          UN:EVENT - Platforma pentru evenimente
-        </Link>
-        .
-      </>
-    ),
-    icon: Target,
-  },
-  {
-    year: "Viitor",
-    title: "Viziune",
-    description: "Continuăm să inovăm și să ajutăm afacerile să își dezvolte proiectele în spațiul digital.",
-    icon: Zap,
-  },
-]
+const milestoneIcons = [Rocket, Users, Target, Zap]
+
+const roCopy = {
+  sectionLabel: "Evoluția noastră",
+  headingPrefix: "De la startup la",
+  headingHighlight: "lider regional",
+  milestones: [
+    {
+      year: "2023",
+      title: "Începutul",
+      description: "Website Factory ia naștere în Timișoara. Primele 21 de proiecte livrate.",
+    },
+    {
+      year: "2024",
+      title: "Creștere",
+      description: "Echipa se extinde. Cifra de afaceri crește cu 171%. Primii clienți din străinătate.",
+    },
+    {
+      year: "2025",
+      title: "Inovație",
+      description: "",
+    },
+    {
+      year: "Viitor",
+      title: "Viziune",
+      description: "Continuăm să inovăm și să ajutăm afacerile să își dezvolte proiectele în spațiul digital.",
+    },
+  ],
+  launchDescriptionPrefix: "Menținem colaborările, continuăm să livrăm proiecte de calitate. Lansăm",
+  launchLinkText: "UN:EVENT - Platforma pentru evenimente",
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
+type Milestone = {
+  year: string
+  title: string
+  description: ReactNode
+  icon: typeof Rocket
+}
 
 export function TimelineSection() {
+  const locale = useLocale()
+  const t = copy[locale]
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal<HTMLDivElement>()
+
+  const milestones: Milestone[] = t.milestones.map((milestone, index) => ({
+    year: milestone.year,
+    title: milestone.title,
+    icon: milestoneIcons[index],
+    description:
+      index === 2 ? (
+        <>
+          {t.launchDescriptionPrefix}{" "}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-brand hover:underline font-medium"
+            href="https://unevent.ro"
+          >
+            {t.launchLinkText}
+          </a>
+          .
+        </>
+      ) : (
+        milestone.description
+      ),
+  }))
 
   return (
     <section className="py-24 lg:py-32 relative overflow-hidden bg-muted/30">
@@ -63,10 +91,10 @@ export function TimelineSection() {
           )}
         >
           <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">
-            Evoluția noastră
+            {t.sectionLabel}
           </span>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-            De la startup la <span className="gradient-text">lider regional</span>
+            {t.headingPrefix} <span className="gradient-text">{t.headingHighlight}</span>
           </h2>
         </div>
 
@@ -91,7 +119,7 @@ function TimelineItem({
   milestone,
   index,
 }: {
-  milestone: (typeof milestones)[0]
+  milestone: Milestone
   index: number
 }) {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>()

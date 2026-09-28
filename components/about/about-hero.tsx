@@ -1,10 +1,33 @@
 "use client"
 
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { FloatingElement } from "@/components/ui/floating-element"
 import { cn } from "@/lib/utils"
 
+const roCopy = {
+  badge: "Despre Website Factory",
+  h1Prefix: "Construim",
+  h1Highlight: "experiențe digitale",
+  h1Middle: "care",
+  h1Outline: "transformă",
+  h1Suffix: "afaceri",
+  paragraph:
+    "Din 2023, suntem partenerii de încredere ai companiilor din România și Europa care vor o identitate digitală puternică. Combinăm creativitatea cu tehnologia pentru rezultate măsurabile.",
+  stats: [
+    { value: "2023", label: "Anul fondării" },
+    { value: "150+", label: "Proiecte livrate" },
+    { value: "100%", label: "Dedicare" },
+  ],
+  scrollLabel: "Descoperă povestea",
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
 export function AboutHero() {
+  const locale = useLocale()
+  const t = copy[locale]
   const { ref: titleRef, isVisible: titleVisible } = useScrollReveal<HTMLDivElement>()
 
   return (
@@ -64,26 +87,21 @@ export function AboutHero() {
         >
           {/* Breadcrumb style label */}
           <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-6">
-            Despre Website Factory
+            {t.badge}
           </span>
 
           <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight">
-            Construim <span className="gradient-text-animated">experiențe digitale</span> care{" "}
-            <span className="text-outline opacity-40">transformă</span> afaceri
+            {t.h1Prefix} <span className="gradient-text-animated">{t.h1Highlight}</span> {t.h1Middle}{" "}
+            <span className="text-outline opacity-40">{t.h1Outline}</span> {t.h1Suffix}
           </h1>
 
           <p className="mt-8 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto text-pretty">
-            Din 2023, suntem partenerii de încredere ai companiilor din România și Europa care vor o identitate digitală puternică.
-            Combinăm creativitatea cu tehnologia pentru rezultate măsurabile.
+            {t.paragraph}
           </p>
 
           {/* Stats row in hero */}
           <div className="mt-12 flex flex-wrap justify-center gap-8 md:gap-16">
-            {[
-              { value: "2023", label: "Anul fondării" },
-              { value: "150+", label: "Proiecte livrate" },
-              { value: "100%", label: "Dedicare" },
-            ].map((stat, index) => (
+            {t.stats.map((stat, index) => (
               <div
                 key={stat.label}
                 className="text-center"
@@ -103,7 +121,7 @@ export function AboutHero() {
       {/* Scroll indicator */}
       <div className="absolute bottom-6 sm:bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20 pointer-events-none">
         <span className="text-[10px] sm:text-xs text-muted-foreground tracking-widest uppercase bg-background/80 backdrop-blur-sm px-3 py-1 rounded-full">
-          Descoperă povestea
+          {t.scrollLabel}
         </span>
         <div className="w-px h-8 sm:h-12 bg-gradient-to-b from-brand to-transparent" />
       </div>
