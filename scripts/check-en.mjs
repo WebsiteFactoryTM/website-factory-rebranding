@@ -20,7 +20,7 @@ for (const route of enRoutes) {
   if (!html.includes('<html lang="en"')) fail(route, 'missing <html lang="en">')
   if (!html.includes(`<link rel="canonical" href="https://websitefactory.ro${route}"`)) fail(route, "canonical is not the EN URL")
   if (!/<meta name="robots" content="noindex/.test(html)) fail(route, "missing noindex")
-  if (html.includes('hreflang=')) fail(route, "hreflang emitted before publishing gate")
+  if (/hreflang=/i.test(html)) fail(route, "hreflang emitted before publishing gate")
   const body = html.split("<body")[1] ?? html
   if (PRICE.test(body)) fail(route, "price token found")
   if (/href="\/en\/(pret-website|politici-de-confidentialitate|termeni-si-conditii|politica-cookie|creare-site-)/.test(html)) fail(route, "link to RO-only route carries /en prefix")
