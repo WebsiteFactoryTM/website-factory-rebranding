@@ -1,26 +1,31 @@
 "use client"
 
 import * as React from "react"
-import Link from "next/link"
+import { useLocale, useTranslations } from "next-intl"
+import { Link } from "@/i18n/navigation"
 import { Cookie, Settings, Check, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useConsent } from "./consent-provider"
 
-const CATEGORY_COPY = {
-  analytics: {
-    title: "Cookie-uri de analiză",
-    description:
-      "Ne ajută să înțelegem cum este folosit site-ul (pagini vizitate, surse de trafic) prin date agregate. Furnizori: Google Analytics 4, Vercel Analytics.",
-  },
-  marketing: {
-    title: "Cookie-uri de marketing",
-    description:
-      "Măsoară eficiența campaniilor și permit remarketing pe alte platforme. Furnizor: Meta Pixel (Facebook).",
-  },
-} as const
-
 export function ConsentBanner() {
   const { state, hasDecided, isBannerOpen, acceptAll, rejectAll, save, close } = useConsent()
+  const t = useTranslations("consent")
+  const locale = useLocale()
+  // next-intl's <Link> forces a `/ro` prefix whenever `locale` is passed explicitly,
+  // even if it matches the already-active locale. Only force it when actually
+  // switching away from RO, so RO pages keep an unprefixed canonical href.
+  const roOnlyLocale = locale === "ro" ? undefined : "ro"
+
+  const CATEGORY_COPY = {
+    analytics: {
+      title: t("analyticsTitle"),
+      description: t("analyticsDescription"),
+    },
+    marketing: {
+      title: t("marketingTitle"),
+      description: t("marketingDescription"),
+    },
+  } as const
 
   const [showDetails, setShowDetails] = React.useState(false)
   const [draft, setDraft] = React.useState({ analytics: state.analytics, marketing: state.marketing })
@@ -112,13 +117,12 @@ export function ConsentBanner() {
                 <Cookie className="w-6 h-6 text-brand flex-shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
                   <h2 id="consent-title" className="text-lg font-heading font-semibold text-foreground">
-                    Respectăm confidențialitatea ta
+                    {t("bannerTitle")}
                   </h2>
                   <p id="consent-desc" className="text-sm text-muted-foreground leading-relaxed mt-1">
-                    Folosim cookie-uri strict necesare pentru funcționarea site-ului și, doar cu acordul
-                    tău, cookie-uri de analiză și marketing. Poți accepta, respinge sau alege în detaliu.{" "}
-                    <Link href="/politica-cookie" className="text-brand hover:underline font-medium">
-                      Politica de cookie-uri
+                    {t("bannerText")}{" "}
+                    <Link href="/politica-cookie" locale={roOnlyLocale} className="text-brand hover:underline font-medium">
+                      {t("cookiePolicyLink")}
                     </Link>
                     .
                   </p>
@@ -131,13 +135,13 @@ export function ConsentBanner() {
                   onClick={rejectAll}
                   className="px-5 py-3 rounded-full bg-muted text-foreground font-medium text-sm hover:bg-muted/80 transition-colors"
                 >
-                  Respinge toate
+                  {t("rejectAll")}
                 </button>
                 <button
                   onClick={acceptAll}
                   className="px-5 py-3 rounded-full bg-brand text-brand-foreground font-medium text-sm hover:opacity-90 transition-opacity"
                 >
-                  Acceptă toate
+                  {t("acceptAll")}
                 </button>
               </div>
               <button
@@ -145,7 +149,7 @@ export function ConsentBanner() {
                 className="w-full px-5 py-2.5 rounded-full border border-border hover:border-brand/50 bg-background text-foreground font-medium text-sm transition-colors flex items-center justify-center gap-2"
               >
                 <Settings className="w-4 h-4" aria-hidden="true" />
-                Preferințe
+                {t("openPreferences")}
               </button>
             </div>
           ) : (
@@ -154,17 +158,17 @@ export function ConsentBanner() {
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h2 id="consent-title" className="text-xl font-heading font-semibold text-foreground">
-                    Preferințe cookie-uri
+                    {t("preferencesTitle")}
                   </h2>
                   <p id="consent-desc" className="text-sm text-muted-foreground mt-1">
-                    Alege ce categorii accepți. Cele strict necesare nu pot fi dezactivate.
+                    {t("preferencesDescription")}
                   </p>
                 </div>
                 {hasDecided && (
                   <button
                     onClick={close}
                     className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-                    aria-label="Închide preferințele"
+                    aria-label={t("closePreferences")}
                   >
                     <X className="w-5 h-5" aria-hidden="true" />
                   </button>
@@ -177,15 +181,12 @@ export function ConsentBanner() {
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        <h3 className="font-semibold text-foreground">Cookie-uri strict necesare</h3>
+                        <h3 className="font-semibold text-foreground">{t("necessaryTitle")}</h3>
                         <span className="text-xs px-2 py-0.5 rounded-full bg-brand/10 text-brand font-medium">
-                          Mereu active
+                          {t("alwaysActive")}
                         </span>
                       </div>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        Esențiale pentru funcționarea site-ului: preferința de temă, salvarea alegerii de
-                        consimțământ, securitate de bază. Nu pot fi dezactivate.
-                      </p>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{t("necessaryDescription")}</p>
                     </div>
                     <div
                       className="w-11 h-6 rounded-full bg-brand flex items-center justify-end px-1 flex-shrink-0"
@@ -214,7 +215,7 @@ export function ConsentBanner() {
                           "relative w-11 h-6 rounded-full transition-colors flex-shrink-0",
                           draft[cat] ? "bg-brand" : "bg-muted-foreground/30",
                         )}
-                        aria-label={`${draft[cat] ? "Dezactivează" : "Activează"} ${CATEGORY_COPY[cat].title.toLowerCase()}`}
+                        aria-label={`${draft[cat] ? t("disable") : t("enable")} ${CATEGORY_COPY[cat].title.toLowerCase()}`}
                       >
                         <span
                           className={cn(
@@ -233,19 +234,19 @@ export function ConsentBanner() {
                   onClick={rejectAll}
                   className="px-5 py-3 rounded-full bg-muted text-foreground font-medium text-sm hover:bg-muted/80 transition-colors"
                 >
-                  Respinge toate
+                  {t("rejectAll")}
                 </button>
                 <button
                   onClick={acceptAll}
                   className="px-5 py-3 rounded-full border border-border hover:border-brand/50 bg-background text-foreground font-medium text-sm transition-colors"
                 >
-                  Acceptă toate
+                  {t("acceptAll")}
                 </button>
                 <button
                   onClick={() => save(draft)}
                   className="px-5 py-3 rounded-full bg-brand text-brand-foreground font-medium text-sm hover:opacity-90 transition-opacity flex-1"
                 >
-                  Salvează preferințele
+                  {t("savePreferences")}
                 </button>
               </div>
             </div>

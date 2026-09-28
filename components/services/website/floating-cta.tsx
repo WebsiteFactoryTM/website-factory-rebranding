@@ -1,10 +1,14 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useTranslations } from "next-intl"
 import { Phone, X, MessageCircle, ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { Link } from "@/i18n/navigation"
 
 export function FloatingCTA() {
+  const t = useTranslations("floatingCta")
+  const tCommon = useTranslations("common")
   const [isVisible, setIsVisible] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
   const [isDismissed, setIsDismissed] = useState(false)
@@ -40,10 +44,8 @@ export function FloatingCTA() {
             <X className="w-4 h-4" />
           </button>
 
-          <p className="font-heading font-bold text-lg mb-3">Hai să vorbim!</p>
-          <p className="text-sm text-muted-foreground mb-4">
-            Ai întrebări despre website-ul tău? Suntem aici să te ajutăm.
-          </p>
+          <p className="font-heading font-bold text-lg mb-3">{t("title")}</p>
+          <p className="text-sm text-muted-foreground mb-4">{t("text")}</p>
 
           <div className="space-y-2">
             <a
@@ -51,22 +53,22 @@ export function FloatingCTA() {
               className="flex items-center gap-3 p-3 rounded-xl bg-brand text-brand-foreground font-medium hover:bg-brand-light transition-colors"
             >
               <Phone className="w-5 h-5" />
-              <span>Sună acum</span>
+              <span>{t("callNow")}</span>
             </a>
             <a
               href="https://wa.me/40728567830"
               className="flex items-center gap-3 p-3 rounded-xl bg-green-500 text-white font-medium hover:bg-green-600 transition-colors"
             >
               <MessageCircle className="w-5 h-5" />
-              <span>WhatsApp</span>
+              <span>{t("whatsapp")}</span>
             </a>
-            <a
+            <Link
               href="/contact"
               className="flex items-center gap-3 p-3 rounded-xl border border-border hover:border-brand/50 font-medium transition-colors group"
             >
               <ArrowRight className="w-5 h-5 text-brand" />
-              <span>Formular contact</span>
-            </a>
+              <span>{t("contactForm")}</span>
+            </Link>
           </div>
         </div>
       )}
@@ -79,7 +81,7 @@ export function FloatingCTA() {
             setIsVisible(false)
           }}
           className="p-2 rounded-full bg-card border border-border text-muted-foreground hover:text-foreground transition-colors"
-          aria-label="Închide"
+          aria-label={tCommon("close")}
         >
           <X className="w-4 h-4" />
         </button>
@@ -94,7 +96,7 @@ export function FloatingCTA() {
           )}
         >
           <Phone className={cn("w-5 h-5", !isExpanded && "animate-bounce")} />
-          <span className="hidden sm:inline">Hai să povestim!</span>
+          <span className="hidden sm:inline">{t("open")}</span>
         </button>
       </div>
     </div>

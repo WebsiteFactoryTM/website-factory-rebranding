@@ -1,39 +1,46 @@
 "use client"
 
 import * as React from "react"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
+import { useLocale, useTranslations } from "next-intl"
 import Image from "next/image"
 import { useTheme } from "@/components/theme-provider"
 import { useConsent } from "@/components/consent/consent-provider"
 import { ArrowUpRight, MapPin, Mail, Phone } from "lucide-react"
 
-const footerLinks = {
-  servicii: [
-    { href: "/servicii/creare-website", label: "Creare website" },
-    { href: "/servicii/magazin-online", label: "Magazin online" },
-    { href: "/servicii/dezvoltare-aplicatie", label: "Dezvoltare aplicație" },
-  ],
-  companie: [
-    { href: "/despre-noi", label: "Despre noi" },
-    { href: "/portofoliu", label: "Portofoliu" },
-    { href: "/contact", label: "Contact" },
-  ],
-  legal: [
-    { href: "/termeni-si-conditii", label: "Termeni și condiții" },
-    { href: "/politici-de-confidentialitate", label: "Politică de confidențialitate" },
-    { href: "/politica-cookie", label: "Politică cookie" },
-  ],
-  cities: [
-    { href: "/", label: "Timișoara" },
-    { href: "/creare-site-bucuresti", label: "București" },
-    { href: "/creare-site-cluj", label: "Cluj-Napoca" },
-    { href: "/creare-site-brasov", label: "Brașov" },
-    { href: "/creare-site-iasi", label: "Iași" },
-    { href: "/creare-site-constanta", label: "Constanța" },
-  ],
-}
-
 export function Footer() {
+  const t = useTranslations("footer")
+  const tNav = useTranslations("nav")
+  const locale = useLocale()
+  // next-intl's <Link> forces a `/ro` prefix whenever `locale` is passed explicitly,
+  // even if it matches the already-active locale. Only force it when actually
+  // switching away from RO, so RO pages keep unprefixed canonical hrefs.
+  const roOnlyLocale = locale === "ro" ? undefined : "ro"
+  const footerLinks = {
+    servicii: [
+      { href: "/servicii/creare-website" as const, label: t("createWebsite") },
+      { href: "/servicii/magazin-online" as const, label: t("onlineStore") },
+      { href: "/servicii/dezvoltare-aplicatie" as const, label: t("appDevelopment") },
+    ],
+    companie: [
+      { href: "/despre-noi" as const, label: t("about") },
+      { href: "/portofoliu" as const, label: t("portfolio") },
+      { href: "/contact" as const, label: t("contact") },
+    ],
+    legal: [
+      { href: "/termeni-si-conditii" as const, label: t("terms") },
+      { href: "/politici-de-confidentialitate" as const, label: t("privacy") },
+      { href: "/politica-cookie" as const, label: t("cookies") },
+    ],
+    cities: [
+      { href: "/" as const, label: "Timișoara", roOnly: false },
+      { href: "/creare-site-bucuresti" as const, label: "București", roOnly: true },
+      { href: "/creare-site-cluj" as const, label: "Cluj-Napoca", roOnly: true },
+      { href: "/creare-site-brasov" as const, label: "Brașov", roOnly: true },
+      { href: "/creare-site-iasi" as const, label: "Iași", roOnly: true },
+      { href: "/creare-site-constanta" as const, label: "Constanța", roOnly: true },
+    ],
+  }
   const currentYear = new Date().getFullYear()
   const { resolvedTheme } = useTheme()
   const { openPreferences } = useConsent()
@@ -61,16 +68,13 @@ export function Footer() {
                     ? "/logo-website-factory-horizontal-white.webp"
                     : "/logo-website-factory-horizontal-webp.webp"
                 }
-                alt="Website Factory - Logo - Creare site și web design Timișoara"
+                alt={tNav("logoAlt")}
                 width={180}
                 height={40}
                 className="h-9 w-auto transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
-            <p className="mt-6 text-muted-foreground leading-relaxed max-w-sm">
-              Web design profesional în Timișoara. Creăm site-uri SEO-first, optimizate pentru performanță și conversii
-              maxime.
-            </p>
+            <p className="mt-6 text-muted-foreground leading-relaxed max-w-sm">{t("tagline")}</p>
 
             {/* Contact info */}
             <div className="mt-6 space-y-3">
@@ -96,21 +100,21 @@ export function Footer() {
                 <div className="w-8 h-8 rounded-lg bg-brand/10 flex items-center justify-center">
                   <MapPin className="w-4 h-4 text-brand" />
                 </div>
-                Timișoara, România
+                {t("location")}
               </div>
             </div>
           </div>
 
           {/* Services Links */}
           <div>
-            <h3 className="font-heading font-semibold text-foreground mb-5">Servicii</h3>
+            <h3 className="font-heading font-semibold text-foreground mb-5">{t("servicesHeading")}</h3>
             <ul className="space-y-3">
               <li>
                 <Link
                   href="/servicii"
                   className="text-sm font-medium text-foreground hover:text-brand transition-colors inline-flex items-center gap-1 group"
                 >
-                  Toate serviciile
+                  {t("allServices")}
                   <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
                 </Link>
               </li>
@@ -130,7 +134,7 @@ export function Footer() {
 
           {/* Company Links */}
           <div>
-            <h3 className="font-heading font-semibold text-foreground mb-5">Companie</h3>
+            <h3 className="font-heading font-semibold text-foreground mb-5">{t("companyHeading")}</h3>
             <ul className="space-y-3">
               {footerLinks.companie.map((link) => (
                 <li key={link.href}>
@@ -147,12 +151,13 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-heading font-semibold text-foreground mb-5">Locații</h3>
+            <h3 className="font-heading font-semibold text-foreground mb-5">{t("locationsHeading")}</h3>
             <ul className="space-y-3">
               {footerLinks.cities.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
+                    locale={link.roOnly ? roOnlyLocale : undefined}
                     className="text-sm text-muted-foreground hover:text-brand transition-colors inline-flex items-center gap-1 group"
                   >
                     {link.label}
@@ -165,12 +170,13 @@ export function Footer() {
 
           {/* Legal Links */}
           <div>
-            <h3 className="font-heading font-semibold text-foreground mb-5">Legal</h3>
+            <h3 className="font-heading font-semibold text-foreground mb-5">{t("legalHeading")}</h3>
             <ul className="space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
+                    locale={roOnlyLocale}
                     className="text-sm text-muted-foreground hover:text-brand transition-colors inline-flex items-center gap-1 group"
                   >
                     {link.label}
@@ -183,7 +189,7 @@ export function Footer() {
                   onClick={openPreferences}
                   className="text-sm text-muted-foreground hover:text-brand transition-colors inline-flex items-center gap-1 group"
                 >
-                  Gestionare cookie-uri
+                  {t("manageCookies")}
                   <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
                 </button>
               </li>
@@ -197,12 +203,12 @@ export function Footer() {
         <div className="container mx-auto px-4 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
-              © {currentYear} Website Factory. Toate drepturile rezervate.
+              © {currentYear} Website Factory. {t("rights")}
             </p>
             <p className="text-sm text-muted-foreground flex items-center gap-2">
-              Creat cu
+              {t("madeWith")}
               <span className="inline-block animate-pulse text-red-500">❤</span>
-              în Timișoara
+              {t("inCity")}
             </p>
           </div>
           <div className="mt-4 text-center text-xs text-muted-foreground/60">

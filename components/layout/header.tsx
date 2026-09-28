@@ -1,30 +1,33 @@
 "use client"
 
 import * as React from "react"
-import Link from "next/link"
+import { Link, useRouter } from "@/i18n/navigation"
+import { useLocale, useTranslations } from "next-intl"
 import Image from "next/image"
 import { Menu, X, ArrowRight, Calculator, ChevronDown, Bot } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { LanguageSwitcher } from "@/components/layout/language-switcher"
 import { useTheme } from "@/components/theme-provider"
 import { MagneticButton } from "@/components/ui/magnetic-button"
-
-const services = [
-  { href: "/servicii/creare-website", label: "Creare Website" },
-  { href: "/servicii/magazin-online", label: "Magazin Online" },
-  { href: "/servicii/dezvoltare-aplicatie", label: "Dezvoltare Aplicație" },
-]
-
-const navLinks = [
-  { href: "/portofoliu", label: "Portofoliu" },
-  { href: "/despre-noi", label: "Despre noi" },
-  { href: "/contact", label: "Contact" },
-]
 
 const CHATBOT_URL = "https://askbot.ro"
 
 export function Header() {
+  const t = useTranslations("nav")
+  const locale = useLocale()
+  const router = useRouter()
+  const services = [
+    { href: "/servicii/creare-website" as const, label: t("createWebsite") },
+    { href: "/servicii/magazin-online" as const, label: t("onlineStore") },
+    { href: "/servicii/dezvoltare-aplicatie" as const, label: t("appDevelopment") },
+  ]
+  const navLinks = [
+    { href: "/portofoliu" as const, label: t("portfolio") },
+    { href: "/despre-noi" as const, label: t("about") },
+    { href: "/contact" as const, label: t("contact") },
+  ]
   const [isScrolled, setIsScrolled] = React.useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
   const [isServicesOpen, setIsServicesOpen] = React.useState(false)
@@ -85,7 +88,7 @@ export function Header() {
                     ? "/logo-website-factory-horizontal-white.webp"
                     : "/logo-website-factory-horizontal-webp.webp"
                 }
-                alt="Website Factory - Logo - Creare site și web design Timișoara"
+                alt={t("logoAlt")}
                 width={144}
                 height={32}
                 className="h-7 sm:h-8 w-auto transition-transform duration-300 group-hover:scale-105"
@@ -100,7 +103,7 @@ export function Header() {
                   onClick={() => setIsServicesOpen(!isServicesOpen)}
                   className="relative px-5 py-2.5 text-sm font-medium text-foreground/70 hover:text-foreground transition-colors group flex items-center gap-1"
                 >
-                  Servicii
+                  {t("services")}
                   <ChevronDown
                     className={cn("w-4 h-4 transition-transform duration-200", isServicesOpen && "rotate-180")}
                   />
@@ -147,7 +150,7 @@ export function Header() {
                 href={CHATBOT_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Chatbot AI (se deschide într-o filă nouă)"
+                aria-label={t("chatbotAria")}
                 className="group ml-2 inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/5 px-4 py-2 text-sm font-semibold text-foreground transition-all duration-300 hover:bg-brand/10 hover:border-brand/50 hover:glow-brand"
               >
                 <span className="relative flex-shrink-0">
@@ -158,32 +161,36 @@ export function Header() {
                     <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand" />
                   </span>
                 </span>
-                Chatbot AI
+                {t("chatbot")}
               </a>
             </div>
 
             {/* Desktop Actions */}
             <div className="hidden lg:flex items-center gap-4">
+              <LanguageSwitcher />
               <ThemeToggle />
-              <MagneticButton
-                className="relative overflow-hidden px-6 py-2.5 bg-brand text-brand-foreground rounded-full font-medium text-sm group glow-brand hover:glow-intense transition-all duration-300"
-                onClick={() => (window.location.href = "/pret-website")}
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  <Calculator className="w-4 h-4" />
-                  Estimează preț
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </span>
-              </MagneticButton>
+              {locale === "ro" && (
+                <MagneticButton
+                  className="relative overflow-hidden px-6 py-2.5 bg-brand text-brand-foreground rounded-full font-medium text-sm group glow-brand hover:glow-intense transition-all duration-300"
+                  onClick={() => router.push("/pret-website")}
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    <Calculator className="w-4 h-4" />
+                    {t("priceEstimate")}
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </MagneticButton>
+              )}
             </div>
 
             {/* Mobile Menu Button */}
             <div className="flex lg:hidden items-center gap-3">
+              <LanguageSwitcher />
               <ThemeToggle />
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="relative z-10 p-2 text-foreground"
-                aria-label={isMobileMenuOpen ? "Închide meniul" : "Deschide meniul"}
+                aria-label={isMobileMenuOpen ? t("closeMenu") : t("openMenu")}
               >
                 {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
@@ -218,7 +225,7 @@ export function Header() {
                   transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0ms",
                 }}
               >
-                Servicii
+                {t("services")}
                 <ChevronDown
                   className={cn("w-6 h-6 transition-transform duration-200", isMobileServicesOpen && "rotate-180")}
                 />
@@ -266,7 +273,7 @@ export function Header() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
-              aria-label="Chatbot AI (se deschide într-o filă nouă)"
+              aria-label={t("chatbotAria")}
               className="group inline-flex items-center gap-3 rounded-full border border-brand/30 bg-brand/10 px-6 py-3 text-2xl font-heading font-bold text-foreground hover:text-brand hover:border-brand/50 transition-colors"
               style={{
                 transform: isMobileMenuOpen ? "translateY(0)" : "translateY(30px)",
@@ -281,29 +288,31 @@ export function Header() {
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-brand" />
                 </span>
               </span>
-              Chatbot AI
+              {t("chatbot")}
             </a>
           </nav>
 
-          <Button
-            asChild
-            size="lg"
-            className="mt-10 bg-brand hover:bg-brand-light text-brand-foreground px-8 glow-brand"
-            style={{
-              transform: isMobileMenuOpen ? "translateY(0)" : "translateY(30px)",
-              opacity: isMobileMenuOpen ? 1 : 0,
-              transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1) 600ms",
-            }}
-          >
-            <Link
-              href="/pret-website"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="inline-flex items-center gap-2"
+          {locale === "ro" && (
+            <Button
+              asChild
+              size="lg"
+              className="mt-10 bg-brand hover:bg-brand-light text-brand-foreground px-8 glow-brand"
+              style={{
+                transform: isMobileMenuOpen ? "translateY(0)" : "translateY(30px)",
+                opacity: isMobileMenuOpen ? 1 : 0,
+                transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1) 600ms",
+              }}
             >
-              <Calculator className="w-5 h-5" />
-              Estimează preț
-            </Link>
-          </Button>
+              <Link
+                href="/pret-website"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="inline-flex items-center gap-2"
+              >
+                <Calculator className="w-5 h-5" />
+                {t("priceEstimate")}
+              </Link>
+            </Button>
+          )}
         </div>
       </div>
     </>

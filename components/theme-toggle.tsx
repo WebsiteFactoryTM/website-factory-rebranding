@@ -1,4 +1,5 @@
 "use client"
+import { useTranslations } from "next-intl"
 import { Moon, Sun, Monitor } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "@/components/theme-provider"
@@ -6,11 +7,12 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
+  const t = useTranslations("nav")
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" aria-label="Schimbă tema">
+        <Button variant="ghost" size="icon" aria-label={t("toggleTheme")}>
           <Sun className="h-4 w-4 rotate-0 scale-100 transition-transform dark:-rotate-90 dark:scale-0" />
           <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-transform dark:rotate-0 dark:scale-100" />
         </Button>

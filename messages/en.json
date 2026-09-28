@@ -1,7 +1,90 @@
 {
   "common": {
     "skipToContent": "Salt la conținut",
-    "home": "Acasă"
+    "home": "Acasă",
+    "requestQuote": "Solicită ofertă gratuită",
+    "viewPortfolio": "Vezi portofoliul",
+    "close": "Închide"
+  },
+  "nav": {
+    "services": "Servicii",
+    "createWebsite": "Creare Website",
+    "onlineStore": "Magazin Online",
+    "appDevelopment": "Dezvoltare Aplicație",
+    "portfolio": "Portofoliu",
+    "about": "Despre noi",
+    "contact": "Contact",
+    "chatbot": "Chatbot AI",
+    "chatbotAria": "Chatbot AI (se deschide într-o filă nouă)",
+    "priceEstimate": "Estimează preț",
+    "openMenu": "Deschide meniul",
+    "closeMenu": "Închide meniul",
+    "logoAlt": "Website Factory - Logo - Creare site și web design Timișoara",
+    "toggleTheme": "Schimbă tema"
+  },
+  "switcher": {
+    "label": "Schimbă limba",
+    "ro": "RO",
+    "en": "EN"
+  },
+  "footer": {
+    "tagline": "Web design profesional în Timișoara. Creăm site-uri SEO-first, optimizate pentru performanță și conversii maxime.",
+    "location": "Timișoara, România",
+    "servicesHeading": "Servicii",
+    "allServices": "Toate serviciile",
+    "createWebsite": "Creare website",
+    "onlineStore": "Magazin online",
+    "appDevelopment": "Dezvoltare aplicație",
+    "companyHeading": "Companie",
+    "about": "Despre noi",
+    "portfolio": "Portofoliu",
+    "contact": "Contact",
+    "locationsHeading": "Locații",
+    "legalHeading": "Legal",
+    "terms": "Termeni și condiții",
+    "privacy": "Politică de confidențialitate",
+    "cookies": "Politică cookie",
+    "manageCookies": "Gestionare cookie-uri",
+    "rights": "Toate drepturile rezervate.",
+    "madeWith": "Creat cu",
+    "inCity": "în Timișoara"
+  },
+  "floatingCta": {
+    "title": "Hai să vorbim!",
+    "text": "Ai întrebări despre website-ul tău? Suntem aici să te ajutăm.",
+    "callNow": "Sună acum",
+    "whatsapp": "WhatsApp",
+    "contactForm": "Formular contact",
+    "open": "Hai să povestim!"
+  },
+  "consent": {
+    "settingsButton": "Setări cookie-uri",
+    "closePreferences": "Închide preferințele",
+    "enable": "Activează",
+    "disable": "Dezactivează",
+    "necessaryTitle": "Cookie-uri strict necesare",
+    "analyticsTitle": "Cookie-uri de analiză",
+    "analyticsDescription": "Ne ajută să înțelegem cum este folosit site-ul (pagini vizitate, surse de trafic) prin date agregate. Furnizori: Google Analytics 4, Vercel Analytics.",
+    "marketingTitle": "Cookie-uri de marketing",
+    "marketingDescription": "Măsoară eficiența campaniilor și permit remarketing pe alte platforme. Furnizor: Meta Pixel (Facebook).",
+    "bannerTitle": "Respectăm confidențialitatea ta",
+    "bannerText": "Folosim cookie-uri strict necesare pentru funcționarea site-ului și, doar cu acordul tău, cookie-uri de analiză și marketing. Poți accepta, respinge sau alege în detaliu.",
+    "cookiePolicyLink": "Politica de cookie-uri",
+    "rejectAll": "Respinge toate",
+    "acceptAll": "Acceptă toate",
+    "openPreferences": "Preferințe",
+    "preferencesTitle": "Preferințe cookie-uri",
+    "preferencesDescription": "Alege ce categorii accepți. Cele strict necesare nu pot fi dezactivate.",
+    "alwaysActive": "Mereu active",
+    "necessaryDescription": "Esențiale pentru funcționarea site-ului: preferința de temă, salvarea alegerii de consimțământ, securitate de bază. Nu pot fi dezactivate.",
+    "savePreferences": "Salvează preferințele"
+  },
+  "breadcrumb": {
+    "home": "Acasă",
+    "contact": "Contact",
+    "about": "Despre Noi",
+    "services": "Servicii",
+    "portfolio": "Portofoliu"
   },
   "notFound": {
     "title": "Pagina pe care o cauți",

@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { Settings } from "lucide-react"
 import { useConsent } from "./consent-provider"
 
@@ -9,6 +10,7 @@ import { useConsent } from "./consent-provider"
  */
 export function CookieSettingsButton({ className }: { className?: string }) {
   const { openPreferences } = useConsent()
+  const t = useTranslations("consent")
   return (
     <button
       onClick={openPreferences}
@@ -18,7 +20,7 @@ export function CookieSettingsButton({ className }: { className?: string }) {
       }
     >
       <Settings className="w-4 h-4" aria-hidden="true" />
-      Setări cookie-uri
+      {t("settingsButton")}
     </button>
   )
 }
