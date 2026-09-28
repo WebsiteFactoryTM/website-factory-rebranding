@@ -17,6 +17,7 @@ import { ArrowRight, CheckCircle2, Loader2, Send } from "lucide-react"
 export function ContactForm() {
   const t = useTranslations("contactForm")
   const locale = useLocale()
+  const roOnlyLocale = locale === "ro" ? undefined : "ro"
   const projectTypes = [
     { value: "website", label: t("projectTypes.website") },
     { value: "magazin", label: t("projectTypes.magazin") },
@@ -237,11 +238,11 @@ export function ContactForm() {
           {/* Privacy notice */}
           <p className="text-xs text-muted-foreground">
             {t("privacyPrefix")}{" "}
-            <Link href="/politici-de-confidentialitate" locale="ro" className="text-brand hover:underline">
+            <Link href="/politici-de-confidentialitate" locale={roOnlyLocale} className="text-brand hover:underline">
               {t("privacyPolicy")}
             </Link>{" "}
             {t("and")}{" "}
-            <Link href="/termeni-si-conditii" locale="ro" className="text-brand hover:underline">
+            <Link href="/termeni-si-conditii" locale={roOnlyLocale} className="text-brand hover:underline">
               {t("terms")}
             </Link>
             .
