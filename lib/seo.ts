@@ -1,4 +1,6 @@
 import type { Metadata } from "next"
+import { getPathname } from "@/i18n/navigation"
+import type { Locale, Pathname } from "@/i18n/routing"
 
 // Base URL for the site
 export const siteConfig = {
@@ -20,35 +22,58 @@ export const siteConfig = {
   },
 }
 
+export type PageHref = Pathname | { pathname: "/portofoliu/[slug]"; params: { slug: string } }
+
+function absoluteUrl(locale: Locale, href: PageHref): string {
+  const localized = getPathname({ locale, href: href as never })
+  return localized === "/" ? siteConfig.url : `${siteConfig.url}${localized}`
+}
+
 // Generate page-specific metadata
 export function generatePageMetadata({
   title,
   description,
   path = "",
+  href,
+  locale = "ro",
+  hreflang = false,
   keywords = [],
   image = "/website-factory-og.webp",
 }: {
   title: string
   description: string
   path?: string
+  href?: PageHref
+  locale?: Locale
+  hreflang?: boolean
   keywords?: string[]
   image?: string
 }): Metadata {
-  const url = `${siteConfig.url}${path}`
+  const url = href ? absoluteUrl(locale, href) : `${siteConfig.url}${path}`
+  const isEn = locale === "en"
 
   return {
     title,
     description,
     keywords: [...keywords, "web design", "creare site", "Website Factory", "dezvoltare website", "creare magazin online"],
+    ...(isEn && { robots: { index: false, follow: true } }),
     alternates: {
       canonical: url,
+      ...(hreflang &&
+        href && {
+          languages: {
+            ro: absoluteUrl("ro", href),
+            en: absoluteUrl("en", href),
+            "x-default": absoluteUrl("ro", href),
+          },
+        }),
     },
     openGraph: {
       title,
       description,
       url,
       siteName: siteConfig.name,
-      locale: siteConfig.locale,
+      locale: isEn ? "en_GB" : siteConfig.locale,
       type: "website",
       images: [
         {
