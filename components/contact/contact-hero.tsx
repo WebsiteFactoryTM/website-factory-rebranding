@@ -1,10 +1,24 @@
 "use client"
 
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { FloatingElement } from "@/components/ui/floating-element"
 import { cn } from "@/lib/utils"
 
+const roCopy = {
+  badge: "Hai să vorbim",
+  title: "Contactează-ne",
+  paragraph: "ESpune-ne ce vrei să construiești. Trimite detaliile și revenim rapid cu o propunere personalizată.",
+  phoneValue: "+40 728 567 830",
+  emailValue: "office@websitefactory.ro",
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
 export function ContactHero() {
+  const locale = useLocale()
+  const t = copy[locale]
   const { ref: titleRef, isVisible: titleVisible } = useScrollReveal()
 
   return (
@@ -53,15 +67,15 @@ export function ContactHero() {
         >
           {/* Breadcrumb style label */}
           <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-6">
-            Hai să vorbim
+            {t.badge}
           </span>
 
           <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight">
-            Contactează-ne
+            {t.title}
           </h1>
 
           <p className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto text-pretty">
-            ESpune-ne ce vrei să construiești. Trimite detaliile și revenim rapid cu o propunere personalizată.
+            {t.paragraph}
           </p>
 
           {/* Quick contact badges */}
@@ -79,7 +93,7 @@ export function ContactHero() {
                 />
               </svg>
               <span className="text-sm font-medium text-foreground group-hover:text-brand transition-colors">
-                +40 728 567 830
+                {t.phoneValue}
               </span>
             </a>
             <a
@@ -95,7 +109,7 @@ export function ContactHero() {
                 />
               </svg>
               <span className="text-sm font-medium text-foreground group-hover:text-brand transition-colors">
-                office@websitefactory.ro
+                {t.emailValue}
               </span>
             </a>
           </div>

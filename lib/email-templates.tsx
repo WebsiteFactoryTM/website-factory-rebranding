@@ -10,6 +10,26 @@ import {
   Section,
   Text,
 } from "@react-email/components"
+import type { Locale } from "@/i18n/routing"
+
+const CLIENT_EMAIL_COPY_RO = {
+  preview: "Am primit mesajul tău - Website Factory",
+  heading: "✅ Mesaj primit cu succes!",
+  greeting: (name: string) => `Bună, ${name}! 👋`,
+  intro:
+    "Mulțumim că ne-ai contactat! Am primit mesajul tău și suntem entuziasmați să discutăm despre proiectul tău.",
+  responseTimeLabel: "⏰ Timp de răspuns:",
+  responseTimeRest: "Îți vom răspunde în maxim",
+  responseTimeHours: "24 de ore",
+  responseTimeSuffix: "în zilele lucrătoare.",
+  urgentQuestion: "În cazul în care ai întrebări urgente sau vrei să discutăm direct, ne poți suna la:",
+  tagline: "Web Design Profesional în Timișoara",
+}
+
+const CLIENT_EMAIL_COPY = { ro: CLIENT_EMAIL_COPY_RO, en: CLIENT_EMAIL_COPY_RO } satisfies Record<
+  Locale,
+  typeof CLIENT_EMAIL_COPY_RO
+>
 
 // Contact Form - Email to Admin
 export const ContactFormAdminEmail = ({
@@ -86,55 +106,54 @@ export const ContactFormAdminEmail = ({
 }
 
 // Contact Form - Confirmation Email to Client
-export const ContactFormClientEmail = ({ name }: { name: string }) => (
-  <Html>
-    <Head />
-    <Preview>Am primit mesajul tău - Website Factory</Preview>
-    <Body style={main}>
-      <Container style={container}>
-        <Section style={header}>
-          <Heading style={headerTitle}>✅ Mesaj primit cu succes!</Heading>
-        </Section>
+export const ContactFormClientEmail = ({ name, locale = "ro" }: { name: string; locale?: Locale }) => {
+  const t = CLIENT_EMAIL_COPY[locale]
 
-        <Section style={content}>
-          <Text style={greeting}>Bună, {name}! 👋</Text>
-
-          <Text style={paragraph}>
-            Mulțumim că ne-ai contactat! Am primit mesajul tău și suntem entuziasmați să discutăm despre
-            proiectul tău.
-          </Text>
-
-          <Section style={highlight}>
-            <Text style={highlightText}>
-              <strong>⏰ Timp de răspuns:</strong> Îți vom răspunde în maxim <strong>24 de ore</strong> în
-              zilele lucrătoare.
-            </Text>
+  return (
+    <Html>
+      <Head />
+      <Preview>{t.preview}</Preview>
+      <Body style={main}>
+        <Container style={container}>
+          <Section style={header}>
+            <Heading style={headerTitle}>{t.heading}</Heading>
           </Section>
 
-          <Text style={paragraph}>
-            În cazul în care ai întrebări urgente sau vrei să discutăm direct, ne poți suna la:
-          </Text>
+          <Section style={content}>
+            <Text style={greeting}>{t.greeting(name)}</Text>
 
-          <Text style={phoneNumber}>
-            📞 <Link href="tel:+40728567830" style={linkStyle}>+40 728 567 830</Link>
-          </Text>
+            <Text style={paragraph}>{t.intro}</Text>
 
-          <Hr style={hr} />
+            <Section style={highlight}>
+              <Text style={highlightText}>
+                <strong>{t.responseTimeLabel}</strong> {t.responseTimeRest} <strong>{t.responseTimeHours}</strong>{" "}
+                {t.responseTimeSuffix}
+              </Text>
+            </Section>
 
-          <Text style={footerText}>
-            <strong>Website Factory</strong>
-          </Text>
-          <Text style={footerText}>Web Design Profesional în Timișoara</Text>
-          <Text style={footerSmall}>
-            📧 <Link href="mailto:office@websitefactory.ro" style={linkStyle}>office@websitefactory.ro</Link>
-            <br />
-            🌐 <Link href="https://websitefactory.ro" style={linkStyle}>websitefactory.ro</Link>
-          </Text>
-        </Section>
-      </Container>
-    </Body>
-  </Html>
-)
+            <Text style={paragraph}>{t.urgentQuestion}</Text>
+
+            <Text style={phoneNumber}>
+              📞 <Link href="tel:+40728567830" style={linkStyle}>+40 728 567 830</Link>
+            </Text>
+
+            <Hr style={hr} />
+
+            <Text style={footerText}>
+              <strong>Website Factory</strong>
+            </Text>
+            <Text style={footerText}>{t.tagline}</Text>
+            <Text style={footerSmall}>
+              📧 <Link href="mailto:office@websitefactory.ro" style={linkStyle}>office@websitefactory.ro</Link>
+              <br />
+              🌐 <Link href="https://websitefactory.ro" style={linkStyle}>websitefactory.ro</Link>
+            </Text>
+          </Section>
+        </Container>
+      </Body>
+    </Html>
+  )
+}
 
 // Price Estimator - Email to Admin
 export const PriceEstimatorAdminEmail = ({

@@ -3,6 +3,8 @@
 import type React from "react"
 
 import { useState } from "react"
+import { useLocale, useTranslations } from "next-intl"
+import { Link } from "@/i18n/navigation"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { useRecaptcha } from "@/hooks/use-recaptcha"
 import { Input } from "@/components/ui/input"
@@ -12,14 +14,15 @@ import { MagneticButton } from "@/components/ui/magnetic-button"
 import { cn } from "@/lib/utils"
 import { ArrowRight, CheckCircle2, Loader2, Send } from "lucide-react"
 
-const projectTypes = [
-  { value: "website", label: "Website de prezentare" },
-  { value: "magazin", label: "Magazin online (E-commerce)" },
-  { value: "aplicatie", label: "Aplicație web / mobilă" },
-  { value: "altul", label: "Alt tip de proiect" },
-]
-
 export function ContactForm() {
+  const t = useTranslations("contactForm")
+  const locale = useLocale()
+  const projectTypes = [
+    { value: "website", label: t("projectTypes.website") },
+    { value: "magazin", label: t("projectTypes.magazin") },
+    { value: "aplicatie", label: t("projectTypes.aplicatie") },
+    { value: "altul", label: t("projectTypes.altul") },
+  ]
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>()
   const { executeRecaptcha } = useRecaptcha()
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -54,19 +57,20 @@ export function ContactForm() {
           company: formData.companie || undefined,
           message: formData.mesaj,
           gRecaptchaToken,
+          locale,
         }),
       })
 
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.error || "Eroare la trimiterea mesajului")
+        throw new Error(data.error || t("sendError"))
       }
 
       setIsSubmitted(true)
     } catch (err) {
       console.error("Form submission error:", err)
-      setError(err instanceof Error ? err.message : "A apărut o eroare. Te rugăm să încerci din nou.")
+      setError(err instanceof Error ? err.message : t("genericError"))
     } finally {
       setIsSubmitting(false)
     }
@@ -89,11 +93,8 @@ export function ContactForm() {
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-500/10 mb-6">
             <CheckCircle2 className="w-10 h-10 text-green-500" />
           </div>
-          <h3 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-4">Mesaj trimis cu succes!</h3>
-          <p className="text-muted-foreground max-w-md mx-auto">
-            Mulțumim pentru mesaj! Echipa noastră te va contacta în cel mai scurt timp posibil, de obicei în maxim 24 de
-            ore.
-          </p>
+          <h3 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-4">{t("successTitle")}</h3>
+          <p className="text-muted-foreground max-w-md mx-auto">{t("successText")}</p>
           <button
             onClick={() => {
               setIsSubmitted(false)
@@ -108,7 +109,7 @@ export function ContactForm() {
             }}
             className="mt-8 text-brand hover:text-brand-light transition-colors font-medium inline-flex items-center gap-2"
           >
-            Trimite alt mesaj
+            {t("sendAnother")}
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>
@@ -130,12 +131,8 @@ export function ContactForm() {
 
       <div className="relative z-10">
         <div className="mb-8">
-          <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-3">
-            Solicită o ofertă gratuită
-          </h2>
-          <p className="text-muted-foreground">
-            Completează formularul și vom reveni cu o propunere personalizată pentru proiectul tău.
-          </p>
+          <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-3">{t("title")}</h2>
+          <p className="text-muted-foreground">{t("intro")}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -143,12 +140,12 @@ export function ContactForm() {
           <div className="grid sm:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label htmlFor="nume" className="text-sm font-medium text-foreground">
-                Nume complet <span className="text-brand">*</span>
+                {t("fullName")} <span className="text-brand">*</span>
               </label>
               <Input
                 id="nume"
                 type="text"
-                placeholder="Ion Popescu"
+                placeholder={t("fullNamePlaceholder")}
                 required
                 value={formData.nume}
                 onChange={(e) => handleChange("nume", e.target.value)}
@@ -157,12 +154,12 @@ export function ContactForm() {
             </div>
             <div className="space-y-2">
               <label htmlFor="email" className="text-sm font-medium text-foreground">
-                Adresă email <span className="text-brand">*</span>
+                {t("email")} <span className="text-brand">*</span>
               </label>
               <Input
                 id="email"
                 type="email"
-                placeholder="ion@exemplu.ro"
+                placeholder={t("emailPlaceholder")}
                 required
                 value={formData.email}
                 onChange={(e) => handleChange("email", e.target.value)}
@@ -175,12 +172,12 @@ export function ContactForm() {
           <div className="grid sm:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label htmlFor="telefon" className="text-sm font-medium text-foreground">
-                Număr de telefon <span className="text-brand">*</span>
+                {t("phone")} <span className="text-brand">*</span>
               </label>
               <Input
                 id="telefon"
                 type="tel"
-                placeholder="+40 7XX XXX XXX"
+                placeholder={t("phonePlaceholder")}
                 required
                 value={formData.telefon}
                 onChange={(e) => handleChange("telefon", e.target.value)}
@@ -189,11 +186,11 @@ export function ContactForm() {
             </div>
             <div className="space-y-2">
               <label htmlFor="tipProiect" className="text-sm font-medium text-foreground">
-                Tip proiect <span className="text-brand">*</span>
+                {t("projectType")} <span className="text-brand">*</span>
               </label>
               <Select value={formData.tipProiect} onValueChange={(value) => handleChange("tipProiect", value)} required>
                 <SelectTrigger className="h-12 w-full rounded-xl bg-background/50 border-border/50 focus:border-brand focus:ring-brand/20">
-                  <SelectValue placeholder="Selectează tipul proiectului" />
+                  <SelectValue placeholder={t("projectTypePlaceholder")} />
                 </SelectTrigger>
                 <SelectContent>
                   {projectTypes.map((type) => (
@@ -209,12 +206,12 @@ export function ContactForm() {
           {/* Row 3: Companie (optional) */}
           <div className="space-y-2">
             <label htmlFor="companie" className="text-sm font-medium text-foreground">
-              Companie <span className="text-muted-foreground text-xs">(opțional)</span>
+              {t("company")} <span className="text-muted-foreground text-xs">{t("optional")}</span>
             </label>
             <Input
               id="companie"
               type="text"
-              placeholder="Numele companiei tale"
+              placeholder={t("companyPlaceholder")}
               value={formData.companie}
               onChange={(e) => handleChange("companie", e.target.value)}
               className="h-12 rounded-xl bg-background/50 border-border/50 focus:border-brand focus:ring-brand/20"
@@ -224,11 +221,11 @@ export function ContactForm() {
           {/* Row 4: Message */}
           <div className="space-y-2">
             <label htmlFor="mesaj" className="text-sm font-medium text-foreground">
-              Cu ce te putem ajuta? <span className="text-brand">*</span>
+              {t("message")} <span className="text-brand">*</span>
             </label>
             <Textarea
               id="mesaj"
-              placeholder="Descrie pe scurt proiectul tău, obiectivele și orice alte detalii relevante..."
+              placeholder={t("messagePlaceholder")}
               required
               rows={5}
               value={formData.mesaj}
@@ -239,14 +236,14 @@ export function ContactForm() {
 
           {/* Privacy notice */}
           <p className="text-xs text-muted-foreground">
-            Prin trimiterea acestui formular, ești de acord cu{" "}
-            <a href="/politici-de-confidentialitate" className="text-brand hover:underline">
-              Politica de confidențialitate
-            </a>{" "}
-            și{" "}
-            <a href="/termeni-si-conditii" className="text-brand hover:underline">
-              Termenii și condițiile
-            </a>
+            {t("privacyPrefix")}{" "}
+            <Link href="/politici-de-confidentialitate" locale="ro" className="text-brand hover:underline">
+              {t("privacyPolicy")}
+            </Link>{" "}
+            {t("and")}{" "}
+            <Link href="/termeni-si-conditii" locale="ro" className="text-brand hover:underline">
+              {t("terms")}
+            </Link>
             .
           </p>
 
@@ -274,11 +271,11 @@ export function ContactForm() {
                 {isSubmitting ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    Se trimite...
+                    {t("sending")}
                   </>
                 ) : (
                   <>
-                    Trimite mesajul
+                    {t("submit")}
                     <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
                   </>
                 )}

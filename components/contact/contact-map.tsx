@@ -1,10 +1,26 @@
 "use client"
 
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 import { MapPin } from "lucide-react"
 
+const roCopy = {
+  label: "Locația noastră",
+  heading: "Unde ne găsești",
+  subtitle: "Suntem din în Timișoara, dar lucrăm cu clienți din toată România și nu numai.",
+  cardTitle: "Website Factory",
+  addressLine1: "Timișoara, Timiș",
+  addressLine2: "România",
+  openMaps: "Deschide în Google Maps",
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
 export function ContactMap() {
+  const locale = useLocale()
+  const t = copy[locale]
   const { ref, isVisible } = useScrollReveal()
 
   return (
@@ -19,12 +35,10 @@ export function ContactMap() {
         >
           <span className="inline-flex items-center gap-2 text-sm font-medium text-brand tracking-widest uppercase mb-4">
             <MapPin className="w-4 h-4" />
-            Locația noastră
+            {t.label}
           </span>
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">Unde ne găsești</h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Suntem din în Timișoara, dar lucrăm cu clienți din toată România și nu numai.
-          </p>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">{t.heading}</h2>
+          <p className="text-muted-foreground max-w-xl mx-auto">{t.subtitle}</p>
         </div>
 
         <div
@@ -59,11 +73,11 @@ export function ContactMap() {
                   <MapPin className="w-6 h-6 text-brand-foreground" />
                 </div>
                 <div>
-                  <h3 className="font-heading font-semibold text-foreground mb-1">Website Factory</h3>
+                  <h3 className="font-heading font-semibold text-foreground mb-1">{t.cardTitle}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Timișoara, Timiș
+                    {t.addressLine1}
                     <br />
-                    România
+                    {t.addressLine2}
                   </p>
                   <a
                     href="https://maps.google.com/?q=Timisoara"
@@ -71,7 +85,7 @@ export function ContactMap() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 mt-3 text-sm font-medium text-brand hover:text-brand-light transition-colors"
                   >
-                    Deschide în Google Maps
+                    {t.openMaps}
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         strokeLinecap="round"

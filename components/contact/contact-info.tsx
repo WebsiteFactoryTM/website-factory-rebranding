@@ -1,39 +1,48 @@
 "use client"
 
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 import { Clock, Mail, MapPin, Phone } from "lucide-react"
 
-const contactDetails = [
-  {
-    icon: Phone,
-    label: "Telefon",
-    value: "+40 728 567 830",
-    href: "tel:+40728567830",
-    description: "Luni - Vineri, 09:00 - 18:00",
-  },
-  {
-    icon: Mail,
-    label: "Email",
-    value: "office@websitefactory.ro",
-    href: "mailto:office@websitefactory.ro",
-    description: "Răspundem în max. 24h",
-  },
-  {
-    icon: MapPin,
-    label: "Locație",
-    value: "Timișoara, România",
-    href: "https://maps.google.com/?q=Timisoara",
-    description: "Lucrăm remote în toată țara",
-  },
-  {
-    icon: Clock,
-    label: "Program",
-    value: "Luni - Vineri",
-    href: null,
-    description: "09:00 - 18:00",
-  },
-]
+const roCopy = {
+  contactDetails: [
+    {
+      icon: Phone,
+      label: "Telefon",
+      value: "+40 728 567 830",
+      href: "tel:+40728567830",
+      description: "Luni - Vineri, 09:00 - 18:00",
+    },
+    {
+      icon: Mail,
+      label: "Email",
+      value: "office@websitefactory.ro",
+      href: "mailto:office@websitefactory.ro",
+      description: "Răspundem în max. 24h",
+    },
+    {
+      icon: MapPin,
+      label: "Locație",
+      value: "Timișoara, România",
+      href: "https://maps.google.com/?q=Timisoara",
+      description: "Lucrăm remote în toată țara",
+    },
+    {
+      icon: Clock,
+      label: "Program",
+      value: "Luni - Vineri",
+      href: null,
+      description: "09:00 - 18:00",
+    },
+  ],
+  followUs: "Urmărește-ne",
+  availableNow: "Disponibil acum",
+  quickResponse: "Răspundem la mesaje în cel mai scurt timp. Programează o întâlnire sau trimite-ne un mesaj.",
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
 
 const socialLinks = [
   {
@@ -75,6 +84,8 @@ const socialLinks = [
 ]
 
 export function ContactInfo() {
+  const locale = useLocale()
+  const t = copy[locale]
   const { ref, isVisible } = useScrollReveal({ threshold: 0.1 })
 
   return (
@@ -87,7 +98,7 @@ export function ContactInfo() {
     >
       {/* Contact Cards */}
       <div className="space-y-4">
-        {contactDetails.map((item, index) => (
+        {t.contactDetails.map((item, index) => (
           <div
             key={item.label}
             className="group glass-card rounded-2xl p-5 border border-border/50 hover:border-brand/30 transition-all duration-300 card-metallic"
@@ -129,7 +140,7 @@ export function ContactInfo() {
 
       {/* Social Links */}
       <div className="glass-card rounded-2xl p-6 border border-border/50">
-        <h3 className="font-heading text-lg font-semibold text-foreground mb-4">Urmărește-ne</h3>
+        <h3 className="font-heading text-lg font-semibold text-foreground mb-4">{t.followUs}</h3>
         <div className="flex gap-3">
           {socialLinks.map((social) => (
             <a
@@ -155,11 +166,9 @@ export function ContactInfo() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
             </span>
-            <span className="text-sm font-medium text-foreground">Disponibil acum</span>
+            <span className="text-sm font-medium text-foreground">{t.availableNow}</span>
           </div>
-          <p className="text-sm text-muted-foreground">
-            Răspundem la mesaje în cel mai scurt timp. Programează o întâlnire sau trimite-ne un mesaj.
-          </p>
+          <p className="text-sm text-muted-foreground">{t.quickResponse}</p>
         </div>
       </div>
     </div>

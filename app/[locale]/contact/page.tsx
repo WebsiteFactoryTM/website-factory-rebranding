@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { setRequestLocale } from "next-intl/server"
+import { setRequestLocale, getTranslations } from "next-intl/server"
 import type { Locale } from "@/i18n/routing"
 import { allLocaleParams } from "@/lib/i18n/ro-only"
 import { generatePageMetadata, generateBreadcrumbSchema, generateLocalBusinessSchema } from "@/lib/seo"
@@ -9,19 +9,23 @@ import { ContactInfo } from "@/components/contact/contact-info"
 import { ContactMap } from "@/components/contact/contact-map"
 import { ContactFaq } from "@/components/contact/contact-faq"
 
-export const metadata: Metadata = generatePageMetadata({
-  title: "Contact",
-  description:
-    "Contactează-ne pentru o ofertă gratuită. Suntem aici să transformăm viziunea ta digitală în realitate. Creare site-uri web, magazine online și aplicații mobile în Timișoara.",
-  path: "/contact",
-  keywords: [
-    "contact web design",
-    "creare site timișoara contact",
-    "ofertă website",
-    "consultanță web",
-    "agenție web timișoara",
-  ],
-})
+export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
+  const { locale } = await params
+  return generatePageMetadata({
+    locale,
+    href: "/contact",
+    title: "Contact",
+    description:
+      "Contactează-ne pentru o ofertă gratuită. Suntem aici să transformăm viziunea ta digitală în realitate. Creare site-uri web, magazine online și aplicații mobile în Timișoara.",
+    keywords: [
+      "contact web design",
+      "creare site timișoara contact",
+      "ofertă website",
+      "consultanță web",
+      "agenție web timișoara",
+    ],
+  })
+}
 
 export function generateStaticParams() {
   return allLocaleParams()
@@ -30,9 +34,10 @@ export function generateStaticParams() {
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
+  const t = await getTranslations("breadcrumb")
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Acasă", url: "/" },
-    { name: "Contact", url: "/contact" },
+    { name: t("home"), url: "/" },
+    { name: t("contact"), url: "/contact" },
   ])
 
   const localBusinessSchema = generateLocalBusinessSchema()

@@ -1,15 +1,20 @@
 import { NextResponse } from "next/server"
 import { resend, ADMIN_EMAIL, FROM_EMAIL } from "@/lib/resend"
 import { ContactFormAdminEmail, ContactFormClientEmail } from "@/lib/email-templates"
+import { CONTACT_API_COPY, resolveContactLocale } from "@/lib/contact-api-copy"
+import type { Locale } from "@/i18n/routing"
 
 export async function POST(request: Request) {
+  let locale: Locale = "ro"
   try {
     const body = await request.json()
-    const { name, email, phone, company, message, gRecaptchaToken } = body
+    const { name, email, phone, company, message, gRecaptchaToken, locale: rawLocale } = body
+    locale = resolveContactLocale(rawLocale)
+    const t = CONTACT_API_COPY[locale]
 
     // Validate reCAPTCHA
     if (!gRecaptchaToken) {
-      return NextResponse.json({ error: "Verificare reCAPTCHA lipsă." }, { status: 400 })
+      return NextResponse.json({ error: t.recaptchaMissing }, { status: 400 })
     }
 
     const recaptchaSecret = process.env.RECAPTCHA_SECRET_KEY || "6Le14kcsAAAAAGkruan7Y-XLwuw0UwrVBdvLik5a"
@@ -22,13 +27,13 @@ export async function POST(request: Request) {
 
     if (!recaptchaData.success || recaptchaData.score < 0.5) {
       console.error("reCAPTCHA failed:", recaptchaData)
-      return NextResponse.json({ error: "Verificare anti-spam eșuată." }, { status: 400 })
+      return NextResponse.json({ error: t.recaptchaFailed }, { status: 400 })
     }
 
     // Validate required fields
     if (!name || !email || !message) {
       return NextResponse.json(
-        { error: "Câmpurile nume, email și mesaj sunt obligatorii." },
+        { error: t.requiredFields },
         { status: 400 }
       )
     }
@@ -36,14 +41,14 @@ export async function POST(request: Request) {
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
-      return NextResponse.json({ error: "Format email invalid." }, { status: 400 })
+      return NextResponse.json({ error: t.invalidEmail }, { status: 400 })
     }
 
     // Send email to admin
     const adminEmailResult = await resend.emails.send({
       from: FROM_EMAIL,
       to: ADMIN_EMAIL,
-      subject: `📬 Cerere Nouă de Contact - ${name}`,
+      subject: t.adminSubject(name),
       react: ContactFormAdminEmail({
         name,
         email,
@@ -62,8 +67,8 @@ export async function POST(request: Request) {
     const clientEmailResult = await resend.emails.send({
       from: FROM_EMAIL,
       to: email,
-      subject: "✅ Am primit mesajul tău - Website Factory",
-      react: ContactFormClientEmail({ name }),
+      subject: t.clientSubject,
+      react: ContactFormClientEmail({ name, locale }),
     })
 
     if (clientEmailResult.error) {
@@ -75,7 +80,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         success: true,
-        message: "Mesajul a fost trimis cu succes!",
+        message: t.success,
         adminEmailId: adminEmailResult.data?.id,
         clientEmailId: clientEmailResult.data?.id,
       },
@@ -85,7 +90,7 @@ export async function POST(request: Request) {
     console.error("Contact form error:", error)
     return NextResponse.json(
       {
-        error: "A apărut o eroare la trimiterea mesajului. Te rugăm să încerci din nou sau să ne suni direct.",
+        error: CONTACT_API_COPY[locale].serverError,
       },
       { status: 500 }
     )
