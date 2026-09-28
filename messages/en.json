@@ -2,5 +2,18 @@
   "common": {
     "skipToContent": "Salt la conținut",
     "home": "Acasă"
+  },
+  "notFound": {
+    "title": "Pagina pe care o cauți",
+    "titleHighlight": "nu există",
+    "p1": "Uneori, chiar și cei mai buni designeri trebuie să înceapă de la zero. Această pagină a fost mutată, ștearsă sau pur și simplu nu a fost construită încă.",
+    "p2": "Dar nu te preocupa — putem construi orice pagină ai nevoie! 🚀",
+    "backHome": "Înapoi acasă",
+    "buildNew": "Construiește o pagină nouă",
+    "orExplore": "Sau explorează:",
+    "services": "Servicii",
+    "portfolio": "Portofoliu",
+    "about": "Despre Noi",
+    "contact": "Contact"
   }
 }
