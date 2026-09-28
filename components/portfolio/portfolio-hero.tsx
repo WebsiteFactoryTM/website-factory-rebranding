@@ -1,13 +1,33 @@
 "use client"
 
+import { useLocale } from "next-intl"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { FloatingElement } from "@/components/ui/floating-element"
 import { cn } from "@/lib/utils"
-import { featuredProjects, simpleProjects } from "@/lib/portfolio-data"
+import { getProjects } from "@/lib/portfolio-data"
+import type { Locale } from "@/i18n/routing"
+
+const roCopy = {
+  eyebrow: "Portofoliu Website Factory",
+  titlePrefix: "O parte din",
+  titleHighlight: "proiectele noastre",
+  titleSuffix: "finalizate.",
+  text: "Soluții digitale construite pentru nevoi reale de business. Aici sunt câteva dintre ele.",
+  stats: [
+    { value: "+150", label: "Proiecte finalizate" },
+    { value: "95%", label: "Livrat la timp" },
+    { value: "∞", label: "Posibilități" },
+  ],
+  scrollLabel: "Explorează proiectele",
+}
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
 
 export function PortfolioHero() {
+  const locale = useLocale()
+  const t = copy[locale]
   const { ref: titleRef, isVisible: titleVisible } = useScrollReveal()
-  const totalProjects = featuredProjects.length + simpleProjects.length
+  const { featured, simple } = getProjects(locale)
+  const totalProjects = featured.length + simple.length
 
   return (
     <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-24 pb-24 md:pb-32">
@@ -60,25 +80,20 @@ export function PortfolioHero() {
         >
           {/* Breadcrumb style label */}
           <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-6">
-            Portofoliu Website Factory
+            {t.eyebrow}
           </span>
 
           <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight">
-            O parte din <span className="gradient-text-animated">proiectele noastre</span> finalizate.
+            {t.titlePrefix} <span className="gradient-text-animated">{t.titleHighlight}</span> {t.titleSuffix}
           </h1>
 
           <p className="mt-8 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto text-pretty">
-            Soluții digitale construite pentru nevoi reale de business. Aici sunt câteva dintre ele.
+            {t.text}
           </p>
 
           {/* Stats row */}
           <div className="mt-12 flex flex-wrap justify-center gap-8 md:gap-16">
-            {[
-              // { value: `${totalProjects}+`, label: "Proiecte finalizate" },
-              { value: `+150`, label: "Proiecte finalizate" },
-              { value: "95%", label: "Livrat la timp" },
-              { value: "∞", label: "Posibilități" },
-            ].map((stat, index) => (
+            {t.stats.map((stat, index) => (
               <div
                 key={stat.label}
                 className="text-center"
@@ -98,7 +113,7 @@ export function PortfolioHero() {
       {/* Scroll indicator */}
       <div className="absolute bottom-6 sm:bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20 pointer-events-none">
         <span className="text-[10px] sm:text-xs text-muted-foreground tracking-widest uppercase bg-background/80 backdrop-blur-sm px-3 py-1 rounded-full">
-          Explorează proiectele
+          {t.scrollLabel}
         </span>
         <div className="w-px h-8 sm:h-12 bg-gradient-to-b from-brand to-transparent" />
       </div>

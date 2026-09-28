@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
-import { setRequestLocale } from "next-intl/server"
+import { setRequestLocale, getTranslations } from "next-intl/server"
 import type { Locale } from "@/i18n/routing"
+import { getPathname } from "@/i18n/navigation"
 import { allLocaleParams } from "@/lib/i18n/ro-only"
 import { generatePageMetadata, generateBreadcrumbSchema, siteConfig } from "@/lib/seo"
 import { PortfolioHero } from "@/components/portfolio/portfolio-hero"
@@ -8,19 +9,23 @@ import { FeaturedProjects } from "@/components/portfolio/featured-projects"
 import { SimpleProjectsGrid } from "@/components/portfolio/simple-projects-grid"
 import { PortfolioCta } from "@/components/portfolio/portfolio-cta"
 
-export const metadata: Metadata = generatePageMetadata({
-  title: "Portofoliu - Web design",
-  description:
-    "Descoperă proiectele noastre de web design, magazine online și aplicații custom. Portofoliu cu rezultate reale și studii de caz detaliate.",
-  path: "/portofoliu",
-  keywords: [
-    "portofoliu web design",
-    "proiecte website Timișoara",
-    "studii de caz web",
-    "exemple magazine online",
-    "aplicații mobile România",
-  ],
-})
+export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
+  const { locale } = await params
+  return generatePageMetadata({
+    locale,
+    href: "/portofoliu",
+    title: "Portofoliu - Web design",
+    description:
+      "Descoperă proiectele noastre de web design, magazine online și aplicații custom. Portofoliu cu rezultate reale și studii de caz detaliate.",
+    keywords: [
+      "portofoliu web design",
+      "proiecte website Timișoara",
+      "studii de caz web",
+      "exemple magazine online",
+      "aplicații mobile România",
+    ],
+  })
+}
 
 export function generateStaticParams() {
   return allLocaleParams()
@@ -29,9 +34,10 @@ export function generateStaticParams() {
 export default async function PortfolioPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
+  const t = await getTranslations("breadcrumb")
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Acasă", url: "/" },
-    { name: "Portofoliu", url: "/portofoliu" },
+    { name: t("home"), url: "/" },
+    { name: t("portfolio"), url: "/portofoliu" },
   ])
 
   const portfolioSchema = {
@@ -39,7 +45,8 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
     "@type": "CollectionPage",
     name: "Portofoliu Website Factory",
     description: "Colecție de proiecte web design, magazine online și aplicații mobile create de Website Factory.",
-    url: `${siteConfig.url}/portofoliu`,
+    url: `${siteConfig.url}${getPathname({ locale: locale as Locale, href: "/portofoliu" })}`,
+    inLanguage: locale,
     isPartOf: {
       "@type": "WebSite",
       name: siteConfig.name,

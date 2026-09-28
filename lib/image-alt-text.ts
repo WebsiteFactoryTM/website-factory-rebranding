@@ -3,18 +3,27 @@
  * Generates descriptive alt text for images to improve SEO and accessibility
  */
 
+import type { Locale } from "@/i18n/routing"
+
+const ALT_WORDS = {
+  ro: { forClient: "pentru", by: "realizat de Website Factory", location: "Timișoara" },
+  en: { forClient: "pentru", by: "realizat de Website Factory", location: "Timișoara" },
+} satisfies Record<Locale, { forClient: string; by: string; location: string }>
+
 interface ProjectAltTextOptions {
   title: string
   client?: string
   category?: string
   categoryLabel?: string
   location?: string
+  locale?: Locale
 }
 
 interface ServiceAltTextOptions {
   serviceName: string
   location?: string
   context?: string
+  locale?: Locale
 }
 
 /**
@@ -25,8 +34,10 @@ export function generateProjectAltText({
   client,
   category,
   categoryLabel,
-  location = "Timișoara",
+  location,
+  locale = "ro",
 }: ProjectAltTextOptions): string {
+  const words = ALT_WORDS[locale]
   const parts: string[] = []
 
   // Add project title
@@ -34,7 +45,7 @@ export function generateProjectAltText({
 
   // Add client if available
   if (client) {
-    parts.push(`pentru ${client}`)
+    parts.push(`${words.forClient} ${client}`)
   }
 
   // Add category
@@ -51,7 +62,7 @@ export function generateProjectAltText({
   }
 
   // Add location for local SEO
-  parts.push(`realizat de Website Factory ${location}`)
+  parts.push(`${words.by} ${location ?? words.location}`)
 
   return parts.join(" ")
 }
@@ -61,9 +72,11 @@ export function generateProjectAltText({
  */
 export function generateServiceAltText({
   serviceName,
-  location = "Timișoara",
+  location,
   context,
+  locale = "ro",
 }: ServiceAltTextOptions): string {
+  const words = ALT_WORDS[locale]
   const parts: string[] = []
 
   if (context) {
@@ -71,7 +84,7 @@ export function generateServiceAltText({
   }
 
   parts.push(serviceName)
-  parts.push(`Website Factory ${location}`)
+  parts.push(`Website Factory ${location ?? words.location}`)
 
   return parts.join(" - ")
 }

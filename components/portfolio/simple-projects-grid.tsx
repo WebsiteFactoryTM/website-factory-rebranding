@@ -1,14 +1,28 @@
 "use client"
 
 import { ExternalLink } from "lucide-react"
+import { useLocale } from "next-intl"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { FloatingElement } from "@/components/ui/floating-element"
 import { cn } from "@/lib/utils"
-import { simpleProjects } from "@/lib/portfolio-data"
+import { getProjects, type SimpleProject } from "@/lib/portfolio-data"
 import Image from "next/image"
 import { generateProjectAltText } from "@/lib/image-alt-text"
+import type { Locale } from "@/i18n/routing"
+
+const roCopy = {
+  eyebrow: "Mai multe proiecte",
+  title: "Și alte",
+  titleHighlight: "povești de succes",
+  text: "O selecție din proiectele pe care le-am livrat pentru clienți din diverse industrii.",
+  viewProject: "Vezi proiect",
+}
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
 
 export function SimpleProjectsGrid() {
+  const locale = useLocale()
+  const { simple } = getProjects(locale)
+  const t = copy[locale]
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollReveal<HTMLDivElement>()
 
   return (
@@ -43,23 +57,19 @@ export function SimpleProjectsGrid() {
           )}
         >
           <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">
-            Mai multe proiecte
+            {t.eyebrow}
           </span>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
-            Și alte <span className="gradient-text">povești de succes</span>
+            {t.title} <span className="gradient-text">{t.titleHighlight}</span>
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            O selecție din proiectele pe care le-am livrat pentru clienți din diverse industrii.
-          </p>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">{t.text}</p>
         </div>
 
         {/* Projects Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
-          {[...simpleProjects]
-            .sort((a, b) => (a.order ?? 999) - (b.order ?? 999))
-            .map((project, index) => (
-              <SimpleProjectCard key={project.id} project={project} index={index} />
-            ))}
+          {simple.map((project, index) => (
+            <SimpleProjectCard key={project.id} project={project} index={index} locale={locale} />
+          ))}
         </div>
       </div>
     </section>
@@ -69,10 +79,13 @@ export function SimpleProjectsGrid() {
 function SimpleProjectCard({
   project,
   index,
+  locale,
 }: {
-  project: (typeof simpleProjects)[0]
+  project: SimpleProject
   index: number
+  locale: Locale
 }) {
+  const t = copy[locale]
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>({ threshold: 0.1 })
 
   return (
@@ -107,6 +120,7 @@ function SimpleProjectCard({
                 client: project.client,
                 category: project.category,
                 categoryLabel: project.categoryLabel,
+                locale,
               })}
               fill
               className="object-contain transition-transform duration-700 group-hover:scale-105"
@@ -119,7 +133,7 @@ function SimpleProjectCard({
             {project.liveUrl && project.liveUrl !== "#" && (
               <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
                 <span className="flex items-center gap-2 px-3 py-1.5 bg-white/90 dark:bg-black/80 text-foreground text-sm font-medium rounded-full backdrop-blur-sm">
-                  Vezi proiect
+                  {t.viewProject}
                   <ExternalLink className="h-3.5 w-3.5" />
                 </span>
               </div>

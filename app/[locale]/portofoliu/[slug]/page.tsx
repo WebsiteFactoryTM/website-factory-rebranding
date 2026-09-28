@@ -1,12 +1,12 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import Link from "next/link"
 import Image from "next/image"
 import { ArrowLeft, ArrowRight, ExternalLink, Quote, CheckCircle2 } from "lucide-react"
-import { setRequestLocale } from "next-intl/server"
+import { setRequestLocale, getTranslations } from "next-intl/server"
 import { routing, type Locale } from "@/i18n/routing"
+import { Link, getPathname } from "@/i18n/navigation"
 import { generatePageMetadata, generateBreadcrumbSchema, siteConfig } from "@/lib/seo"
-import { featuredProjects } from "@/lib/portfolio-data"
+import { getProjects } from "@/lib/portfolio-data"
 import { Button } from "@/components/ui/button"
 import { generateProjectAltText } from "@/lib/image-alt-text"
 
@@ -14,22 +14,39 @@ interface Props {
   params: Promise<{ locale: string; slug: string }>
 }
 
+const roCopy = {
+  backToPortfolio: "Înapoi la portofoliu",
+  client: "Client:",
+  visitLive: "Vizitează site-ul live",
+  challenge: "Provocarea",
+  solution: "Soluția noastră",
+  technologies: "Tehnologii folosite",
+  prevProject: "Proiect anterior",
+  nextProject: "Proiect următor",
+  ctaTitle: "Vrei un proiect similar?",
+  ctaText: "Hai să discutăm despre cum putem crea ceva extraordinar împreună.",
+  ctaButton: "Solicită ofertă gratuită",
+}
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
 export async function generateStaticParams() {
-  return routing.locales.flatMap((locale) => featuredProjects.map((project) => ({ locale, slug: project.slug })))
+  const { featured } = getProjects("ro")
+  return routing.locales.flatMap((locale) => featured.map((project) => ({ locale, slug: project.slug })))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params
-  const project = featuredProjects.find((p) => p.slug === slug)
+  const project = getProjects(locale as Locale).featured.find((p) => p.slug === slug)
 
   if (!project) {
     return {}
   }
 
   return generatePageMetadata({
+    locale: locale as Locale,
+    href: { pathname: "/portofoliu/[slug]", params: { slug } },
     title: `${project.title} - Studiu de caz - Web design`,
     description: project.description,
-    path: `/portofoliu/${project.slug}`,
     keywords: [project.categoryLabel, project.client, "studiu de caz", "portofoliu web design"],
   })
 }
@@ -37,19 +54,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CaseStudyPage({ params }: Props) {
   const { locale, slug } = await params
   setRequestLocale(locale as Locale)
-  const project = featuredProjects.find((p) => p.slug === slug)
+  const t = copy[locale as Locale]
+  const tBreadcrumb = await getTranslations("breadcrumb")
+
+  const { featured } = getProjects(locale as Locale)
+  const project = featured.find((p) => p.slug === slug)
 
   if (!project) {
     notFound()
   }
 
-  const currentIndex = featuredProjects.findIndex((p) => p.slug === slug)
-  const prevProject = currentIndex > 0 ? featuredProjects[currentIndex - 1] : null
-  const nextProject = currentIndex < featuredProjects.length - 1 ? featuredProjects[currentIndex + 1] : null
+  const currentIndex = featured.findIndex((p) => p.slug === slug)
+  const prevProject = currentIndex > 0 ? featured[currentIndex - 1] : null
+  const nextProject = currentIndex < featured.length - 1 ? featured[currentIndex + 1] : null
 
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Acasă", url: "/" },
-    { name: "Portofoliu", url: "/portofoliu" },
+    { name: tBreadcrumb("home"), url: "/" },
+    { name: tBreadcrumb("portfolio"), url: "/portofoliu" },
     { name: project.title, url: `/portofoliu/${project.slug}` },
   ])
 
@@ -58,7 +79,11 @@ export default async function CaseStudyPage({ params }: Props) {
     "@type": "CreativeWork",
     name: project.title,
     description: project.description,
-    url: `${siteConfig.url}/portofoliu/${project.slug}`,
+    url: `${siteConfig.url}${getPathname({
+      locale: locale as Locale,
+      href: { pathname: "/portofoliu/[slug]", params: { slug: project.slug } },
+    })}`,
+    inLanguage: locale,
     dateCreated: project.year,
     creator: {
       "@type": "Organization",
@@ -89,7 +114,7 @@ export default async function CaseStudyPage({ params }: Props) {
               className="inline-flex items-center gap-2 text-muted-foreground hover:text-brand transition-colors mb-8"
             >
               <ArrowLeft className="h-4 w-4" />
-              Înapoi la portofoliu
+              {t.backToPortfolio}
             </Link>
 
             <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -107,7 +132,7 @@ export default async function CaseStudyPage({ params }: Props) {
                 </h1>
 
                 <p className="text-sm text-muted-foreground">
-                  Client: <span className="text-foreground font-medium">{project.client}</span>
+                  {t.client} <span className="text-foreground font-medium">{project.client}</span>
                 </p>
 
                 <p className="text-lg text-muted-foreground leading-relaxed">{project.description}</p>
@@ -125,7 +150,7 @@ export default async function CaseStudyPage({ params }: Props) {
                 {project.liveUrl && (
                   <Button asChild size="lg">
                     <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                      Vizitează site-ul live
+                      {t.visitLive}
                       <ExternalLink className="ml-2 h-4 w-4" />
                     </a>
                   </Button>
@@ -143,6 +168,7 @@ export default async function CaseStudyPage({ params }: Props) {
                       client: project.client,
                       category: project.category,
                       categoryLabel: project.categoryLabel,
+                      locale: locale as Locale,
                     })}
                     fill
                     className="object-cover"
@@ -160,13 +186,13 @@ export default async function CaseStudyPage({ params }: Props) {
             <div className="grid md:grid-cols-2 gap-12">
               {/* Challenge */}
               <div className="space-y-4">
-                <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">Provocarea</h2>
+                <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">{t.challenge}</h2>
                 <p className="text-muted-foreground leading-relaxed">{project.challenge}</p>
               </div>
 
               {/* Solution */}
               <div className="space-y-4">
-                <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">Soluția noastră</h2>
+                <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">{t.solution}</h2>
                 <p className="text-muted-foreground leading-relaxed">{project.solution}</p>
               </div>
             </div>
@@ -177,7 +203,7 @@ export default async function CaseStudyPage({ params }: Props) {
         <section className="py-20">
           <div className="container mx-auto px-4 lg:px-8">
             <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground text-center mb-8">
-              Tehnologii folosite
+              {t.technologies}
             </h2>
             <div className="flex flex-wrap justify-center gap-3">
               {project.technologies.map((tech) => (
@@ -217,12 +243,12 @@ export default async function CaseStudyPage({ params }: Props) {
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
               {prevProject ? (
                 <Link
-                  href={`/portofoliu/${prevProject.slug}`}
+                  href={{ pathname: "/portofoliu/[slug]", params: { slug: prevProject.slug } }}
                   className="flex items-center gap-3 text-muted-foreground hover:text-brand transition-colors group"
                 >
                   <ArrowLeft className="h-5 w-5 transition-transform group-hover:-translate-x-1" />
                   <div className="text-left">
-                    <span className="text-xs uppercase tracking-wider">Proiect anterior</span>
+                    <span className="text-xs uppercase tracking-wider">{t.prevProject}</span>
                     <p className="font-medium text-foreground">{prevProject.title}</p>
                   </div>
                 </Link>
@@ -232,11 +258,11 @@ export default async function CaseStudyPage({ params }: Props) {
 
               {nextProject ? (
                 <Link
-                  href={`/portofoliu/${nextProject.slug}`}
+                  href={{ pathname: "/portofoliu/[slug]", params: { slug: nextProject.slug } }}
                   className="flex items-center gap-3 text-muted-foreground hover:text-brand transition-colors group"
                 >
                   <div className="text-right">
-                    <span className="text-xs uppercase tracking-wider">Proiect următor</span>
+                    <span className="text-xs uppercase tracking-wider">{t.nextProject}</span>
                     <p className="font-medium text-foreground">{nextProject.title}</p>
                   </div>
                   <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -251,13 +277,11 @@ export default async function CaseStudyPage({ params }: Props) {
         {/* CTA */}
         <section className="py-20 bg-brand">
           <div className="container mx-auto px-4 lg:px-8 text-center">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">Vrei un proiect similar?</h2>
-            <p className="text-white/80 mb-8 max-w-xl mx-auto">
-              Hai să discutăm despre cum putem crea ceva extraordinar împreună.
-            </p>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">{t.ctaTitle}</h2>
+            <p className="text-white/80 mb-8 max-w-xl mx-auto">{t.ctaText}</p>
             <Button asChild size="lg" className="bg-white text-brand hover:bg-white/90">
               <Link href="/contact">
-                Solicită ofertă gratuită
+                {t.ctaButton}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>

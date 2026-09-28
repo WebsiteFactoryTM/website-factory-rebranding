@@ -1,14 +1,28 @@
 "use client"
 
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
+import { useLocale } from "next-intl"
 import { ArrowRight, Phone, MessageSquare } from "lucide-react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { FloatingElement } from "@/components/ui/floating-element"
 import { MagneticButton } from "@/components/ui/magnetic-button"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import type { Locale } from "@/i18n/routing"
+
+const roCopy = {
+  badge: "Disponibili pentru proiecte noi",
+  title: "Vrei un proiect ca acestea?",
+  text: "Hai să discutăm despre cum putem transforma viziunea ta într-o realitate digitală de succes. Consultanță gratuită, fără obligații.",
+  ctaButton: "Solicită ofertă gratuită",
+  callButton: "Sună-ne direct",
+  trust: ["Răspuns în 24h", "Consultanță gratuită", "Fără obligații"],
+}
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
 
 export function PortfolioCta() {
+  const locale = useLocale()
+  const t = copy[locale]
   const { ref, isVisible } = useScrollReveal()
 
   return (
@@ -63,16 +77,15 @@ export function PortfolioCta() {
           {/* Badge */}
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white/90 text-sm font-medium mb-8">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            Disponibili pentru proiecte noi
+            {t.badge}
           </span>
 
           <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-            Vrei un proiect ca acestea?
+            {t.title}
           </h2>
 
           <p className="mt-6 text-lg md:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto text-pretty">
-            Hai să discutăm despre cum putem transforma viziunea ta într-o realitate digitală de succes. Consultanță
-            gratuită, fără obligații.
+            {t.text}
           </p>
 
           {/* CTAs */}
@@ -85,7 +98,7 @@ export function PortfolioCta() {
               >
                 <Link href="/contact">
                   <MessageSquare className="mr-2 h-5 w-5" />
-                  Solicită ofertă gratuită
+                  {t.ctaButton}
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
@@ -100,7 +113,7 @@ export function PortfolioCta() {
               >
                 <a href="tel:+40728567830">
                   <Phone className="mr-2 h-5 w-5" />
-                  Sună-ne direct
+                  {t.callButton}
                 </a>
               </Button>
             </MagneticButton>
@@ -110,15 +123,15 @@ export function PortfolioCta() {
           <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-white/60 text-sm">
             <span className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
-              Răspuns în 24h
+              {t.trust[0]}
             </span>
             <span className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
-              Consultanță gratuită
+              {t.trust[1]}
             </span>
             <span className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
-              Fără obligații
+              {t.trust[2]}
             </span>
           </div>
         </div>

@@ -1,5 +1,7 @@
 // Portfolio data - Featured projects have dedicated pages, others are external links only
 
+import type { Locale } from "@/i18n/routing"
+
 export interface FeaturedProject {
   id: string
   slug: string
@@ -21,6 +23,13 @@ export interface FeaturedProject {
   challenge: string
   solution: string
   liveUrl?: string
+  en?: Partial<
+    Pick<
+      FeaturedProject,
+      "title" | "categoryLabel" | "description" | "shortDescription" | "results" | "challenge" | "solution" | "testimonial"
+    >
+  >
+  enOrder?: number
 }
 
 export interface SimpleProject {
@@ -34,6 +43,8 @@ export interface SimpleProject {
   year: string
   shortDescription?: string
   order?: number // For custom sorting in grid
+  en?: Partial<Pick<SimpleProject, "categoryLabel" | "shortDescription">>
+  enOrder?: number
 }
 
 export const featuredProjects: FeaturedProject[] = [
@@ -67,6 +78,7 @@ export const featuredProjects: FeaturedProject[] = [
       "Dezvoltare agentică",
     ],
     year: "2026",
+    enOrder: 6,
     challenge:
       "Un club cu peste 100 de ani de istorie și zeci de mii de suporteri avea nevoie de un singur punct digital oficial: știri publicate zilnic, trei echipe, program competițional, bilete și shop — toate într-o platformă care să reziste vârfurilor de trafic din zilele de meci și să se încarce instant pe mobil, acolo unde stă majoritatea audienței.",
     solution:
@@ -91,6 +103,7 @@ export const featuredProjects: FeaturedProject[] = [
     ],
     technologies: ["Next.js", "Tailwind CSS", "TypeScript", "Railway", "Vercel", "Resend", "Sentry", "Payload CMS", "PostgreSQL", "Map Integration", "Scalable marketplace logic"],
     year: "2025",
+    enOrder: 5,
     testimonial: {
       quote:
         "UN:EVENT este un produs propriu aflat în dezvoltare activă. Recenziile provin de la parteneri și utilizatori care folosesc deja platforma în primele etape.",
@@ -133,6 +146,7 @@ export const featuredProjects: FeaturedProject[] = [
       "Vercel",
     ],
     year: "2026",
+    enOrder: 4,
     challenge:
       "Motocicliștii folosesc aplicații de navigație generaliste, care nu înțeleg nevoile reale ale unei ture: trasee alese pentru viraje, profil de altitudine, statistici de rulaj, întreținerea motocicletei și siguranța pe drum. Provocarea a fost să construim un produs care funcționează identic pe telefon și pe web, cu hărți performante și date sincronizate în timp real.",
     solution:
@@ -169,6 +183,7 @@ export const featuredProjects: FeaturedProject[] = [
       "Vercel",
     ],
     year: "2026",
+    enOrder: 8,
     challenge:
       "Vechea platformă de comenzi arăta datat și punea prea multe obstacole între client și butonul de comandă: meniu greu de parcurs pe mobil, imagini lente, checkout lung. Într-un oraș în care decizia de livrare se ia în câteva secunde, fiecare pas în plus însemna o comandă pierdută.",
     solution:
@@ -203,6 +218,7 @@ export const featuredProjects: FeaturedProject[] = [
       "SEO local UK",
     ],
     year: "2026",
+    enOrder: 1,
     challenge:
       "Într-o zonă cu zeci de saloane, Fern & Flow avea nevoie de o prezență online care să comunice instant poziționarea premium și filosofia organică a brandului — și, în același timp, să transforme vizitatorul în programare, fără să-l trimită într-un sistem extern greoi.",
     solution:
@@ -238,6 +254,7 @@ export const featuredProjects: FeaturedProject[] = [
       "SEO Irlanda",
     ],
     year: "2026",
+    enOrder: 2,
     challenge:
       "Daylin vinde simultan către tehnicieni profesioniști și către clienți finali, cu un catalog amplu, împărțit pe branduri și tipuri de produse. Era nevoie de un magazin care să arate premium, să se încarce rapid pe mobil — de unde vine majoritatea comenzilor — și să servească două tipuri de public, cu prețuri și beneficii diferite, fără să complice experiența niciunuia.",
     solution:
@@ -276,6 +293,7 @@ export const featuredProjects: FeaturedProject[] = [
       "Vercel",
     ],
     year: "2026",
+    enOrder: 3,
     challenge:
       "Întregul proces se desfășura pe canale disparate — mesaje, e-mailuri și fișiere trimise manual — ceea ce încetinea ofertarea și lăsa clientul fără vizibilitate asupra stadiului lucrării. Într-o piață în care încrederea decide totul, platforma trebuia să comunice clar legitimitatea serviciului și să aducă tot fluxul într-un singur loc.",
     solution:
@@ -300,6 +318,7 @@ export const featuredProjects: FeaturedProject[] = [
     ],
     technologies: ["Wordpress", "WooCommerce", "MySQL", "Netopia Payments", "Sameday Courier", "Easybox", "SmartBill", "Klaviyo", "Meta Pixel", "Google Ads"],
     year: "2023",
+    enOrder: 7,
     challenge: "Brandul avea nevoie de o prezență online premium care să vorbească despre originea produselor, valorile culturale și beneficiile naturale — combinând narativul cu un magazin ușor de folosit.",
     solution:
       "Am modernizat prezența online a brandului printr-un design curat, adaptat identității vizuale Blue Phoenix, cu accent pe claritate, coerență și experiență de navigare. Platforma este optimizată pentru viteză de încărcare și utilizare fluentă pe toate dispozitivele, iar structura paginilor este gândită pentru a susține conversia — de la descoperirea produselor până la achiziție. Arhitectura permite extinderea ulterioară a funcționalităților, fără a compromite performanța sau simplitatea experienței.",
@@ -323,7 +342,7 @@ export const featuredProjects: FeaturedProject[] = [
     ],
     technologies: ["Wordpress", "Elementor", "SEO"],
     year: "2024",
-  
+    enOrder: 12,
     challenge:
       "Website-ul existent nu reflecta pe deplin nivelul și profesionalismul companiei: structură depășită, vizual neconectat la brand și UX neoptimizat. Era nevoie de o prezență digitală modernă, coerentă și orientată spre încredere, care să pună în valoare portofoliul larg de produse și expertiza echipei.",
     solution:
@@ -516,6 +535,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare clinică de înfrumusețare, Web design, Graphic design, Consultanta, Web development, Mentenanță, domeniu, SEO",
     order: 3,
+    enOrder: 11,
   },
   {
     id: "s21",
@@ -552,6 +572,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare - Automatizări industriale, Web design, Web development, SEO",
     order: 24,
+    enOrder: 13,
   },
   {
     id: "s25",
@@ -890,6 +911,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Magazin Online - Companie italiană de produse cosmetice, Web design, Web development, SEO",
     order: 10,
+    enOrder: 9,
   },
   {
     id: "s64",
@@ -938,6 +960,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Platformă online pentru organizarea evenimentelor, Web design, Web development, React-Next.js, Mentenanță, Găzduire, Logo & Branding design, SEO",
     order: 11,
+    enOrder: 10,
   },
   {
     id: "s68",
@@ -978,10 +1001,41 @@ export const simpleProjects: SimpleProject[] = [
   },
 ]
 
-export const categoryFilters = [
+const categoryFiltersRo = [
   { value: "all", label: "Toate proiectele" },
   { value: "website", label: "Website-uri" },
   { value: "ecommerce", label: "Magazine online" },
   { value: "app", label: "Aplicații mobile" },
   { value: "custom", label: "Platforme custom" },
 ]
+const categoryFilters = { ro: categoryFiltersRo, en: categoryFiltersRo } satisfies Record<Locale, typeof categoryFiltersRo>
+
+export function getCategoryFilters(locale: Locale) {
+  return categoryFilters[locale]
+}
+
+function localize<T extends { en?: Partial<T> }>(project: T, locale: Locale): T {
+  if (locale !== "en" || !project.en) return project
+  return { ...project, ...project.en }
+}
+
+export function getProjects(
+  locale: Locale,
+  source: { featured: FeaturedProject[]; simple: SimpleProject[] } = { featured: featuredProjects, simple: simpleProjects },
+): { featured: FeaturedProject[]; simple: SimpleProject[] } {
+  if (locale === "ro") {
+    return {
+      featured: source.featured,
+      simple: [...source.simple].sort((a, b) => (a.order ?? 999) - (b.order ?? 999)),
+    }
+  }
+  const featured = source.featured
+    .map((p, index) => ({ p, key: p.enOrder ?? 1000 + index }))
+    .sort((a, b) => a.key - b.key)
+    .map(({ p }) => localize(p, locale))
+  const simple = source.simple
+    .map((p) => ({ p, key: p.enOrder ?? 1000 + (p.order ?? 999) }))
+    .sort((a, b) => a.key - b.key)
+    .map(({ p }) => localize(p, locale))
+  return { featured, simple }
+}

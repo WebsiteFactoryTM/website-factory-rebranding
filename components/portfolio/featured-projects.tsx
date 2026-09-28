@@ -1,22 +1,37 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
 import Image from "next/image"
+import { useLocale } from "next-intl"
 import { ArrowRight, ExternalLink } from "lucide-react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { FloatingElement } from "@/components/ui/floating-element"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { featuredProjects, categoryFilters } from "@/lib/portfolio-data"
+import { getProjects, getCategoryFilters, type FeaturedProject } from "@/lib/portfolio-data"
 import { generateProjectAltText } from "@/lib/image-alt-text"
+import type { Locale } from "@/i18n/routing"
+
+const roCopy = {
+  eyebrow: "Proiecte principale",
+  title: "Studii de caz",
+  titleHighlight: "detaliate",
+  text: "Proiecte complexe cu rezultate măsurabile și povești complete de transformare digitală.",
+  viewCaseStudy: "Vezi studiul de caz",
+  visitSite: "Vizitează site-ul",
+}
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
 
 export function FeaturedProjects() {
+  const locale = useLocale()
+  const { featured } = getProjects(locale)
+  const categoryFilters = getCategoryFilters(locale)
+  const t = copy[locale]
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollReveal()
   const [activeFilter, setActiveFilter] = useState("all")
 
-  const filteredProjects =
-    activeFilter === "all" ? featuredProjects : featuredProjects.filter((p) => p.category === activeFilter)
+  const filteredProjects = activeFilter === "all" ? featured : featured.filter((p) => p.category === activeFilter)
 
   return (
     <section className="relative pt-16 sm:pt-20 md:pt-24 pb-24 md:pb-32 overflow-hidden">
@@ -47,14 +62,12 @@ export function FeaturedProjects() {
           )}
         >
           <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">
-            Proiecte principale
+            {t.eyebrow}
           </span>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
-            Studii de caz <span className="gradient-text">detaliate</span>
+            {t.title} <span className="gradient-text">{t.titleHighlight}</span>
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Proiecte complexe cu rezultate măsurabile și povești complete de transformare digitală.
-          </p>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">{t.text}</p>
 
           {/* Filter buttons */}
           <div className="mt-8 flex flex-wrap justify-center gap-2">
@@ -78,7 +91,7 @@ export function FeaturedProjects() {
         {/* Projects Grid */}
         <div className="grid gap-8 md:gap-12">
           {filteredProjects.map((project, index) => (
-            <FeaturedProjectCard key={project.id} project={project} index={index} />
+            <FeaturedProjectCard key={project.id} project={project} index={index} locale={locale} />
           ))}
         </div>
       </div>
@@ -89,10 +102,13 @@ export function FeaturedProjects() {
 function FeaturedProjectCard({
   project,
   index,
+  locale,
 }: {
-  project: (typeof featuredProjects)[0]
+  project: FeaturedProject
   index: number
+  locale: Locale
 }) {
+  const t = copy[locale]
   const { ref, isVisible } = useScrollReveal({ threshold: 0.2 })
   const isEven = index % 2 === 0
 
@@ -119,6 +135,7 @@ function FeaturedProjectCard({
               client: project.client,
               category: project.category,
               categoryLabel: project.categoryLabel,
+              locale,
             })}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -188,15 +205,15 @@ function FeaturedProjectCard({
         {/* Actions */}
         <div className="flex flex-wrap gap-4">
           <Button asChild className="group/btn">
-            <Link href={`/portofoliu/${project.slug}`}>
-              Vezi studiul de caz
+            <Link href={{ pathname: "/portofoliu/[slug]", params: { slug: project.slug } }}>
+              {t.viewCaseStudy}
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
             </Link>
           </Button>
           {project.liveUrl && (
             <Button variant="outline" asChild>
               <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                Vizitează site-ul
+                {t.visitSite}
                 <ExternalLink className="ml-2 h-4 w-4" />
               </a>
             </Button>
