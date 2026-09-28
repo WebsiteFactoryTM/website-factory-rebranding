@@ -24,7 +24,7 @@
 | 6 | Requests to `/en/<route without an EN version>` **permanently redirect** to the RO URL (not 404). Unknown paths still 404. |
 | 7 | Static rendering via Next 16 `next/root-params` (verify next-intl version support during planning; `setRequestLocale` is the fallback). Every route must remain statically rendered. |
 | 8 | Portfolio: EN shows **all** projects, ordered by an explicit `enOrder`; RO ordering untouched. |
-| 9 | Price estimator (`/pret-website`) is RO-only; its CTA ("Estimează preț") is **hidden** on EN pages. |
+| 9 | **No pricing of any kind on EN pages**: no price badges, no "De la 450€"-style figures in prose or FAQs, no ROI/revenue calculators, no price-estimator CTA or `/pret-website` links. See "Price content on EN". |
 | 10 | hreflang value `en` (language-only, not `en-GB`); OpenGraph locale `en_GB`; `x-default` → RO. |
 | 11 | Contact API receives `locale` and sends EN subjects/templates/errors for EN submissions. |
 | 12 | Add Vitest for unit-testable logic (`lib/seo.ts`, portfolio ordering, locale/path helpers). |
@@ -128,6 +128,14 @@ So the build prerenders exactly the pages that should exist; a request to `/en/t
 - Raw `window.location.href = "/contact"` in `hero.tsx`, `about-cta.tsx`, `cta-section.tsx`, `header.tsx` (and city/service hero variants that are RO-only but share the pattern) are replaced with `Link`/`useRouter` from `i18n/navigation.ts`.
 - Links to RO-only routes from any page (legal links in contact form, consent banner → `/politica-cookie`, footer) pass `locale="ro"` explicitly so they never produce `/en/...` URLs.
 - Header/footer: "Estimează preț" CTA and the `/pret-website` link in `components/services/website/website-types.tsx` render only when `locale === 'ro'`.
+
+### Price content on EN
+
+EN pages show no pricing. Two mechanisms, chosen per element:
+
+- **Structural elements** render only when `locale === 'ro'`: the `price` badge on the services grid (`app/[locale]/servicii/page.tsx`), the ROI calculator (`components/services/website/roi-calculator.tsx`), the revenue calculator (`components/services/ecommerce/revenue-calculator.tsx`), the price figure in `components/services/ecommerce/ecommerce-blob.tsx`, the "Estimează preț" header CTA, and every `/pret-website` link.
+- **Prose containing figures** is dropped from the `en` copy rather than rendered conditionally: the pricing/maintenance FAQ items in `app/[locale]/servicii/{creare-website,magazin-online,dezvoltare-aplicatie}/page.tsx`, and any price-bearing items in `lib/content.ts`, `components/home/faq.tsx`, `components/contact/contact-faq.tsx`, `components/services/apps/app-cta.tsx`, `components/services/ecommerce/ecommerce-process.tsx`. The `en` FAQ arrays simply omit those entries; the RO arrays are untouched.
+- Guard: a unit test greps the rendered EN routes for `€`, `EUR`, `lei`, `RON` and fails on any hit, so a future edit cannot leak a price back in.
 - Language switcher component (header, desktop + mobile): uses `usePathname()` + `Link` with `locale` prop to swap locales on dual-locale routes; on RO-only routes the EN link targets `/` (EN homepage). Labels: "RO" / "EN".
 
 ### Contact API
@@ -145,7 +153,7 @@ So the build prerenders exactly the pages that should exist; a request to `/en/t
 
 ## Testing
 
-- Add Vitest (`vitest`, `@vitejs/plugin-react` if components are tested). Unit tests for: `generatePageMetadata` (canonical per locale, OG locale, `alternates.languages` shape when flag on/off, `noindex` on EN), `getProjects()` ordering for both locales, `roOnly()` guard, switcher path mapping, `pathnames` round-trip (`/despre-noi` ↔ `/en/about`).
+- Add Vitest (`vitest`, `@vitejs/plugin-react` if components are tested). Unit tests for: `generatePageMetadata` (canonical per locale, OG locale, `alternates.languages` shape when flag on/off, `noindex` on EN), `getProjects()` ordering for both locales, `roOnly()` guard, switcher path mapping, `pathnames` round-trip (`/despre-noi` ↔ `/en/about`), and the EN price-leak check (rendered EN routes contain no `€`/`EUR`/`lei`/`RON`).
 - The route-snapshot fetch script from Migration safety is a repeatable `scripts/` check, not a one-off.
 
 ## Out of scope / deferred
