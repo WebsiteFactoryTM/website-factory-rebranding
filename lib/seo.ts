@@ -39,6 +39,10 @@ export function generatePageMetadata({
   hreflang = false,
   keywords = [],
   image = "/website-factory-og.webp",
+  imageWidth = 1200,
+  imageHeight = 630,
+  ogTitle = title,
+  imageAlt = title,
 }: {
   title: string
   description: string
@@ -48,6 +52,10 @@ export function generatePageMetadata({
   hreflang?: boolean
   keywords?: string[]
   image?: string
+  imageWidth?: number
+  imageHeight?: number
+  ogTitle?: string
+  imageAlt?: string
 }): Metadata {
   const url = href ? absoluteUrl(locale, href) : `${siteConfig.url}${path}`
   const isEn = locale === "en"
@@ -69,7 +77,7 @@ export function generatePageMetadata({
         }),
     },
     openGraph: {
-      title,
+      title: ogTitle,
       description,
       url,
       siteName: siteConfig.name,
@@ -78,16 +86,16 @@ export function generatePageMetadata({
       images: [
         {
           url: image,
-          width: 1200,
-          height: 630,
-          alt: title,
+          width: imageWidth,
+          height: imageHeight,
+          alt: imageAlt,
           type: "image/webp",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: ogTitle,
       description,
       images: [image],
     },

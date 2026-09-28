@@ -32,6 +32,19 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
     description:
       "Servicii profesionale de web design, magazin online si optimizare SEO, vizibilitate locală și națională - De la idee la soluție digitală",
     image: "/website-factory-og-square.webp",
+    imageWidth: 1080,
+    imageHeight: 1080,
+    ogTitle: "Creare Site Timișoara - Web Design Timișoara - Website Factory",
+    imageAlt: "Website Factory - Web Design Timișoara",
+    keywords: [
+      "creare site Timișoara",
+      "web design Timișoara",
+      "dezvoltare site web",
+      "site-uri profesionale",
+      "magazin online",
+      "aplicații mobile",
+      "Firmă web design Timișoara",
+    ],
   })
 }
 
