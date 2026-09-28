@@ -8,7 +8,7 @@ describe("withoutPrices", () => {
       { question: "Cât costă?", answer: "De la 450€." },
       { question: "Preț?", answer: "Începe de la 650 EUR." },
       { question: "Cât durează?", answer: "4-6 săptămâni." },
-      { question: "Plătesc în lei?", answer: "Da." },
+      { question: "Cât costă în RON?", answer: "100 RON pentru pachetul basic." },
     ]
     expect(withoutPrices(faqs).map((f) => f.question)).toEqual(["Cât durează?"])
   })

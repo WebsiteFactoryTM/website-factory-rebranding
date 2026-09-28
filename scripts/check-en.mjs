@@ -1,5 +1,5 @@
 const base = (process.argv[2] ?? "http://localhost:3000").replace(/\/$/, "")
-const PRICE = /€|\bEUR\b|\blei\b|\bRON\b/i
+const PRICE = /€|\d\s*\b(?:EUR|lei|RON)\b|\b(?:EUR|lei|RON)\b\s*\d/i
 const slugs = [
   "politehnica-timisoara", "un-event", "riders-route", "la-pinocchio", "fern-and-flow",
   "daylin-nail-supply", "rox-assignment-solution", "blue-phoenix", "merpano",
