@@ -1,7 +1,9 @@
 "use client"
 
 import * as React from "react"
-import Link from "next/link"
+import { Link, useRouter } from "@/i18n/navigation"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { ArrowRight, Play, Sparkles } from "lucide-react"
 import { MagneticButton } from "@/components/ui/magnetic-button"
 import { FloatingElement } from "@/components/ui/floating-element"
@@ -9,10 +11,30 @@ import { LiquidBlob } from "@/components/ui/liquid-blob"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 
+const roCopy = {
+  badge: "Web design in Timisoara",
+  h1Line1: "De la idee la soluție",
+  h1Line2: "digitală pentru",
+  h1Highlight: "afacerea ta.",
+  subtitle:
+    "Transformăm viziunea ta într-un site care atrage clienți, convertește vizitatori și crește vizibilitatea în Google.",
+  ctaPrimary: "Solicită ofertă gratuită",
+  ctaSecondary: "Vezi portofoliu",
+  proofSeo: "SEO - în prim plan",
+  proofPerformance: "Performanță maximă",
+  proofConversions: "Conversii măsurabile",
+  scroll: "Scroll",
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
 export function Hero() {
+  const locale = useLocale()
+  const t = copy[locale]
+  const router = useRouter()
   const { ref: badgeRef, isVisible: badgeVisible } = useScrollReveal()
   const { ref: ctaRef, isVisible: ctaVisible } = useScrollReveal()
-  
+
   // Generate stable random values for floating particles to prevent hydration mismatch
   // Use deterministic values for SSR, then update with random values on client
   const [floatingParticles, setFloatingParticles] = React.useState(() => {
@@ -101,14 +123,14 @@ export function Hero() {
           >
             <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand animate-pulse" />
             <span className="text-xs sm:text-sm font-medium text-foreground/80">
-              Web design in Timisoara
+              {t.badge}
             </span>
           </div>
 
           <h1 className="font-heading text-5xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight">
-            <span className="text-foreground">De la idee la soluție</span>
+            <span className="text-foreground">{t.h1Line1}</span>
             <br />
-            <span className="text-foreground">digitală pentru</span>
+            <span className="text-foreground">{t.h1Line2}</span>
             <br />
             <span
               className="gradient-text-animated"
@@ -118,7 +140,7 @@ export function Hero() {
                 transform: "translateY(20px)",
               }}
             >
-              afacerea ta.
+              {t.h1Highlight}
               {/* Decorative underline */}
               <svg
                 className="w-full h-1 sm:h-2 md:h-3 mt-1"
@@ -157,7 +179,7 @@ export function Hero() {
                 transform: "translateY(20px)",
               }}
             >
-              Transformăm viziunea ta într-un site care atrage clienți, convertește vizitatori și crește vizibilitatea în Google.
+              {t.subtitle}
             </p>
           </div>
 
@@ -171,10 +193,10 @@ export function Hero() {
           >
             <MagneticButton
               className="group relative overflow-hidden w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-brand text-brand-foreground rounded-full font-semibold text-sm sm:text-base glow-brand hover:glow-intense transition-all duration-300"
-              onClick={() => (window.location.href = "/contact")}
+              onClick={() => router.push("/contact")}
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
-                Solicită ofertă gratuită
+                {t.ctaPrimary}
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" />
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-brand-light to-brand opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -187,7 +209,7 @@ export function Hero() {
               <span className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand/10 group-hover:bg-brand/20 transition-colors">
                 <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand ml-0.5" />
               </span>
-              <span className="font-medium text-sm sm:text-base text-foreground">Vezi portofoliu</span>
+              <span className="font-medium text-sm sm:text-base text-foreground">{t.ctaSecondary}</span>
             </Link>
           </div>
 
@@ -202,15 +224,15 @@ export function Hero() {
           >
             <span className="flex items-center gap-1.5 sm:gap-2">
               <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-500 animate-pulse" />
-              SEO - în prim plan
+              {t.proofSeo}
             </span>
             <span className="flex items-center gap-1.5 sm:gap-2">
               <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-brand" />
-              Performanță maximă
+              {t.proofPerformance}
             </span>
             <span className="flex items-center gap-1.5 sm:gap-2">
               <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-glow-violet" />
-              Conversii măsurabile
+              {t.proofConversions}
             </span>
           </div>
         </div>
@@ -228,7 +250,7 @@ export function Hero() {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 sm:gap-2">
-        <span className="text-[10px] sm:text-xs text-muted-foreground tracking-widest uppercase">Scroll</span>
+        <span className="text-[10px] sm:text-xs text-muted-foreground tracking-widest uppercase">{t.scroll}</span>
         <div className="w-px h-8 sm:h-12 bg-gradient-to-b from-brand to-transparent" />
       </div>
 

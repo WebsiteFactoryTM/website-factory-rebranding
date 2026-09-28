@@ -2,6 +2,8 @@
 
 import { useRef, useState, useEffect, useCallback } from "react"
 import Image from "next/image"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { Quote, Star, ChevronLeft, ChevronRight } from "lucide-react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { FloatingElement } from "@/components/ui/floating-element"
@@ -10,7 +12,23 @@ import { Button } from "@/components/ui/button"
 import { generateTestimonialLogoAltText } from "@/lib/image-alt-text"
 import { testimonials } from "@/lib/testimonials-data"
 
+const roCopy = {
+  sectionLabel: "Testimoniale",
+  headingPrefix: "Ce spun",
+  headingHighlight: "clienții noștri",
+  subtitle: "Feedback real de la companii care au ales să lucreze cu noi.",
+  prevLabel: "Previous testimonial",
+  nextLabel: "Next testimonial",
+  goToSlide: "Go to slide",
+}
+
+// The testimonial quotes themselves (lib/testimonials-data.ts) are RO-only for now
+// and are used as-is for the EN locale too — see task-8 brief step 6 item 7.
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
 export function Testimonials() {
+  const locale = useLocale()
+  const t = copy[locale]
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal<HTMLDivElement>()
   const scrollRef = useRef<HTMLDivElement>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -198,13 +216,13 @@ export function Testimonials() {
           )}
         >
           <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">
-            Testimoniale
+            {t.sectionLabel}
           </span>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
-            Ce spun <span className="gradient-text">clienții noștri</span>
+            {t.headingPrefix} <span className="gradient-text">{t.headingHighlight}</span>
           </h2>
           <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Feedback real de la companii care au ales să lucreze cu noi.
+            {t.subtitle}
           </p>
         </div>
 
@@ -217,7 +235,7 @@ export function Testimonials() {
               size="icon"
               onClick={handlePrev}
               disabled={currentIndex === 0}
-              aria-label="Previous testimonial"
+              aria-label={t.prevLabel}
               className={cn(
                 "rounded-full w-12 h-12 border-border/50 hover:border-brand/50 hover:bg-brand/5",
                 "disabled:opacity-50 disabled:cursor-not-allowed",
@@ -246,7 +264,7 @@ export function Testimonials() {
                       ? "before:bg-brand before:w-8 before:h-2"
                       : "before:bg-border/50 before:w-2 before:h-2 hover:before:bg-border/70",
                   )}
-                  aria-label={`Go to slide ${index + 1}`}
+                  aria-label={`${t.goToSlide} ${index + 1}`}
                 />
               ))}
             </div>
@@ -256,7 +274,7 @@ export function Testimonials() {
               size="icon"
               onClick={handleNext}
               disabled={currentIndex >= maxIndex}
-              aria-label="Next testimonial"
+              aria-label={t.nextLabel}
               className={cn(
                 "rounded-full w-12 h-12 border-border/50 hover:border-brand/50 hover:bg-brand/5",
                 "disabled:opacity-50 disabled:cursor-not-allowed",

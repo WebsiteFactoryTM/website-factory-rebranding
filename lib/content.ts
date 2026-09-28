@@ -1,3 +1,6 @@
+import type { Locale } from "@/i18n/routing"
+import { withoutPrices } from "@/lib/i18n/no-prices"
+
 // Homepage content
 export const heroContent = {
   h1: "Creare site Timișoara. Web design care vinde.",
@@ -132,7 +135,7 @@ export const testimonials = [
   },
 ]
 
-export const faqs = [
+const faqsRo = [
   {
     question: "Cât costă crearea unui site web în Timișoara?",
     answer:
@@ -159,6 +162,12 @@ export const faqs = [
       "Folosim tehnologii moderne: Next.js, React, TypeScript pentru frontend, și diverse soluții backend în funcție de proiect. Alegem întotdeauna stack-ul optim pentru obiectivele tale specifice.",
   },
 ]
+
+const faqsByLocale = { ro: faqsRo, en: withoutPrices(faqsRo) } satisfies Record<Locale, typeof faqsRo>
+
+export function getFaqs(locale: Locale) {
+  return faqsByLocale[locale]
+}
 
 export const ctaSection = {
   title: "Gata să-ți transformi prezența online?",

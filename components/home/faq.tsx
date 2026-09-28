@@ -1,39 +1,55 @@
 "use client"
 
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 import { HelpCircle } from "lucide-react"
+import { withoutPrices } from "@/lib/i18n/no-prices"
 
-const faqs = [
-  {
-    question: "Cât costă crearea unui site web în Timișoara?",
-    answer:
-      "Prețul variază în funcție de complexitate. Un site de prezentare poate începe de la 650 EUR, iar un magazin online de la 1000 EUR. Oferim consultanță gratuită pentru a stabili exact ce ai nevoie și un preț în funcție de specificațiile proiectului.",
-  },
-  {
-    question: "Cât durează să creați un website?",
-    answer:
-      "Un site de prezentare standard este gata în 2-4 săptămâni. Proiectele complexe precum magazinele online sau aplicațiile custom pot dura 5-12 săptămâni. Respectăm întotdeauna deadline-urile agreate.",
-  },
-  {
-    question: "Oferiți servicii SEO pentru site-uri în Timișoara?",
-    answer:
-      "Da! Toate site-urile noastre sunt construite SEO-first. Implementăm optimizări on-page, structură corectă de headings, meta tags, schema markup și performanță optimizată - toate incluse în preț.",
-  },
-  {
-    question: "Pot să îmi administrez singur site-ul după lansare?",
-    answer:
-      "Absolut. Predăm site-uri cu panou de administrare intuitiv și prezentarea platformei. Dacă preferi, avem și pachete de mentenanță lunară pentru gestionarea completă.",
-  },
-  {
-    question: "Ce tehnologii folosiți pentru dezvoltare?",
-    answer:
-      "Folosim tehnologii moderne: Next.js, React, TypeScript pentru frontend, și diverse soluții backend în funcție de proiect. De asemenea, putem folosi si WordPress pentru proiecte unde nu este nevoie de o platforma custom. Alegem întotdeauna stack-ul optim pentru obiectivele tale specifice.",
-  },
-]
+const roCopy = {
+  sectionLabel: "FAQ",
+  headingPrefix: "Întrebări",
+  headingHighlight: "frecvente",
+  subtitle: "Răspunsuri la cele mai comune întrebări despre serviciile noastre de web design în Timișoara.",
+  faqs: [
+    {
+      question: "Cât costă crearea unui site web în Timișoara?",
+      answer:
+        "Prețul variază în funcție de complexitate. Un site de prezentare poate începe de la 650 EUR, iar un magazin online de la 1000 EUR. Oferim consultanță gratuită pentru a stabili exact ce ai nevoie și un preț în funcție de specificațiile proiectului.",
+    },
+    {
+      question: "Cât durează să creați un website?",
+      answer:
+        "Un site de prezentare standard este gata în 2-4 săptămâni. Proiectele complexe precum magazinele online sau aplicațiile custom pot dura 5-12 săptămâni. Respectăm întotdeauna deadline-urile agreate.",
+    },
+    {
+      question: "Oferiți servicii SEO pentru site-uri în Timișoara?",
+      answer:
+        "Da! Toate site-urile noastre sunt construite SEO-first. Implementăm optimizări on-page, structură corectă de headings, meta tags, schema markup și performanță optimizată - toate incluse în preț.",
+    },
+    {
+      question: "Pot să îmi administrez singur site-ul după lansare?",
+      answer:
+        "Absolut. Predăm site-uri cu panou de administrare intuitiv și prezentarea platformei. Dacă preferi, avem și pachete de mentenanță lunară pentru gestionarea completă.",
+    },
+    {
+      question: "Ce tehnologii folosiți pentru dezvoltare?",
+      answer:
+        "Folosim tehnologii moderne: Next.js, React, TypeScript pentru frontend, și diverse soluții backend în funcție de proiect. De asemenea, putem folosi si WordPress pentru proiecte unde nu este nevoie de o platforma custom. Alegem întotdeauna stack-ul optim pentru obiectivele tale specifice.",
+    },
+  ],
+}
+
+const copy = {
+  ro: roCopy,
+  en: { ...roCopy, faqs: withoutPrices(roCopy.faqs) },
+} satisfies Record<Locale, typeof roCopy>
 
 export function FAQ() {
+  const locale = useLocale()
+  const t = copy[locale]
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal<HTMLDivElement>()
   const { ref: faqRef, isVisible: faqVisible } = useScrollReveal<HTMLDivElement>()
 
@@ -52,12 +68,12 @@ export function FAQ() {
               headerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
             )}
           >
-            <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">FAQ</span>
+            <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">{t.sectionLabel}</span>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
-              Întrebări <span className="gradient-text">frecvente</span>
+              {t.headingPrefix} <span className="gradient-text">{t.headingHighlight}</span>
             </h2>
             <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
-              Răspunsuri la cele mai comune întrebări despre serviciile noastre de web design în Timișoara.
+              {t.subtitle}
             </p>
           </div>
 
@@ -70,7 +86,7 @@ export function FAQ() {
             )}
           >
             <Accordion type="single" collapsible className="w-full space-y-4">
-              {faqs.map((faq, index) => (
+              {t.faqs.map((faq, index) => (
                 <AccordionItem
                   key={index}
                   value={`item-${index}`}

@@ -1,45 +1,71 @@
 "use client"
 
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { Globe, ShoppingCart, Smartphone, ArrowUpRight } from "lucide-react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { FloatingElement } from "@/components/ui/floating-element"
 import { cn } from "@/lib/utils"
 
-const services = [
+const serviceItems = [
   {
     id: "creare-website",
-    title: "Creare website",
-    description:
-      "Site-uri de prezentare structurate clar, rapide, optimizate SEO și construite să aducă cereri și clienți — nu doar să arate bine.",
-    href: "/servicii/creare-website",
+    href: "/servicii/creare-website" as const,
     icon: Globe,
-    outcomes: ["Vizibilitate crescută în Google", "Design responsive", "Încărcare rapidă"],
     gradient: "from-brand to-brand-light",
   },
   {
     id: "magazin-online",
-    title: "Magazin online",
-    description:
-      "E-commerce complet funcțional cu plăți integrate, sisteme de loializare, gestiune stocuri și gândit pentru vânzări și administrare ușoară.",
-    href: "/servicii/magazin-online",
+    href: "/servicii/magazin-online" as const,
     icon: ShoppingCart,
-    outcomes: ["Plăți + livrare + facturare", "Filtre, căutare, variante produse", "Checkout optimizat pentru conversii"],
     gradient: "from-glow-violet to-brand",
   },
   {
     id: "aplicatie-mobile",
-    title: "Aplicație mobilă",
-    description:
-      "Aplicații mobile native sau web și cross-platform pentru iOS și Android. UX curat și performanță bună — de la MVP la produs scalabil.",
-    href: "/servicii/aplicatie-mobile",
+    href: "/servicii/aplicatie-mobile" as const,
     icon: Smartphone,
-    outcomes: ["iOS & Android (cross-platform)", "Push, conturi, plăți (la nevoie)", "Publicare în store + mentenanță"],
     gradient: "from-glow-cyan to-glow-violet",
   },
 ]
 
+const roCopy = {
+  sectionLabel: "Servicii",
+  heading: "Soluții complete pentru",
+  headingHighlight: "prezența ta digitală",
+  subtitle:
+    "De la site-uri de prezentare și magazine online la aplicații mobile complexe. Alegem tehnologia potrivită în funcție de proiectul tău.",
+  learnMore: "Află mai multe",
+  services: [
+    {
+      id: "creare-website",
+      title: "Creare website",
+      description:
+        "Site-uri de prezentare structurate clar, rapide, optimizate SEO și construite să aducă cereri și clienți — nu doar să arate bine.",
+      outcomes: ["Vizibilitate crescută în Google", "Design responsive", "Încărcare rapidă"],
+    },
+    {
+      id: "magazin-online",
+      title: "Magazin online",
+      description:
+        "E-commerce complet funcțional cu plăți integrate, sisteme de loializare, gestiune stocuri și gândit pentru vânzări și administrare ușoară.",
+      outcomes: ["Plăți + livrare + facturare", "Filtre, căutare, variante produse", "Checkout optimizat pentru conversii"],
+    },
+    {
+      id: "aplicatie-mobile",
+      title: "Aplicație mobilă",
+      description:
+        "Aplicații mobile native sau web și cross-platform pentru iOS și Android. UX curat și performanță bună — de la MVP la produs scalabil.",
+      outcomes: ["iOS & Android (cross-platform)", "Push, conturi, plăți (la nevoie)", "Publicare în store + mentenanță"],
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
 export function ServicesPreview() {
+  const locale = useLocale()
+  const t = copy[locale]
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal<HTMLDivElement>()
   const { ref: cardsRef, isVisible: cardsVisible } = useScrollReveal<HTMLDivElement>()
 
@@ -87,23 +113,24 @@ export function ServicesPreview() {
             headerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
           )}
         >
-          <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">Servicii</span>
+          <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">{t.sectionLabel}</span>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
-            Soluții complete pentru <span className="gradient-text">prezența ta digitală</span>
+            {t.heading} <span className="gradient-text">{t.headingHighlight}</span>
           </h2>
           <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
-            De la site-uri de prezentare și magazine online la aplicații mobile complexe. Alegem tehnologia potrivită în funcție de proiectul tău.
+            {t.subtitle}
           </p>
         </div>
 
         {/* Service Cards */}
         <div ref={cardsRef} className="grid lg:grid-cols-3 gap-6 lg:gap-8 perspective-container">
-          {services.map((service, index) => {
-            const Icon = service.icon
+          {t.services.map((service, index) => {
+            const item = serviceItems[index]
+            const Icon = item.icon
             return (
               <Link
                 key={service.id}
-                href={service.href}
+                href={item.href as never}
                 className={cn(
                   "group relative p-8 lg:p-10 rounded-3xl",
                   "bg-card/80 backdrop-blur-sm border border-border/50",
@@ -121,7 +148,7 @@ export function ServicesPreview() {
                   className={cn(
                     "relative w-16 h-16 rounded-2xl flex items-center justify-center mb-8",
                     "bg-gradient-to-br",
-                    service.gradient,
+                    item.gradient,
                     "shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:rotate-3",
                     "group-hover:shadow-xl group-hover:shadow-brand/30",
                   )}
@@ -139,7 +166,7 @@ export function ServicesPreview() {
                 <ul className="relative space-y-3 mb-8">
                   {service.outcomes.map((outcome, i) => (
                     <li key={i} className="flex items-center gap-3 text-sm text-foreground/80">
-                      <span className={cn("w-1.5 h-1.5 rounded-full bg-gradient-to-r shadow-sm", service.gradient)} />
+                      <span className={cn("w-1.5 h-1.5 rounded-full bg-gradient-to-r shadow-sm", item.gradient)} />
                       {outcome}
                     </li>
                   ))}
@@ -147,7 +174,7 @@ export function ServicesPreview() {
 
                 {/* Link indicator */}
                 <div className="relative flex items-center text-brand text-sm font-semibold">
-                  <span className="mr-2 animated-underline">Află mai multe</span>
+                  <span className="mr-2 animated-underline">{t.learnMore}</span>
                   <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </div>
 
@@ -155,7 +182,7 @@ export function ServicesPreview() {
                   className={cn(
                     "absolute -top-4 -right-4 w-24 h-24 rounded-full opacity-0 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none",
                     "bg-gradient-to-br",
-                    service.gradient,
+                    item.gradient,
                     "blur-3xl",
                   )}
                 />

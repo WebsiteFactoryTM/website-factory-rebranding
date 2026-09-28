@@ -1,28 +1,34 @@
 "use client"
 
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { useCounter } from "@/hooks/use-counter"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 
-const metrics = [
-  { value: 150, suffix: "+", label: "Proiecte livrate" },
-  { value: 5, suffix: "+", label: "Ani experiență" },
-  { value: 100, suffix: "%", label: "SEO - în prim plan" },
-  { value: 150, suffix: "+", label: "Clienți mulțumiți" },
-]
+const roCopy = {
+  sectionLabel: "De ce să ne alegi",
+  metrics: [
+    { value: 150, suffix: "+", label: "Proiecte livrate" },
+    { value: 5, suffix: "+", label: "Ani experiență" },
+    { value: 100, suffix: "%", label: "SEO - în prim plan" },
+    { value: 150, suffix: "+", label: "Clienți mulțumiți" },
+  ],
+  marqueeWords: [
+    "Web Design",
+    "E-Commerce",
+    "Optimizare SEO",
+    "UI/UX Design",
+    "Aplicații mobile",
+    "Identitate de brand",
+    "Performanță",
+    "Conversii",
+    "Timișoara",
+    "România",
+  ],
+}
 
-const marqueeWords = [
-  "Web Design",
-  "E-Commerce",
-  "Optimizare SEO",
-  "UI/UX Design",
-  "Aplicații mobile",
-  "Identitate de brand",
-  "Performanță",
-  "Conversii",
-  "Timișoara",
-  "România",
-]
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
 
 function CounterItem({ value, suffix, label }: { value: number; suffix: string; label: string }) {
   const { count, ref } = useCounter({ end: value, duration: 2000 })
@@ -43,6 +49,8 @@ function CounterItem({ value, suffix, label }: { value: number; suffix: string; 
 }
 
 export function TrustStrip() {
+  const locale = useLocale()
+  const t = copy[locale]
   const { ref, isVisible } = useScrollReveal<HTMLElement>()
 
   return (
@@ -59,12 +67,12 @@ export function TrustStrip() {
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         {/* Section label */}
         <div className="text-center mb-12">
-          <span className="text-sm font-medium text-brand tracking-widest uppercase">De ce să ne alegi</span>
+          <span className="text-sm font-medium text-brand tracking-widest uppercase">{t.sectionLabel}</span>
         </div>
 
         {/* Metrics Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {metrics.map((metric, index) => (
+          {t.metrics.map((metric, index) => (
             <div
               key={metric.label}
               style={{
@@ -92,7 +100,7 @@ export function TrustStrip() {
             {/* Duplicate content for seamless loop */}
             {[...Array(2)].map((_, setIndex) => (
               <div key={setIndex} className="inline-flex items-center">
-                {marqueeWords.map((word, index) => (
+                {t.marqueeWords.map((word, index) => (
                   <span key={`${setIndex}-${index}`} className="inline-flex items-center mx-8">
                     <span className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold text-outline text-muted-foreground/20 hover:text-foreground transition-colors duration-300 cursor-default">
                       {word}

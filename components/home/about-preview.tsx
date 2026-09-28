@@ -1,6 +1,8 @@
 "use client"
 
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import Image from "next/image"
 import { ArrowRight, Users, Award, Clock, Zap, Code2 } from "lucide-react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
@@ -8,14 +10,42 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { generateTeamImageAltText } from "@/lib/image-alt-text"
 
-const stats = [
-  { icon: Users, value: "150+", label: "Clienți mulțumiți" },
-  { icon: Award, value: "5+", label: "Ani experiență" },
-  { icon: Clock, value: "-24h", label: "Timp maxim de răspuns" },
-  { icon: Zap, value: "+95%", label: "Proiecte livrate la timp" },
+const statItems = [
+  { icon: Users },
+  { icon: Award },
+  { icon: Clock },
+  { icon: Zap },
 ]
 
+const roCopy = {
+  teamImageAltSubject: "Echipa Website Factory la lucru",
+  teamImageAltLocation: "Timișoara",
+  badgeTitle: "Web Design & Development",
+  badgeLocation: "Timișoara, România",
+  sectionLabel: "Despre noi",
+  headingPrefix: "Soluții",
+  headingHighlight: "personalizate",
+  headingSuffix: "pentru ideile tale",
+  paragraph1:
+    "Suntem o echipă din Timișoara, iar de peste 5 ani ajutăm companii din România și Europa să-și digitalizeze prezența online.",
+  paragraph2Prefix:
+    "Lucrăm transparent, îți explicăm pe înțeles fiecare etapă și te ținem la curent cu progresul. Avem un ",
+  paragraph2Strong: "proces clar pentru fiecare proiect, ",
+  paragraph2Suffix: "astfel încât să știi mereu ce urmează și de ce..",
+  cta: "Vezi detalii",
+  stats: [
+    { value: "150+", label: "Clienți mulțumiți" },
+    { value: "5+", label: "Ani experiență" },
+    { value: "-24h", label: "Timp maxim de răspuns" },
+    { value: "+95%", label: "Proiecte livrate la timp" },
+  ],
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
 export function AboutPreview() {
+  const locale = useLocale()
+  const t = copy[locale]
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal<HTMLDivElement>()
   const { ref: contentRef, isVisible: contentVisible } = useScrollReveal<HTMLDivElement>()
   const { ref: statsRef, isVisible: statsVisible } = useScrollReveal<HTMLDivElement>()
@@ -40,7 +70,7 @@ export function AboutPreview() {
             <div className="relative aspect-[4/3] rounded-3xl overflow-hidden glass-premium">
               <Image
                 src="/despre-websitefactory-timisoara.webp"
-                alt={generateTeamImageAltText("Echipa Website Factory la lucru", "Timișoara")}
+                alt={generateTeamImageAltText(t.teamImageAltSubject, t.teamImageAltLocation)}
                 fill
                 className="object-cover"
               />
@@ -54,8 +84,8 @@ export function AboutPreview() {
                     <Code2 className="w-6 h-6 text-brand" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-black">Web Design & Development</p>
-                    <p className="text-xs text-black">Timișoara, România</p>
+                    <p className="text-sm font-semibold text-black">{t.badgeTitle}</p>
+                    <p className="text-xs text-black">{t.badgeLocation}</p>
                   </div>
                 </div>
               </div>
@@ -81,16 +111,16 @@ export function AboutPreview() {
             )}
           >
             <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">
-              Despre noi
+              {t.sectionLabel}
             </span>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance leading-tight">
-              Soluții <span className="gradient-text">personalizate</span> pentru ideile tale
+              {t.headingPrefix} <span className="gradient-text">{t.headingHighlight}</span> {t.headingSuffix}
             </h2>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-              Suntem o echipă din Timișoara, iar de peste 5 ani ajutăm companii din România și Europa să-și digitalizeze prezența online.
+              {t.paragraph1}
             </p>
             <p className="mt-4 text-muted-foreground leading-relaxed">
-              Lucrăm transparent, îți explicăm pe înțeles fiecare etapă și te ținem la curent cu progresul. Avem un <strong className="text-foreground">proces clar pentru fiecare proiect, </strong>astfel încât să știi mereu ce urmează și de ce..
+              {t.paragraph2Prefix}<strong className="text-foreground">{t.paragraph2Strong}</strong>{t.paragraph2Suffix}
             </p>
 
             {/* CTA Button */}
@@ -101,7 +131,7 @@ export function AboutPreview() {
                 className="group bg-brand hover:bg-brand-light text-brand-foreground rounded-full px-8 glow-brand hover:glow-intense transition-all duration-300"
               >
                 <Link href="/despre-noi">
-                  Vezi detalii
+                  {t.cta}
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
@@ -117,8 +147,8 @@ export function AboutPreview() {
             statsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
           )}
         >
-          {stats.map((stat, index) => {
-            const Icon = stat.icon
+          {t.stats.map((stat, index) => {
+            const Icon = statItems[index].icon
             return (
               <div
                 key={stat.label}

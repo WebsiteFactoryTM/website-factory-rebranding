@@ -1,13 +1,32 @@
 "use client"
 
-import Link from "next/link"
+import { Link, useRouter } from "@/i18n/navigation"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { ArrowRight, MessageCircle, Sparkles } from "lucide-react"
 import { MagneticButton } from "@/components/ui/magnetic-button"
 import { FloatingElement } from "@/components/ui/floating-element"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 
+const roCopy = {
+  badge: "Consultanță gratuită",
+  headingPrefix: "Gata să-ți transformi",
+  headingHighlight: "prezența online",
+  subtitle: "Hai să povestim despre proiectul tău. Abia așteptăm să te cunoaștem!",
+  ctaPrimary: "Solicită ofertă gratuită",
+  ctaSecondary: "Discută cu noi",
+  noObligation: "Fără obligații",
+  responseTime: "Răspuns în maxim 24h",
+  customOffer: "Ofertă personalizată",
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
 export function CTASection() {
+  const locale = useLocale()
+  const t = copy[locale]
+  const router = useRouter()
   const { ref, isVisible } = useScrollReveal<HTMLElement>()
 
   return (
@@ -96,14 +115,14 @@ export function CTASection() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8">
             <Sparkles className="w-4 h-4 text-white animate-pulse" />
-            <span className="text-sm font-medium text-white/90">Consultanță gratuită</span>
+            <span className="text-sm font-medium text-white/90">{t.badge}</span>
           </div>
 
           {/* Heading */}
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white text-balance leading-tight">
-            Gata să-ți transformi{" "}
+            {t.headingPrefix}{" "}
             <span className="relative inline-block">
-              prezența online
+              {t.headingHighlight}
               <svg
                 className="absolute -bottom-2 left-0 w-full"
                 viewBox="0 0 200 8"
@@ -122,17 +141,17 @@ export function CTASection() {
           </h2>
 
           <p className="mt-6 text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
-            Hai să povestim despre proiectul tău. Abia așteptăm să te cunoaștem!
+            {t.subtitle}
           </p>
 
           {/* CTAs */}
           <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
             <MagneticButton
               className="group relative overflow-hidden px-8 py-4 bg-white text-brand rounded-full font-semibold text-base shadow-2xl hover:shadow-white/20 transition-all duration-300"
-              onClick={() => (window.location.href = "/contact")}
+              onClick={() => router.push("/contact")}
             >
               <span className="relative z-10 flex items-center gap-2">
-                Solicită ofertă gratuită
+                {t.ctaPrimary}
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </span>
             </MagneticButton>
@@ -142,22 +161,22 @@ export function CTASection() {
               className="group flex items-center gap-3 px-8 py-4 rounded-full border border-white/30 hover:border-white/50 bg-white/5 backdrop-blur-sm transition-all duration-300 hover:bg-white/10"
             >
               <MessageCircle className="w-5 h-5 text-white" />
-              <span className="font-medium text-white">Discută cu noi</span>
+              <span className="font-medium text-white">{t.ctaSecondary}</span>
             </Link>
           </div>
 
           <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-white/70">
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shadow-lg shadow-green-400/50" />
-              Fără obligații
+              {t.noObligation}
             </span>
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-glow-cyan shadow-lg shadow-glow-cyan/50" />
-              Răspuns în maxim 24h
+              {t.responseTime}
             </span>
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-glow-violet shadow-lg shadow-glow-violet/50" />
-              Ofertă personalizată
+              {t.customOffer}
             </span>
           </div>
         </div>

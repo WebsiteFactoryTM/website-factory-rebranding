@@ -1,14 +1,27 @@
 "use client"
 
 import Image from "next/image"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { ArrowRight, ArrowUpRight } from "lucide-react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { FloatingElement } from "@/components/ui/floating-element"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { featuredProjects } from "@/lib/portfolio-data"
+import { getProjects } from "@/lib/portfolio-data"
 import { generatePortfolioShowcaseAltText } from "@/lib/image-alt-text"
+
+const roCopy = {
+  sectionLabel: "Portofoliu",
+  heading: "Proiecte care",
+  headingHighlight: "generează rezultate",
+  subtitle: "Rezultate măsurabile pentru clienți din diverse industrii.",
+  viewAll: "Vezi toate proiectele",
+  defaultOutcome: "Rezultate măsurabile",
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
 
 // Map category to color gradient
 const getColorByCategory = (category: string): string => {
@@ -26,33 +39,31 @@ const getColorByCategory = (category: string): string => {
   }
 }
 
-// Transform featured projects to case studies format
-const caseStudies = featuredProjects.slice(0, 6).map((project) => {
-  const firstResult = project.results[0]
-  const outcome = firstResult
-    ? `${firstResult.value} · ${firstResult.label}`
-    : "Rezultate măsurabile"
-
-  return {
-    id: project.id,
-    title: project.title,
-    industry: project.categoryLabel,
-    outcome,
-    description: project.shortDescription || project.description,
-    image: project.image,
-    href: `/portofoliu/${project.slug}`,
-    color: getColorByCategory(project.category),
-    altText: generatePortfolioShowcaseAltText(
-      project.title,
-      project.category,
-      outcome,
-    ),
-  }
-})
-
 export function FeaturedWork() {
+  const locale = useLocale()
+  const t = copy[locale]
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal<HTMLDivElement>()
   const { ref: gridRef, isVisible: gridVisible } = useScrollReveal<HTMLDivElement>()
+
+  // Transform featured projects to case studies format
+  const caseStudies = getProjects(locale)
+    .featured.slice(0, 6)
+    .map((project) => {
+      const firstResult = project.results[0]
+      const outcome = firstResult ? `${firstResult.value} · ${firstResult.label}` : t.defaultOutcome
+
+      return {
+        id: project.id,
+        title: project.title,
+        industry: project.categoryLabel,
+        outcome,
+        description: project.shortDescription || project.description,
+        image: project.image,
+        slug: project.slug,
+        color: getColorByCategory(project.category),
+        altText: generatePortfolioShowcaseAltText(project.title, project.category, outcome),
+      }
+    })
 
   return (
     <section className="py-24 lg:py-32 relative overflow-hidden bg-secondary/20">
@@ -95,13 +106,13 @@ export function FeaturedWork() {
         >
           <div className="max-w-2xl">
             <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">
-              Portofoliu
+              {t.sectionLabel}
             </span>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
-              Proiecte care <span className="gradient-text">generează rezultate</span>
+              {t.heading} <span className="gradient-text">{t.headingHighlight}</span>
             </h2>
             <p className="mt-6 text-lg text-muted-foreground">
-              Rezultate măsurabile pentru clienți din diverse industrii.
+              {t.subtitle}
             </p>
           </div>
           <Button
@@ -111,7 +122,7 @@ export function FeaturedWork() {
             className="self-start lg:self-auto group border-border/50 hover:border-brand/50 hover:glow-subtle bg-transparent"
           >
             <Link href="/portofoliu">
-              Vezi toate proiectele
+              {t.viewAll}
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>
@@ -122,7 +133,7 @@ export function FeaturedWork() {
           {caseStudies.map((study, index) => (
             <Link
               key={study.id}
-              href={study.href}
+              href={{ pathname: "/portofoliu/[slug]", params: { slug: study.slug } }}
               className={cn(
                 "group relative rounded-3xl overflow-hidden",
                 "bg-card border border-border/50",

@@ -1,50 +1,58 @@
 "use client"
 
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { FloatingElement } from "@/components/ui/floating-element"
 import { cn } from "@/lib/utils"
 import { Search, PenTool, Code, CheckCircle, Rocket, TrendingUp } from "lucide-react"
 
-const processSteps = [
-  {
-    step: 1,
-    title: "Descoperire",
-    description: "Analizăm obiectivele tale, publicul țintă și competiția pentru a crea strategia perfectă.",
-    icon: Search,
-  },
-  {
-    step: 2,
-    title: "Design & Prototip",
-    description: "Creăm wireframe-uri și design-uri interactive. Validăm deciziile importante înainte de implementare.",
-    icon: PenTool,
-  },
-  {
-    step: 3,
-    title: "Dezvoltare",
-    description: "Construim site-ul cu tehnologii moderne, cod curat și optimizare SEO în prim plan.",
-    icon: Code,
-  },
-  {
-    step: 4,
-    title: "Testare & QA",
-    description: "Testăm pe toate dispozitivele împreună cu clientul, optimizăm performanța și verificăm securitatea.",
-    icon: CheckCircle,
-  },
-  {
-    step: 5,
-    title: "Lansare",
-    description: "Publicăm site-ul, configurăm analytics și ne asigurăm că totul funcționează perfect.",
-    icon: Rocket,
-  },
-  {
-    step: 6,
-    title: "Suport & Creștere",
-    description: "Unde e cazul, oferim mentenanță continuă, monitorizare și optimizări bazate pe date reale.",
-    icon: TrendingUp,
-  },
-]
+const stepIcons = [Search, PenTool, Code, CheckCircle, Rocket, TrendingUp]
+
+const roCopy = {
+  sectionLabel: "Cum lucrăm",
+  headingPrefix: "Procesul nostru",
+  headingHighlight: "în 6 pași",
+  subtitle: "O metodologie testată care garantează rezultate. Transparent, eficient, orientat spre obiective.",
+  steps: [
+    {
+      step: 1,
+      title: "Descoperire",
+      description: "Analizăm obiectivele tale, publicul țintă și competiția pentru a crea strategia perfectă.",
+    },
+    {
+      step: 2,
+      title: "Design & Prototip",
+      description: "Creăm wireframe-uri și design-uri interactive. Validăm deciziile importante înainte de implementare.",
+    },
+    {
+      step: 3,
+      title: "Dezvoltare",
+      description: "Construim site-ul cu tehnologii moderne, cod curat și optimizare SEO în prim plan.",
+    },
+    {
+      step: 4,
+      title: "Testare & QA",
+      description: "Testăm pe toate dispozitivele împreună cu clientul, optimizăm performanța și verificăm securitatea.",
+    },
+    {
+      step: 5,
+      title: "Lansare",
+      description: "Publicăm site-ul, configurăm analytics și ne asigurăm că totul funcționează perfect.",
+    },
+    {
+      step: 6,
+      title: "Suport & Creștere",
+      description: "Unde e cazul, oferim mentenanță continuă, monitorizare și optimizări bazate pe date reale.",
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
 
 export function Process() {
+  const locale = useLocale()
+  const t = copy[locale]
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal<HTMLDivElement>()
   const { ref: stepsRef, isVisible: stepsVisible } = useScrollReveal<HTMLDivElement>()
 
@@ -87,19 +95,19 @@ export function Process() {
             headerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
           )}
         >
-          <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">Cum lucrăm</span>
+          <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">{t.sectionLabel}</span>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
-            Procesul nostru <span className="gradient-text">în 6 pași</span>
+            {t.headingPrefix} <span className="gradient-text">{t.headingHighlight}</span>
           </h2>
           <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
-            O metodologie testată care garantează rezultate. Transparent, eficient, orientat spre obiective.
+            {t.subtitle}
           </p>
         </div>
 
         {/* Process Steps Grid */}
         <div ref={stepsRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {processSteps.map((step, index) => {
-            const Icon = step.icon
+          {t.steps.map((step, index) => {
+            const Icon = stepIcons[index]
             return (
               <div
                 key={step.step}
@@ -134,7 +142,7 @@ export function Process() {
                 <p className="relative text-muted-foreground text-sm leading-relaxed">{step.description}</p>
 
                 {/* Connection line (except last in row) */}
-                {(index + 1) % 3 !== 0 && index !== processSteps.length - 1 && (
+                {(index + 1) % 3 !== 0 && index !== t.steps.length - 1 && (
                   <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-px bg-gradient-to-r from-border to-transparent" />
                 )}
               </div>

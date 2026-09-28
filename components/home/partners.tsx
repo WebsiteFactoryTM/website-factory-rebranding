@@ -2,27 +2,36 @@
 
 import { useRef, useState, useEffect, useCallback } from "react"
 import Image from "next/image"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { cn } from "@/lib/utils"
 import { generatePartnerLogoAltText } from "@/lib/image-alt-text"
 
-const partners = [
-  { name: "Sotherm", logo: "/partners/logo-design-sotherm.webp" },
-  { name: "Merpano", logo: "/partners/design-logo-merpano.webp" },
-  { name: "OrneBlue Phoenix", logo: "/partners/blue-phoenix-partner.webp" },
-  { name: "Ornella", logo: "/partners/ornella.webp" },
-  { name: "You Plus Agency", logo: "/partners/youplus-partner.webp" },
-  { name: "Frentzy", logo: "/partners/frentzy.webp" },
-  { name: "Pinocchio", logo: "/partners/pinocchio.webp" },
-  { name: "The Permanent", logo: "/partners/the-permanent-partner.webp" },
-  { name: "Revelio", logo: "/partners/revelio.webp" },
-  { name: "Jurjut", logo: "/partners/jurjut.webp" },
-  { name: "Horvel", logo: "/partners/horvel.webp" },
-]
+const roCopy = {
+  partners: [
+    { name: "Sotherm", logo: "/partners/logo-design-sotherm.webp" },
+    { name: "Merpano", logo: "/partners/design-logo-merpano.webp" },
+    { name: "OrneBlue Phoenix", logo: "/partners/blue-phoenix-partner.webp" },
+    { name: "Ornella", logo: "/partners/ornella.webp" },
+    { name: "You Plus Agency", logo: "/partners/youplus-partner.webp" },
+    { name: "Frentzy", logo: "/partners/frentzy.webp" },
+    { name: "Pinocchio", logo: "/partners/pinocchio.webp" },
+    { name: "The Permanent", logo: "/partners/the-permanent-partner.webp" },
+    { name: "Revelio", logo: "/partners/revelio.webp" },
+    { name: "Jurjut", logo: "/partners/jurjut.webp" },
+    { name: "Horvel", logo: "/partners/horvel.webp" },
+  ],
+}
 
-// Duplicate partners for infinite loop
-const duplicatedPartners = [...partners, ...partners, ...partners]
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
 
 export function Partners() {
+  const locale = useLocale()
+  const t = copy[locale]
+  const partners = t.partners
+  // Duplicate partners for infinite loop
+  const duplicatedPartners = [...partners, ...partners, ...partners]
+
   const scrollRef = useRef<HTMLDivElement>(null)
   const [isDragging, setIsDragging] = useState(false)
   const [startX, setStartX] = useState(0)
