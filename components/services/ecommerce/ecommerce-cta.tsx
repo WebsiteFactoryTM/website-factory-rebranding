@@ -1,12 +1,31 @@
 "use client"
 
-import Link from "next/link"
+import { useRouter } from "@/i18n/navigation"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { ArrowRight, Phone, ShoppingCart } from "lucide-react"
 import { MagneticButton } from "@/components/ui/magnetic-button"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 
+const roCopy = {
+  headingLine1: "Gata să-ți lansezi",
+  headingLine2: "magazinul online?",
+  subtitle:
+    "Contactează-ne pentru o consultație gratuită și află cum putem transforma viziunea ta într-un magazin online de succes.",
+  ctaPrimary: "Solicită ofertă gratuită",
+  callNow: "Sună acum",
+  trustConsulting: "Consultație gratuită",
+  trustResponse: "Răspuns în 24h",
+  trustNoObligations: "Fără obligații",
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
 export function EcommerceCta() {
+  const locale = useLocale()
+  const t = copy[locale as Locale]
+  const router = useRouter()
   const { ref, isVisible } = useScrollReveal()
 
   return (
@@ -52,51 +71,48 @@ export function EcommerceCta() {
 
           {/* Heading */}
           <h2 className="font-heading text-3xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 leading-tight">
-            Gata să-ți lansezi
+            {t.headingLine1}
             <br />
-            <span className="text-glow-cyan">magazinul online?</span>
+            <span className="text-glow-cyan">{t.headingLine2}</span>
           </h2>
 
           {/* Subtitle */}
-          <p className="text-lg lg:text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Contactează-ne pentru o consultație gratuită și află cum putem transforma viziunea ta într-un magazin online
-            de succes.
-          </p>
+          <p className="text-lg lg:text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed">{t.subtitle}</p>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <MagneticButton
               className="group relative overflow-hidden px-8 py-4 bg-white text-brand rounded-full font-semibold text-base shadow-2xl hover:shadow-white/20 transition-all duration-300"
-              onClick={() => (window.location.href = "/contact")}
+              onClick={() => router.push("/contact")}
             >
               <span className="relative z-10 flex items-center gap-2">
-                Solicită ofertă gratuită
+                {t.ctaPrimary}
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </span>
             </MagneticButton>
 
-            <Link
+            <a
               href="tel:+40728567830"
               className="group flex items-center gap-3 px-8 py-4 rounded-full border border-white/30 hover:border-white/60 text-white transition-all duration-300"
             >
               <Phone className="w-5 h-5" />
-              <span className="font-medium">Sună acum</span>
-            </Link>
+              <span className="font-medium">{t.callNow}</span>
+            </a>
           </div>
 
           {/* Trust indicators */}
           <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-white/60">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-green-400" />
-              <span>Consultație gratuită</span>
+              <span>{t.trustConsulting}</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-green-400" />
-              <span>Răspuns în 24h</span>
+              <span>{t.trustResponse}</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-green-400" />
-              <span>Fără obligații</span>
+              <span>{t.trustNoObligations}</span>
             </div>
           </div>
         </div>

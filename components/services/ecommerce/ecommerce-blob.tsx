@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState, useCallback } from "react"
+import { useLocale } from "next-intl"
 import { ShoppingCart, CreditCard, Package, Star, Heart, Truck } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -10,6 +11,7 @@ interface EcommerceBlobProps {
 }
 
 export function EcommerceBlob({ className, size = "lg" }: EcommerceBlobProps) {
+  const locale = useLocale()
   const containerRef = useRef<HTMLDivElement>(null)
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const [targetPos, setTargetPos] = useState({ x: 0, y: 0 })
@@ -361,26 +363,28 @@ export function EcommerceBlob({ className, size = "lg" }: EcommerceBlobProps) {
           </div>
         </div>
 
-        {/* Floating Analytics Card - hidden on small/medium screens */}
-        <div
-          className={cn("absolute analytics-orbit will-change-transform", sizes.analytics)}
-          style={{
-            transform: `translate(${-140 + mousePos.x * 0.6}px, ${-70 + mousePos.y * 0.6}px) scale(${isHovering ? 1.1 : 1})`,
-            transition: "transform 0.1s linear",
-          }}
-        >
-          <div className="px-3 sm:px-4 py-2 sm:py-3 rounded-xl bg-card border border-brand/20 shadow-lg">
-            <div className="flex items-center gap-2 mb-1 sm:mb-2">
-              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-[8px] sm:text-[10px] text-muted-foreground">Live Sales</span>
-            </div>
-            <div className="text-base sm:text-lg font-bold text-foreground">€12,847</div>
-            <div className="flex items-center gap-1 text-[8px] sm:text-[10px] text-green-500">
-              <span>↑ 24%</span>
-              <span className="text-muted-foreground">vs ieri</span>
+        {/* Floating Analytics Card - hidden on small/medium screens, price data RO-only */}
+        {locale === "ro" && (
+          <div
+            className={cn("absolute analytics-orbit will-change-transform", sizes.analytics)}
+            style={{
+              transform: `translate(${-140 + mousePos.x * 0.6}px, ${-70 + mousePos.y * 0.6}px) scale(${isHovering ? 1.1 : 1})`,
+              transition: "transform 0.1s linear",
+            }}
+          >
+            <div className="px-3 sm:px-4 py-2 sm:py-3 rounded-xl bg-card border border-brand/20 shadow-lg">
+              <div className="flex items-center gap-2 mb-1 sm:mb-2">
+                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-500 animate-pulse" />
+                <span className="text-[8px] sm:text-[10px] text-muted-foreground">Live Sales</span>
+              </div>
+              <div className="text-base sm:text-lg font-bold text-foreground">€12,847</div>
+              <div className="flex items-center gap-1 text-[8px] sm:text-[10px] text-green-500">
+                <span>↑ 24%</span>
+                <span className="text-muted-foreground">vs ieri</span>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Floating Discount Badge - only on large */}
         <div

@@ -1,13 +1,32 @@
 "use client"
 
-import Link from "next/link"
+import { useRouter } from "@/i18n/navigation"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { ArrowRight, Phone, Mail, MessageCircle } from "lucide-react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { MagneticButton } from "@/components/ui/magnetic-button"
 import { FloatingElement } from "@/components/ui/floating-element"
 import { cn } from "@/lib/utils"
 
+const roCopy = {
+  headingLine1: "Gata să ai un website",
+  headingLine2: "care lucrează pentru tine?",
+  subtitle: "Hai să discutăm despre proiectul tău. Consultanță gratuită, fără obligații. Îți răspundem în maxim 24 de ore.",
+  ctaPrimary: "Solicită ofertă gratuită",
+  ctaCall: "Sună-ne direct",
+  whatsapp: "WhatsApp",
+  trustResponse: "Răspuns în 24h",
+  trustConsulting: "Consultanță gratuită",
+  trustNoObligations: "Fără obligații",
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
 export function ServiceCTA() {
+  const locale = useLocale()
+  const t = copy[locale as Locale]
+  const router = useRouter()
   const { ref, isVisible } = useScrollReveal()
 
   return (
@@ -54,34 +73,31 @@ export function ServiceCTA() {
           )}
         >
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
-            Gata să ai un website
+            {t.headingLine1}
             <br />
-            <span className="text-white/80">care lucrează pentru tine?</span>
+            <span className="text-white/80">{t.headingLine2}</span>
           </h2>
 
-          <p className="mt-6 text-lg lg:text-xl text-white/80 max-w-2xl mx-auto">
-            Hai să discutăm despre proiectul tău. Consultanță gratuită, fără obligații. Îți răspundem în maxim 24 de
-            ore.
-          </p>
+          <p className="mt-6 text-lg lg:text-xl text-white/80 max-w-2xl mx-auto">{t.subtitle}</p>
 
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <MagneticButton
               className="group relative overflow-hidden px-8 py-4 bg-white text-brand rounded-full font-semibold text-base shadow-2xl hover:shadow-white/25 transition-all duration-300"
-              onClick={() => (window.location.href = "/contact")}
+              onClick={() => router.push("/contact")}
             >
               <span className="relative z-10 flex items-center gap-2">
-                Solicită ofertă gratuită
+                {t.ctaPrimary}
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </span>
             </MagneticButton>
 
-            <Link
+            <a
               href="tel:+40728567830"
               className="flex items-center gap-3 px-8 py-4 rounded-full border-2 border-white/30 hover:border-white/60 text-white font-semibold transition-all duration-300 hover:bg-white/10"
             >
               <Phone className="w-5 h-5" />
-              Sună-ne direct
-            </Link>
+              {t.ctaCall}
+            </a>
           </div>
 
           {/* Contact options */}
@@ -98,7 +114,7 @@ export function ServiceCTA() {
               className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"
             >
               <MessageCircle className="w-4 h-4" />
-              <span>WhatsApp</span>
+              <span>{t.whatsapp}</span>
             </a>
           </div>
 
@@ -106,15 +122,15 @@ export function ServiceCTA() {
           <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm text-white/60">
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-green-400" />
-              Răspuns în 24h
+              {t.trustResponse}
             </span>
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-green-400" />
-              Consultanță gratuită
+              {t.trustConsulting}
             </span>
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-green-400" />
-              Fără obligații
+              {t.trustNoObligations}
             </span>
           </div>
         </div>

@@ -1,40 +1,52 @@
 "use client"
 
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { FloatingElement } from "@/components/ui/floating-element"
 import { cn } from "@/lib/utils"
 
-const technologies = [
-  {
-    category: "Frontend",
-    items: [
-      { name: "Next.js", description: "Framework React pentru performanță maximă" },
-      { name: "React", description: "Librăria #1 pentru interfețe moderne" },
-      { name: "TypeScript", description: "Cod sigur și ușor de întreținut" },
-      { name: "Tailwind CSS", description: "Design system rapid și consistent" },
-    ],
-  },
-  {
-    category: "Performance",
-    items: [
-      { name: "Vercel", description: "Hosting global cu CDN inclus" },
-      { name: "Image Optimization", description: "Imagini comprimate automat" },
-      { name: "Code Splitting", description: "Încărcare inteligentă a codului" },
-      { name: "Caching Avansat", description: "Răspunsuri rapide din cache" },
-    ],
-  },
-  {
-    category: "SEO & Analytics",
-    items: [
-      { name: "Schema Markup", description: "Date structurate pentru Google" },
-      { name: "Core Web Vitals", description: "Metrici optimizate pentru ranking" },
-      { name: "Google Analytics 4", description: "Tracking complet al vizitatorilor" },
-      { name: "Search Console", description: "Monitorizare indexare Google" },
-    ],
-  },
-]
+const roCopy = {
+  eyebrow: "Tehnologii",
+  headingPre: "Stack-ul ",
+  headingHighlight: "modern",
+  subtitle: "Folosim cele mai noi și performante tehnologii pentru rezultate excepționale.",
+  categories: [
+    {
+      category: "Frontend",
+      items: [
+        { name: "Next.js", description: "Framework React pentru performanță maximă" },
+        { name: "React", description: "Librăria #1 pentru interfețe moderne" },
+        { name: "TypeScript", description: "Cod sigur și ușor de întreținut" },
+        { name: "Tailwind CSS", description: "Design system rapid și consistent" },
+      ],
+    },
+    {
+      category: "Performance",
+      items: [
+        { name: "Vercel", description: "Hosting global cu CDN inclus" },
+        { name: "Image Optimization", description: "Imagini comprimate automat" },
+        { name: "Code Splitting", description: "Încărcare inteligentă a codului" },
+        { name: "Caching Avansat", description: "Răspunsuri rapide din cache" },
+      ],
+    },
+    {
+      category: "SEO & Analytics",
+      items: [
+        { name: "Schema Markup", description: "Date structurate pentru Google" },
+        { name: "Core Web Vitals", description: "Metrici optimizate pentru ranking" },
+        { name: "Google Analytics 4", description: "Tracking complet al vizitatorilor" },
+        { name: "Search Console", description: "Monitorizare indexare Google" },
+      ],
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
 
 export function TechStack() {
+  const locale = useLocale()
+  const t = copy[locale as Locale]
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>()
 
   return (
@@ -56,17 +68,18 @@ export function TechStack() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
           )}
         >
-          <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">Tehnologii</span>
+          <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">
+            {t.eyebrow}
+          </span>
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold">
-            Stack-ul <span className="gradient-text">modern</span>
+            {t.headingPre}
+            <span className="gradient-text">{t.headingHighlight}</span>
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Folosim cele mai noi și performante tehnologii pentru rezultate excepționale.
-          </p>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">{t.subtitle}</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {technologies.map((category, catIndex) => (
+          {t.categories.map((category, catIndex) => (
             <div
               key={category.category}
               className="glass-premium rounded-3xl p-6 lg:p-8"
@@ -81,7 +94,7 @@ export function TechStack() {
               </h3>
 
               <div className="space-y-4">
-                {category.items.map((tech, techIndex) => (
+                {category.items.map((tech) => (
                   <div
                     key={tech.name}
                     className="group p-4 rounded-xl bg-card/50 border border-border/50 hover:border-brand/30 transition-all duration-300 hover:translate-x-1"

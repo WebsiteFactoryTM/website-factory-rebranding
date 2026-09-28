@@ -1,15 +1,29 @@
 "use client"
 
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { HelpCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
+
+const roCopy = {
+  eyebrow: "Întrebări frecvente",
+  headingPre: "Ai ",
+  headingHighlight: "întrebări",
+  headingEnd: "?",
+  subtitle: "Răspundem la cele mai comune întrebări despre crearea website-urilor.",
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
 
 interface ServiceFAQProps {
   faqs: { question: string; answer: string }[]
 }
 
 export function ServiceFAQ({ faqs }: ServiceFAQProps) {
+  const locale = useLocale()
+  const t = copy[locale as Locale]
   const { ref, isVisible } = useScrollReveal()
 
   return (
@@ -26,14 +40,14 @@ export function ServiceFAQ({ faqs }: ServiceFAQProps) {
         >
           <span className="inline-flex items-center gap-2 text-sm font-medium text-brand tracking-widest uppercase mb-4">
             <HelpCircle className="w-4 h-4" />
-            Întrebări frecvente
+            {t.eyebrow}
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold">
-            Ai <span className="gradient-text">întrebări</span>?
+            {t.headingPre}
+            <span className="gradient-text">{t.headingHighlight}</span>
+            {t.headingEnd}
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Răspundem la cele mai comune întrebări despre crearea website-urilor.
-          </p>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">{t.subtitle}</p>
         </div>
 
         <div className="max-w-3xl mx-auto">

@@ -1,45 +1,60 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { Zap, TrendingUp, Clock, Users } from "lucide-react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { useCounter } from "@/hooks/use-counter"
 import { cn } from "@/lib/utils"
 
-const stats = [
-  {
-    icon: TrendingUp,
-    value: 280,
-    suffix: "%",
-    label: "Creștere engagement",
-    description: "Aplicațiile mobile cresc interacțiunea",
-  },
-  {
-    icon: Clock,
-    value: 99.9,
-    suffix: "%",
-    label: "Uptime garantat",
-    description: "Infrastructură cloud redundantă",
-    decimals: 1,
-  },
-  {
-    icon: Users,
-    value: 50,
-    suffix: "K+",
-    label: "Utilizatori activi",
-    description: "În aplicațiile dezvoltate de noi",
-  },
-  {
-    icon: Zap,
-    value: 0.8,
-    suffix: "s",
-    label: "Timp de încărcare",
-    description: "Performanță optimizată",
-    decimals: 1,
-  },
-]
+const roCopy = {
+  eyebrow: "Rezultate măsurabile",
+  headingPre: "De ce să alegi ",
+  headingHighlight: "aplicații custom",
+  headingEnd: "?",
+  subtitle: "Aplicațiile dezvoltate de noi generează rezultate concrete pentru clienții noștri.",
+  stats: [
+    {
+      value: 280,
+      suffix: "%",
+      label: "Creștere engagement",
+      description: "Aplicațiile mobile cresc interacțiunea",
+    },
+    {
+      value: 99.9,
+      suffix: "%",
+      label: "Uptime garantat",
+      description: "Infrastructură cloud redundantă",
+      decimals: 1,
+    },
+    {
+      value: 50,
+      suffix: "K+",
+      label: "Utilizatori activi",
+      description: "În aplicațiile dezvoltate de noi",
+    },
+    {
+      value: 0.8,
+      suffix: "s",
+      label: "Timp de încărcare",
+      description: "Performanță optimizată",
+      decimals: 1,
+    },
+  ],
+}
 
-function AnimatedStat({ stat, isActive, index }: { stat: (typeof stats)[0]; isActive: boolean; index: number }) {
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
+const statIcons = [TrendingUp, Clock, Users, Zap]
+
+function AnimatedStat({
+  stat,
+  isActive,
+}: {
+  stat: (typeof roCopy.stats)[0] & { icon: (typeof statIcons)[number] }
+  isActive: boolean
+}) {
   const { count, ref } = useCounter({
     start: 0,
     end: stat.value,
@@ -123,6 +138,9 @@ function AnimatedStat({ stat, isActive, index }: { stat: (typeof stats)[0]; isAc
 }
 
 export function AppBenefits() {
+  const locale = useLocale()
+  const t = copy[locale as Locale]
+  const stats = t.stats.map((s, i) => ({ ...s, icon: statIcons[i] }))
   const { ref, isVisible } = useScrollReveal()
   const [activeIndex, setActiveIndex] = useState(0)
   const intervalRef = useRef<NodeJS.Timeout | undefined>(undefined)
@@ -134,7 +152,7 @@ export function AppBenefits() {
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current)
     }
-  }, [])
+  }, [stats.length])
 
   const handleHover = (index: number) => {
     setActiveIndex(index)
@@ -153,14 +171,14 @@ export function AppBenefits() {
         >
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-premium text-sm font-medium mb-6">
             <TrendingUp className="w-4 h-4 text-brand" />
-            Rezultate măsurabile
+            {t.eyebrow}
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
-            De ce să alegi <span className="gradient-text">aplicații custom</span>?
+            {t.headingPre}
+            <span className="gradient-text">{t.headingHighlight}</span>
+            {t.headingEnd}
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground text-pretty">
-            Aplicațiile dezvoltate de noi generează rezultate concrete pentru clienții noștri.
-          </p>
+          <p className="text-base sm:text-lg text-muted-foreground text-pretty">{t.subtitle}</p>
         </div>
 
         {/* Stats Grid */}
@@ -172,7 +190,7 @@ export function AppBenefits() {
         >
           {stats.map((stat, index) => (
             <div key={stat.label} onMouseEnter={() => handleHover(index)} onTouchStart={() => handleHover(index)}>
-              <AnimatedStat stat={stat} isActive={activeIndex === index} index={index} />
+              <AnimatedStat stat={stat} isActive={activeIndex === index} />
             </div>
           ))}
         </div>

@@ -1,63 +1,73 @@
 "use client"
 
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { Heart, Gift, Star, Users, Percent, Trophy, Repeat, BadgeCheck } from "lucide-react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 
-const loyaltyFeatures = [
-  {
-    icon: Star,
-    title: "Sistem de puncte",
-    description:
-      "Clienții acumulează puncte la fiecare achiziție pe care le pot converti în reduceri sau produse gratuite.",
-    color: "from-yellow-500 to-orange-500",
-  },
-  {
-    icon: Gift,
-    title: "Recompense & cadouri",
-    description:
-      "Surprinde clienții fideli cu cadouri la anumite praguri sau ocazii speciale (ziua de naștere, aniversări).",
-    color: "from-pink-500 to-rose-500",
-  },
-  {
-    icon: Percent,
-    title: "Reduceri exclusive",
-    description: "Oferă discount-uri personalizate bazate pe comportamentul de cumpărare și istoricul clientului.",
-    color: "from-green-500 to-emerald-500",
-  },
-  {
-    icon: Trophy,
-    title: "Niveluri VIP",
-    description: "Creează tiers de loialitate (Bronze, Silver, Gold, Platinum) cu beneficii crescătoare.",
-    color: "from-brand to-glow-violet",
-  },
-  {
-    icon: Users,
-    title: "Program de referral",
-    description: "Încurajează clienții să recomande prieteni în schimbul unor recompense atractive.",
-    color: "from-blue-500 to-cyan-500",
-  },
-  {
-    icon: Repeat,
-    title: "Subscripții recurente",
-    description: "Automatizează comenzile recurente cu discount pentru produsele consumabile.",
-    color: "from-purple-500 to-indigo-500",
-  },
-  {
-    icon: BadgeCheck,
-    title: "Gamification",
-    description: "Badge-uri, achievements și challenges pentru a crește engagementul și timpul petrecut în magazin.",
-    color: "from-teal-500 to-green-500",
-  },
-  {
-    icon: Heart,
-    title: "Wishlist smart",
-    description: "Notifică automat clienții când produsele favorite intră în stoc sau au reducere.",
-    color: "from-red-500 to-pink-500",
-  },
-]
+const roCopy = {
+  eyebrow: "Customer Loyalty",
+  headingPre: "Funcționalități de",
+  headingHighlight: " loializare clienți",
+  subtitle:
+    "Transformă cumpărătorii ocazionali în clienți fideli cu sistemele noastre avansate de loializare și recompense.",
+  bottomText: "Toate funcționalitățile sunt complet personalizabile și se integrează perfect cu magazinul tău.",
+  tags: ["WooCommerce Ready", "Next.js Compatible", "API First"],
+  features: [
+    {
+      title: "Sistem de puncte",
+      description:
+        "Clienții acumulează puncte la fiecare achiziție pe care le pot converti în reduceri sau produse gratuite.",
+      color: "from-yellow-500 to-orange-500",
+    },
+    {
+      title: "Recompense & cadouri",
+      description:
+        "Surprinde clienții fideli cu cadouri la anumite praguri sau ocazii speciale (ziua de naștere, aniversări).",
+      color: "from-pink-500 to-rose-500",
+    },
+    {
+      title: "Reduceri exclusive",
+      description: "Oferă discount-uri personalizate bazate pe comportamentul de cumpărare și istoricul clientului.",
+      color: "from-green-500 to-emerald-500",
+    },
+    {
+      title: "Niveluri VIP",
+      description: "Creează tiers de loialitate (Bronze, Silver, Gold, Platinum) cu beneficii crescătoare.",
+      color: "from-brand to-glow-violet",
+    },
+    {
+      title: "Program de referral",
+      description: "Încurajează clienții să recomande prieteni în schimbul unor recompense atractive.",
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      title: "Subscripții recurente",
+      description: "Automatizează comenzile recurente cu discount pentru produsele consumabile.",
+      color: "from-purple-500 to-indigo-500",
+    },
+    {
+      title: "Gamification",
+      description: "Badge-uri, achievements și challenges pentru a crește engagementul și timpul petrecut în magazin.",
+      color: "from-teal-500 to-green-500",
+    },
+    {
+      title: "Wishlist smart",
+      description: "Notifică automat clienții când produsele favorite intră în stoc sau au reducere.",
+      color: "from-red-500 to-pink-500",
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
+const featureIcons = [Star, Gift, Percent, Trophy, Users, Repeat, BadgeCheck, Heart]
 
 export function LoyaltyFeatures() {
+  const locale = useLocale()
+  const t = copy[locale as Locale]
+  const loyaltyFeatures = t.features.map((f, i) => ({ ...f, icon: featureIcons[i] }))
   const { ref, isVisible } = useScrollReveal()
 
   return (
@@ -89,16 +99,13 @@ export function LoyaltyFeatures() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-premium mb-4 sm:mb-6">
             <Heart className="w-4 h-4 text-brand" />
-            <span className="text-xs sm:text-sm font-medium">Customer Loyalty</span>
+            <span className="text-xs sm:text-sm font-medium">{t.eyebrow}</span>
           </div>
           <h2 className="font-heading text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 sm:mb-6">
-            Funcționalități de
-            <span className="gradient-text"> loializare clienți</span>
+            {t.headingPre}
+            <span className="gradient-text">{t.headingHighlight}</span>
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed px-4">
-            Transformă cumpărătorii ocazionali în clienți fideli cu sistemele noastre avansate de loializare și
-            recompense.
-          </p>
+          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed px-4">{t.subtitle}</p>
         </div>
 
         <div
@@ -149,17 +156,13 @@ export function LoyaltyFeatures() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
           )}
         >
-          <p className="text-sm sm:text-base text-muted-foreground mb-3 sm:mb-4 px-4">
-            Toate funcționalitățile sunt complet personalizabile și se integrează perfect cu magazinul tău.
-          </p>
+          <p className="text-sm sm:text-base text-muted-foreground mb-3 sm:mb-4 px-4">{t.bottomText}</p>
           <div className="flex flex-wrap justify-center gap-2 sm:gap-4 text-xs sm:text-sm">
-            <span className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-muted border border-border/50">
-              WooCommerce Ready
-            </span>
-            <span className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-muted border border-border/50">
-              Next.js Compatible
-            </span>
-            <span className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-muted border border-border/50">API First</span>
+            {t.tags.map((tag) => (
+              <span key={tag} className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-muted border border-border/50">
+                {tag}
+              </span>
+            ))}
           </div>
         </div>
       </div>

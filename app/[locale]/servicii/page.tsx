@@ -1,79 +1,114 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 import { Globe, ShoppingCart, Smartphone, ArrowRight, CheckCircle2 } from "lucide-react"
-import { setRequestLocale } from "next-intl/server"
+import { setRequestLocale, getTranslations } from "next-intl/server"
 import type { Locale } from "@/i18n/routing"
 import { allLocaleParams } from "@/lib/i18n/ro-only"
+import { Link } from "@/i18n/navigation"
 import { generatePageMetadata, generateBreadcrumbSchema, generateServiceSchema } from "@/lib/seo"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-export const metadata: Metadata = generatePageMetadata({
-  title: "Servicii Web Design Timișoara",
-  description:
-    "Servicii complete de web design și dezvoltare în Timișoara: creare website, magazin online, aplicații mobile. Soluții profesionale pentru afacerea ta digitală.",
-  path: "/servicii",
-  keywords: [
-    "servicii web design timisoara",
-    "creare website timisoara",
-    "magazin online timisoara",
-    "aplicatii mobile timisoara",
-    "dezvoltare aplicatii web",
-    "firma web design timisoara",
-    "agentie web design",
-    "servicii digitale timisoara",
-  ],
-})
+export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
+  const { locale } = await params
+  return generatePageMetadata({
+    locale,
+    href: "/servicii",
+    title: "Servicii Web Design Timișoara",
+    description:
+      "Servicii complete de web design și dezvoltare în Timișoara: creare website, magazin online, aplicații mobile. Soluții profesionale pentru afacerea ta digitală.",
+    keywords: [
+      "servicii web design timisoara",
+      "creare website timisoara",
+      "magazin online timisoara",
+      "aplicatii mobile timisoara",
+      "dezvoltare aplicatii web",
+      "firma web design timisoara",
+      "agentie web design",
+      "servicii digitale timisoara",
+    ],
+  })
+}
 
-const services = [
+const roCopy = {
+  hero: {
+    eyebrow: "Servicii Complete",
+    title: "Servicii ",
+    titleHighlight: "Web Design",
+    city: " Timișoara",
+    text: "Oferim soluții complete de web design și dezvoltare pentru afacerea ta digitală. De la website-uri de prezentare la magazine online și aplicații mobile — totul gândit pentru rezultate măsurabile.",
+  },
+  services: [
+    {
+      id: "creare-website",
+      title: "Creare Website",
+      description:
+        "Site-uri de prezentare structurate clar, rapide, optimizate SEO și construite să aducă cereri și clienți — nu doar să arate bine.",
+      features: [
+        "Design modern și responsive",
+        "Optimizare SEO completă",
+        "Viteză de încărcare optimă",
+        "Panou de administrare intuitiv",
+        "Suport și mentenanță",
+      ],
+    },
+    {
+      id: "magazin-online",
+      title: "Magazin Online",
+      description:
+        "E-commerce complet funcțional cu plăți integrate, sisteme de loializare, gestiune stocuri și gândit pentru vânzări și administrare ușoară.",
+      features: [
+        "Plăți + livrare + facturare",
+        "Filtre, căutare, variante produse",
+        "Checkout optimizat pentru conversii",
+        "Sisteme de loializare clienți",
+        "Integrare curieri și metode de plată",
+      ],
+    },
+    {
+      id: "dezvoltare-aplicatie",
+      title: "Dezvoltare Aplicație",
+      description:
+        "Aplicații mobile native sau web și cross-platform pentru iOS și Android. UX curat și performanță bună — de la MVP la produs scalabil.",
+      features: [
+        "iOS & Android (cross-platform)",
+        "Push notifications, conturi, plăți",
+        "Publicare în store + mentenanță",
+        "MVP rapid pentru startup-uri",
+        "Scalabilitate și performanță",
+      ],
+    },
+  ],
+  viewDetails: "Vezi detalii",
+  cta: {
+    title: "Ai nevoie de o ",
+    titleHighlight: "soluție personalizată",
+    text: "Fiecare proiect este unic. Oferim consultanță gratuită pentru a înțelege nevoile tale și a propune soluția optimă.",
+    primary: "Solicită ofertă gratuită",
+    secondary: "Vezi portofoliul",
+  },
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
+const serviceMeta = [
   {
     id: "creare-website",
-    title: "Creare Website",
-    description:
-      "Site-uri de prezentare structurate clar, rapide, optimizate SEO și construite să aducă cereri și clienți — nu doar să arate bine.",
-    href: "/servicii/creare-website",
+    href: "/servicii/creare-website" as const,
     icon: Globe,
-    features: [
-      "Design modern și responsive",
-      "Optimizare SEO completă",
-      "Viteză de încărcare optimă",
-      "Panou de administrare intuitiv",
-      "Suport și mentenanță",
-    ],
     gradient: "from-brand to-brand-light",
     price: "De la 450€",
   },
   {
     id: "magazin-online",
-    title: "Magazin Online",
-    description:
-      "E-commerce complet funcțional cu plăți integrate, sisteme de loializare, gestiune stocuri și gândit pentru vânzări și administrare ușoară.",
-    href: "/servicii/magazin-online",
+    href: "/servicii/magazin-online" as const,
     icon: ShoppingCart,
-    features: [
-      "Plăți + livrare + facturare",
-      "Filtre, căutare, variante produse",
-      "Checkout optimizat pentru conversii",
-      "Sisteme de loializare clienți",
-      "Integrare curieri și metode de plată",
-    ],
     gradient: "from-glow-violet to-brand",
     price: "De la 1100€",
   },
   {
     id: "dezvoltare-aplicatie",
-    title: "Dezvoltare Aplicație",
-    description:
-      "Aplicații mobile native sau web și cross-platform pentru iOS și Android. UX curat și performanță bună — de la MVP la produs scalabil.",
-    href: "/servicii/dezvoltare-aplicatie",
+    href: "/servicii/dezvoltare-aplicatie" as const,
     icon: Smartphone,
-    features: [
-      "iOS & Android (cross-platform)",
-      "Push notifications, conturi, plăți",
-      "Publicare în store + mentenanță",
-      "MVP rapid pentru startup-uri",
-      "Scalabilitate și performanță",
-    ],
     gradient: "from-glow-cyan to-glow-violet",
     price: "Personalizat",
   },
@@ -86,17 +121,24 @@ export function generateStaticParams() {
 export default async function ServiciiPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
+  const t = copy[locale as Locale]
+  const services = t.services.map((service, i) => ({ ...service, ...serviceMeta[i] }))
+
+  const tBreadcrumb = await getTranslations("breadcrumb")
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Acasă", url: "/" },
-    { name: "Servicii", url: "/servicii" },
+    { name: tBreadcrumb("home"), url: "/" },
+    { name: tBreadcrumb("services"), url: "/servicii" },
   ])
 
-  const serviceSchema = generateServiceSchema({
-    name: "Servicii Web Design și Dezvoltare",
-    description:
-      "Servicii complete de web design și dezvoltare în Timișoara: creare website, magazin online, aplicații mobile. Soluții profesionale pentru afacerea ta digitală.",
-    url: "/servicii",
-  })
+  const serviceSchema = {
+    ...generateServiceSchema({
+      name: "Servicii Web Design și Dezvoltare",
+      description:
+        "Servicii complete de web design și dezvoltare în Timișoara: creare website, magazin online, aplicații mobile. Soluții profesionale pentru afacerea ta digitală.",
+      url: "/servicii",
+    }),
+    inLanguage: locale,
+  }
 
   return (
     <>
@@ -113,14 +155,15 @@ export default async function ServiciiPage({ params }: { params: Promise<{ local
           <div className="container mx-auto px-4 lg:px-8 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
               <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">
-                Servicii Complete
+                {t.hero.eyebrow}
               </span>
               <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-                Servicii <span className="gradient-text">Web Design</span> Timișoara
+                {t.hero.title}
+                <span className="gradient-text">{t.hero.titleHighlight}</span>
+                {t.hero.city}
               </h1>
               <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-                Oferim soluții complete de web design și dezvoltare pentru afacerea ta digitală. De la website-uri de
-                prezentare la magazine online și aplicații mobile — totul gândit pentru rezultate măsurabile.
+                {t.hero.text}
               </p>
             </div>
           </div>
@@ -135,7 +178,7 @@ export default async function ServiciiPage({ params }: { params: Promise<{ local
 
           <div className="container mx-auto px-4 lg:px-8 relative z-10">
             <div className="grid lg:grid-cols-3 gap-8 lg:gap-10">
-              {services.map((service, index) => {
+              {services.map((service) => {
                 const Icon = service.icon
                 return (
                   <Link
@@ -165,11 +208,13 @@ export default async function ServiciiPage({ params }: { params: Promise<{ local
                     </div>
 
                     {/* Price Badge */}
-                    <div className="absolute top-6 right-6">
-                      <span className="px-3 py-1.5 rounded-full text-sm font-semibold bg-brand/10 text-brand">
-                        {service.price}
-                      </span>
-                    </div>
+                    {locale === "ro" && (
+                      <div className="absolute top-6 right-6">
+                        <span className="px-3 py-1.5 rounded-full text-sm font-semibold bg-brand/10 text-brand">
+                          {service.price}
+                        </span>
+                      </div>
+                    )}
 
                     {/* Content */}
                     <h2 className="relative font-heading text-2xl font-bold text-foreground mb-4 group-hover:text-brand transition-colors">
@@ -189,7 +234,7 @@ export default async function ServiciiPage({ params }: { params: Promise<{ local
 
                     {/* CTA */}
                     <div className="relative flex items-center gap-2 text-brand font-semibold group-hover:gap-3 transition-all">
-                      <span>Vezi detalii</span>
+                      <span>{t.viewDetails}</span>
                       <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                     </div>
                   </Link>
@@ -204,21 +249,19 @@ export default async function ServiciiPage({ params }: { params: Promise<{ local
           <div className="container mx-auto px-4 lg:px-8">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-                Ai nevoie de o <span className="gradient-text">soluție personalizată</span>?
+                {t.cta.title}
+                <span className="gradient-text">{t.cta.titleHighlight}</span>?
               </h2>
-              <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Fiecare proiect este unic. Oferim consultanță gratuită pentru a înțelege nevoile tale și a propune
-                soluția optimă.
-              </p>
+              <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">{t.cta.text}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg" className="group">
                   <Link href="/contact">
-                    Solicită ofertă gratuită
+                    {t.cta.primary}
                     <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link href="/portofoliu">Vezi portofoliul</Link>
+                  <Link href="/portofoliu">{t.cta.secondary}</Link>
                 </Button>
               </div>
             </div>
@@ -228,4 +271,3 @@ export default async function ServiciiPage({ params }: { params: Promise<{ local
     </>
   )
 }
-

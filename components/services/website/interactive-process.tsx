@@ -1,80 +1,92 @@
 "use client"
 
 import { useState } from "react"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { Search, PenTool, Code2, TestTube, Rocket, HeartHandshake, ChevronDown, Check } from "lucide-react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 
-const processSteps = [
-  {
-    step: 1,
-    icon: Search,
-    title: "Descoperire",
-    shortTitle: "Brief",
-    duration: "Ziua 1-2",
-    description:
-      "Începem cu o întâlnire de discovery unde înțelegem afacerea ta, obiectivele, publicul țintă și competiția. Analizăm ce funcționează și ce nu în industria ta.",
-    deliverables: ["Brief de proiect", "Analiza competiție", "Propunere soluție"],
-    color: "from-blue-500 to-cyan-500",
-  },
-  {
-    step: 2,
-    icon: PenTool,
-    title: "Design & Prototip",
-    shortTitle: "Design",
-    duration: "Ziua 3-7",
-    description:
-      "Creăm wireframe-uri și mockup-uri interactive. Validăm fiecare decizie de design cu tine înainte de a trece la implementare. Revizuiri nelimitate până ești mulțumit.",
-    deliverables: ["Wireframes", "Design UI complet", "Prototip interactiv"],
-    color: "from-violet-500 to-purple-500",
-  },
-  {
-    step: 3,
-    icon: Code2,
-    title: "Dezvoltare",
-    shortTitle: "Code",
-    duration: "Ziua 8-14",
-    description:
-      "Construim site-ul folosind cele mai noi tehnologii. Cod curat, performant, optimizat SEO din prima zi. Fiecare linie de cod este scrisă pentru viteză și scalabilitate.",
-    deliverables: ["Frontend responsive", "Integrare CMS", "Optimizare performanță"],
-    color: "from-brand to-indigo-500",
-  },
-  {
-    step: 4,
-    icon: TestTube,
-    title: "Testare & QA",
-    shortTitle: "Test",
-    duration: "Ziua 15-17",
-    description:
-      "Testăm riguros pe toate browserele și dispozitivele. Verificăm performanța, securitatea și funcționalitățile. Corectăm orice problemă înainte de lansare.",
-    deliverables: ["Raport testare", "Optimizări finale", "Checklist lansare"],
-    color: "from-amber-500 to-orange-500",
-  },
-  {
-    step: 5,
-    icon: Rocket,
-    title: "Lansare",
-    shortTitle: "Launch",
-    duration: "Ziua 18-20",
-    description:
-      "Configurăm hosting, domeniu și SSL. Lansăm site-ul live, setăm Google Analytics și Search Console. Te ghidăm prin toate setările importante.",
-    deliverables: ["Site live", "Analytics setup", "Training administrare"],
-    color: "from-green-500 to-emerald-500",
-  },
-  {
-    step: 6,
-    icon: HeartHandshake,
-    title: "Suport & Creștere",
-    shortTitle: "Suport",
-    duration: "Ongoing",
-    description:
-      "30 de zile suport gratuit post-lansare. Monitorizăm performanța, oferim recomandări de optimizare și suntem aici pentru orice întrebare sau ajustare.",
-    deliverables: ["Suport 30 zile", "Rapoarte performanță", "Consultanță SEO"],
-    color: "from-pink-500 to-rose-500",
-  },
-]
+const roCopy = {
+  eyebrow: "Procesul Nostru",
+  headingPre: "Cum creăm ",
+  headingHighlight: "website-ul tău",
+  subtitle: "Un proces transparent, testat pe 150+ proiecte. Știi exact ce se întâmplă în fiecare etapă.",
+  stepLabel: "Pasul ",
+  whatYouGet: "Ce primești:",
+  durationLabel: "Durată estimată: ",
+  steps: [
+    {
+      step: 1,
+      title: "Descoperire",
+      shortTitle: "Brief",
+      duration: "Ziua 1-2",
+      description:
+        "Începem cu o întâlnire de discovery unde înțelegem afacerea ta, obiectivele, publicul țintă și competiția. Analizăm ce funcționează și ce nu în industria ta.",
+      deliverables: ["Brief de proiect", "Analiza competiție", "Propunere soluție"],
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      step: 2,
+      title: "Design & Prototip",
+      shortTitle: "Design",
+      duration: "Ziua 3-7",
+      description:
+        "Creăm wireframe-uri și mockup-uri interactive. Validăm fiecare decizie de design cu tine înainte de a trece la implementare. Revizuiri nelimitate până ești mulțumit.",
+      deliverables: ["Wireframes", "Design UI complet", "Prototip interactiv"],
+      color: "from-violet-500 to-purple-500",
+    },
+    {
+      step: 3,
+      title: "Dezvoltare",
+      shortTitle: "Code",
+      duration: "Ziua 8-14",
+      description:
+        "Construim site-ul folosind cele mai noi tehnologii. Cod curat, performant, optimizat SEO din prima zi. Fiecare linie de cod este scrisă pentru viteză și scalabilitate.",
+      deliverables: ["Frontend responsive", "Integrare CMS", "Optimizare performanță"],
+      color: "from-brand to-indigo-500",
+    },
+    {
+      step: 4,
+      title: "Testare & QA",
+      shortTitle: "Test",
+      duration: "Ziua 15-17",
+      description:
+        "Testăm riguros pe toate browserele și dispozitivele. Verificăm performanța, securitatea și funcționalitățile. Corectăm orice problemă înainte de lansare.",
+      deliverables: ["Raport testare", "Optimizări finale", "Checklist lansare"],
+      color: "from-amber-500 to-orange-500",
+    },
+    {
+      step: 5,
+      title: "Lansare",
+      shortTitle: "Launch",
+      duration: "Ziua 18-20",
+      description:
+        "Configurăm hosting, domeniu și SSL. Lansăm site-ul live, setăm Google Analytics și Search Console. Te ghidăm prin toate setările importante.",
+      deliverables: ["Site live", "Analytics setup", "Training administrare"],
+      color: "from-green-500 to-emerald-500",
+    },
+    {
+      step: 6,
+      title: "Suport & Creștere",
+      shortTitle: "Suport",
+      duration: "Ongoing",
+      description:
+        "30 de zile suport gratuit post-lansare. Monitorizăm performanța, oferim recomandări de optimizare și suntem aici pentru orice întrebare sau ajustare.",
+      deliverables: ["Suport 30 zile", "Rapoarte performanță", "Consultanță SEO"],
+      color: "from-pink-500 to-rose-500",
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
+const stepIcons = [Search, PenTool, Code2, TestTube, Rocket, HeartHandshake]
 
 export function InteractiveProcess() {
+  const locale = useLocale()
+  const t = copy[locale as Locale]
+  const processSteps = t.steps.map((step, i) => ({ ...step, icon: stepIcons[i] }))
   const [activeStep, setActiveStep] = useState(0)
   const { ref, isVisible } = useScrollReveal({ threshold: 0.1 })
   const currentStep = processSteps[activeStep]
@@ -92,14 +104,13 @@ export function InteractiveProcess() {
           )}
         >
           <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">
-            Procesul Nostru
+            {t.eyebrow}
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold">
-            Cum creăm <span className="gradient-text">website-ul tău</span>
+            {t.headingPre}
+            <span className="gradient-text">{t.headingHighlight}</span>
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Un proces transparent, testat pe 150+ proiecte. Știi exact ce se întâmplă în fiecare etapă.
-          </p>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">{t.subtitle}</p>
         </div>
 
         <div className="lg:hidden space-y-3">
@@ -135,7 +146,7 @@ export function InteractiveProcess() {
                   {/* Step info */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-medium text-muted-foreground">Pasul {step.step}</span>
+                      <span className="text-xs font-medium text-muted-foreground">{`${t.stepLabel}${step.step}`}</span>
                       <span className="text-xs text-muted-foreground">•</span>
                       <span className="text-xs font-medium text-brand">{step.duration}</span>
                     </div>
@@ -173,7 +184,7 @@ export function InteractiveProcess() {
                       {/* Deliverables */}
                       <div className="space-y-2">
                         <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-                          Ce primești:
+                          {t.whatYouGet}
                         </h4>
                         <div className="flex flex-wrap gap-2">
                           {step.deliverables.map((item) => (
@@ -272,7 +283,7 @@ export function InteractiveProcess() {
                   <currentStep.icon className="w-7 h-7 text-white" />
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Pasul {currentStep.step}</p>
+                  <p className="text-sm text-muted-foreground">{`${t.stepLabel}${currentStep.step}`}</p>
                   <h3 className="font-heading text-2xl font-bold">{currentStep.title}</h3>
                 </div>
               </div>
@@ -282,14 +293,15 @@ export function InteractiveProcess() {
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <span className="w-2 h-2 rounded-full bg-brand" />
                 <span>
-                  Durată estimată: <strong className="text-foreground">{currentStep.duration}</strong>
+                  {t.durationLabel}
+                  <strong className="text-foreground">{currentStep.duration}</strong>
                 </span>
               </div>
             </div>
 
             {/* Deliverables */}
             <div className="space-y-4">
-              <h4 className="font-heading text-lg font-semibold mb-6">Ce primești:</h4>
+              <h4 className="font-heading text-lg font-semibold mb-6">{t.whatYouGet}</h4>
               {currentStep.deliverables.map((item, index) => (
                 <div
                   key={item}

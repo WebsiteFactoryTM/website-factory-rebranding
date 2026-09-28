@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
-import { setRequestLocale } from "next-intl/server"
+import { setRequestLocale, getTranslations } from "next-intl/server"
 import type { Locale } from "@/i18n/routing"
 import { allLocaleParams } from "@/lib/i18n/ro-only"
+import { withoutPrices } from "@/lib/i18n/no-prices"
 import { generatePageMetadata, generateServiceSchema, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/seo"
 import { ServiceHero } from "@/components/services/website/service-hero"
 import { WebsiteTypes } from "@/components/services/website/website-types"
@@ -13,26 +14,30 @@ import { WebsitePortfolio } from "@/components/services/website/website-portfoli
 import { ServiceFAQ } from "@/components/services/website/service-faq"
 import { ServiceCTA } from "@/components/services/website/service-cta"
 
-export const metadata: Metadata = generatePageMetadata({
-  title: "Creare Website Timișoara - Web design",
-  description:
-    "Servicii profesionale de creare website în Timișoara. Design modern, SEO optimizat, performanță excepțională. Site-uri de prezentare care convertesc vizitatori în clienți. Solicită ofertă gratuită!",
-  path: "/servicii/creare-website",
-  keywords: [
-    "creare website timisoara",
-    "web design timisoara",
-    "creare site timisoara",
-    "firma web design",
-    "dezvoltare website",
-    "site prezentare",
-    "design responsive",
-    "website profesional",
-    "agentie web design",
-    "creare pagina web",
-  ],
-})
+export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
+  const { locale } = await params
+  return generatePageMetadata({
+    locale,
+    href: "/servicii/creare-website",
+    title: "Creare Website Timișoara - Web design",
+    description:
+      "Servicii profesionale de creare website în Timișoara. Design modern, SEO optimizat, performanță excepțională. Site-uri de prezentare care convertesc vizitatori în clienți. Solicită ofertă gratuită!",
+    keywords: [
+      "creare website timisoara",
+      "web design timisoara",
+      "creare site timisoara",
+      "firma web design",
+      "dezvoltare website",
+      "site prezentare",
+      "design responsive",
+      "website profesional",
+      "agentie web design",
+      "creare pagina web",
+    ],
+  })
+}
 
-const serviceFaqs = [
+const faqsRo = [
   {
     question: "Cât costă crearea unui website în Timișoara?",
     answer:
@@ -75,6 +80,8 @@ const serviceFaqs = [
   },
 ]
 
+const faqs = { ro: faqsRo, en: withoutPrices(faqsRo) } satisfies Record<Locale, typeof faqsRo>
+
 export function generateStaticParams() {
   return allLocaleParams()
 }
@@ -82,20 +89,27 @@ export function generateStaticParams() {
 export default async function CreareWebsitePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
-  const serviceSchema = generateServiceSchema({
-    name: "Creare Website Profesional",
-    description:
-      "Servicii complete de creare website în Timișoara. Design modern, optimizare SEO, performanță maximă și conversii măsurabile.",
-    url: "/servicii/creare-website",
-  })
+  const loc = locale as Locale
+  const pageFaqs = faqs[loc]
 
+  const serviceSchema = {
+    ...generateServiceSchema({
+      name: "Creare Website Profesional",
+      description:
+        "Servicii complete de creare website în Timișoara. Design modern, optimizare SEO, performanță maximă și conversii măsurabile.",
+      url: "/servicii/creare-website",
+    }),
+    inLanguage: locale,
+  }
+
+  const tBreadcrumb = await getTranslations("breadcrumb")
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Acasă", url: "/" },
-    { name: "Servicii", url: "/servicii" },
+    { name: tBreadcrumb("home"), url: "/" },
+    { name: tBreadcrumb("services"), url: "/servicii" },
     { name: "Creare Website", url: "/servicii/creare-website" },
   ])
 
-  const faqSchema = generateFAQSchema(serviceFaqs)
+  const faqSchema = generateFAQSchema(pageFaqs)
 
   return (
     <>
@@ -108,10 +122,10 @@ export default async function CreareWebsitePage({ params }: { params: Promise<{ 
         <WebsiteTypes />
         <BenefitsShowcase />
         <InteractiveProcess />
-        <ROICalculator />
+        {loc === "ro" && <ROICalculator />}
         <TechStack />
         <WebsitePortfolio />
-        <ServiceFAQ faqs={serviceFaqs} />
+        <ServiceFAQ faqs={pageFaqs} />
         <ServiceCTA />
       </main>
     </>

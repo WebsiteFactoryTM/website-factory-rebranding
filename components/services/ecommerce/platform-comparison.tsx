@@ -1,65 +1,88 @@
 "use client"
 
 import { useState } from "react"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { Check, X, Zap, Shield, TrendingUp, Code, Layers, Rocket } from "lucide-react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 
-const platforms = [
-  {
-    id: "woocommerce",
-    name: "WooCommerce",
-    subtitle: "WordPress + WooCommerce",
-    description: "Soluția clasică, stabilă și dovedită pentru magazine online. Ecosistem vast de plugin-uri si teme testate si verificate.",
-    icon: Layers,
-    color: "from-purple-500 to-indigo-600",
-    idealFor: "Magazine mici-medii, buget controlat",
-    features: [
-      { name: "Timp implementare", value: "5-8 săptămâni", positive: true },
-      { name: "Cost inițial", value: "Accesibil", positive: true },
-      { name: "Ecosistem plugin-uri", value: "50,000+", positive: true },
-      { name: "Scalabilitate", value: "Până la ~7000 produse", positive: true },
-      { name: "Performanță", value: "Bună (cu optimizare)", positive: true },
-      { name: "Personalizare", value: "Extensivă", positive: true },
-      { name: "Mentenanță", value: "Necesită actualizări", positive: false },
-      { name: "Securitate", value: "Necesită monitorizare", positive: false },
-    ],
-    highlights: [
-      "Familiar și ușor de administrat",
-      "Mii de teme și plugin-uri",
-      "Comunitate uriașă",
-      "Integrări native cu procesatori plăți RO",
-    ],
-  },
-  {
-    id: "nextjs",
-    name: "Next.js + Payload",
-    subtitle: "React + Headless CMS",
-    description:
-      "Tehnologie de ultimă generație pentru magazine care cer performanță și scalabilitate enterprise-level.",
-    icon: Rocket,
-    color: "from-brand to-glow-violet",
-    idealFor: "Magazine mari, high-traffic, funcționalități avansate",
-    features: [
-      { name: "Timp implementare", value: "8-12 săptămâni", positive: true },
-      { name: "Cost inițial", value: "Investiție mai mare", positive: false },
-      { name: "Ecosistem", value: "Modern, în creștere", positive: true },
-      { name: "Scalabilitate", value: "Nelimitată", positive: true },
-      { name: "Performanță", value: "Excepțională (sub 1s)", positive: true },
-      { name: "Personalizare", value: "100% custom", positive: true },
-      { name: "Mentenanță", value: "Minimă", positive: true },
-      { name: "Securitate", value: "Enterprise-grade", positive: true },
-    ],
-    highlights: [
-      "Performanță sub 1 secundă",
-      "SEO nativ exceptional",
-      "Scalabilitate cloud",
-      "Zero vulnerabilități WordPress",
-    ],
-  },
-]
+const roCopy = {
+  eyebrow: "Tehnologii eCommerce",
+  headingPre: "Alege platforma",
+  headingHighlight: " potrivită",
+  subtitle:
+    "Oferim două direcții tehnologice pentru magazinul tău online. Fiecare cu avantaje specifice, în funcție de nevoi și buget.",
+  keyAdvantages: "Avantaje cheie",
+  recommendationTitle: "Recomandarea noastră",
+  platforms: [
+    {
+      id: "woocommerce",
+      name: "WooCommerce",
+      subtitle: "WordPress + WooCommerce",
+      description:
+        "Soluția clasică, stabilă și dovedită pentru magazine online. Ecosistem vast de plugin-uri si teme testate si verificate.",
+      color: "from-purple-500 to-indigo-600",
+      idealFor: "Magazine mici-medii, buget controlat",
+      features: [
+        { name: "Timp implementare", value: "5-8 săptămâni", positive: true },
+        { name: "Cost inițial", value: "Accesibil", positive: true },
+        { name: "Ecosistem plugin-uri", value: "50,000+", positive: true },
+        { name: "Scalabilitate", value: "Până la ~7000 produse", positive: true },
+        { name: "Performanță", value: "Bună (cu optimizare)", positive: true },
+        { name: "Personalizare", value: "Extensivă", positive: true },
+        { name: "Mentenanță", value: "Necesită actualizări", positive: false },
+        { name: "Securitate", value: "Necesită monitorizare", positive: false },
+      ],
+      highlights: [
+        "Familiar și ușor de administrat",
+        "Mii de teme și plugin-uri",
+        "Comunitate uriașă",
+        "Integrări native cu procesatori plăți RO",
+      ],
+      recommendation:
+        "WooCommerce este alegerea ideală pentru magazine cu până la 7000 de produse și buget controlat. Oferă flexibilitate excelentă și o curbă de învățare redusă pentru administrare.",
+      recommendationTag: "Perfect pentru lansare rapidă",
+    },
+    {
+      id: "nextjs",
+      name: "Next.js + Payload",
+      subtitle: "React + Headless CMS",
+      description:
+        "Tehnologie de ultimă generație pentru magazine care cer performanță și scalabilitate enterprise-level.",
+      color: "from-brand to-glow-violet",
+      idealFor: "Magazine mari, high-traffic, funcționalități avansate",
+      features: [
+        { name: "Timp implementare", value: "8-12 săptămâni", positive: true },
+        { name: "Cost inițial", value: "Investiție mai mare", positive: false },
+        { name: "Ecosistem", value: "Modern, în creștere", positive: true },
+        { name: "Scalabilitate", value: "Nelimitată", positive: true },
+        { name: "Performanță", value: "Excepțională (sub 1s)", positive: true },
+        { name: "Personalizare", value: "100% custom", positive: true },
+        { name: "Mentenanță", value: "Minimă", positive: true },
+        { name: "Securitate", value: "Enterprise-grade", positive: true },
+      ],
+      highlights: [
+        "Performanță sub 1 secundă",
+        "SEO nativ exceptional",
+        "Scalabilitate cloud",
+        "Zero vulnerabilități WordPress",
+      ],
+      recommendation:
+        "Next.js + Payload este recomandat pentru branduri care vizează creștere rapidă, volume mari de trafic și doresc o experiență de cumpărare ultra-rapidă pe orice dispozitiv.",
+      recommendationTag: "Investiție pe termen lung",
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
+const platformIcons = [Layers, Rocket]
 
 export function PlatformComparison() {
+  const locale = useLocale()
+  const t = copy[locale as Locale]
+  const platforms = t.platforms.map((p, i) => ({ ...p, icon: platformIcons[i] }))
   const { ref, isVisible } = useScrollReveal()
   const [activePlatform, setActivePlatform] = useState("woocommerce")
 
@@ -85,16 +108,13 @@ export function PlatformComparison() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-premium mb-4 sm:mb-6">
             <Code className="w-4 h-4 text-brand" />
-            <span className="text-xs sm:text-sm font-medium">Tehnologii eCommerce</span>
+            <span className="text-xs sm:text-sm font-medium">{t.eyebrow}</span>
           </div>
           <h2 className="font-heading text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 sm:mb-6">
-            Alege platforma
-            <span className="gradient-text"> potrivită</span>
+            {t.headingPre}
+            <span className="gradient-text">{t.headingHighlight}</span>
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed px-4">
-            Oferim două direcții tehnologice pentru magazinul tău online. Fiecare cu avantaje specifice, în funcție de
-            nevoi și buget.
-          </p>
+          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed px-4">{t.subtitle}</p>
         </div>
 
         <div
@@ -201,7 +221,7 @@ export function PlatformComparison() {
             <div className="bg-card rounded-2xl sm:rounded-3xl border border-border/50 p-5 sm:p-8">
               <h4 className="font-heading text-lg sm:text-xl font-bold mb-4 sm:mb-6 flex items-center gap-2">
                 <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-brand" />
-                Avantaje cheie
+                {t.keyAdvantages}
               </h4>
               <div className="grid gap-3 sm:gap-4">
                 {selectedPlatform.highlights.map((highlight, index) => (
@@ -226,18 +246,14 @@ export function PlatformComparison() {
             <div className="bg-gradient-to-br from-brand/10 to-glow-violet/10 rounded-2xl sm:rounded-3xl border border-brand/20 p-5 sm:p-8">
               <div className="flex items-center gap-3 mb-3 sm:mb-4">
                 <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-brand" />
-                <h4 className="font-heading text-base sm:text-lg font-bold">Recomandarea noastră</h4>
+                <h4 className="font-heading text-base sm:text-lg font-bold">{t.recommendationTitle}</h4>
               </div>
               <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                {activePlatform === "woocommerce"
-                  ? "WooCommerce este alegerea ideală pentru magazine cu până la 7000 de produse și buget controlat. Oferă flexibilitate excelentă și o curbă de învățare redusă pentru administrare."
-                  : "Next.js + Payload este recomandat pentru branduri care vizează creștere rapidă, volume mari de trafic și doresc o experiență de cumpărare ultra-rapidă pe orice dispozitiv."}
+                {selectedPlatform.recommendation}
               </p>
               <div className="mt-3 sm:mt-4 flex items-center gap-2 text-xs sm:text-sm text-brand font-medium">
                 <TrendingUp className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                <span>
-                  {activePlatform === "woocommerce" ? "Perfect pentru lansare rapidă" : "Investiție pe termen lung"}
-                </span>
+                <span>{selectedPlatform.recommendationTag}</span>
               </div>
             </div>
           </div>

@@ -1,56 +1,68 @@
 "use client"
 
 import { useState } from "react"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { Lightbulb, PenTool, Code2, TestTube, Rocket, Headphones, ChevronDown } from "lucide-react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 
-const processSteps = [
-  {
-    icon: Lightbulb,
-    title: "Discovery & Analiză",
-    duration: "1-2 săptămâni",
-    description: "Analizăm cerințele, definim funcționalitățile și creăm specificațiile tehnice.",
-    deliverables: ["PRD Document", "User Stories", "Wireframes", "Estimare"],
-  },
-  {
-    icon: PenTool,
-    title: "UX/UI Design",
-    duration: "2-3 săptămâni",
-    description: "Design centrat pe utilizator cu prototipuri interactive și sistem de design.",
-    deliverables: ["Figma Designs", "Prototip interactiv", "Design System", "Assets"],
-  },
-  {
-    icon: Code2,
-    title: "Dezvoltare",
-    duration: "4-12 săptămâni",
-    description: "Dezvoltare iterativă cu sprint-uri de 2 săptămâni și demo-uri regulate.",
-    deliverables: ["Cod sursă", "API Documentation", "Sprint Reviews", "Builds"],
-  },
-  {
-    icon: TestTube,
-    title: "QA & Testing",
-    duration: "1-2 săptămâni",
-    description: "Testare completă: unit tests, integration tests, UAT și performance testing.",
-    deliverables: ["Test Reports", "Bug Fixes", "Performance Audit", "Security Scan"],
-  },
-  {
-    icon: Rocket,
-    title: "Lansare",
-    duration: "3-5 zile",
-    description: "Deploy pe App Store/Google Play sau server de producție cu monitorizare.",
-    deliverables: ["Store Submission", "CI/CD Setup", "Monitoring", "Documentation"],
-  },
-  {
-    icon: Headphones,
-    title: "Suport & Evoluție",
-    duration: "Continuu",
-    description: "Mentenanță, actualizări și dezvoltare de noi funcționalități.",
-    deliverables: ["Updates", "Analytics", "Optimizări", "New Features"],
-  },
-]
+const roCopy = {
+  eyebrow: "Proces de dezvoltare",
+  headingPre: "Cum dezvoltăm ",
+  headingHighlight: "aplicația ta",
+  subtitle: "Proces Agile structurat cu transparență totală și livrări predictibile.",
+  stepLabel: "Pasul ",
+  whatYouGet: "Ce primești:",
+  durationLabel: "Durată: ",
+  steps: [
+    {
+      title: "Discovery & Analiză",
+      duration: "1-2 săptămâni",
+      description: "Analizăm cerințele, definim funcționalitățile și creăm specificațiile tehnice.",
+      deliverables: ["PRD Document", "User Stories", "Wireframes", "Estimare"],
+    },
+    {
+      title: "UX/UI Design",
+      duration: "2-3 săptămâni",
+      description: "Design centrat pe utilizator cu prototipuri interactive și sistem de design.",
+      deliverables: ["Figma Designs", "Prototip interactiv", "Design System", "Assets"],
+    },
+    {
+      title: "Dezvoltare",
+      duration: "4-12 săptămâni",
+      description: "Dezvoltare iterativă cu sprint-uri de 2 săptămâni și demo-uri regulate.",
+      deliverables: ["Cod sursă", "API Documentation", "Sprint Reviews", "Builds"],
+    },
+    {
+      title: "QA & Testing",
+      duration: "1-2 săptămâni",
+      description: "Testare completă: unit tests, integration tests, UAT și performance testing.",
+      deliverables: ["Test Reports", "Bug Fixes", "Performance Audit", "Security Scan"],
+    },
+    {
+      title: "Lansare",
+      duration: "3-5 zile",
+      description: "Deploy pe App Store/Google Play sau server de producție cu monitorizare.",
+      deliverables: ["Store Submission", "CI/CD Setup", "Monitoring", "Documentation"],
+    },
+    {
+      title: "Suport & Evoluție",
+      duration: "Continuu",
+      description: "Mentenanță, actualizări și dezvoltare de noi funcționalități.",
+      deliverables: ["Updates", "Analytics", "Optimizări", "New Features"],
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
+const stepIcons = [Lightbulb, PenTool, Code2, TestTube, Rocket, Headphones]
 
 export function AppProcess() {
+  const locale = useLocale()
+  const t = copy[locale as Locale]
+  const processSteps = t.steps.map((step, i) => ({ ...step, icon: stepIcons[i] }))
   const { ref, isVisible } = useScrollReveal()
   const [activeStep, setActiveStep] = useState(0)
   const [expandedMobile, setExpandedMobile] = useState<number | null>(0)
@@ -71,14 +83,13 @@ export function AppProcess() {
         >
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-premium text-sm font-medium mb-6">
             <Code2 className="w-4 h-4 text-brand" />
-            Proces de dezvoltare
+            {t.eyebrow}
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
-            Cum dezvoltăm <span className="gradient-text">aplicația ta</span>
+            {t.headingPre}
+            <span className="gradient-text">{t.headingHighlight}</span>
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground text-pretty">
-            Proces Agile structurat cu transparență totală și livrări predictibile.
-          </p>
+          <p className="text-base sm:text-lg text-muted-foreground text-pretty">{t.subtitle}</p>
         </div>
 
         {/* Desktop: Timeline */}
@@ -135,17 +146,17 @@ export function AppProcess() {
                       })()}
                     </div>
                     <div>
-                      <span className="text-sm text-brand font-medium">Pasul {activeStep + 1}</span>
+                      <span className="text-sm text-brand font-medium">{`${t.stepLabel}${activeStep + 1}`}</span>
                       <h3 className="text-2xl font-bold">{processSteps[activeStep].title}</h3>
                     </div>
                   </div>
                   <p className="text-lg text-muted-foreground mb-4">{processSteps[activeStep].description}</p>
                   <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand/10 text-brand font-medium">
-                    <span>Durată: {processSteps[activeStep].duration}</span>
+                    <span>{`${t.durationLabel}${processSteps[activeStep].duration}`}</span>
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-4">Ce primești:</h4>
+                  <h4 className="font-semibold mb-4">{t.whatYouGet}</h4>
                   <div className="grid grid-cols-2 gap-3">
                     {processSteps[activeStep].deliverables.map((item) => (
                       <div
@@ -196,7 +207,7 @@ export function AppProcess() {
                       />
                     </div>
                     <div className="text-left">
-                      <span className="text-xs text-brand font-medium">Pasul {index + 1}</span>
+                      <span className="text-xs text-brand font-medium">{`${t.stepLabel}${index + 1}`}</span>
                       <h3 className="font-bold text-sm sm:text-base">{step.title}</h3>
                     </div>
                   </div>

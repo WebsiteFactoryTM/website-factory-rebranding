@@ -1,6 +1,8 @@
 "use client"
 
 import { useState } from "react"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import {
   Search,
   Palette,
@@ -16,98 +18,106 @@ import {
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 
-const processSteps = [
-  {
-    step: 1,
-    icon: Search,
-    title: "Analiză & Strategie",
-    shortTitle: "Analiză",
-    duration: "Ziua 1-3",
-    description:
-      "Analizăm piața, competiția și publicul țintă. Definim strategia de vânzare, categoriile de produse și fluxul ideal de checkout pentru maximizarea conversiilor.",
-    deliverables: ["Audit competiție", "Strategie pricing", "Arhitectura magazin"],
-    color: "from-blue-500 to-cyan-500",
-  },
-  {
-    step: 2,
-    icon: Palette,
-    title: "Design UX/UI",
-    shortTitle: "Design",
-    duration: "Ziua 4-12",
-    description:
-      "Creăm un design orientat pe conversie: homepage atractiv, pagini de produs optimizate, coș de cumpărături intuitiv și checkout simplificat pentru mobile.",
-    deliverables: ["Wireframes UX", "Design complet", "Prototip interactiv"],
-    color: "from-violet-500 to-purple-500",
-  },
-  {
-    step: 3,
-    icon: Database,
-    title: "Setup Catalog",
-    shortTitle: "Catalog",
-    duration: "Ziua 13-20",
-    description:
-      "Structurăm catalogul de produse, setăm categorii, filtre și atribute. Importăm produsele și optimizăm descrierile pentru SEO și conversie.",
-    deliverables: ["Structură categorii", "Import produse", "SEO produse"],
-    color: "from-brand to-indigo-500",
-  },
-  {
-    step: 4,
-    icon: CreditCard,
-    title: "Plăți & Livrare",
-    shortTitle: "Integrări",
-    duration: "Ziua 21-25",
-    description:
-      "Integrăm procesatorii de plăți (card, ramburs, rate), curierii (FanCourier, Sameday, DPD) și sistemele de facturare. Totul automatizat.",
-    deliverables: ["Gateway plăți", "Integrare curieri", "Facturare automată"],
-    color: "from-green-500 to-emerald-500",
-  },
-  {
-    step: 5,
-    icon: ShoppingBag,
-    title: "Funcționalități Extra",
-    shortTitle: "Features",
-    duration: "Ziua 26-30",
-    description:
-      "Implementăm funcțiile de loializare: puncte de fidelitate, programe referral, wishlist smart, notificări stoc, subscripții și marketing automation.",
-    deliverables: ["Sistem loializare", "Marketing automation", "Notificări email"],
-    color: "from-amber-500 to-orange-500",
-  },
-  {
-    step: 6,
-    icon: TestTube,
-    title: "Testare & QA",
-    shortTitle: "Test",
-    duration: "Ziua 31-35",
-    description:
-      "Testăm riguros fluxul complet de cumpărare pe toate dispozitivele. Verificăm plățile, livrările, email-urile automate și performanța.",
-    deliverables: ["Teste checkout", "Teste plăți", "Optimizare viteză"],
-    color: "from-rose-500 to-pink-500",
-  },
-  {
-    step: 7,
-    icon: Rocket,
-    title: "Lansare",
-    shortTitle: "Launch",
-    duration: "Ziua 36-37",
-    description:
-      "Lansăm magazinul live, configurăm Google Analytics eCommerce, setăm tracking conversii și te instruim cum să gestionezi comenzile zilnice.",
-    deliverables: ["Magazin live", "Analytics eCommerce", "Training complet"],
-    color: "from-cyan-500 to-teal-500",
-  },
-  {
-    step: 8,
-    icon: HeartHandshake,
-    title: "Suport & Creștere",
-    shortTitle: "Suport",
-    duration: "Ongoing",
-    description:
-      "30 zile suport gratuit. Monitorizăm vânzările, rata de abandon coș, optimizăm conversiile și te ajutăm să scalezi afacerea.",
-    deliverables: ["Suport 30 zile", "Rapoarte vânzări", "Optimizări CRO"],
-    color: "from-brand-light to-brand",
-  },
-]
+const roCopy = {
+  eyebrow: "Procesul Nostru",
+  headingPre: "Cum construim ",
+  headingHighlight: "magazinul tău online",
+  subtitle: "Un proces transparent de 30 de zile, de la concept la vânzări.",
+  stepLabel: "Pasul ",
+  whatYouGet: "Ce primești:",
+  durationLabel: "Durată estimată: ",
+  steps: [
+    {
+      step: 1,
+      title: "Analiză & Strategie",
+      shortTitle: "Analiză",
+      duration: "Ziua 1-3",
+      description:
+        "Analizăm piața, competiția și publicul țintă. Definim strategia de vânzare, categoriile de produse și fluxul ideal de checkout pentru maximizarea conversiilor.",
+      deliverables: ["Audit competiție", "Strategie pricing", "Arhitectura magazin"],
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      step: 2,
+      title: "Design UX/UI",
+      shortTitle: "Design",
+      duration: "Ziua 4-12",
+      description:
+        "Creăm un design orientat pe conversie: homepage atractiv, pagini de produs optimizate, coș de cumpărături intuitiv și checkout simplificat pentru mobile.",
+      deliverables: ["Wireframes UX", "Design complet", "Prototip interactiv"],
+      color: "from-violet-500 to-purple-500",
+    },
+    {
+      step: 3,
+      title: "Setup Catalog",
+      shortTitle: "Catalog",
+      duration: "Ziua 13-20",
+      description:
+        "Structurăm catalogul de produse, setăm categorii, filtre și atribute. Importăm produsele și optimizăm descrierile pentru SEO și conversie.",
+      deliverables: ["Structură categorii", "Import produse", "SEO produse"],
+      color: "from-brand to-indigo-500",
+    },
+    {
+      step: 4,
+      title: "Plăți & Livrare",
+      shortTitle: "Integrări",
+      duration: "Ziua 21-25",
+      description:
+        "Integrăm procesatorii de plăți (card, ramburs, rate), curierii (FanCourier, Sameday, DPD) și sistemele de facturare. Totul automatizat.",
+      deliverables: ["Gateway plăți", "Integrare curieri", "Facturare automată"],
+      color: "from-green-500 to-emerald-500",
+    },
+    {
+      step: 5,
+      title: "Funcționalități Extra",
+      shortTitle: "Features",
+      duration: "Ziua 26-30",
+      description:
+        "Implementăm funcțiile de loializare: puncte de fidelitate, programe referral, wishlist smart, notificări stoc, subscripții și marketing automation.",
+      deliverables: ["Sistem loializare", "Marketing automation", "Notificări email"],
+      color: "from-amber-500 to-orange-500",
+    },
+    {
+      step: 6,
+      title: "Testare & QA",
+      shortTitle: "Test",
+      duration: "Ziua 31-35",
+      description:
+        "Testăm riguros fluxul complet de cumpărare pe toate dispozitivele. Verificăm plățile, livrările, email-urile automate și performanța.",
+      deliverables: ["Teste checkout", "Teste plăți", "Optimizare viteză"],
+      color: "from-rose-500 to-pink-500",
+    },
+    {
+      step: 7,
+      title: "Lansare",
+      shortTitle: "Launch",
+      duration: "Ziua 36-37",
+      description:
+        "Lansăm magazinul live, configurăm Google Analytics eCommerce, setăm tracking conversii și te instruim cum să gestionezi comenzile zilnice.",
+      deliverables: ["Magazin live", "Analytics eCommerce", "Training complet"],
+      color: "from-cyan-500 to-teal-500",
+    },
+    {
+      step: 8,
+      title: "Suport & Creștere",
+      shortTitle: "Suport",
+      duration: "Ongoing",
+      description:
+        "30 zile suport gratuit. Monitorizăm vânzările, rata de abandon coș, optimizăm conversiile și te ajutăm să scalezi afacerea.",
+      deliverables: ["Suport 30 zile", "Rapoarte vânzări", "Optimizări CRO"],
+      color: "from-brand-light to-brand",
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
+const stepIcons = [Search, Palette, Database, CreditCard, ShoppingBag, TestTube, Rocket, HeartHandshake]
 
 export function EcommerceProcess() {
+  const locale = useLocale()
+  const t = copy[locale as Locale]
+  const processSteps = t.steps.map((step, i) => ({ ...step, icon: stepIcons[i] }))
   const [activeStep, setActiveStep] = useState(0)
   const { ref, isVisible } = useScrollReveal({ threshold: 0.1 })
   const currentStep = processSteps[activeStep]
@@ -129,14 +139,13 @@ export function EcommerceProcess() {
           )}
         >
           <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">
-            Procesul Nostru
+            {t.eyebrow}
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold">
-            Cum construim <span className="gradient-text">magazinul tău online</span>
+            {t.headingPre}
+            <span className="gradient-text">{t.headingHighlight}</span>
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Un proces transparent de 30 de zile, de la concept la vânzări.
-          </p>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">{t.subtitle}</p>
         </div>
 
         {/* Mobile Accordion */}
@@ -170,7 +179,7 @@ export function EcommerceProcess() {
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-medium text-muted-foreground">Pasul {step.step}</span>
+                      <span className="text-xs font-medium text-muted-foreground">{`${t.stepLabel}${step.step}`}</span>
                       <span className="text-xs text-muted-foreground">•</span>
                       <span className="text-xs font-medium text-brand">{step.duration}</span>
                     </div>
@@ -203,7 +212,7 @@ export function EcommerceProcess() {
                       <p className="text-sm text-foreground/80 leading-relaxed">{step.description}</p>
                       <div className="space-y-2">
                         <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-                          Ce primești:
+                          {t.whatYouGet}
                         </h4>
                         <div className="flex flex-wrap gap-2">
                           {step.deliverables.map((item) => (
@@ -231,7 +240,6 @@ export function EcommerceProcess() {
 
         {/* Desktop Timeline */}
         <div className="hidden lg:block max-w-6xl mx-auto">
-          {/* Step Indicators */}
           <div className="relative mb-12">
             <div className="absolute top-6 left-0 right-0 h-0.5 bg-border">
               <div
@@ -299,7 +307,7 @@ export function EcommerceProcess() {
                   <currentStep.icon className="w-7 h-7 text-white" />
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Pasul {currentStep.step}</p>
+                  <p className="text-sm text-muted-foreground">{`${t.stepLabel}${currentStep.step}`}</p>
                   <h3 className="font-heading text-2xl font-bold">{currentStep.title}</h3>
                 </div>
               </div>
@@ -309,13 +317,14 @@ export function EcommerceProcess() {
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <span className="w-2 h-2 rounded-full bg-brand" />
                 <span>
-                  Durată estimată: <strong className="text-foreground">{currentStep.duration}</strong>
+                  {t.durationLabel}
+                  <strong className="text-foreground">{currentStep.duration}</strong>
                 </span>
               </div>
             </div>
 
             <div className="space-y-4">
-              <h4 className="font-heading text-lg font-semibold mb-6">Ce primești:</h4>
+              <h4 className="font-heading text-lg font-semibold mb-6">{t.whatYouGet}</h4>
               {currentStep.deliverables.map((item, index) => (
                 <div
                   key={item}

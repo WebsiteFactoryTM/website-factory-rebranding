@@ -1,54 +1,67 @@
 "use client"
 
 import Image from "next/image"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { ArrowUpRight, ExternalLink } from "lucide-react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
-import { featuredProjects, simpleProjects } from "@/lib/portfolio-data"
+import { getProjects } from "@/lib/portfolio-data"
 import { generatePortfolioShowcaseAltText } from "@/lib/image-alt-text"
 
-// Get website projects from featured projects
-const featuredWebsiteProjects = featuredProjects
-  .filter((project) => project.category === "website")
-  .slice(0, 3)
-  .map((project) => {
-    const firstResult = project.results[0]
-    const outcome = firstResult ? `${firstResult.value} ${firstResult.label}` : "Rezultate măsurabile"
-    return {
-      title: project.title,
-      category: project.categoryLabel,
-      image: project.image,
-      results: firstResult?.value || "Rezultate măsurabile",
-      href: `/portofoliu/${project.slug}`,
-      altText: generatePortfolioShowcaseAltText(project.title, project.category, outcome),
-      isFeatured: true,
-    }
-  })
+const roCopy = {
+  eyebrow: "Portofoliu",
+  headingPre: "Website-uri ",
+  headingHighlight: "de succes",
+  subtitle: "Exemple reale de website-uri create de noi care generează rezultate pentru clienți.",
+  viewAll: "Vezi toate proiectele",
+  otherProjects: "Alte proiecte",
+  defaultResult: "Rezultate măsurabile",
+  recentProject: "Proiect recent",
+}
 
-// Get secondary projects from simpleProjects (sorted by order, max 3)
-const secondaryWebsiteProjects = simpleProjects
-  .filter((project) => project.category === "website")
-  .sort((a, b) => (a.order || 999) - (b.order || 999))
-  .slice(0, 3)
-  .map((project) => {
-    return {
-      title: project.title,
-      category: project.categoryLabel,
-      image: project.image,
-      results: project.year || "Proiect recent",
-      href: project.liveUrl || "#",
-      altText: generatePortfolioShowcaseAltText(project.title, project.category, project.year || "Proiect recent"),
-      isFeatured: false,
-      isExternal: !!project.liveUrl,
-    }
-  })
-
-// Combine featured and secondary projects
-const websiteProjects = [...featuredWebsiteProjects, ...secondaryWebsiteProjects]
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
 
 export function WebsitePortfolio() {
+  const locale = useLocale() as Locale
+  const t = copy[locale]
   const { ref, isVisible } = useScrollReveal()
+  const { featured, simple } = getProjects(locale)
+
+  const featuredWebsiteProjects = featured
+    .filter((project) => project.category === "website")
+    .slice(0, 3)
+    .map((project) => {
+      const firstResult = project.results[0]
+      const outcome = firstResult ? `${firstResult.value} ${firstResult.label}` : t.defaultResult
+      return {
+        title: project.title,
+        category: project.categoryLabel,
+        image: project.image,
+        results: firstResult?.value || t.defaultResult,
+        slug: project.slug,
+        altText: generatePortfolioShowcaseAltText(project.title, project.category, outcome),
+        isFeatured: true,
+      }
+    })
+
+  const secondaryWebsiteProjects = [...simple]
+    .filter((project) => project.category === "website")
+    .sort((a, b) => (a.order || 999) - (b.order || 999))
+    .slice(0, 3)
+    .map((project) => {
+      return {
+        title: project.title,
+        category: project.categoryLabel,
+        image: project.image,
+        results: project.year || t.recentProject,
+        href: project.liveUrl || "#",
+        altText: generatePortfolioShowcaseAltText(project.title, project.category, project.year || t.recentProject),
+        isFeatured: false,
+        isExternal: !!project.liveUrl,
+      }
+    })
 
   return (
     <section className="relative py-24 lg:py-32 overflow-hidden">
@@ -62,21 +75,20 @@ export function WebsitePortfolio() {
         >
           <div>
             <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">
-              Portofoliu
+              {t.eyebrow}
             </span>
             <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold">
-              Website-uri <span className="gradient-text">de succes</span>
+              {t.headingPre}
+              <span className="gradient-text">{t.headingHighlight}</span>
             </h2>
-            <p className="mt-4 text-lg text-muted-foreground max-w-xl">
-              Exemple reale de website-uri create de noi care generează rezultate pentru clienți.
-            </p>
+            <p className="mt-4 text-lg text-muted-foreground max-w-xl">{t.subtitle}</p>
           </div>
 
           <Link
             href="/portofoliu"
             className="inline-flex items-center gap-2 text-brand font-semibold hover:gap-3 transition-all group"
           >
-            Vezi toate proiectele
+            {t.viewAll}
             <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
         </div>
@@ -86,7 +98,7 @@ export function WebsitePortfolio() {
           {featuredWebsiteProjects.map((project, index) => (
             <Link
               key={project.title}
-              href={project.href}
+              href={{ pathname: "/portofoliu/[slug]", params: { slug: project.slug } }}
               className="group relative rounded-3xl overflow-hidden bg-card border border-border/50 hover:border-brand/30 transition-all duration-500 hover:shadow-2xl"
               style={{
                 animation: isVisible ? `fadeInUp 0.6s ease-out ${index * 0.15}s forwards` : "none",
@@ -127,7 +139,7 @@ export function WebsitePortfolio() {
         {/* Secondary Projects */}
         {secondaryWebsiteProjects.length > 0 && (
           <div className="mt-8">
-            <h3 className="text-lg font-semibold text-muted-foreground mb-6">Alte proiecte</h3>
+            <h3 className="text-lg font-semibold text-muted-foreground mb-6">{t.otherProjects}</h3>
             <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
               {secondaryWebsiteProjects.map((project, index) => (
                 <a

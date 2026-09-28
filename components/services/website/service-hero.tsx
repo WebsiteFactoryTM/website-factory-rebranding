@@ -1,7 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Link from "next/link"
+import { Link, useRouter } from "@/i18n/navigation"
+import { useLocale, useTranslations } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { ArrowRight, Check, Play, Sparkles, Globe, Zap, TrendingUp, Shield } from "lucide-react"
 import { MagneticButton } from "@/components/ui/magnetic-button"
 import { FloatingElement } from "@/components/ui/floating-element"
@@ -9,25 +11,50 @@ import { WebsiteBlob } from "@/components/services/website/website-blob"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 
-const heroFeatures = [
-  { icon: Globe, label: "Design Responsive" },
-  { icon: Zap, label: "Încărcare Rapidă" },
-  { icon: TrendingUp, label: "SEO Optimizat" },
-  { icon: Shield, label: "Securitate SSL" },
-]
+const roCopy = {
+  breadcrumbCurrent: "Creare Website",
+  badge: "Serviciu #1 cerut în Timișoara",
+  h1Line1: "Creare Website",
+  h1Highlight: "Profesional",
+  h1Line2: "în Timișoara",
+  subtitlePre: "Transformăm ideile în website-uri care ",
+  subtitleBold1: "atrag clienți",
+  subtitleMid1: ", ",
+  subtitleBold2: "convertesc vizitatori",
+  subtitleMid2: " și ",
+  subtitleBold3: " cu vizibilitate crescută în motoarele de căutare",
+  subtitleEnd: ". Design modern, performanță excepțională, rezultate măsurabile.",
+  features: [
+    { label: "Design Responsive" },
+    { label: "Încărcare Rapidă" },
+    { label: "SEO Optimizat" },
+    { label: "Securitate SSL" },
+  ],
+  ctaPrimary: "Solicită ofertă gratuită",
+  ctaSecondary: "Vezi exemple",
+  trustBadges: ["150+ site-uri livrate", "100% clienți mulțumiți", "Google Partner"],
+  scrollHint: "Descoperă mai mult",
+}
 
-const trustBadges = ["150+ site-uri livrate", "100% clienți mulțumiți", "Google Partner"]
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
+const heroFeatureIcons = [Globe, Zap, TrendingUp, Shield]
 
 export function ServiceHero() {
+  const locale = useLocale()
+  const t = copy[locale as Locale]
+  const tBreadcrumb = useTranslations("breadcrumb")
+  const router = useRouter()
   const { ref: contentRef, isVisible: contentVisible } = useScrollReveal()
   const [activeFeature, setActiveFeature] = useState(0)
+  const heroFeatures = t.features.map((f, i) => ({ ...f, icon: heroFeatureIcons[i] }))
 
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveFeature((prev) => (prev + 1) % heroFeatures.length)
     }, 3000)
     return () => clearInterval(interval)
-  }, [])
+  }, [heroFeatures.length])
 
   return (
     <section className="relative min-h-[100svh] flex items-center overflow-hidden pb-24 md:pb-32">
@@ -89,37 +116,40 @@ export function ServiceHero() {
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
             <Link href="/" className="hover:text-brand transition-colors">
-              Acasă
+              {tBreadcrumb("home")}
             </Link>
             <span>/</span>
             <Link href="/servicii" className="hover:text-brand transition-colors">
-              Servicii
+              {tBreadcrumb("services")}
             </Link>
             <span>/</span>
-            <span className="text-foreground">Creare Website</span>
+            <span className="text-foreground">{t.breadcrumbCurrent}</span>
           </nav>
 
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass-premium mb-8">
             <Sparkles className="w-4 h-4 text-brand animate-pulse" />
-            <span className="text-sm font-medium">Serviciu #1 cerut în Timișoara</span>
+            <span className="text-sm font-medium">{t.badge}</span>
           </div>
 
           {/* Main Heading */}
           <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]">
-            <span className="text-foreground">Creare Website</span>
+            <span className="text-foreground">{t.h1Line1}</span>
             <br />
-            <span className="gradient-text-animated">Profesional</span>
+            <span className="gradient-text-animated">{t.h1Highlight}</span>
             <br />
-            <span className="text-foreground/80">în Timișoara</span>
+            <span className="text-foreground/80">{t.h1Line2}</span>
           </h1>
 
           {/* Subtitle */}
           <p className="mt-6 text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-2xl text-pretty">
-            Transformăm ideile în website-uri care <strong className="text-foreground">atrag clienți</strong>,{" "}
-            <strong className="text-foreground">convertesc vizitatori</strong> și{" "}
-            <strong className="text-foreground"> cu vizibilitate crescută în motoarele de căutare</strong>. Design modern, performanță excepțională,
-            rezultate măsurabile.
+            {t.subtitlePre}
+            <strong className="text-foreground">{t.subtitleBold1}</strong>
+            {t.subtitleMid1}
+            <strong className="text-foreground">{t.subtitleBold2}</strong>
+            {t.subtitleMid2}
+            <strong className="text-foreground">{t.subtitleBold3}</strong>
+            {t.subtitleEnd}
           </p>
 
           <div className="mt-8 grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3">
@@ -150,10 +180,10 @@ export function ServiceHero() {
           <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-start gap-4">
             <MagneticButton
               className="group relative overflow-hidden px-8 py-4 bg-brand text-brand-foreground rounded-full font-semibold text-base glow-brand hover:glow-intense transition-all duration-300 w-full sm:w-auto text-center justify-center"
-              onClick={() => (window.location.href = "/contact")}
+              onClick={() => router.push("/contact")}
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
-                Solicită ofertă gratuită
+                {t.ctaPrimary}
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-brand-light to-brand opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -166,12 +196,12 @@ export function ServiceHero() {
               <span className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand/10 group-hover:bg-brand/20 transition-colors">
                 <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand ml-0.5" />
               </span>
-              <span className="font-medium text-base">Vezi exemple</span>
+              <span className="font-medium text-base">{t.ctaSecondary}</span>
             </Link>
           </div>
 
           <div className="mt-12 flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-3 sm:gap-6">
-            {trustBadges.map((badge, index) => (
+            {t.trustBadges.map((badge, index) => (
               <div
                 key={badge}
                 className="flex items-center gap-2 text-sm text-muted-foreground"
@@ -191,7 +221,7 @@ export function ServiceHero() {
       {/* Scroll Indicator */}
       <div className="absolute bottom-6 sm:bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20 pointer-events-none">
         <span className="text-[10px] sm:text-xs text-muted-foreground tracking-widest uppercase bg-background/80 backdrop-blur-sm px-3 py-1 rounded-full">
-          Descoperă mai mult
+          {t.scrollHint}
         </span>
         <div className="w-px h-8 sm:h-12 bg-gradient-to-b from-brand to-transparent" />
       </div>

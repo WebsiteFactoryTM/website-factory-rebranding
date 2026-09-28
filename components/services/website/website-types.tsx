@@ -1,80 +1,96 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { FileText, Layers, Briefcase, Rocket, ArrowRight, Check } from "lucide-react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 
-const websiteTypes = [
-  {
-    id: "one-page",
-    icon: FileText,
-    title: "One Page",
-    subtitle: "Perfect pentru start",
-    description:
-      "O singură pagină cu tot ce ai nevoie: prezentare, servicii, contact. Ideal pentru freelanceri, consultanți sau lansări rapide.",
-    features: ["Design premium", "Formular contact", "SEO de bază", "Mobile responsive", "Încărcare rapidă"],
-    idealFor: "Freelanceri, consultanți, start-up-uri",
-    timeline: "5-7 zile",
-    popular: false,
-  },
-  {
-    id: "prezentare",
-    icon: Layers,
-    title: "Site Prezentare",
-    subtitle: "Cel mai popular",
-    description:
-      "Website complet cu multiple pagini: acasă, despre, servicii, portofoliu, contact. Soluția completă pentru afaceri în creștere.",
-    features: [
-      "5-10 pagini",
-      "Blog integrat",
-      "SEO avansat",
-      "Galerie foto/video",
-      "Integrare social media",
-      "Analytics setup",
-    ],
-    idealFor: "IMM-uri, agenții, companii",
-    timeline: "2-3 săptămâni",
-    popular: true,
-  },
-  {
-    id: "corporate",
-    icon: Briefcase,
-    title: "Corporate",
-    subtitle: "Pentru companii mari",
-    description:
-      "Soluție enterprise cu arhitectură complexă, multiple secțiuni, integrări CRM și funcționalități avansate.",
-    features: ["15+ pagini", "CMS avansat", "Multi-limbă", "Integrări CRM", "Portal clienți", "Securitate avansată"],
-    idealFor: "Corporații, instituții, holdinguri",
-    timeline: "4-8 săptămâni",
-    popular: false,
-  },
-  {
-    id: "custom",
-    icon: Rocket,
-    title: "Custom / Aplicație",
-    subtitle: "Fără limite",
-    description:
-      "Dezvoltare personalizată pentru nevoi unice: platforme, dashboards, aplicații web complexe cu funcționalități la comandă.",
-    features: [
-      "Funcționalități unice",
-      "Arhitectură scalabilă",
-      "API integrations",
-      "User management",
-      "Raportare avansată",
-      "Suport dedicat",
-    ],
-    idealFor: "Proiecte inovative, SaaS, platforme",
-    timeline: "6-12 săptămâni",
-    popular: false,
-  },
-]
+const roCopy = {
+  eyebrow: "Tipuri de Website",
+  heading: "Ce tip de website ai nevoie?",
+  subtitle:
+    "Alege varianta potrivită pentru afacerea ta. Fiecare proiect este personalizat pentru obiectivele tale specifice.",
+  popular: "Popular",
+  timeLabel: "Timp: ",
+  idealLabel: "Ideal: ",
+  calculatePrice: "Calculează preț",
+  includesTitle: "Ce include:",
+  types: [
+    {
+      id: "one-page",
+      title: "One Page",
+      subtitle: "Perfect pentru start",
+      description:
+        "O singură pagină cu tot ce ai nevoie: prezentare, servicii, contact. Ideal pentru freelanceri, consultanți sau lansări rapide.",
+      features: ["Design premium", "Formular contact", "SEO de bază", "Mobile responsive", "Încărcare rapidă"],
+      idealFor: "Freelanceri, consultanți, start-up-uri",
+      timeline: "5-7 zile",
+      popular: false,
+    },
+    {
+      id: "prezentare",
+      title: "Site Prezentare",
+      subtitle: "Cel mai popular",
+      description:
+        "Website complet cu multiple pagini: acasă, despre, servicii, portofoliu, contact. Soluția completă pentru afaceri în creștere.",
+      features: [
+        "5-10 pagini",
+        "Blog integrat",
+        "SEO avansat",
+        "Galerie foto/video",
+        "Integrare social media",
+        "Analytics setup",
+      ],
+      idealFor: "IMM-uri, agenții, companii",
+      timeline: "2-3 săptămâni",
+      popular: true,
+    },
+    {
+      id: "corporate",
+      title: "Corporate",
+      subtitle: "Pentru companii mari",
+      description:
+        "Soluție enterprise cu arhitectură complexă, multiple secțiuni, integrări CRM și funcționalități avansate.",
+      features: ["15+ pagini", "CMS avansat", "Multi-limbă", "Integrări CRM", "Portal clienți", "Securitate avansată"],
+      idealFor: "Corporații, instituții, holdinguri",
+      timeline: "4-8 săptămâni",
+      popular: false,
+    },
+    {
+      id: "custom",
+      title: "Custom / Aplicație",
+      subtitle: "Fără limite",
+      description:
+        "Dezvoltare personalizată pentru nevoi unice: platforme, dashboards, aplicații web complexe cu funcționalități la comandă.",
+      features: [
+        "Funcționalități unice",
+        "Arhitectură scalabilă",
+        "API integrations",
+        "User management",
+        "Raportare avansată",
+        "Suport dedicat",
+      ],
+      idealFor: "Proiecte inovative, SaaS, platforme",
+      timeline: "6-12 săptămâni",
+      popular: false,
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
+const typeIcons = [FileText, Layers, Briefcase, Rocket]
 
 export function WebsiteTypes() {
+  const locale = useLocale()
+  const t = copy[locale as Locale]
+  const websiteTypes = t.types.map((type, i) => ({ ...type, icon: typeIcons[i] }))
   const [activeType, setActiveType] = useState("prezentare")
   const { ref, isVisible } = useScrollReveal()
-  const selectedType = websiteTypes.find((t) => t.id === activeType)!
+  const selectedType = websiteTypes.find((type) => type.id === activeType)!
 
   return (
     <section className="relative pt-16 sm:pt-20 md:pt-24 pb-24 lg:pb-32 overflow-hidden">
@@ -91,13 +107,10 @@ export function WebsiteTypes() {
           )}
         >
           <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">
-            Tipuri de Website
+            {t.eyebrow}
           </span>
-          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold">Ce tip de website ai nevoie?</h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Alege varianta potrivită pentru afacerea ta. Fiecare proiect este personalizat pentru obiectivele tale
-            specifice.
-          </p>
+          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold">{t.heading}</h2>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">{t.subtitle}</p>
         </div>
 
         {/* Interactive Selector */}
@@ -120,7 +133,7 @@ export function WebsiteTypes() {
                 >
                   {type.popular && (
                     <span className="absolute -top-2 -right-2 px-2 py-0.5 bg-green-500 text-white text-xs font-bold rounded-full">
-                      Popular
+                      {t.popular}
                     </span>
                   )}
                   <Icon className={cn("w-5 h-5", isActive ? "text-brand-foreground" : "text-brand")} />
@@ -158,29 +171,33 @@ export function WebsiteTypes() {
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-brand" />
                   <span className="text-muted-foreground">
-                    Timp: <strong className="text-foreground">{selectedType.timeline}</strong>
+                    {t.timeLabel}
+                    <strong className="text-foreground">{selectedType.timeline}</strong>
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-green-500" />
                   <span className="text-muted-foreground">
-                    Ideal: <strong className="text-foreground">{selectedType.idealFor}</strong>
+                    {t.idealLabel}
+                    <strong className="text-foreground">{selectedType.idealFor}</strong>
                   </span>
                 </div>
               </div>
 
-              <Link
-                href="/pret-website"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-brand text-brand-foreground rounded-full font-semibold hover:bg-brand-light transition-colors group"
-              >
-                Calculează preț
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              {locale === "ro" && (
+                <Link
+                  href="/pret-website"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-brand text-brand-foreground rounded-full font-semibold hover:bg-brand-light transition-colors group"
+                >
+                  {t.calculatePrice}
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              )}
             </div>
 
             {/* Features List */}
             <div className="space-y-4">
-              <h4 className="font-heading text-lg font-semibold mb-6">Ce include:</h4>
+              <h4 className="font-heading text-lg font-semibold mb-6">{t.includesTitle}</h4>
               {selectedType.features.map((feature, index) => (
                 <div
                   key={feature}

@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
-import { setRequestLocale } from "next-intl/server"
+import { setRequestLocale, getTranslations } from "next-intl/server"
 import type { Locale } from "@/i18n/routing"
 import { allLocaleParams } from "@/lib/i18n/ro-only"
+import { withoutPrices } from "@/lib/i18n/no-prices"
 import { generatePageMetadata, generateServiceSchema, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/seo"
 import { EcommerceHero } from "@/components/services/ecommerce/ecommerce-hero"
 import { PlatformComparison } from "@/components/services/ecommerce/platform-comparison"
@@ -14,26 +15,30 @@ import { EcommercePortfolio } from "@/components/services/ecommerce/ecommerce-po
 import { EcommerceFaq } from "@/components/services/ecommerce/ecommerce-faq"
 import { EcommerceCta } from "@/components/services/ecommerce/ecommerce-cta"
 
-export const metadata: Metadata = generatePageMetadata({
-  title: "Creare Magazin Online Timișoara - Web design",
-  description:
-    "Dezvoltare magazin online performant. Funcționalități de loializare clienți, checkout optimizat, plăți securizate, ușor de administrat.",
-  path: "/servicii/magazin-online",
-  keywords: [
-    "creare magazin online timisoara",
-    "ecommerce timisoara",
-    "woocommerce romania",
-    "magazin online wordpress",
-    "next.js ecommerce",
-    "payload cms shop",
-    "dezvoltare magazin online",
-    "platforma vanzari online",
-    "shop online profesional",
-    "comert electronic romania",
-  ],
-})
+export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
+  const { locale } = await params
+  return generatePageMetadata({
+    locale,
+    href: "/servicii/magazin-online",
+    title: "Creare Magazin Online Timișoara - Web design",
+    description:
+      "Dezvoltare magazin online performant. Funcționalități de loializare clienți, checkout optimizat, plăți securizate, ușor de administrat.",
+    keywords: [
+      "creare magazin online timisoara",
+      "ecommerce timisoara",
+      "woocommerce romania",
+      "magazin online wordpress",
+      "next.js ecommerce",
+      "payload cms shop",
+      "dezvoltare magazin online",
+      "platforma vanzari online",
+      "shop online profesional",
+      "comert electronic romania",
+    ],
+  })
+}
 
-const ecommerceFaqs = [
+const faqsRo = [
   {
     question: "Cât costă să creez un magazin online?",
     answer:
@@ -76,6 +81,8 @@ const ecommerceFaqs = [
   },
 ]
 
+const faqs = { ro: faqsRo, en: withoutPrices(faqsRo) } satisfies Record<Locale, typeof faqsRo>
+
 export function generateStaticParams() {
   return allLocaleParams()
 }
@@ -83,20 +90,27 @@ export function generateStaticParams() {
 export default async function MagazinOnlinePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
-  const serviceSchema = generateServiceSchema({
-    name: "Creare Magazin Online Profesional",
-    description:
-      "Dezvoltare magazine online cu WooCommerce și Next.js + Payload CMS. Funcționalități de loializare clienți, checkout optimizat și scalabilitate nelimitată.",
-    url: "/servicii/magazin-online",
-  })
+  const loc = locale as Locale
+  const pageFaqs = faqs[loc]
 
+  const serviceSchema = {
+    ...generateServiceSchema({
+      name: "Creare Magazin Online Profesional",
+      description:
+        "Dezvoltare magazine online cu WooCommerce și Next.js + Payload CMS. Funcționalități de loializare clienți, checkout optimizat și scalabilitate nelimitată.",
+      url: "/servicii/magazin-online",
+    }),
+    inLanguage: locale,
+  }
+
+  const tBreadcrumb = await getTranslations("breadcrumb")
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Acasă", url: "/" },
-    { name: "Servicii", url: "/servicii" },
+    { name: tBreadcrumb("home"), url: "/" },
+    { name: tBreadcrumb("services"), url: "/servicii" },
     { name: "Magazin Online", url: "/servicii/magazin-online" },
   ])
 
-  const faqSchema = generateFAQSchema(ecommerceFaqs)
+  const faqSchema = generateFAQSchema(pageFaqs)
 
   return (
     <>
@@ -111,9 +125,9 @@ export default async function MagazinOnlinePage({ params }: { params: Promise<{ 
         <LoyaltyFeatures />
         <EcommerceProcess />
         <EcommerceTechStack />
-        <RevenueCalculator />
+        {loc === "ro" && <RevenueCalculator />}
         <EcommercePortfolio />
-        <EcommerceFaq faqs={ecommerceFaqs} />
+        <EcommerceFaq faqs={pageFaqs} />
         <EcommerceCta />
       </main>
     </>

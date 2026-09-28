@@ -1,13 +1,31 @@
 "use client"
 
-import Link from "next/link"
+import { Link, useRouter } from "@/i18n/navigation"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { ArrowRight, Phone, MessageCircle, Calendar } from "lucide-react"
 import { MagneticButton } from "@/components/ui/magnetic-button"
 import { FloatingElement } from "@/components/ui/floating-element"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 
+const roCopy = {
+  headingLine1: "Pregătit să-ți transformi",
+  headingLine2: "ideea în realitate",
+  subtitle: "Hai să discutăm despre aplicația ta. Consultanță gratuită și estimare de preț în maxim 48 de ore.",
+  ctaPrimary: "Solicită consultanță gratuită",
+  callNow: "Sună acum",
+  whatsapp: "WhatsApp",
+  scheduleMeeting: "Programează întâlnire",
+  trustItems: ["Răspuns în 24h", "Consultanță gratuită", "NDA disponibil"],
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
 export function AppCta() {
+  const locale = useLocale()
+  const t = copy[locale as Locale]
+  const router = useRouter()
   const { ref, isVisible } = useScrollReveal()
 
   return (
@@ -47,54 +65,55 @@ export function AppCta() {
           )}
         >
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
-            Pregătit să-ți transformi
+            {t.headingLine1}
             <br />
-            <span className="text-glow-cyan">ideea în realitate</span>?
+            <span className="text-glow-cyan">{t.headingLine2}</span>?
           </h2>
           <p className="text-lg sm:text-xl text-white/80 mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed">
-            Hai să discutăm despre aplicația ta. Consultanță gratuită și estimare de preț în maxim 48 de ore.
+            {t.subtitle}
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 sm:mb-12">
             <MagneticButton
               className="group relative overflow-hidden px-8 sm:px-10 py-4 sm:py-5 bg-white text-brand rounded-full font-bold text-base sm:text-lg shadow-2xl hover:shadow-white/25 transition-all duration-300 w-full sm:w-auto"
-              onClick={() => (window.location.href = "/contact")}
+              onClick={() => router.push("/contact")}
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
-                Solicită consultanță gratuită
+                {t.ctaPrimary}
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </span>
             </MagneticButton>
 
-            <Link
+            <a
               href="tel:+40728567830"
               className="group flex items-center justify-center gap-3 px-8 py-4 sm:py-5 rounded-full border-2 border-white/30 hover:border-white/60 text-white transition-all duration-300 w-full sm:w-auto"
             >
               <Phone className="w-5 h-5" />
-              <span className="font-semibold">Sună acum</span>
-            </Link>
+              <span className="font-semibold">{t.callNow}</span>
+            </a>
           </div>
 
           {/* Quick Contact Options */}
           <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
-            <Link
+            <a
               href="https://wa.me/40728567830"
               target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"
             >
               <MessageCircle className="w-4 h-4" />
-              <span className="text-sm">WhatsApp</span>
-            </Link>
+              <span className="text-sm">{t.whatsapp}</span>
+            </a>
             <Link href="/contact" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors">
               <Calendar className="w-4 h-4" />
-              <span className="text-sm">Programează întâlnire</span>
+              <span className="text-sm">{t.scheduleMeeting}</span>
             </Link>
           </div>
 
           {/* Trust indicators */}
           <div className="mt-10 sm:mt-12 flex flex-wrap justify-center gap-6 sm:gap-8">
-            {["Răspuns în 24h", "Consultanță gratuită", "NDA disponibil"].map((text) => (
+            {t.trustItems.map((text) => (
               <div key={text} className="flex items-center gap-2 text-white/60 text-sm">
                 <div className="w-2 h-2 rounded-full bg-glow-cyan" />
                 <span>{text}</span>

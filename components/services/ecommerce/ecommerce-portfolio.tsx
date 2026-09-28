@@ -1,54 +1,72 @@
 "use client"
 
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 import { ArrowRight, ExternalLink, TrendingUp, ShoppingCart } from "lucide-react"
 import Image from "next/image"
-import Link from "next/link"
-import { featuredProjects, simpleProjects } from "@/lib/portfolio-data"
+import { Link } from "@/i18n/navigation"
+import { getProjects } from "@/lib/portfolio-data"
 import { generatePortfolioShowcaseAltText } from "@/lib/image-alt-text"
 
-// Get ecommerce projects from featured projects
-const featuredEcommerceProjects = featuredProjects
-  .filter((project) => project.category === "ecommerce")
-  .slice(0, 3)
-  .map((project) => {
-    const firstResult = project.results[0]
-    const outcome = firstResult ? `${firstResult.value} ${firstResult.label}` : "Rezultate măsurabile"
-    return {
-      slug: project.slug,
-      name: project.title,
-      category: project.categoryLabel,
-      image: project.image,
-      results: firstResult?.value || "Rezultate măsurabile",
-      platform: project.technologies[0] || "Magazin online",
-      altText: generatePortfolioShowcaseAltText(project.title, project.category, outcome),
-      isFeatured: true,
-    }
-  })
+const roCopy = {
+  eyebrow: "Portofoliu eCommerce",
+  headingPre: "Magazine online care ",
+  headingHighlight: "vând",
+  subtitle: "Rezultate reale pentru clienți reali. Fiecare magazin este optimizat pentru conversie maximă.",
+  viewAll: "Vezi toate proiectele",
+  otherProjects: "Alte proiecte",
+  defaultResult: "Rezultate măsurabile",
+  defaultPlatform: "Magazin online",
+  recentProject: "Proiect recent",
+  viewProject: "Vezi proiectul",
+}
 
-// Get secondary projects from simpleProjects (sorted by order, max 3)
-const secondaryEcommerceProjects = simpleProjects
-  .filter((project) => project.category === "ecommerce")
-  .sort((a, b) => (a.order || 999) - (b.order || 999))
-  .slice(0, 3)
-  .map((project) => {
-    return {
-      slug: project.id,
-      name: project.title,
-      category: project.categoryLabel,
-      image: project.image,
-      results: project.year || "Proiect recent",
-      platform: "Wordpress",
-      altText: generatePortfolioShowcaseAltText(project.title, project.category, project.year || "Proiect recent"),
-      isFeatured: false,
-      isExternal: !!project.liveUrl,
-      liveUrl: project.liveUrl,
-    }
-  })
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
 
 export function EcommercePortfolio() {
+  const locale = useLocale() as Locale
+  const t = copy[locale]
   const { ref, isVisible } = useScrollReveal()
+  const { featured, simple } = getProjects(locale)
+
+  const featuredEcommerceProjects = featured
+    .filter((project) => project.category === "ecommerce")
+    .slice(0, 3)
+    .map((project) => {
+      const firstResult = project.results[0]
+      const outcome = firstResult ? `${firstResult.value} ${firstResult.label}` : t.defaultResult
+      return {
+        slug: project.slug,
+        name: project.title,
+        category: project.categoryLabel,
+        image: project.image,
+        results: firstResult?.value || t.defaultResult,
+        platform: project.technologies[0] || t.defaultPlatform,
+        altText: generatePortfolioShowcaseAltText(project.title, project.category, outcome),
+        isFeatured: true,
+      }
+    })
+
+  const secondaryEcommerceProjects = [...simple]
+    .filter((project) => project.category === "ecommerce")
+    .sort((a, b) => (a.order || 999) - (b.order || 999))
+    .slice(0, 3)
+    .map((project) => {
+      return {
+        slug: project.id,
+        name: project.title,
+        category: project.categoryLabel,
+        image: project.image,
+        results: project.year || t.recentProject,
+        platform: "Wordpress",
+        altText: generatePortfolioShowcaseAltText(project.title, project.category, project.year || t.recentProject),
+        isFeatured: false,
+        isExternal: !!project.liveUrl,
+        liveUrl: project.liveUrl,
+      }
+    })
 
   return (
     <section className="relative py-24 lg:py-32 overflow-hidden bg-muted/30">
@@ -68,20 +86,19 @@ export function EcommercePortfolio() {
         >
           <div>
             <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">
-              Portofoliu eCommerce
+              {t.eyebrow}
             </span>
             <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold">
-              Magazine online care <span className="gradient-text">vând</span>
+              {t.headingPre}
+              <span className="gradient-text">{t.headingHighlight}</span>
             </h2>
-            <p className="mt-4 text-lg text-muted-foreground max-w-xl">
-              Rezultate reale pentru clienți reali. Fiecare magazin este optimizat pentru conversie maximă.
-            </p>
+            <p className="mt-4 text-lg text-muted-foreground max-w-xl">{t.subtitle}</p>
           </div>
           <Link
             href="/portofoliu"
             className="inline-flex items-center gap-2 text-brand font-semibold hover:gap-3 transition-all group"
           >
-            Vezi toate proiectele
+            {t.viewAll}
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
@@ -91,7 +108,7 @@ export function EcommercePortfolio() {
           {featuredEcommerceProjects.map((project, index) => (
             <Link
               key={project.slug}
-              href={`/portofoliu/${project.slug}`}
+              href={{ pathname: "/portofoliu/[slug]", params: { slug: project.slug } }}
               className="group relative"
               style={{
                 animation: isVisible ? `fadeInUp 0.6s ease-out ${index * 0.15}s forwards` : "none",
@@ -123,7 +140,7 @@ export function EcommercePortfolio() {
 
                 {/* View project */}
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0">
-                  <span className="text-white font-semibold">Vezi proiectul</span>
+                  <span className="text-white font-semibold">{t.viewProject}</span>
                   <ExternalLink className="w-5 h-5 text-white" />
                 </div>
               </div>
@@ -141,7 +158,7 @@ export function EcommercePortfolio() {
         {/* Secondary Projects */}
         {secondaryEcommerceProjects.length > 0 && (
           <div className="mt-8">
-            <h3 className="text-lg font-semibold text-muted-foreground mb-6">Alte proiecte</h3>
+            <h3 className="text-lg font-semibold text-muted-foreground mb-6">{t.otherProjects}</h3>
             <div className="grid md:grid-cols-3 gap-8">
               {secondaryEcommerceProjects.map((project, index) => (
                 <a
@@ -179,7 +196,7 @@ export function EcommercePortfolio() {
 
                     {/* View project */}
                     <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0">
-                      <span className="text-white font-semibold">Vezi proiectul</span>
+                      <span className="text-white font-semibold">{t.viewProject}</span>
                       <ExternalLink className="w-5 h-5 text-white" />
                     </div>
                   </div>

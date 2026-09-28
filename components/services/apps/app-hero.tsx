@@ -1,7 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Link from "next/link"
+import { Link, useRouter } from "@/i18n/navigation"
+import { useLocale, useTranslations } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { ArrowRight, Check, Play, Sparkles, Smartphone, Monitor, Cloud, Cpu } from "lucide-react"
 import { MagneticButton } from "@/components/ui/magnetic-button"
 import { FloatingElement } from "@/components/ui/floating-element"
@@ -9,25 +11,52 @@ import { AppBlob } from "@/components/services/apps/app-blob"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 
-const heroFeatures = [
-  { icon: Smartphone, label: "React Native" },
-  { icon: Monitor, label: "Next.js Apps" },
-  { icon: Cloud, label: "SaaS Platforms" },
-  { icon: Cpu, label: "Digitalizare" },
-]
+const roCopy = {
+  breadcrumbCurrent: "Dezvoltare Aplicații",
+  badge: "Aplicații mobile & web de performanță",
+  h1Line1: "Dezvoltare",
+  h1Highlight: "Aplicații Custom",
+  h1Line2: "pentru afacerea ta",
+  subtitlePre: "Dezvoltăm aplicații mobile cu ",
+  subtitleBold1: "React Native",
+  subtitleMid1: ", web apps cu ",
+  subtitleBold2: "Next.js & Payload CMS",
+  subtitleMid2: ", platforme ",
+  subtitleBold3: "SaaS scalabile",
+  subtitleMid3: " și soluții de ",
+  subtitleBold4: "digitalizare",
+  subtitleEnd: " pentru companii ambițioase.",
+  features: [
+    { label: "React Native" },
+    { label: "Next.js Apps" },
+    { label: "SaaS Platforms" },
+    { label: "Digitalizare" },
+  ],
+  ctaPrimary: "Discută proiectul tău",
+  ctaSecondary: "Vezi aplicații lansate",
+  trustBadges: ["iOS & Android", "MVP rapid", "99.9% uptime garantat"],
+  scrollHint: "Descoperă mai mult",
+}
 
-const trustBadges = ["iOS & Android", "MVP rapid", "99.9% uptime garantat"]
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
+const heroFeatureIcons = [Smartphone, Monitor, Cloud, Cpu]
 
 export function AppHero() {
+  const locale = useLocale()
+  const t = copy[locale as Locale]
+  const tBreadcrumb = useTranslations("breadcrumb")
+  const router = useRouter()
   const { ref: contentRef, isVisible: contentVisible } = useScrollReveal()
   const [activeFeature, setActiveFeature] = useState(0)
+  const heroFeatures = t.features.map((f, i) => ({ ...f, icon: heroFeatureIcons[i] }))
 
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveFeature((prev) => (prev + 1) % heroFeatures.length)
     }, 3000)
     return () => clearInterval(interval)
-  }, [])
+  }, [heroFeatures.length])
 
   return (
     <section className="relative min-h-[100svh] flex items-center overflow-hidden">
@@ -93,37 +122,42 @@ export function AppHero() {
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-6">
             <Link href="/" className="hover:text-brand transition-colors">
-              Acasă
+              {tBreadcrumb("home")}
             </Link>
             <span>/</span>
             <Link href="/servicii" className="hover:text-brand transition-colors">
-              Servicii
+              {tBreadcrumb("services")}
             </Link>
             <span>/</span>
-            <span className="text-foreground">Dezvoltare Aplicații</span>
+            <span className="text-foreground">{t.breadcrumbCurrent}</span>
           </nav>
 
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full glass-premium mb-6 sm:mb-8">
             <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand animate-pulse" />
-            <span className="text-xs sm:text-sm font-medium">Aplicații mobile & web de performanță</span>
+            <span className="text-xs sm:text-sm font-medium">{t.badge}</span>
           </div>
 
           {/* Main Heading */}
           <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]">
-            <span className="text-foreground">Dezvoltare</span>
+            <span className="text-foreground">{t.h1Line1}</span>
             <br />
-            <span className="gradient-text-animated">Aplicații Custom</span>
+            <span className="gradient-text-animated">{t.h1Highlight}</span>
             <br />
-            <span className="text-foreground/80">pentru afacerea ta</span>
+            <span className="text-foreground/80">{t.h1Line2}</span>
           </h1>
 
           {/* Subtitle */}
           <p className="mt-4 sm:mt-6 text-base sm:text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-2xl text-pretty">
-            Dezvoltăm aplicații mobile cu <strong className="text-foreground">React Native</strong>, web apps cu{" "}
-            <strong className="text-foreground">Next.js & Payload CMS</strong>, platforme{" "}
-            <strong className="text-foreground">SaaS scalabile</strong> și soluții de{" "}
-            <strong className="text-foreground">digitalizare</strong> pentru companii ambițioase.
+            {t.subtitlePre}
+            <strong className="text-foreground">{t.subtitleBold1}</strong>
+            {t.subtitleMid1}
+            <strong className="text-foreground">{t.subtitleBold2}</strong>
+            {t.subtitleMid2}
+            <strong className="text-foreground">{t.subtitleBold3}</strong>
+            {t.subtitleMid3}
+            <strong className="text-foreground">{t.subtitleBold4}</strong>
+            {t.subtitleEnd}
           </p>
 
           <div className="mt-6 sm:mt-8 grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3">
@@ -160,28 +194,28 @@ export function AppHero() {
           <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-start gap-3 sm:gap-4">
             <MagneticButton
               className="group relative overflow-hidden px-6 sm:px-8 py-3.5 sm:py-4 bg-brand text-brand-foreground rounded-full font-semibold text-sm sm:text-base glow-brand hover:glow-intense transition-all duration-300 w-full sm:w-auto justify-center"
-              onClick={() => (window.location.href = "/contact")}
+              onClick={() => router.push("/contact")}
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
-                Discută proiectul tău
+                {t.ctaPrimary}
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" />
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-brand-light to-brand opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </MagneticButton>
 
             <Link
-              href="/portofoliu?category=aplicatie"
+              href={{ pathname: "/portofoliu", query: { category: "aplicatie" } }}
               className="group flex items-center justify-center gap-2.5 px-8 py-4 rounded-full border border-border/50 hover:border-brand/50 glass-premium transition-all duration-300"
             >
               <span className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand/10 group-hover:bg-brand/20 transition-colors">
                 <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand ml-0.5" />
               </span>
-              <span className="font-medium text-base">Vezi aplicații lansate</span>
+              <span className="font-medium text-base">{t.ctaSecondary}</span>
             </Link>
           </div>
 
           <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-3 sm:gap-6">
-            {trustBadges.map((badge, index) => (
+            {t.trustBadges.map((badge, index) => (
               <div
                 key={badge}
                 className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground"
@@ -200,7 +234,7 @@ export function AppHero() {
 
       {/* Scroll Indicator - hidden on mobile */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 hidden sm:flex">
-        <span className="text-xs text-muted-foreground tracking-widest uppercase">Descoperă mai mult</span>
+        <span className="text-xs text-muted-foreground tracking-widest uppercase">{t.scrollHint}</span>
         <div className="w-px h-12 bg-gradient-to-b from-brand to-transparent" />
       </div>
 

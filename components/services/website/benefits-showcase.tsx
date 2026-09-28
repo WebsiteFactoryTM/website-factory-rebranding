@@ -1,57 +1,65 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { TrendingUp, Users, Clock, Search, Smartphone, Shield, Gauge, Award } from "lucide-react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { useCounter } from "@/hooks/use-counter"
 import { FloatingElement } from "@/components/ui/floating-element"
 import { cn } from "@/lib/utils"
 
-const benefits = [
-  {
-    icon: TrendingUp,
-    stat: 50,
-    suffix: "%",
-    label: "Creștere prerformață medie",
-    description: "Clienții noștri văd o creștere semnificativă a performanței site-ului.",
-    color: "text-green-500",
-    bgColor: "bg-green-500/10",
-  },
-  {
-    icon: Users,
-    stat: 30,
-    suffix: "%",
-    label: "Rată de conversie",
-    description: "Design-ul nostru UX este optimizat pentru a transforma vizitatori în clienți.",
-    color: "text-brand",
-    bgColor: "bg-brand/10",
-  },
-  {
-    icon: Clock,
-    stat: 1.2,
-    suffix: "s",
-    label: "Timp încărcare mediu",
-    description: "Site-uri ultra-rapide care nu pierd vizitatori din cauza vitezei.",
-    color: "text-glow-cyan",
-    bgColor: "bg-glow-cyan/10",
-  },
-  {
-    icon: Search,
-    stat: 100,
-    suffix: "%",
-    label: "Scor SEO",
-    description: "Optimizare completă pentru motoarele de căutare din prima zi.",
-    color: "text-glow-violet",
-    bgColor: "bg-glow-violet/10",
-  },
-]
+const roCopy = {
+  eyebrow: "De ce noi?",
+  headingPre: "Rezultate ",
+  headingHighlight: "măsurabile",
+  subtitle: "Nu promitem - livrăm. Iată ce obțin clienții noștri în medie după lansarea site-ului.",
+  benefits: [
+    {
+      stat: 50,
+      suffix: "%",
+      label: "Creștere prerformață medie",
+      description: "Clienții noștri văd o creștere semnificativă a performanței site-ului.",
+      color: "text-green-500",
+      bgColor: "bg-green-500/10",
+    },
+    {
+      stat: 30,
+      suffix: "%",
+      label: "Rată de conversie",
+      description: "Design-ul nostru UX este optimizat pentru a transforma vizitatori în clienți.",
+      color: "text-brand",
+      bgColor: "bg-brand/10",
+    },
+    {
+      stat: 1.2,
+      suffix: "s",
+      label: "Timp încărcare mediu",
+      description: "Site-uri ultra-rapide care nu pierd vizitatori din cauza vitezei.",
+      color: "text-glow-cyan",
+      bgColor: "bg-glow-cyan/10",
+    },
+    {
+      stat: 100,
+      suffix: "%",
+      label: "Scor SEO",
+      description: "Optimizare completă pentru motoarele de căutare din prima zi.",
+      color: "text-glow-violet",
+      bgColor: "bg-glow-violet/10",
+    },
+  ],
+  additionalBenefits: [
+    { label: "100% Responsive" },
+    { label: "SSL Securizat" },
+    { label: "Core Web Vitals" },
+    { label: "Best Practices" },
+  ],
+}
 
-const additionalBenefits = [
-  { icon: Smartphone, label: "100% Responsive" },
-  { icon: Shield, label: "SSL Securizat" },
-  { icon: Gauge, label: "Core Web Vitals" },
-  { icon: Award, label: "Best Practices" },
-]
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
+const benefitIcons = [TrendingUp, Users, Clock, Search]
+const additionalBenefitIcons = [Smartphone, Shield, Gauge, Award]
 
 function AnimatedStat({ value, suffix, isVisible }: { value: number; suffix: string; isVisible: boolean }) {
   const { count } = useCounter({
@@ -69,6 +77,10 @@ function AnimatedStat({ value, suffix, isVisible }: { value: number; suffix: str
 }
 
 export function BenefitsShowcase() {
+  const locale = useLocale()
+  const t = copy[locale as Locale]
+  const benefits = t.benefits.map((b, i) => ({ ...b, icon: benefitIcons[i] }))
+  const additionalBenefits = t.additionalBenefits.map((b, i) => ({ ...b, icon: additionalBenefitIcons[i] }))
   const { ref, isVisible } = useScrollReveal({ threshold: 0.2 })
   const [activeIndex, setActiveIndex] = useState(0)
   const [progress, setProgress] = useState(0)
@@ -80,7 +92,7 @@ export function BenefitsShowcase() {
       setProgress(0)
     }, 4000)
     return () => clearInterval(interval)
-  }, [isVisible])
+  }, [isVisible, benefits.length])
 
   useEffect(() => {
     if (!isVisible) return
@@ -130,13 +142,14 @@ export function BenefitsShowcase() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
           )}
         >
-          <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">De ce noi?</span>
+          <span className="inline-block text-sm font-medium text-brand tracking-widest uppercase mb-4">
+            {t.eyebrow}
+          </span>
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold">
-            Rezultate <span className="gradient-text">măsurabile</span>
+            {t.headingPre}
+            <span className="gradient-text">{t.headingHighlight}</span>
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Nu promitem - livrăm. Iată ce obțin clienții noștri în medie după lansarea site-ului.
-          </p>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">{t.subtitle}</p>
         </div>
 
         {/* Stats Grid */}

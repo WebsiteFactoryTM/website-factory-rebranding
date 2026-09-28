@@ -1,72 +1,90 @@
 "use client"
 
 import { useState } from "react"
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { ShoppingBag, Store, Building2, Sparkles, Check, ArrowRight, ChevronDown } from "lucide-react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
 
-const storeTypes = [
-  {
-    id: "startup",
-    icon: ShoppingBag,
-    name: "Magazin Start-up",
-    description: "Pentru antreprenori la început de drum care vor să vândă online rapid și eficient.",
-    features: [
-      "Până la 100 produse",
-      "Design template premium",
-      "Plăți card + ramburs",
-      "Integrare curier (FanCourier/Sameday)",
-      "Administrare simplă",
-      "SSL & GDPR incluse",
-    ],
-    idealFor: "Afaceri noi, testare piață, produse de nișă",
-    timeline: "3-4 săptămâni",
-    platform: "WooCommerce",
-  },
-  {
-    id: "growth",
-    icon: Store,
-    name: "Magazin Business",
-    description: "Soluția completă pentru afaceri în creștere care doresc funcționalități avansate.",
-    features: [
-      "Până la 1000 produse",
-      "Design personalizat",
-      "Multiple metode de plată",
-      "Sistem de reduceri avansat",
-      "Program de loializare clienți",
-      "Integrări ERP/facturare",
-      "Analytics & rapoarte",
-      "Email marketing integrat",
-    ],
-    idealFor: "Afaceri în creștere, multiple categorii, echipă dedicată",
-    timeline: "6-8 săptămâni",
-    platform: "WooCommerce / Next.js",
-    popular: true,
-  },
-  {
-    id: "enterprise",
-    icon: Building2,
-    name: "Magazin Enterprise",
-    description: "Platformă eCommerce scalabilă pentru volume mari și cerințe complexe.",
-    features: [
-      "Produse nelimitate",
-      "Design & UX 100% custom",
-      "Multi-vendor marketplace",
-      "B2B + B2C în aceeași platformă",
-      "API pentru integrări",
-      "Multi-limbă & multi-valută",
-      "Performance optimizat (sub 1s)",
-      "Infrastructură cloud scalabilă",
-      "SLA & suport dedicat",
-    ],
-    idealFor: "Companii cu vechime, marketplace-uri, volume mari de tranzacții",
-    timeline: "8-12 săptămâni",
-    platform: "Next.js + Payload CMS",
-  },
-]
+const roCopy = {
+  eyebrow: "Tipuri de magazine",
+  headingPre: "Ce tip de magazin",
+  headingHighlight: " ai nevoie?",
+  subtitle:
+    "Indiferent de dimensiunea afacerii tale, avem soluția potrivită. De la magazine mici la platforme enterprise.",
+  mostPopular: "Cel mai popular",
+  platformLabel: "Platformă",
+  timelineLabel: "Timp livrare",
+  idealForLabel: "Ideal pentru",
+  requestOffer: "Solicită ofertă",
+  types: [
+    {
+      id: "startup",
+      name: "Magazin Start-up",
+      description: "Pentru antreprenori la început de drum care vor să vândă online rapid și eficient.",
+      features: [
+        "Până la 100 produse",
+        "Design template premium",
+        "Plăți card + ramburs",
+        "Integrare curier (FanCourier/Sameday)",
+        "Administrare simplă",
+        "SSL & GDPR incluse",
+      ],
+      idealFor: "Afaceri noi, testare piață, produse de nișă",
+      timeline: "3-4 săptămâni",
+      platform: "WooCommerce",
+    },
+    {
+      id: "growth",
+      name: "Magazin Business",
+      description: "Soluția completă pentru afaceri în creștere care doresc funcționalități avansate.",
+      features: [
+        "Până la 1000 produse",
+        "Design personalizat",
+        "Multiple metode de plată",
+        "Sistem de reduceri avansat",
+        "Program de loializare clienți",
+        "Integrări ERP/facturare",
+        "Analytics & rapoarte",
+        "Email marketing integrat",
+      ],
+      idealFor: "Afaceri în creștere, multiple categorii, echipă dedicată",
+      timeline: "6-8 săptămâni",
+      platform: "WooCommerce / Next.js",
+      popular: true,
+    },
+    {
+      id: "enterprise",
+      name: "Magazin Enterprise",
+      description: "Platformă eCommerce scalabilă pentru volume mari și cerințe complexe.",
+      features: [
+        "Produse nelimitate",
+        "Design & UX 100% custom",
+        "Multi-vendor marketplace",
+        "B2B + B2C în aceeași platformă",
+        "API pentru integrări",
+        "Multi-limbă & multi-valută",
+        "Performance optimizat (sub 1s)",
+        "Infrastructură cloud scalabilă",
+        "SLA & suport dedicat",
+      ],
+      idealFor: "Companii cu vechime, marketplace-uri, volume mari de tranzacții",
+      timeline: "8-12 săptămâni",
+      platform: "Next.js + Payload CMS",
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
+const typeIcons = [ShoppingBag, Store, Building2]
 
 export function StoreTypes() {
+  const locale = useLocale()
+  const t = copy[locale as Locale]
+  const storeTypes = t.types.map((type, i) => ({ ...type, icon: typeIcons[i] }))
   const { ref, isVisible } = useScrollReveal()
   const [activeType, setActiveType] = useState("growth")
   const [expandedMobile, setExpandedMobile] = useState<string | null>("growth")
@@ -87,16 +105,13 @@ export function StoreTypes() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-premium mb-4 sm:mb-6">
             <Sparkles className="w-4 h-4 text-brand" />
-            <span className="text-xs sm:text-sm font-medium">Tipuri de magazine</span>
+            <span className="text-xs sm:text-sm font-medium">{t.eyebrow}</span>
           </div>
           <h2 className="font-heading text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 sm:mb-6">
-            Ce tip de magazin
-            <span className="gradient-text"> ai nevoie?</span>
+            {t.headingPre}
+            <span className="gradient-text">{t.headingHighlight}</span>
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed px-4">
-            Indiferent de dimensiunea afacerii tale, avem soluția potrivită. De la magazine mici la platforme
-            enterprise.
-          </p>
+          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed px-4">{t.subtitle}</p>
         </div>
 
         <div
@@ -127,7 +142,7 @@ export function StoreTypes() {
                 {/* Popular badge - Outside overflow hidden */}
                 {type.popular && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-brand text-brand-foreground text-xs font-semibold whitespace-nowrap z-30 shadow-lg ring-4 ring-background">
-                    Cel mai popular
+                    {t.mostPopular}
                   </div>
                 )}
 
@@ -200,15 +215,15 @@ export function StoreTypes() {
                     {/* Meta info */}
                     <div className="pt-4 sm:pt-6 border-t border-border/50 space-y-2 sm:space-y-3">
                       <div className="flex justify-between text-xs sm:text-sm">
-                        <span className="text-muted-foreground">Platformă</span>
+                        <span className="text-muted-foreground">{t.platformLabel}</span>
                         <span className="font-medium">{type.platform}</span>
                       </div>
                       <div className="flex justify-between text-xs sm:text-sm">
-                        <span className="text-muted-foreground">Timp livrare</span>
+                        <span className="text-muted-foreground">{t.timelineLabel}</span>
                         <span className="font-medium">{type.timeline}</span>
                       </div>
                       <div className="flex flex-col sm:flex-row sm:justify-between text-xs sm:text-sm gap-1">
-                        <span className="text-muted-foreground">Ideal pentru</span>
+                        <span className="text-muted-foreground">{t.idealForLabel}</span>
                         <span className="font-medium sm:text-right sm:max-w-[60%]">{type.idealFor}</span>
                       </div>
                     </div>
@@ -220,7 +235,7 @@ export function StoreTypes() {
                         className="mt-4 sm:mt-6 w-full flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-brand text-brand-foreground font-semibold text-xs sm:text-sm hover:bg-brand-light transition-colors"
                         onClick={(e) => e.stopPropagation()}
                       >
-                        Solicită ofertă
+                        {t.requestOffer}
                         <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                       </Link>
                     )}

@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
-import { setRequestLocale } from "next-intl/server"
+import { setRequestLocale, getTranslations } from "next-intl/server"
 import type { Locale } from "@/i18n/routing"
 import { allLocaleParams } from "@/lib/i18n/ro-only"
+import { withoutPrices } from "@/lib/i18n/no-prices"
 import { generatePageMetadata, generateServiceSchema, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/seo"
 import { AppHero } from "@/components/services/apps/app-hero"
 import { AppTypes } from "@/components/services/apps/app-types"
@@ -11,26 +12,30 @@ import { AppTechStack } from "@/components/services/apps/app-tech-stack"
 import { AppFaq } from "@/components/services/apps/app-faq"
 import { AppCta } from "@/components/services/apps/app-cta"
 
-export const metadata: Metadata = generatePageMetadata({
-  title: "Dezvoltare Aplicație Mobilă & Web - React Native, Next.js, SaaS",
-  description:
-    "Dezvoltăm aplicații mobile cu React Native, web apps cu Next.js & Payload CMS, platforme SaaS scalabile și soluții de digitalizare. Consultanță gratuită!",
-  path: "/servicii/dezvoltare-aplicatie",
-  keywords: [
-    "dezvoltare aplicatii mobile timisoara",
-    "react native romania",
-    "aplicatii web next.js",
-    "dezvoltare saas",
-    "digitalizare companii",
-    "aplicatii custom",
-    "payload cms",
-    "aplicatii ios android",
-    "software development romania",
-    "app development timisoara",
-  ],
-})
+export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
+  const { locale } = await params
+  return generatePageMetadata({
+    locale,
+    href: "/servicii/dezvoltare-aplicatie",
+    title: "Dezvoltare Aplicație Mobilă & Web - React Native, Next.js, SaaS",
+    description:
+      "Dezvoltăm aplicații mobile cu React Native, web apps cu Next.js & Payload CMS, platforme SaaS scalabile și soluții de digitalizare. Consultanță gratuită!",
+    keywords: [
+      "dezvoltare aplicatii mobile timisoara",
+      "react native romania",
+      "aplicatii web next.js",
+      "dezvoltare saas",
+      "digitalizare companii",
+      "aplicatii custom",
+      "payload cms",
+      "aplicatii ios android",
+      "software development romania",
+      "app development timisoara",
+    ],
+  })
+}
 
-const appFaqs = [
+const faqsRo = [
   {
     question: "Cât costă să dezvolt o aplicație mobilă?",
     answer:
@@ -73,6 +78,8 @@ const appFaqs = [
   },
 ]
 
+const faqs = { ro: faqsRo, en: withoutPrices(faqsRo) } satisfies Record<Locale, typeof faqsRo>
+
 export function generateStaticParams() {
   return allLocaleParams()
 }
@@ -80,20 +87,27 @@ export function generateStaticParams() {
 export default async function DezvoltareAplicatiePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
-  const serviceSchema = generateServiceSchema({
-    name: "Dezvoltare Aplicații Mobile & Web",
-    description:
-      "Dezvoltare aplicații mobile cu React Native, web apps cu Next.js & Payload CMS, platforme SaaS scalabile și soluții de digitalizare pentru companii.",
-    url: "/servicii/dezvoltare-aplicatie",
-  })
+  const loc = locale as Locale
+  const pageFaqs = faqs[loc]
 
+  const serviceSchema = {
+    ...generateServiceSchema({
+      name: "Dezvoltare Aplicații Mobile & Web",
+      description:
+        "Dezvoltare aplicații mobile cu React Native, web apps cu Next.js & Payload CMS, platforme SaaS scalabile și soluții de digitalizare pentru companii.",
+      url: "/servicii/dezvoltare-aplicatie",
+    }),
+    inLanguage: locale,
+  }
+
+  const tBreadcrumb = await getTranslations("breadcrumb")
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Acasă", url: "/" },
-    { name: "Servicii", url: "/servicii" },
+    { name: tBreadcrumb("home"), url: "/" },
+    { name: tBreadcrumb("services"), url: "/servicii" },
     { name: "Dezvoltare Aplicații", url: "/servicii/dezvoltare-aplicatie" },
   ])
 
-  const faqSchema = generateFAQSchema(appFaqs)
+  const faqSchema = generateFAQSchema(pageFaqs)
 
   return (
     <>
@@ -107,7 +121,7 @@ export default async function DezvoltareAplicatiePage({ params }: { params: Prom
         <AppBenefits />
         <AppProcess />
         <AppTechStack />
-        <AppFaq faqs={appFaqs} />
+        <AppFaq faqs={pageFaqs} />
         <AppCta />
       </main>
     </>

@@ -1,69 +1,84 @@
 "use client"
 
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 import { Check, Zap } from "lucide-react"
 
-const platforms = [
-  {
-    name: "WooCommerce + WordPress",
-    subtitle: "Soluția clasică, flexibilă",
-    description: "Perfect pentru magazine mici și medii cu buget controlat și administrare simplă.",
-    icon: "🛒",
-    color: "from-purple-500 to-violet-600",
-    features: [
-      { name: "WordPress CMS", desc: "Administrare intuitivă" },
-      { name: "WooCommerce Core", desc: "Funcționalități complete" },
-      { name: "Teme Premium", desc: "Design personalizabil" },
-      { name: "Plugin-uri Pro", desc: "Extindere nelimitată" },
-      { name: "PHP & MySQL", desc: "Tehnologie dovedită" },
-      { name: "Hosting optimizat", desc: "Performanță garantată" },
-    ],
-    benefits: ["Cost accesibil", "Administrare ușoară", "Ecosistem vast"],
-  },
-  {
-    name: "Next.js + Payload CMS",
-    subtitle: "Tehnologia viitorului",
-    description: "Arhitectură headless pentru magazine high-performance cu scalabilitate nelimitată.",
-    icon: "⚡",
-    color: "from-brand to-cyan-500",
-    recommended: true,
-    features: [
-      { name: "Next.js 15", desc: "React framework #1" },
-      { name: "Payload CMS", desc: "Headless modern" },
-      { name: "TypeScript", desc: "Cod type-safe" },
-      { name: "Vercel Edge", desc: "CDN global rapid" },
-      { name: "PostgreSQL", desc: "Database scalabilă" },
-      { name: "API REST/GraphQL", desc: "Integrări flexibile" },
-    ],
-    benefits: ["Viteză <1s", "Scalabilitate nelimitată", "SEO perfect"],
-  },
-]
+const roCopy = {
+  eyebrow: "Tehnologii",
+  headingPre: "Două platforme, ",
+  headingHighlight: "zero compromisuri",
+  subtitle: "Alegi tu platforma sau te ajutăm noi să decizi în funcție de obiectivele tale.",
+  recommended: "Recomandat pentru scalare",
+  integrationsTitlePre: "Integrări ",
+  integrationsTitleHighlight: "native",
+  integrationsSubtitle: "Conectăm magazinul tău cu toate serviciile necesare pentru automatizare completă.",
+  platforms: [
+    {
+      name: "WooCommerce + WordPress",
+      subtitle: "Soluția clasică, flexibilă",
+      description: "Perfect pentru magazine mici și medii cu buget controlat și administrare simplă.",
+      icon: "🛒",
+      color: "from-purple-500 to-violet-600",
+      features: [
+        { name: "WordPress CMS", desc: "Administrare intuitivă" },
+        { name: "WooCommerce Core", desc: "Funcționalități complete" },
+        { name: "Teme Premium", desc: "Design personalizabil" },
+        { name: "Plugin-uri Pro", desc: "Extindere nelimitată" },
+        { name: "PHP & MySQL", desc: "Tehnologie dovedită" },
+        { name: "Hosting optimizat", desc: "Performanță garantată" },
+      ],
+      benefits: ["Cost accesibil", "Administrare ușoară", "Ecosistem vast"],
+    },
+    {
+      name: "Next.js + Payload CMS",
+      subtitle: "Tehnologia viitorului",
+      description: "Arhitectură headless pentru magazine high-performance cu scalabilitate nelimitată.",
+      icon: "⚡",
+      color: "from-brand to-cyan-500",
+      recommended: true,
+      features: [
+        { name: "Next.js 15", desc: "React framework #1" },
+        { name: "Payload CMS", desc: "Headless modern" },
+        { name: "TypeScript", desc: "Cod type-safe" },
+        { name: "Vercel Edge", desc: "CDN global rapid" },
+        { name: "PostgreSQL", desc: "Database scalabilă" },
+        { name: "API REST/GraphQL", desc: "Integrări flexibile" },
+      ],
+      benefits: ["Viteză <1s", "Scalabilitate nelimitată", "SEO perfect"],
+    },
+  ],
+  integrations: [
+    {
+      category: "Plăți",
+      items: ["Stripe", "Netopia", "PayU", "EuPlatesc", "Apple Pay", "Google Pay"],
+      icon: "💳",
+    },
+    {
+      category: "Curieri",
+      items: ["FanCourier", "Sameday", "DPD", "Cargus", "GLS"],
+      icon: "📦",
+    },
+    {
+      category: "ERP & Facturare",
+      items: ["SmartBill", "Facturis", "SAGA", "Oblio", "FGO"],
+      icon: "📊",
+    },
+    {
+      category: "Marketing",
+      items: ["Klaviyo", "Mailchimp", "Meta Pixel", "Google Ads", "TikTok Pixel", "Hotjar"],
+      icon: "📈",
+    },
+  ],
+}
 
-const integrations = [
-  {
-    category: "Plăți",
-    items: ["Stripe", "Netopia", "PayU", "EuPlatesc", "Apple Pay", "Google Pay"],
-    icon: "💳",
-  },
-  {
-    category: "Curieri",
-    items: ["FanCourier", "Sameday", "DPD", "Cargus", "GLS"],
-    icon: "📦",
-  },
-  {
-    category: "ERP & Facturare",
-    items: ["SmartBill", "Facturis", "SAGA", "Oblio", "FGO"],
-    icon: "📊",
-  },
-  {
-    category: "Marketing",
-    items: ["Klaviyo", "Mailchimp", "Meta Pixel", "Google Ads", "TikTok Pixel", "Hotjar"],
-    icon: "📈",
-  },
-]
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
 
 export function EcommerceTechStack() {
+  const locale = useLocale()
+  const t = copy[locale as Locale]
   const { ref, isVisible } = useScrollReveal()
 
   return (
@@ -83,18 +98,19 @@ export function EcommerceTechStack() {
           )}
         >
           <span className="inline-block text-xs sm:text-sm font-medium text-brand tracking-widest uppercase mb-3 sm:mb-4">
-            Tehnologii
+            {t.eyebrow}
           </span>
           <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold px-4">
-            Două platforme, <span className="gradient-text">zero compromisuri</span>
+            {t.headingPre}
+            <span className="gradient-text">{t.headingHighlight}</span>
           </h2>
           <p className="mt-3 sm:mt-4 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-            Alegi tu platforma sau te ajutăm noi să decizi în funcție de obiectivele tale.
+            {t.subtitle}
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-4 sm:gap-8 max-w-5xl mx-auto mb-16 sm:mb-20">
-          {platforms.map((platform, index) => (
+          {t.platforms.map((platform, index) => (
             <div
               key={platform.name}
               className={cn(
@@ -110,7 +126,7 @@ export function EcommerceTechStack() {
             >
               {platform.recommended && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 sm:px-4 py-1 rounded-full bg-brand text-white text-[10px] sm:text-xs font-semibold whitespace-nowrap">
-                  Recomandat pentru scalare
+                  {t.recommended}
                 </div>
               )}
 
@@ -171,15 +187,14 @@ export function EcommerceTechStack() {
         {/* Integrations */}
         <div className="text-center mb-8 sm:mb-12">
           <h3 className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold mb-3 sm:mb-4">
-            Integrări <span className="gradient-text">native</span>
+            {t.integrationsTitlePre}
+            <span className="gradient-text">{t.integrationsTitleHighlight}</span>
           </h3>
-          <p className="text-sm sm:text-base text-muted-foreground px-4">
-            Conectăm magazinul tău cu toate serviciile necesare pentru automatizare completă.
-          </p>
+          <p className="text-sm sm:text-base text-muted-foreground px-4">{t.integrationsSubtitle}</p>
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 max-w-5xl mx-auto">
-          {integrations.map((category, index) => (
+          {t.integrations.map((category, index) => (
             <div
               key={category.category}
               className="glass-premium rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center"

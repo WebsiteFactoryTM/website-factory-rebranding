@@ -1,57 +1,69 @@
 "use client"
 
+import { useLocale } from "next-intl"
+import type { Locale } from "@/i18n/routing"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 import { Smartphone, Monitor, Cloud, Database, Cpu, Lock } from "lucide-react"
 
-const techCategories = [
-  {
-    title: "Mobile Development",
-    icon: Smartphone,
-    description: "Cross-platform nativ",
-    technologies: [
-      { name: "React Native", description: "Framework principal" },
-      { name: "Expo", description: "Tooling & build" },
-      { name: "TypeScript", description: "Type safety" },
-      { name: "React Navigation", description: "Routing nativ" },
-    ],
-  },
-  {
-    title: "Web Applications",
-    icon: Monitor,
-    description: "Full-stack modern",
-    technologies: [
-      { name: "Next.js 15", description: "React framework" },
-      { name: "Payload CMS", description: "Headless CMS" },
-      { name: "TailwindCSS", description: "Styling" },
-      { name: "Vercel", description: "Hosting & CDN" },
-    ],
-  },
-  {
-    title: "Backend & APIs",
-    icon: Database,
-    description: "Scalabil & securizat",
-    technologies: [
-      { name: "Node.js", description: "Runtime" },
-      { name: "PostgreSQL", description: "Database" },
-      { name: "Redis", description: "Cache & sessions" },
-      { name: "GraphQL / REST", description: "API layer" },
-    ],
-  },
-  {
-    title: "Cloud & DevOps",
-    icon: Cloud,
-    description: "Infrastructură modernă",
-    technologies: [
-      { name: "Vercel / AWS", description: "Cloud hosting" },
-      { name: "Docker", description: "Containerization" },
-      { name: "GitHub Actions", description: "CI/CD" },
-      { name: "Sentry", description: "Error tracking" },
-    ],
-  },
-]
+const roCopy = {
+  eyebrow: "Stack tehnologic",
+  headingPre: "Tehnologii ",
+  headingHighlight: "de ultimă generație",
+  subtitle: "Folosim cele mai moderne tehnologii pentru aplicații performante, scalabile și ușor de întreținut.",
+  securityBadge: "Securitate enterprise-grade • GDPR compliant • SOC 2 ready",
+  categories: [
+    {
+      title: "Mobile Development",
+      description: "Cross-platform nativ",
+      technologies: [
+        { name: "React Native", description: "Framework principal" },
+        { name: "Expo", description: "Tooling & build" },
+        { name: "TypeScript", description: "Type safety" },
+        { name: "React Navigation", description: "Routing nativ" },
+      ],
+    },
+    {
+      title: "Web Applications",
+      description: "Full-stack modern",
+      technologies: [
+        { name: "Next.js 15", description: "React framework" },
+        { name: "Payload CMS", description: "Headless CMS" },
+        { name: "TailwindCSS", description: "Styling" },
+        { name: "Vercel", description: "Hosting & CDN" },
+      ],
+    },
+    {
+      title: "Backend & APIs",
+      description: "Scalabil & securizat",
+      technologies: [
+        { name: "Node.js", description: "Runtime" },
+        { name: "PostgreSQL", description: "Database" },
+        { name: "Redis", description: "Cache & sessions" },
+        { name: "GraphQL / REST", description: "API layer" },
+      ],
+    },
+    {
+      title: "Cloud & DevOps",
+      description: "Infrastructură modernă",
+      technologies: [
+        { name: "Vercel / AWS", description: "Cloud hosting" },
+        { name: "Docker", description: "Containerization" },
+        { name: "GitHub Actions", description: "CI/CD" },
+        { name: "Sentry", description: "Error tracking" },
+      ],
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+
+const categoryIcons = [Smartphone, Monitor, Database, Cloud]
 
 export function AppTechStack() {
+  const locale = useLocale()
+  const t = copy[locale as Locale]
+  const techCategories = t.categories.map((c, i) => ({ ...c, icon: categoryIcons[i] }))
   const { ref, isVisible } = useScrollReveal()
 
   return (
@@ -66,14 +78,13 @@ export function AppTechStack() {
         >
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-premium text-sm font-medium mb-6">
             <Cpu className="w-4 h-4 text-brand" />
-            Stack tehnologic
+            {t.eyebrow}
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
-            Tehnologii <span className="gradient-text">de ultimă generație</span>
+            {t.headingPre}
+            <span className="gradient-text">{t.headingHighlight}</span>
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground text-pretty">
-            Folosim cele mai moderne tehnologii pentru aplicații performante, scalabile și ușor de întreținut.
-          </p>
+          <p className="text-base sm:text-lg text-muted-foreground text-pretty">{t.subtitle}</p>
         </div>
 
         {/* Tech Grid */}
@@ -125,7 +136,7 @@ export function AppTechStack() {
         >
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full glass-premium">
             <Lock className="w-5 h-5 text-green-500" />
-            <span className="text-sm font-medium">Securitate enterprise-grade • GDPR compliant • SOC 2 ready</span>
+            <span className="text-sm font-medium">{t.securityBadge}</span>
           </div>
         </div>
       </div>
