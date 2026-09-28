@@ -19,6 +19,7 @@ const roCopy = {
   timelineLabel: "Timp livrare",
   idealForLabel: "Ideal pentru",
   requestOffer: "Solicită ofertă",
+  moreFeatures: " mai multe...",
   types: [
     {
       id: "startup",
@@ -207,7 +208,7 @@ export function StoreTypes() {
                       ))}
                       {!isActive && type.features.length > 4 && (
                         <li className="text-xs sm:text-sm text-brand font-medium">
-                          + {type.features.length - 4} mai multe...
+                          {`+ ${type.features.length - 4}${t.moreFeatures}`}
                         </li>
                       )}
                     </ul>
