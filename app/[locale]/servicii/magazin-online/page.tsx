@@ -21,6 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
     return generatePageMetadata({
       locale,
       href: "/servicii/magazin-online",
+      hreflang: true,
       title: "Online Store & E-commerce Development",
       description:
         "High-performance online store development. Customer loyalty features, optimised checkout, secure payments, easy to manage.",
@@ -37,6 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return generatePageMetadata({
     locale,
     href: "/servicii/magazin-online",
+    hreflang: true,
     title: "Creare Magazin Online Timișoara - Web design",
     description:
       "Dezvoltare magazin online performant. Funcționalități de loializare clienți, checkout optimizat, plăți securizate, ușor de administrat.",

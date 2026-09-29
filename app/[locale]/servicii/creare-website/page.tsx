@@ -20,6 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
     return generatePageMetadata({
       locale,
       href: "/servicii/creare-website",
+      hreflang: true,
       title: "Website Development Services",
       description:
         "Professional website development — modern design, SEO-first, built for performance. Business websites that turn visitors into customers. Get a free quote.",
@@ -36,6 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return generatePageMetadata({
     locale,
     href: "/servicii/creare-website",
+    hreflang: true,
     title: "Creare Website Timișoara - Web design",
     description:
       "Servicii profesionale de creare website în Timișoara. Design modern, SEO optimizat, performanță excepțională. Site-uri de prezentare care convertesc vizitatori în clienți. Solicită ofertă gratuită!",

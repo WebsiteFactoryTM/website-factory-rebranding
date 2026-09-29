@@ -18,6 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
     return generatePageMetadata({
       locale,
       href: "/servicii/dezvoltare-aplicatie",
+      hreflang: true,
       title: "App Development — Mobile, Web & SaaS",
       description:
         "We build mobile apps with React Native, web apps with Next.js & Payload CMS, and scalable SaaS platforms. Free consultation.",
@@ -34,6 +35,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return generatePageMetadata({
     locale,
     href: "/servicii/dezvoltare-aplicatie",
+    hreflang: true,
     title: "Dezvoltare Aplicație Mobilă & Web - React Native, Next.js, SaaS",
     description:
       "Dezvoltăm aplicații mobile cu React Native, web apps cu Next.js & Payload CMS, platforme SaaS scalabile și soluții de digitalizare. Consultanță gratuită!",

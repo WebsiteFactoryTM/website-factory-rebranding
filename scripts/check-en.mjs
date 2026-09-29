@@ -10,6 +10,17 @@ const enRoutes = [
   ...slugs.map((s) => `/en/portfolio/${s}`),
 ]
 
+// Phase 2 pages: hreflang is now live (ro/en/x-default), paired with the RO URL below.
+// Everything else (contact, portfolio index + case studies) is still pre-Phase-3 — hreflang must stay absent there.
+const hreflangRoPath = {
+  "/en": "", // RO homepage URL has no trailing slash (see lib/seo.ts absoluteUrl's "/" special-case)
+  "/en/about": "/despre-noi",
+  "/en/services": "/servicii",
+  "/en/services/website-development": "/servicii/creare-website",
+  "/en/services/ecommerce": "/servicii/magazin-online",
+  "/en/services/app-development": "/servicii/dezvoltare-aplicatie",
+}
+
 let failures = 0
 const fail = (route, msg) => { failures++; console.error(`FAIL ${route}: ${msg}`) }
 
@@ -20,7 +31,16 @@ for (const route of enRoutes) {
   if (!html.includes('<html lang="en"')) fail(route, 'missing <html lang="en">')
   if (!html.includes(`<link rel="canonical" href="https://websitefactory.ro${route}"`)) fail(route, "canonical is not the EN URL")
   if (!/<meta name="robots" content="noindex/.test(html)) fail(route, "missing noindex")
-  if (/<link[^>]*rel="alternate"[^>]*hreflang=/i.test(html)) fail(route, "hreflang emitted before publishing gate")
+  const roPath = hreflangRoPath[route]
+  const hreflangLink = (hl, href) =>
+    new RegExp(`<link rel="alternate" hreflang="${hl}" href="${href.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`, "i").test(html)
+  if (roPath !== undefined) {
+    if (!hreflangLink("ro", `https://websitefactory.ro${roPath}`)) fail(route, "missing/incorrect ro hreflang")
+    if (!hreflangLink("en", `https://websitefactory.ro${route}`)) fail(route, "missing/incorrect en hreflang")
+    if (!hreflangLink("x-default", `https://websitefactory.ro${roPath}`)) fail(route, "missing/incorrect x-default hreflang")
+  } else if (/<link[^>]*rel="alternate"[^>]*hreflang=/i.test(html)) {
+    fail(route, "hreflang emitted before publishing gate")
+  }
   const body = html.split("<body")[1] ?? html
   if (PRICE.test(body)) fail(route, "price token found")
   if (/href="\/en\/(pret-website|politici-de-confidentialitate|termeni-si-conditii|politica-cookie|creare-site-)/.test(html)) fail(route, "link to RO-only route carries /en prefix")

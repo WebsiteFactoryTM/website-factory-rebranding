@@ -29,6 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
     return generatePageMetadata({
       locale,
       href: "/",
+      hreflang: true,
       title: "Website Design & Development for Small Businesses",
       description:
         "We build fast, SEO-first websites that help small businesses attract customers and grow online — from idea to launch.",
@@ -50,6 +51,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return generatePageMetadata({
     locale,
     href: "/",
+    hreflang: true,
     title: "Creare Site Timișoara - Web Design Timișoara",
     description:
       "Servicii profesionale de web design, magazin online si optimizare SEO, vizibilitate locală și națională - De la idee la soluție digitală",

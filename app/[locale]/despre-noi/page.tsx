@@ -16,6 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
     return generatePageMetadata({
       locale,
       href: "/despre-noi",
+      hreflang: true,
       title: "About Website Factory",
       description:
         "Meet the team behind Website Factory — a web design studio based in Timișoara, building results-driven websites for clients across Europe since 2023.",
@@ -31,6 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return generatePageMetadata({
     locale,
     href: "/despre-noi",
+    hreflang: true,
     title: "Despre Noi",
     description:
       "Descoperiți povestea Website Factory - agenție de web design din Timișoara fondată în 2023. Cunoașteți echipa noastră și valorile care ne ghidează în fiecare proiect.",

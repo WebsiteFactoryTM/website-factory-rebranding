@@ -14,6 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
     return generatePageMetadata({
       locale,
       href: "/servicii",
+      hreflang: true,
       title: "Web Design & Development Services",
       description:
         "Business websites, online stores and mobile apps — built SEO-first, optimised for performance, and designed to bring in enquiries.",
@@ -30,6 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return generatePageMetadata({
     locale,
     href: "/servicii",
+    hreflang: true,
     title: "Servicii Web Design Timișoara",
     description:
       "Servicii complete de web design și dezvoltare în Timișoara: creare website, magazin online, aplicații mobile. Soluții profesionale pentru afacerea ta digitală.",
