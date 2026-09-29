@@ -110,7 +110,99 @@ const roCopy = {
   ],
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  eyebrow: "Our Process",
+  headingPre: "How we build ",
+  headingHighlight: "your online store",
+  subtitle: "A transparent 30-day process, from concept to your first sale.",
+  stepLabel: "Step ",
+  whatYouGet: "What you get:",
+  durationLabel: "Estimated time: ",
+  steps: [
+    {
+      step: 1,
+      title: "Analysis & Strategy",
+      shortTitle: "Analysis",
+      duration: "Day 1–3",
+      description:
+        "We analyse the market, competitors and target audience, then define the selling strategy, product categories, and the checkout flow that will convert best.",
+      deliverables: ["Competitor audit", "Pricing strategy", "Store architecture"],
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      step: 2,
+      title: "UX/UI Design",
+      shortTitle: "Design",
+      duration: "Day 4–12",
+      description:
+        "We design for conversion: an attractive homepage, optimised product pages, an intuitive cart, and a checkout simplified for mobile.",
+      deliverables: ["UX wireframes", "Full design", "Interactive prototype"],
+      color: "from-violet-500 to-purple-500",
+    },
+    {
+      step: 3,
+      title: "Catalogue Setup",
+      shortTitle: "Catalogue",
+      duration: "Day 13–20",
+      description:
+        "We structure the product catalogue, set up categories, filters and attributes, import products, and optimise descriptions for SEO and conversion.",
+      deliverables: ["Category structure", "Product import", "Product SEO"],
+      color: "from-brand to-indigo-500",
+    },
+    {
+      step: 4,
+      title: "Payments & Delivery",
+      shortTitle: "Integrations",
+      duration: "Day 21–25",
+      description:
+        "We integrate payment processors (card, cash on delivery, instalments), courier services, and invoicing systems — all automated.",
+      deliverables: ["Payment gateway", "Courier integration", "Automated invoicing"],
+      color: "from-green-500 to-emerald-500",
+    },
+    {
+      step: 5,
+      title: "Extra Features",
+      shortTitle: "Features",
+      duration: "Day 26–30",
+      description:
+        "We implement loyalty features: points, referral programmes, smart wishlists, stock alerts, subscriptions, and marketing automation.",
+      deliverables: ["Loyalty system", "Marketing automation", "Email notifications"],
+      color: "from-amber-500 to-orange-500",
+    },
+    {
+      step: 6,
+      title: "Testing & QA",
+      shortTitle: "Test",
+      duration: "Day 31–35",
+      description:
+        "We rigorously test the full buying journey across every device — payments, deliveries, automated emails, and performance.",
+      deliverables: ["Checkout testing", "Payment testing", "Speed optimisation"],
+      color: "from-rose-500 to-pink-500",
+    },
+    {
+      step: 7,
+      title: "Launch",
+      shortTitle: "Launch",
+      duration: "Day 36–37",
+      description:
+        "We take the store live, set up Google Analytics e-commerce tracking, configure conversion tracking, and walk you through handling day-to-day orders.",
+      deliverables: ["Live store", "E-commerce analytics", "Full training"],
+      color: "from-cyan-500 to-teal-500",
+    },
+    {
+      step: 8,
+      title: "Support & Growth",
+      shortTitle: "Support",
+      duration: "Ongoing",
+      description:
+        "30 days of free support. We monitor sales and cart abandonment, optimise conversions, and help you scale the business.",
+      deliverables: ["30 days' support", "Sales reports", "CRO optimisations"],
+      color: "from-brand-light to-brand",
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 const stepIcons = [Search, Palette, Database, CreditCard, ShoppingBag, TestTube, Rocket, HeartHandshake]
 

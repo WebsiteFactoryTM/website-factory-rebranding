@@ -74,7 +74,70 @@ const roCopy = {
   ],
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  eyebrow: "Technology",
+  headingPre: "Two platforms, ",
+  headingHighlight: "zero compromises",
+  subtitle: "Pick the platform yourself, or let us help you decide based on your goals.",
+  recommended: "Recommended for scale",
+  integrationsTitlePre: "Native ",
+  integrationsTitleHighlight: "integrations",
+  integrationsSubtitle: "We connect your store to the services you need for full automation.",
+  platforms: [
+    {
+      name: "WooCommerce + WordPress",
+      subtitle: "The classic, flexible choice",
+      description: "Perfect for small to medium stores with a defined budget and simple admin.",
+      icon: "🛒",
+      color: "from-purple-500 to-violet-600",
+      features: [
+        { name: "WordPress CMS", desc: "Intuitive admin" },
+        { name: "WooCommerce Core", desc: "Complete functionality" },
+        { name: "Premium Themes", desc: "Customisable design" },
+        { name: "Pro Plugins", desc: "Unlimited extensibility" },
+        { name: "PHP & MySQL", desc: "Proven technology" },
+        { name: "Optimised hosting", desc: "Guaranteed performance" },
+      ],
+      benefits: ["Accessible cost", "Easy to manage", "A huge ecosystem"],
+    },
+    {
+      name: "Next.js + Payload CMS",
+      subtitle: "Tomorrow's technology, today",
+      description: "Headless architecture for high-performance stores with no ceiling on scale.",
+      icon: "⚡",
+      color: "from-brand to-cyan-500",
+      recommended: true,
+      features: [
+        { name: "Next.js 15", desc: "The #1 React framework" },
+        { name: "Payload CMS", desc: "Modern headless CMS" },
+        { name: "TypeScript", desc: "Type-safe code" },
+        { name: "Vercel Edge", desc: "Fast global CDN" },
+        { name: "PostgreSQL", desc: "Scalable database" },
+        { name: "REST/GraphQL API", desc: "Flexible integrations" },
+      ],
+      benefits: ["<1s speed", "Unlimited scalability", "Excellent SEO"],
+    },
+  ],
+  integrations: [
+    {
+      category: "Payments",
+      items: ["Stripe", "Apple Pay", "Google Pay"],
+      icon: "💳",
+    },
+    {
+      category: "Couriers",
+      items: ["DPD", "GLS"],
+      icon: "📦",
+    },
+    {
+      category: "Marketing",
+      items: ["Klaviyo", "Mailchimp", "Meta Pixel", "Google Ads", "TikTok Pixel", "Hotjar"],
+      icon: "📈",
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function EcommerceTechStack() {
   const locale = useLocale()

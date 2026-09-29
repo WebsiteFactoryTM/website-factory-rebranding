@@ -75,7 +75,74 @@ const roCopy = {
   ],
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  eyebrow: "E-commerce Technology",
+  headingPre: "Choose the right",
+  headingHighlight: " platform",
+  subtitle:
+    "We offer two technology paths for your online store, each with its own advantages depending on your needs and budget.",
+  keyAdvantages: "Key advantages",
+  recommendationTitle: "Our recommendation",
+  platforms: [
+    {
+      id: "woocommerce",
+      name: "WooCommerce",
+      subtitle: "WordPress + WooCommerce",
+      description:
+        "The classic, stable, proven choice for online stores — a huge ecosystem of tested plugins and themes.",
+      color: "from-purple-500 to-indigo-600",
+      idealFor: "Small to medium stores, tighter budgets",
+      features: [
+        { name: "Build time", value: "5–8 weeks", positive: true },
+        { name: "Upfront cost", value: "Accessible", positive: true },
+        { name: "Plugin ecosystem", value: "50,000+", positive: true },
+        { name: "Scalability", value: "Up to ~7,000 products", positive: true },
+        { name: "Performance", value: "Good (with optimisation)", positive: true },
+        { name: "Customisation", value: "Extensive", positive: true },
+        { name: "Maintenance", value: "Needs regular updates", positive: false },
+        { name: "Security", value: "Needs monitoring", positive: false },
+      ],
+      highlights: [
+        "Familiar and easy to manage",
+        "Thousands of themes and plugins",
+        "A huge community",
+        "Integrates with major payment processors",
+      ],
+      recommendation:
+        "WooCommerce is the ideal choice for stores with up to 7,000 products and a defined budget. It offers excellent flexibility and a gentle learning curve for day-to-day admin.",
+      recommendationTag: "Perfect for launching fast",
+    },
+    {
+      id: "nextjs",
+      name: "Next.js + Payload",
+      subtitle: "React + Headless CMS",
+      description: "Cutting-edge technology for stores that need enterprise-level performance and scalability.",
+      color: "from-brand to-glow-violet",
+      idealFor: "Larger stores, high traffic, advanced functionality",
+      features: [
+        { name: "Build time", value: "8–12 weeks", positive: true },
+        { name: "Upfront cost", value: "Higher investment", positive: false },
+        { name: "Ecosystem", value: "Modern, growing", positive: true },
+        { name: "Scalability", value: "Unlimited", positive: true },
+        { name: "Performance", value: "Exceptional (under 1s)", positive: true },
+        { name: "Customisation", value: "100% bespoke", positive: true },
+        { name: "Maintenance", value: "Minimal", positive: true },
+        { name: "Security", value: "Enterprise-grade", positive: true },
+      ],
+      highlights: [
+        "Sub-1-second performance",
+        "Excellent native SEO",
+        "Cloud-scale infrastructure",
+        "Zero WordPress vulnerabilities",
+      ],
+      recommendation:
+        "Next.js + Payload is the right call for brands chasing rapid growth, high traffic volumes, and an ultra-fast buying experience on any device.",
+      recommendationTag: "A long-term investment",
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 const platformIcons = [Layers, Rocket]
 

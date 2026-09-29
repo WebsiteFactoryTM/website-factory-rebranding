@@ -14,7 +14,14 @@ const roCopy = {
   subtitle: "Răspunsuri la cele mai comune întrebări despre crearea și administrarea unui magazin online.",
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  eyebrow: "FAQ",
+  headingPre: "Questions about",
+  headingHighlight: " online stores",
+  subtitle: "Answers to the most common questions about building and running an online store.",
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 interface EcommerceFaqProps {
   faqs: { question: string; answer: string }[]

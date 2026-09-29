@@ -78,7 +78,76 @@ const roCopy = {
   ],
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  eyebrow: "Store Types",
+  headingPre: "What kind of store",
+  headingHighlight: " do you need?",
+  subtitle: "Whatever the size of your business, there's a fit — from a small startup shop to an enterprise platform.",
+  mostPopular: "Most popular",
+  platformLabel: "Platform",
+  timelineLabel: "Delivery time",
+  idealForLabel: "Best for",
+  requestOffer: "Request a quote",
+  moreFeatures: " more...",
+  types: [
+    {
+      id: "startup",
+      name: "Startup Store",
+      description: "For entrepreneurs just getting started who want to sell online quickly and efficiently.",
+      features: [
+        "Up to 100 products",
+        "Premium template design",
+        "Card + cash-on-delivery payments",
+        "Courier integration",
+        "Simple admin",
+        "SSL & GDPR included",
+      ],
+      idealFor: "New businesses, market testing, niche products",
+      timeline: "3–4 weeks",
+      platform: "WooCommerce",
+    },
+    {
+      id: "growth",
+      name: "Business Store",
+      description: "The complete solution for growing businesses that want advanced functionality.",
+      features: [
+        "Up to 1,000 products",
+        "Custom design",
+        "Multiple payment methods",
+        "Advanced discount system",
+        "Customer loyalty programme",
+        "ERP/invoicing integrations",
+        "Analytics & reporting",
+        "Integrated email marketing",
+      ],
+      idealFor: "Growing businesses, multiple categories, a dedicated team",
+      timeline: "6–8 weeks",
+      platform: "WooCommerce / Next.js",
+      popular: true,
+    },
+    {
+      id: "enterprise",
+      name: "Enterprise Store",
+      description: "A scalable e-commerce platform for high volumes and complex requirements.",
+      features: [
+        "Unlimited products",
+        "100% custom design & UX",
+        "Multi-vendor marketplace",
+        "B2B + B2C on one platform",
+        "API for integrations",
+        "Multi-language & multi-currency",
+        "Optimised performance (under 1s)",
+        "Scalable cloud infrastructure",
+        "SLA & dedicated support",
+      ],
+      idealFor: "Established companies, marketplaces, high transaction volumes",
+      timeline: "8–12 weeks",
+      platform: "Next.js + Payload CMS",
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 const typeIcons = [ShoppingBag, Store, Building2]
 

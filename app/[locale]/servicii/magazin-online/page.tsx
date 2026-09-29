@@ -17,6 +17,23 @@ import { EcommerceCta } from "@/components/services/ecommerce/ecommerce-cta"
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
   const { locale } = await params
+  if (locale === "en") {
+    return generatePageMetadata({
+      locale,
+      href: "/servicii/magazin-online",
+      title: "Online Store & E-commerce Development",
+      description:
+        "High-performance online store development. Customer loyalty features, optimised checkout, secure payments, easy to manage.",
+      keywords: [
+        "online store development",
+        "e-commerce website design",
+        "woocommerce development",
+        "next.js ecommerce",
+        "headless commerce",
+        "custom online shop",
+      ],
+    })
+  }
   return generatePageMetadata({
     locale,
     href: "/servicii/magazin-online",
@@ -81,7 +98,50 @@ const faqsRo = [
   },
 ]
 
-const faqs = { ro: faqsRo, en: withoutPrices(faqsRo) } satisfies Record<Locale, typeof faqsRo>
+const faqsEn = [
+  {
+    question: "What does an online store cost?",
+    answer:
+      "Pricing starts from €1,100 for a startup store with up to 100 products. Business stores with advanced features (loyalty, ERP, marketing automation) start from €1,700, and enterprise headless builds are quoted individually. Get in touch for a free consultation to work out exactly what you need.",
+  },
+  {
+    question: "WooCommerce or Next.js — which should I choose?",
+    answer:
+      "WooCommerce is ideal for small to medium stores (up to around 7,000 products) with a controlled budget and simple admin needs. Next.js + Payload CMS suits larger, high-traffic stores that need sub-1-second performance and unlimited scalability. We'll help you pick the right option for your goals.",
+  },
+  {
+    question: "What payment methods can you integrate?",
+    answer:
+      "We integrate the major payment methods for your market — card payments via providers like Stripe, cash on delivery, bank transfer, buy-now-pay-later, Apple Pay and Google Pay. Every transaction is secured with SSL and PCI-DSS compliance.",
+  },
+  {
+    question: "How long does it take for the store to be ready?",
+    answer:
+      "A startup store is ready in 3–4 weeks. Business stores with advanced functionality take 6–8 weeks. Enterprise projects with a custom architecture take 8–12 weeks. We stick to deadlines and keep you updated on progress.",
+  },
+  {
+    question: "Can you add customer loyalty features?",
+    answer:
+      "Absolutely. We build complete loyalty systems: points, referral programmes, VIP tiers, personalised discounts, smart wishlists, recurring subscriptions and gamification. These features can lift retention by up to 40%.",
+  },
+  {
+    question: "Will the store be optimised for SEO?",
+    answer:
+      "Yes. Every store includes full SEO optimisation: friendly URLs, product meta tags, schema markup for rich snippets in Google, an XML sitemap, optimised performance, and an SEO-friendly category structure.",
+  },
+  {
+    question: "Which couriers can you integrate?",
+    answer:
+      "We integrate with the courier services relevant to your market, calculating delivery costs automatically and generating shipping labels straight from the dashboard.",
+  },
+  {
+    question: "Do you offer support and maintenance after launch?",
+    answer:
+      "Yes. We include 60 days of free support after launch, then — if needed — monthly maintenance plans covering security updates, backups, uptime monitoring, technical support and optimisation guidance.",
+  },
+]
+
+const faqs = { ro: faqsRo, en: withoutPrices(faqsEn) } satisfies Record<Locale, typeof faqsRo>
 
 export function generateStaticParams() {
   return allLocaleParams()
@@ -94,12 +154,21 @@ export default async function MagazinOnlinePage({ params }: { params: Promise<{ 
   const pageFaqs = faqs[loc]
 
   const serviceSchema = {
-    ...generateServiceSchema({
-      name: "Creare Magazin Online Profesional",
-      description:
-        "Dezvoltare magazine online cu WooCommerce și Next.js + Payload CMS. Funcționalități de loializare clienți, checkout optimizat și scalabilitate nelimitată.",
-      url: "/servicii/magazin-online",
-    }),
+    ...generateServiceSchema(
+      locale === "en"
+        ? {
+            name: "Professional Online Store Development",
+            description:
+              "Online store development with WooCommerce and Next.js + Payload CMS. Customer loyalty features, optimised checkout and unlimited scalability.",
+            url: "/servicii/magazin-online",
+          }
+        : {
+            name: "Creare Magazin Online Profesional",
+            description:
+              "Dezvoltare magazine online cu WooCommerce și Next.js + Payload CMS. Funcționalități de loializare clienți, checkout optimizat și scalabilitate nelimitată.",
+            url: "/servicii/magazin-online",
+          },
+    ),
     inLanguage: locale,
   }
 
@@ -107,7 +176,7 @@ export default async function MagazinOnlinePage({ params }: { params: Promise<{ 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: tBreadcrumb("home"), url: "/" },
     { name: tBreadcrumb("services"), url: "/servicii" },
-    { name: "Magazin Online", url: "/servicii/magazin-online" },
+    { name: locale === "en" ? "Online Store" : "Magazin Online", url: "/servicii/magazin-online" },
   ])
 
   const faqSchema = generateFAQSchema(pageFaqs)

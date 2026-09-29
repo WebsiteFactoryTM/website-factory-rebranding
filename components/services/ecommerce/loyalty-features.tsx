@@ -60,7 +60,58 @@ const roCopy = {
   ],
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  eyebrow: "Customer Loyalty",
+  headingPre: "Features that build",
+  headingHighlight: " customer loyalty",
+  subtitle: "Turn one-off buyers into repeat customers with our loyalty and rewards systems.",
+  bottomText: "Every feature is fully customisable and integrates cleanly with your store.",
+  tags: ["WooCommerce Ready", "Next.js Compatible", "API First"],
+  features: [
+    {
+      title: "Points system",
+      description: "Customers earn points on every purchase, which they can redeem for discounts or free products.",
+      color: "from-yellow-500 to-orange-500",
+    },
+    {
+      title: "Rewards & gifts",
+      description: "Surprise loyal customers with gifts at certain milestones or special occasions — birthdays, anniversaries.",
+      color: "from-pink-500 to-rose-500",
+    },
+    {
+      title: "Exclusive discounts",
+      description: "Offer personalised discounts based on a customer's buying behaviour and history.",
+      color: "from-green-500 to-emerald-500",
+    },
+    {
+      title: "VIP tiers",
+      description: "Build loyalty tiers — Bronze, Silver, Gold, Platinum — with benefits that grow at each level.",
+      color: "from-brand to-glow-violet",
+    },
+    {
+      title: "Referral programme",
+      description: "Encourage customers to refer friends in exchange for attractive rewards.",
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      title: "Recurring subscriptions",
+      description: "Automate recurring orders with a discount on consumable products.",
+      color: "from-purple-500 to-indigo-500",
+    },
+    {
+      title: "Gamification",
+      description: "Badges, achievements and challenges that boost engagement and time spent in-store.",
+      color: "from-teal-500 to-green-500",
+    },
+    {
+      title: "Smart wishlist",
+      description: "Automatically notify customers when their favourite products are back in stock or on offer.",
+      color: "from-red-500 to-pink-500",
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 const featureIcons = [Star, Gift, Percent, Trophy, Users, Repeat, BadgeCheck, Heart]
 

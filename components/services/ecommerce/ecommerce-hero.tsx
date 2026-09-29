@@ -34,7 +34,30 @@ const roCopy = {
   scrollHint: "Descoperă mai mult",
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  breadcrumbCurrent: "Online Store",
+  badge: "High-Performance E-commerce",
+  h1Line1: "Online Stores",
+  h1Highlight: "Built to Sell",
+  h1Line2: "and easy to manage",
+  subtitlePre: "We build online stores on ",
+  subtitleBold1: "WooCommerce",
+  subtitleMid: " or modern ",
+  subtitleBold2: "Next.js + Payload CMS",
+  subtitleEnd: " — loyalty features, an optimised checkout, and scalability with no ceiling.",
+  features: [
+    { label: "Optimised Checkout" },
+    { label: "Secure Payments" },
+    { label: "Higher Conversions" },
+    { label: "GDPR Compliant" },
+  ],
+  ctaPrimary: "Get a store quote",
+  ctaSecondary: "See live stores",
+  trustBadges: ["Loyalty systems", "Advanced filters & search", "A smooth buying experience"],
+  scrollHint: "See more",
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 const heroFeatureIcons = [ShoppingCart, CreditCard, TrendingUp, Shield]
 
