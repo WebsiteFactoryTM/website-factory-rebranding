@@ -523,6 +523,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare companie de consultanță digitală, Web design, Web development, SEO",
     order: 1,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for a digital consultancy." },
   },
   {
     id: "s45",
@@ -535,6 +536,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Website de prezentare - Servicii de curățenie și mentenanță piscine, Web design, Web development",
     order: 45,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for a pool cleaning and maintenance service." },
   },
   {
     id: "s2",
@@ -546,7 +548,8 @@ export const simpleProjects: SimpleProject[] = [
     liveUrl: "http://thermosolarenergy.ro/",
     year: "2023",
     shortDescription: "Website de prezentare compamnie vanzare de panouri fotovoltaice, Web Design, Mentenanță, Găzduire domeniu, SEO",
-    order: 64
+    order: 64,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for a solar panel retailer." },
   },
   {
     id: "s3",
@@ -559,6 +562,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Website de prezentare și achiziție abonamente medicale și descărcare aplicație mobilă, Web design, Web development, Mentenanță, domeniu, SEO",
     order: 20,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for medical subscription sign-ups and app downloads." },
   },
   {
     id: "s4",
@@ -588,6 +592,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2023",
     shortDescription: "Website de prezentare afterschool, Web Design, Mentenanță, Găzduire domeniu, SEO",
     order: 50,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for an after-school arts programme." },
   },
   {
     id: "s6",
@@ -600,6 +605,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Website de prezentare evaluator + formular de evaluare rapida cu plata online, Web design, Web Development, SEO",
     order: 6,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for a property valuer, with an online quick-valuation form and payment." },
   },
   {
     id: "s7",
@@ -612,6 +618,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Website de prezentare firmă de curățenie, Web Design, SEO",
     order: 61,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for a cleaning company." },
   },
   {
     id: "s8",
@@ -624,6 +631,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Pagină de prezentare - Designer de interior, Web design, Web development, SEO",
     order: 67,
+    en: { categoryLabel: "Business website", shortDescription: "A landing page for an interior designer." },
   },
   {
     id: "s11",
@@ -636,6 +644,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare - Change agent, Web design, Web development, SEO, Mentenanta",
     order: 63,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for a change management consultant." },
   },
   {
     id: "s12",
@@ -648,6 +657,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare și achiziții cursuri - Agenție de marketing, Web design, Web development, Achiziție în rate cursuri, Design Grafic, SEO",
     order: 9,
+    en: { categoryLabel: "Business website", shortDescription: "Business website and course sign-ups for a marketing agency." },
   },
   {
     id: "s13",
@@ -660,6 +670,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2023",
     shortDescription: "Design landing page, Găzduire domeniu, SEO",
     order: 67,
+    en: { categoryLabel: "Business website", shortDescription: "A landing page for an Austrian apitherapy practice." },
   },
   {
     id: "s15",
@@ -672,6 +683,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare - Agenție de turism, Web design, Web development, Design Grafic, SEO",
     order: 15,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for a travel agency." },
   },
   {
     id: "s18",
@@ -684,6 +696,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Website de preszentare - Drone agricole, Web design, Web Development, SEO",
     order: 13,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for an agricultural drone service." },
   },
   {
     id: "s20",
@@ -696,6 +709,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare clinică de înfrumusețare, Web design, Graphic design, Consultanta, Web development, Mentenanță, domeniu, SEO",
     order: 3,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for a beauty clinic." },
   },
   {
     id: "s21",
@@ -708,6 +722,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2023",
     shortDescription: "Website de prezentare - Servicii curățenie pavaje, Web design, Web development, Design Grafic",
     order: 21,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for a paving and driveway cleaning service." },
   },
   {
     id: "s23",
@@ -720,6 +735,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Website de prezentare - Firmă de curățenie, Web design, Web development, Formular complex de rezervări, Design Grafic, SEO",
     order: 23,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for a cleaning company, with an online booking form." },
   },
   {
     id: "s24",
@@ -732,6 +748,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare - Automatizări industriale, Web design, Web development, SEO",
     order: 24,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for an industrial automation company." },
   },
   {
     id: "s25",
@@ -744,6 +761,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare - Medicină nucleară, Web design, Web development, SEO",
     order: 25,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for a nuclear medicine technology company." },
   },
   {
     id: "s26",
@@ -756,6 +774,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare - Website de prezetare și vânzare auto, Web design, Web Development, SEO, Mentenanță",
     order: 26,
+    en: { categoryLabel: "Automotive website", shortDescription: "Business website for a car dealership." },
   },
   {
     id: "s27",
@@ -768,6 +787,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Website prezentare - Terapie Energetică, Web design, Web development, Design Grafic",
     order: 27,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for an energy therapy practice." },
   },
   {
     id: "s28",
@@ -780,6 +800,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Website de prezentare restaurant, Pagină meniu, QR, Web design, Web development, Design Grafic",
     order: 28,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for a restaurant, with a QR-code menu page." },
   },
   {
     id: "s29",
@@ -792,6 +813,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Website ONG, Sitem donație, Web design, Web development, Design Grafic",
     order: 29,
+    en: { categoryLabel: "Charity website", shortDescription: "Website for a charity, with an online donation system." },
   },
   {
     id: "s30",
@@ -804,6 +826,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare - Proiectare digitală clădiri, Web design, Web development, Portofoliu, Design Grafic, SEO",
     order: 14,
+    en: { categoryLabel: "Business website", shortDescription: "Business website and portfolio for a building design studio." },
   },
   {
     id: "s31",
@@ -816,6 +839,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare consultanță și proiectare sisteme green power, Web design, Web development, Design grafic, SEO",
     order: 31,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for a renewable energy consultancy." },
   },
   {
     id: "s32",
@@ -828,6 +852,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Pagină de prezentare - Închirierea ciubăr mobil, Web design, Web development, SEO, Design Logo și Branding",
     order: 32,
+    en: { categoryLabel: "Business website", shortDescription: "A landing page for a mobile hot-tub rental service." },
   },
   {
     id: "s34",
@@ -840,6 +865,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2023",
     shortDescription: "Website de prezentare avocați, Web design, Mentenanță, Găzduire domeniu, Design Logo, SEO",
     order: 15,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for a law firm." },
   },
   {
     id: "s35",
@@ -852,6 +878,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de preszentare - Companie produse alimentare pentru industria Horeca, Web design, Web Development, SEO",
     order: 35,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for a food supplier to the hospitality industry." },
   },
   {
     id: "s38",
@@ -864,6 +891,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Website de prezentare companie de medicina nucleara, Web design, Web development, SEO",
     order: 38,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for a nuclear medicine company." },
   },
   {
     id: "s39",
@@ -876,6 +904,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare asociație ONG, Web design, Web development, SEO, Găzduire domeniu",
     order: 39,
+    en: { categoryLabel: "Charity website", shortDescription: "Business website for a charity." },
   },
   {
     id: "s40",
@@ -888,6 +917,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare, Web Design, Web development, Design Logo, Găzduire domeniu, SEO",
     order: 40,
+    en: { categoryLabel: "Automotive website", shortDescription: "Business website for a car dealership." },
   },
   {
     id: "s41",
@@ -900,6 +930,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare companie de automatizari industriale, Web design, Web development, SEO",
     order: 41,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for an industrial automation company." },
   },
   {
     id: "s42",
@@ -912,6 +943,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare, Web design, Web development, Design Logo,",
     order: 42,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for a company-formation service." },
   },
   {
     id: "s43",
@@ -924,6 +956,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare firma topografica Iași, Web design, Web development, Mentenanță, Găzduire, SEO",
     order: 4,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for a land surveying firm." },
   },
   {
     id: "s44",
@@ -936,6 +969,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare avocat, Web design, Mentenanță, Găzduire domeniu, Design Logo, SEO",
     order: 44,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for a lawyer." },
   },
   {
     id: "s46",
@@ -948,6 +982,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare clinică terapeutică suedeză, Web Design, Web Development, Graphic design, SEO",
     order: 46,
+    en: { categoryLabel: "Business website", shortDescription: "Business website for a Swedish therapy clinic." },
   },
   // Magazine online
   {
@@ -961,6 +996,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Magazin online si inchiriere scule Timișoara, Web design, Web development, Design grafic, Mentenanță, SEO",
     order: 47,
+    en: { categoryLabel: "Online store", shortDescription: "Online store and rental platform for power tools." },
   },
   // La Pinocchio a fost promovat în studiile de caz (vezi featuredProjects → /portofoliu/la-pinocchio)
   {
@@ -974,6 +1010,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Aplicație online de vânzare haine adolescenți, Scanare QR unic Web design, Web Development, Next.js - React, Găzduire, SEO, Mentenanta",
     order: 5,
+    en: { categoryLabel: "Online store", shortDescription: "An online store for teen clothing, with unique QR-code scanning per item." },
   },
   {
     id: "s51",
@@ -986,6 +1023,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Magazin online - Firmă de construcții, Web design, Mentenanță, Design Logo, SEO",
     order: 51,
+    en: { categoryLabel: "Online store", shortDescription: "Online store for a construction company." },
   },
   {
     id: "s52",
@@ -998,6 +1036,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2023",
     shortDescription: "Supermarket Online, Web design, Web development, Administrare, Design grafic, Marketing digital, SEO",
     order: 52,
+    en: { categoryLabel: "Online store", shortDescription: "Online supermarket, with digital ordering and admin tools." },
   },
   {
     id: "s53",
@@ -1010,6 +1049,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Magazin online produse piscină, Web design, Web development",
     order: 53,
+    en: { categoryLabel: "Online store", shortDescription: "Online store for pool products." },
   },
   {
     id: "s54",
@@ -1022,6 +1062,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Magazin Online - Galerie de Artă, Web design, Web development, SEO",
     order: 54,
+    en: { categoryLabel: "Online store", shortDescription: "Online store for an art gallery." },
   },
   {
     id: "s55",
@@ -1034,6 +1075,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2023",
     shortDescription: "Magazin Online - Print Shop, Web design, Web Development, SEO",
     order: 55,
+    en: { categoryLabel: "Online store", shortDescription: "Online store for a print shop." },
   },
   {
     id: "s61",
@@ -1046,6 +1088,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Magazin online - restaurant comenzi la domiciliu, Mentenanță, Marketing Digital, Web Design, Web Development, Design grafic, SEO",
     order: 7,
+    en: { categoryLabel: "Online store", shortDescription: "Online store for a restaurant's home delivery orders." },
   },
   {
     id: "s62",
@@ -1058,6 +1101,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Magazin online - mobilă transformabilă, Web design, Web Development, SEO",
     order: 62,
+    en: { categoryLabel: "Online store", shortDescription: "Online store for transformable furniture." },
   },
   {
     id: "s63",
@@ -1070,6 +1114,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Magazin Online - Companie italiană de produse cosmetice, Web design, Web development, SEO",
     order: 10,
+    en: { categoryLabel: "Online store", shortDescription: "Online store for an Italian cosmetics brand." },
   },
   {
     id: "s64",
@@ -1082,6 +1127,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Magazin online și calculator sisteme panouri fotovoltaice complete, sistem prețuri în funcție de rolul utilizatorului, Web design, Web development, Mentenanță, domeniu, SEO",
     order: 2,
+    en: { categoryLabel: "Online store", shortDescription: "An online store and calculator for solar panel systems, with role-based pricing." },
   },
   {
     id: "s65",
@@ -1094,6 +1140,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Magazin online produse sanitare și decor, Web design, Web development, Design grafic, Mentenanță, SEO, Logo & Branding design",
     order: 65,
+    en: { categoryLabel: "Online store", shortDescription: "Online store for bathroom fixtures and decor." },
   },
   {
     id: "s66",
@@ -1106,6 +1153,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2026",
     shortDescription: "Magazin online pet shop, Web design, Web development, Design grafic, Mentenanță, SEO, Logo & Branding design",
     order: 12,
+    en: { categoryLabel: "Online store", shortDescription: "Online pet shop." },
   },
   {
     id: "s67",
@@ -1153,6 +1201,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Platformă online pentru achizitionarea extraselor CF ANCPI, Web design, Web development, Mentenanță, Găzduire, SEO",
     order: 17,
+    en: { categoryLabel: "Custom platform", shortDescription: "A platform for ordering official Romanian land registry extracts." },
   },
   {
     id: "s71",
@@ -1165,6 +1214,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare standuri expo, Web design, Web development, Mentenanță, SEO",
     order: 18,
+    en: { categoryLabel: "Online catalogue", shortDescription: "Business website for an exhibition stand manufacturer." },
   },
 ]
 
