@@ -10,6 +10,23 @@ import { cn } from "@/lib/utils"
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
   const { locale } = await params
+  if (locale === "en") {
+    return generatePageMetadata({
+      locale,
+      href: "/servicii",
+      title: "Web Design & Development Services",
+      description:
+        "Business websites, online stores and mobile apps — built SEO-first, optimised for performance, and designed to bring in enquiries.",
+      keywords: [
+        "web design agency",
+        "website design services",
+        "e-commerce website development",
+        "mobile app development",
+        "SEO-first web design",
+        "small business website design",
+      ],
+    })
+  }
   return generatePageMetadata({
     locale,
     href: "/servicii",
@@ -88,7 +105,66 @@ const roCopy = {
   },
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  hero: {
+    eyebrow: "Full-Service Web Design",
+    title: "Web Design &",
+    titleHighlight: " Development",
+    city: " Services",
+    text: "From business websites to online stores and mobile apps, we build the tools your business needs to grow online — all engineered with one thing in mind: measurable results.",
+  },
+  services: [
+    {
+      id: "creare-website",
+      title: "Website Development",
+      description:
+        "A clear, fast, SEO-optimised website — built to bring in enquiries, not just to look the part.",
+      features: [
+        "Modern, responsive design",
+        "Complete SEO optimisation",
+        "Fast, optimised loading",
+        "Intuitive admin panel",
+        "Ongoing support & maintenance",
+      ],
+    },
+    {
+      id: "magazin-online",
+      title: "Online Store",
+      description:
+        "A fully working online shop — integrated payments, loyalty tools, stock management — built around easy admin and even easier selling.",
+      features: [
+        "Payments, delivery & invoicing handled",
+        "Filters, search & product variants",
+        "Checkout built to convert",
+        "Customer loyalty schemes",
+        "Courier & payment method integrations",
+      ],
+    },
+    {
+      id: "dezvoltare-aplicatie",
+      title: "Mobile App Development",
+      description:
+        "Native or cross-platform apps for iOS and Android. Clean UX, strong performance — from first MVP to a product ready to scale.",
+      features: [
+        "iOS & Android (cross-platform)",
+        "Push notifications, accounts & payments",
+        "App store publishing & maintenance",
+        "Fast MVPs for startups",
+        "Built to scale",
+      ],
+    },
+  ],
+  viewDetails: "See details",
+  cta: {
+    title: "Not sure which service",
+    titleHighlight: " fits your business",
+    text: "That's what the free consultation is for — we'll look at what you need and point you to the right option.",
+    primary: "Get a free quote",
+    secondary: "View our portfolio",
+  },
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 const serviceMeta = [
   {
@@ -131,12 +207,21 @@ export default async function ServiciiPage({ params }: { params: Promise<{ local
   ])
 
   const serviceSchema = {
-    ...generateServiceSchema({
-      name: "Servicii Web Design și Dezvoltare",
-      description:
-        "Servicii complete de web design și dezvoltare în Timișoara: creare website, magazin online, aplicații mobile. Soluții profesionale pentru afacerea ta digitală.",
-      url: "/servicii",
-    }),
+    ...generateServiceSchema(
+      locale === "en"
+        ? {
+            name: "Web Design & Development Services",
+            description:
+              "Business websites, online stores and mobile apps — built SEO-first, optimised for performance, and designed to bring in enquiries.",
+            url: "/servicii",
+          }
+        : {
+            name: "Servicii Web Design și Dezvoltare",
+            description:
+              "Servicii complete de web design și dezvoltare în Timișoara: creare website, magazin online, aplicații mobile. Soluții profesionale pentru afacerea ta digitală.",
+            url: "/servicii",
+          },
+    ),
     inLanguage: locale,
   }
 
