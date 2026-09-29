@@ -66,7 +66,9 @@ Five things the brief implies that no single task would catch unless someone own
 
 ---
 
-## Phase 2 — Core page copy: Homepage, Despre noi (About), Servicii (Services)
+## Phase 2 — Core page copy: Homepage, Despre noi (About), Servicii (Services) — ✅ DONE, pending user review (Task 2.6)
+
+Commits: `5502c6e` (homepage), `bf44426` (about), `1dcc8d0` (services index), `d62449e` (website dev sub-page), `948c1a2` (ecommerce sub-page), `814c4da` (app dev sub-page), `67ec15c` (hreflang). All content restructured rather than translated line-for-line, per the user's explicit instruction to diverge from the RO sentence shape. See chat for the full list of claims softened/generalised and flagged for review.
 
 **Pattern for every task in this phase:** each file has `const roCopy = {...}` then `const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>`. The task is: write `const enCopy = {...}` with the same shape as `roCopy` (TypeScript's `satisfies Record<Locale, typeof roCopy>` will error if a key is missing or mistyped — that's the built-in check), then change the line to `const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>`.
 
@@ -156,7 +158,13 @@ Note: `components/services/website/roi-calculator.tsx` is the same kind of inter
 
 ---
 
-## Phase 3 — Portfolio
+## Phase 3 — Portfolio — ✅ DONE and approved
+
+Commits: `0ff63b8` (3 strong case studies + slug-page chrome), `123cd47` (portfolio index), `a2b0280` (remaining 6 case studies + curated simpleProjects), `89443c0` (hreflang), `c53bce5` (full simpleProjects translation, superseding the 3-entry curation after the user asked for full coverage). All 9 case studies and all 53 simpleProjects entries now have English `en` overrides.
+
+## Post-phase fixes (`01055e1`)
+
+After all three phases were reported done, user review caught: the contact page cluster (hero/info/map/FAQ) was still untranslated despite `/contact` being a dual-locale route — fixed. Also removed the AI Chatbot nav link and the footer's Locations column (RO-only city pages) from the EN experience per user request, and fixed `generateLocalBusinessSchema()` to accept a locale param (was RO-only regardless of caller, including on the homepage's EN branch).
 
 **Structural head start:** `lib/portfolio-data.ts` already has an `en?: Partial<...>` override field on both `FeaturedProject` and `SimpleProject`, and all 9 featured (dedicated-page) case studies already have an `enOrder` set. That existing ranking (1 = most EN-relevant) already lines up with an outcomes-based read of the RO copy:
 
