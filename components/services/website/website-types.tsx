@@ -80,7 +80,78 @@ const roCopy = {
   ],
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  eyebrow: "Website Types",
+  heading: "Which kind of website fits your business?",
+  subtitle: "Pick the option that matches where you are — every project is shaped around your specific goals.",
+  popular: "Most popular",
+  timeLabel: "Timeline: ",
+  idealLabel: "Best for: ",
+  calculatePrice: "Calculate price",
+  includesTitle: "What's included:",
+  types: [
+    {
+      id: "one-page",
+      title: "One Page",
+      subtitle: "Great for getting started",
+      description:
+        "Everything on one page — an introduction, your services, and a way to get in touch. Ideal for freelancers, consultants, or a quick launch.",
+      features: ["Premium design", "Contact form", "Basic SEO", "Mobile responsive", "Fast loading"],
+      idealFor: "Freelancers, consultants, startups",
+      timeline: "5–7 days",
+      popular: false,
+    },
+    {
+      id: "prezentare",
+      title: "Business Website",
+      subtitle: "Most popular",
+      description:
+        "A complete multi-page site — home, about, services, portfolio, contact. The full package for a growing business.",
+      features: [
+        "5–10 pages",
+        "Built-in blog",
+        "Advanced SEO",
+        "Photo/video gallery",
+        "Social media integration",
+        "Analytics setup",
+      ],
+      idealFor: "SMEs, agencies, established businesses",
+      timeline: "2–3 weeks",
+      popular: true,
+    },
+    {
+      id: "corporate",
+      title: "Corporate",
+      subtitle: "For larger organisations",
+      description:
+        "An enterprise-grade build — complex architecture, multiple sections, CRM integrations, and advanced functionality.",
+      features: ["15+ pages", "Advanced CMS", "Multi-language", "CRM integrations", "Client portal", "Advanced security"],
+      idealFor: "Corporations, institutions, larger groups",
+      timeline: "4–8 weeks",
+      popular: false,
+    },
+    {
+      id: "custom",
+      title: "Custom / App",
+      subtitle: "No limits",
+      description:
+        "Bespoke development for anything that doesn't fit a template — platforms, dashboards, complex web apps built to spec.",
+      features: [
+        "Bespoke functionality",
+        "Scalable architecture",
+        "API integrations",
+        "User management",
+        "Advanced reporting",
+        "Dedicated support",
+      ],
+      idealFor: "Innovative projects, SaaS, platforms",
+      timeline: "6–12 weeks",
+      popular: false,
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 const typeIcons = [FileText, Layers, Briefcase, Rocket]
 

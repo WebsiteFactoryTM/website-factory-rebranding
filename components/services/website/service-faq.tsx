@@ -15,7 +15,15 @@ const roCopy = {
   subtitle: "Răspundem la cele mai comune întrebări despre crearea website-urilor.",
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  eyebrow: "FAQ",
+  headingPre: "Got ",
+  headingHighlight: "questions",
+  headingEnd: "?",
+  subtitle: "Answers to what people usually ask us about building a website.",
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 interface ServiceFAQProps {
   faqs: { question: string; answer: string }[]

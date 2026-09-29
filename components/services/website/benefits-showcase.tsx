@@ -56,7 +56,54 @@ const roCopy = {
   ],
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  eyebrow: "Why us?",
+  headingPre: "Results ",
+  headingHighlight: "you can measure",
+  subtitle: "We don't just promise — we deliver. Here's what clients typically see after their new site goes live.",
+  benefits: [
+    {
+      stat: 50,
+      suffix: "%",
+      label: "Average performance gain",
+      description: "Most clients see a significant jump in site performance after launch.",
+      color: "text-green-500",
+      bgColor: "bg-green-500/10",
+    },
+    {
+      stat: 30,
+      suffix: "%",
+      label: "Conversion rate",
+      description: "Our UX is built to turn visitors into customers.",
+      color: "text-brand",
+      bgColor: "bg-brand/10",
+    },
+    {
+      stat: 1.2,
+      suffix: "s",
+      label: "Average load time",
+      description: "Fast sites that don't lose visitors to a slow spinner.",
+      color: "text-glow-cyan",
+      bgColor: "bg-glow-cyan/10",
+    },
+    {
+      stat: 100,
+      suffix: "%",
+      label: "SEO score",
+      description: "Fully optimised for search engines from day one.",
+      color: "text-glow-violet",
+      bgColor: "bg-glow-violet/10",
+    },
+  ],
+  additionalBenefits: [
+    { label: "100% Responsive" },
+    { label: "SSL Secured" },
+    { label: "Core Web Vitals" },
+    { label: "Best Practices" },
+  ],
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 const benefitIcons = [TrendingUp, Users, Clock, Search]
 const additionalBenefitIcons = [Smartphone, Shield, Gauge, Award]

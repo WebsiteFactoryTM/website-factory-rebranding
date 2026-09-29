@@ -42,7 +42,43 @@ const roCopy = {
   ],
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  eyebrow: "Technology",
+  headingPre: "A modern ",
+  headingHighlight: "tech stack",
+  subtitle: "We build with modern, high-performance technology to get exceptional results.",
+  categories: [
+    {
+      category: "Frontend",
+      items: [
+        { name: "Next.js", description: "The React framework built for speed and scale" },
+        { name: "React", description: "The industry-standard library for modern interfaces" },
+        { name: "TypeScript", description: "Type-safe code that's easy to maintain" },
+        { name: "Tailwind CSS", description: "A fast, consistent design system" },
+      ],
+    },
+    {
+      category: "Performance",
+      items: [
+        { name: "Vercel", description: "Global hosting with CDN built in" },
+        { name: "Image Optimisation", description: "Images compressed automatically" },
+        { name: "Code Splitting", description: "Smart, on-demand code loading" },
+        { name: "Advanced Caching", description: "Near-instant responses from cache" },
+      ],
+    },
+    {
+      category: "SEO & Analytics",
+      items: [
+        { name: "Schema Markup", description: "Structured data for Google" },
+        { name: "Core Web Vitals", description: "Metrics tuned for search ranking" },
+        { name: "Google Analytics 4", description: "Full visitor tracking" },
+        { name: "Search Console", description: "Monitoring how Google indexes your site" },
+      ],
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function TechStack() {
   const locale = useLocale()

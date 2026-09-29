@@ -36,7 +36,32 @@ const roCopy = {
   scrollHint: "Descoperă mai mult",
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  breadcrumbCurrent: "Website Development",
+  badge: "Our Most Popular Service",
+  h1Line1: "Website Development",
+  h1Highlight: "That Works",
+  h1Line2: "For Your Business",
+  subtitlePre: "We build websites that ",
+  subtitleBold1: "bring in customers",
+  subtitleMid1: ", ",
+  subtitleBold2: "convert visitors",
+  subtitleMid2: ", and ",
+  subtitleBold3: "climb higher in search results",
+  subtitleEnd: " — modern design, exceptional performance, results you can measure.",
+  features: [
+    { label: "Responsive Design" },
+    { label: "Fast Loading" },
+    { label: "SEO Optimised" },
+    { label: "SSL Security" },
+  ],
+  ctaPrimary: "Get a free quote",
+  ctaSecondary: "See examples",
+  trustBadges: ["150+ websites delivered", "100% client satisfaction"],
+  scrollHint: "See more",
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 const heroFeatureIcons = [Globe, Zap, TrendingUp, Shield]
 

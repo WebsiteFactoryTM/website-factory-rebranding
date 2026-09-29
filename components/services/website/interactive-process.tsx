@@ -79,7 +79,79 @@ const roCopy = {
   ],
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  eyebrow: "Our Process",
+  headingPre: "How we build ",
+  headingHighlight: "your website",
+  subtitle: "A transparent process, proven across 150+ projects. You'll always know exactly what's happening and when.",
+  stepLabel: "Step ",
+  whatYouGet: "What you get:",
+  durationLabel: "Estimated time: ",
+  steps: [
+    {
+      step: 1,
+      title: "Discovery",
+      shortTitle: "Brief",
+      duration: "Day 1–2",
+      description:
+        "We kick off with a discovery call to understand your business, goals, audience and competitors — what's working in your industry, and what isn't.",
+      deliverables: ["Project brief", "Competitor analysis", "Proposed approach"],
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      step: 2,
+      title: "Design & Prototype",
+      shortTitle: "Design",
+      duration: "Day 3–7",
+      description:
+        "We create wireframes and interactive mockups, checking every design decision with you before development starts. Revisions continue until you're happy.",
+      deliverables: ["Wireframes", "Full UI design", "Interactive prototype"],
+      color: "from-violet-500 to-purple-500",
+    },
+    {
+      step: 3,
+      title: "Development",
+      shortTitle: "Code",
+      duration: "Day 8–14",
+      description:
+        "We build the site using the latest technology — clean, performant code with SEO considered from day one. Every line is written for speed and scalability.",
+      deliverables: ["Responsive front end", "CMS integration", "Performance optimisation"],
+      color: "from-brand to-indigo-500",
+    },
+    {
+      step: 4,
+      title: "Testing & QA",
+      shortTitle: "Test",
+      duration: "Day 15–17",
+      description:
+        "We test rigorously across every browser and device, checking performance, security and functionality, and fix anything that needs it before launch.",
+      deliverables: ["Testing report", "Final optimisations", "Launch checklist"],
+      color: "from-amber-500 to-orange-500",
+    },
+    {
+      step: 5,
+      title: "Launch",
+      shortTitle: "Launch",
+      duration: "Day 18–20",
+      description:
+        "We set up hosting, domain and SSL, take the site live, and configure Google Analytics and Search Console — walking you through every setting that matters.",
+      deliverables: ["Live site", "Analytics setup", "Admin training"],
+      color: "from-green-500 to-emerald-500",
+    },
+    {
+      step: 6,
+      title: "Support & Growth",
+      shortTitle: "Support",
+      duration: "Ongoing",
+      description:
+        "30 days of free support after launch. We monitor performance, suggest optimisations, and we're here for any question or tweak you need.",
+      deliverables: ["30 days' support", "Performance reports", "SEO guidance"],
+      color: "from-pink-500 to-rose-500",
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 const stepIcons = [Search, PenTool, Code2, TestTube, Rocket, HeartHandshake]
 

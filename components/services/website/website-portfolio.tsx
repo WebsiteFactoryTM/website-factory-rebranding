@@ -21,7 +21,18 @@ const roCopy = {
   recentProject: "Proiect recent",
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  eyebrow: "Portfolio",
+  headingPre: "Websites ",
+  headingHighlight: "that deliver",
+  subtitle: "Real websites we've built, and the results they generate for clients.",
+  viewAll: "See all projects",
+  otherProjects: "More projects",
+  defaultResult: "Measurable results",
+  recentProject: "Recent project",
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function WebsitePortfolio() {
   const locale = useLocale() as Locale
