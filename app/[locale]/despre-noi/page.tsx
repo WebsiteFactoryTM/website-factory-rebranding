@@ -12,6 +12,22 @@ import { AboutCTA } from "@/components/about/about-cta"
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
   const { locale } = await params
+  if (locale === "en") {
+    return generatePageMetadata({
+      locale,
+      href: "/despre-noi",
+      title: "About Website Factory",
+      description:
+        "Meet the team behind Website Factory — a web design studio based in Timișoara, building results-driven websites for clients across Europe since 2023.",
+      keywords: [
+        "web design agency",
+        "about website factory",
+        "web development team",
+        "website design studio",
+        "Timișoara web design",
+      ],
+    })
+  }
   return generatePageMetadata({
     locale,
     href: "/despre-noi",

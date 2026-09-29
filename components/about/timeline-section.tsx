@@ -39,7 +39,37 @@ const roCopy = {
   launchLinkText: "UN:EVENT - Platforma pentru evenimente",
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  sectionLabel: "Our journey",
+  headingPrefix: "From a startup",
+  headingHighlight: "to where we are today",
+  milestones: [
+    {
+      year: "2023",
+      title: "The Beginning",
+      description: "Website Factory launches in Timișoara. First 21 projects delivered.",
+    },
+    {
+      year: "2024",
+      title: "Growth",
+      description: "The team grows. Revenue increases by 171%. Our first clients from outside Romania.",
+    },
+    {
+      year: "2025",
+      title: "Innovation",
+      description: "",
+    },
+    {
+      year: "Future",
+      title: "Vision",
+      description: "We keep pushing to help businesses grow their presence in the digital space.",
+    },
+  ],
+  launchDescriptionPrefix: "We're keeping every partnership going and still shipping quality work. Meanwhile, we're launching",
+  launchLinkText: "UN:EVENT — our events platform",
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 type Milestone = {
   year: string

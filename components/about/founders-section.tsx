@@ -55,7 +55,41 @@ const roCopy = {
   ],
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  sectionLabel: "The Team",
+  headingLine1: "The people behind",
+  headingHighlight: "Website Factory",
+  subtitle: "Two founders, one goal: websites built to a standard that can compete anywhere.",
+  ctaText: "Want to know us better? Let's talk about your project.",
+  ctaButton: "Book a meeting",
+  imageAltSuffix: "Website Factory co-founder, Timișoara",
+  linkedinLabel: "LinkedIn",
+  emailLabel: "Email",
+  founders: [
+    {
+      name: "Ernest Slach",
+      role: "Co-Founder & CEO",
+      bio: "Ernest sets the strategic direction for every project, making sure each site ties back to the client's actual business goals. His background in digital entrepreneurship brings together strategy, web design, and a creative approach focused on clarity, differentiation, and results.",
+      expertise: [
+        "Business Strategy",
+        "Client Relations",
+        "Project Management",
+        "UX & UI Design",
+        "SEO",
+        "Consulting",
+        "Copywriting",
+      ],
+    },
+    {
+      name: "Alex Nedelia-Kerekes",
+      role: "Co-Founder & CTO",
+      bio: "Alex is the technical mind behind Website Factory. With expertise in full-stack development, software architecture, and performance optimisation, he turns complex requirements into solutions that are elegant and built to scale.",
+      expertise: ["Full-Stack Development", "Technical Architecture", "Performance Optimisation", "Integrations & Authorisation"],
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function FoundersSection() {
   const locale = useLocale()

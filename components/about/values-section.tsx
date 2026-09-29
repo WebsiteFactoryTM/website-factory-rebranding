@@ -53,7 +53,46 @@ const roCopy = {
   ],
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  sectionLabel: "Our values",
+  headingPrefix: "The principles behind",
+  headingHighlight: "every project",
+  headingSuffix: "we take on",
+  subtitle: "These are the values that shape how we work, and the relationships we build with clients.",
+  values: [
+    {
+      title: "Performance",
+      description:
+        "Fast, stable sites — built around Core Web Vitals, solid technical SEO, and a smooth mobile-first experience.",
+    },
+    {
+      title: "Transparency",
+      description:
+        "Open communication and clear deliverables. You'll always know what we're doing, why, and what it costs — no hidden extras.",
+    },
+    {
+      title: "Partnership",
+      description:
+        "We don't disappear after handover. We think through the solution with you, help set the right priorities, and stay around for the decisions that follow.",
+    },
+    {
+      title: "Results",
+      description:
+        "We set goals and track what matters — relevant traffic, enquiries, conversions. Decisions are driven by data, not guesswork.",
+    },
+    {
+      title: "Innovation",
+      description:
+        "We use the technology that fits the project, not whatever's trending. Stable, scalable, and easy to maintain wins every time.",
+    },
+    {
+      title: "Creativity",
+      description: "Design that's true to your brand: clear, memorable, and built to communicate its value at a glance.",
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function ValuesSection() {
   const locale = useLocale()

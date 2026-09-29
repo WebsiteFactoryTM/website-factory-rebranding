@@ -47,7 +47,44 @@ const roCopy = {
   ],
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  sectionLabel: "Our story",
+  headingLine1: "Started in Timișoara.",
+  headingLine2: "Built for anywhere.",
+  teamImageAltSubject: "Website Factory co-founders — Ernest and Alex",
+  teamImageAltLocation: "Timișoara",
+  quote: '"Building the web, one dream at a time"',
+  quoteAttribution: "— Ernest & Alex, Co-founders",
+  paragraph1:
+    "Website Factory started in Timișoara with a simple idea: a website's job is to work for the business behind it, not just look good. Since 2023, we've built websites, online stores and digital products with a focus on clarity, speed, and a genuinely good user experience.",
+  paragraph2Prefix:
+    "We work in the open, explain the technical bits in plain language, and follow the same clear process on every project — from strategy and structure through to design, development and launch. We'd rather make the right call for your goals than chase whatever's trending. ",
+  paragraph2Strong: "Every pixel and every line of code has to earn its place by serving the business behind it.",
+  storyPoints: [
+    {
+      title: "The Idea",
+      description:
+        "A good website starts with a clear foundation — goals, structure, message. We turn that into a digital product that's coherent, easy to use, and easy to grow.",
+    },
+    {
+      title: "The Mission",
+      description:
+        "We build for measurable value — more enquiries, more trust, better conversions. No empty promises, just a clear plan and solid execution.",
+    },
+    {
+      title: "The Vision",
+      description:
+        "Clean design, solid technical foundations, SEO done properly, and communication that doesn't need a decoder ring. Modern, fast, accessible, and built to scale.",
+    },
+    {
+      title: "The Passion",
+      description:
+        "We sweat the details — micro-interactions, performance, security. To us, \"done\" means tested, optimised, and shipped with care, whatever the size of the project.",
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function CompanyStory() {
   const locale = useLocale()

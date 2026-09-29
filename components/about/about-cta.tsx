@@ -23,7 +23,21 @@ const roCopy = {
   trustNoObligation: "Fără obligații",
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  badge: "Let's work together",
+  headingPrefix: "Ready to give your",
+  headingHighlight: "online presence",
+  headingSuffix: "a boost?",
+  paragraph:
+    "Get in touch for a free consultation. We'll look at what you need and recommend the best way forward for your business.",
+  ctaPrimary: "Get a free quote",
+  ctaSecondary: "Call us directly",
+  trustResponse: "We reply within 24h",
+  trustConsultation: "Free consultation",
+  trustNoObligation: "No obligation",
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function AboutCTA() {
   const locale = useLocale()

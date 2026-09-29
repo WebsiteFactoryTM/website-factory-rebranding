@@ -23,7 +23,24 @@ const roCopy = {
   scrollLabel: "Descoperă povestea",
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  badge: "About Website Factory",
+  h1Prefix: "We build",
+  h1Highlight: "digital experiences",
+  h1Middle: "that",
+  h1Outline: "grow",
+  h1Suffix: "businesses",
+  paragraph:
+    "Since 2023, we've been the go-to partner for companies across Romania and Europe that want a strong digital presence — combining design and technology to get results you can measure.",
+  stats: [
+    { value: "2023", label: "Founded" },
+    { value: "150+", label: "Projects delivered" },
+    { value: "100%", label: "Dedication" },
+  ],
+  scrollLabel: "See our story",
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function AboutHero() {
   const locale = useLocale()
