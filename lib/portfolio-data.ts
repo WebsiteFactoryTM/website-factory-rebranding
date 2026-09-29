@@ -84,6 +84,23 @@ export const featuredProjects: FeaturedProject[] = [
     solution:
       "Am construit platforma pe Next.js, cu randare pe server și cache la nivel de rută, astfel încât navigarea între secțiuni să fie percepută ca instantanee. Rezultatele meciurilor, programul și clasamentul sunt preluate automat printr-o integrare API dedicată, eliminând complet actualizările manuale. Editorii publică știri și conținut direct din CMS, iar structura semantică, datele structurate și optimizarea imaginilor asigură Core Web Vitals 3/3 și vizibilitate maximă în căutări. Întregul proiect a fost livrat printr-un flux de dezvoltare agentic, care a scurtat radical drumul de la concept la producție.",
     liveUrl: "https://www.politehnicatimisoara.com/",
+    en: {
+      title: "Politehnica Timișoara – The Club's Official Digital Platform",
+      categoryLabel: "Digital platform",
+      description:
+        "The official digital platform for Politehnica Timișoara football club: news, squads, fixtures, ticketing and an official shop, all in one fast, coherent experience. Results, the fixture list and league standings update automatically through a dedicated API integration, and the Next.js architecture delivers content almost instantly on any device.",
+      shortDescription:
+        "The official digital platform for Politehnica Timișoara — news, fixtures, ticketing and shop, with results and standings updated automatically via API.",
+      results: [
+        { label: "Core Web Vitals", value: "3/3" },
+        { label: "Page load", value: "Instant" },
+        { label: "Results & standings", value: "Live API" },
+      ],
+      challenge:
+        "A club with over 100 years of history and tens of thousands of supporters needed a single official digital hub: daily news, three squads, a fixture list, ticketing and a shop — all on a platform that could handle matchday traffic spikes and load instantly on mobile, where most of the audience is.",
+      solution:
+        "We built the platform on Next.js, with server rendering and route-level caching so navigation between sections feels instant. Match results, fixtures and standings are pulled automatically through a dedicated API integration, removing manual updates entirely. Editors publish news and content directly from the CMS, and semantic structure, structured data and image optimisation deliver Core Web Vitals 3/3 and maximum search visibility. The whole project was delivered through an agentic development workflow that radically shortened the path from concept to production.",
+    },
   },
   {
     id: "2",
@@ -115,6 +132,28 @@ export const featuredProjects: FeaturedProject[] = [
     solution:
       "Am construit UN:EVENT — o platformă digitală care centralizează locații, servicii și evenimente, cu filtre inteligente, listări validate și o experiență gândită pentru decizii rapide și vizibilitate reală.",
     liveUrl: "https://unevent.ro",
+    en: {
+      title: "UN:EVENT – A Platform for Venues, Services and Events",
+      categoryLabel: "Digital platform",
+      description:
+        "A digital platform connecting venues, suppliers and event organisers in one ecosystem. Smart filtering, verified listings, real visibility, and other integrated systems.",
+      shortDescription: "A digital platform that simplifies finding venues, services and events.",
+      results: [
+        { label: "Listings in month one", value: "61+" },
+        { label: "Load speed", value: "0.4s" },
+        { label: "Core Web Vitals - SEO", value: "100%" },
+      ],
+      testimonial: {
+        quote:
+          "UN:EVENT is our own product, still in active development. These reviews come from partners and early users already using the platform in its early stages.",
+        author: "Ernest Slach",
+        role: "Co-Founder, UN:EVENT & Website Factory",
+      },
+      challenge:
+        "Event organisers waste time searching for venues and suppliers across multiple platforms, while suppliers have no clear, effective channel for online visibility.",
+      solution:
+        "We built UN:EVENT — a digital platform that brings venues, services and events together in one place, with smart filters, verified listings, and an experience designed for quick decisions and real visibility.",
+    },
   },
   {
     id: "3",
@@ -152,6 +191,23 @@ export const featuredProjects: FeaturedProject[] = [
     solution:
       "Am dezvoltat aplicația mobilă în React Native — un singur cod sursă pentru iOS și Android — și platforma web în Next.js, ambele conectate la același API și la aceeași bază de date. Motociclistul pornește un Free Ride sau navighează turn-by-turn către o destinație, iar aplicația înregistrează distanța, viteza, altitudinea și traseul complet. În jurul acestui nucleu am construit garajul digital (revizii, ITP, asigurări), feed-ul de comunitate cu ture partajate și butonul SOS accesibil în timpul rulajului. Site-ul expune rutele publice optimizat pentru căutări și devine astfel principalul canal de achiziție pentru aplicație.",
     liveUrl: "https://ridersroute.app/",
+    en: {
+      title: "Rider's Route – Mobile App & Web Platform for Motorcyclists",
+      categoryLabel: "Mobile app & website",
+      description:
+        "A digital ecosystem built for motorcyclists: a React Native mobile app with turn-by-turn navigation, GPS ride tracking, a digital garage and an SOS button, paired with a Next.js web platform where routes can be discovered, saved and shared. Community, maps and ride stats — the same product, on iOS, Android and the web.",
+      shortDescription:
+        "A React Native mobile app and web platform for discovering, recording and sharing motorcycle routes.",
+      results: [
+        { label: "Platforms shipped", value: "3" },
+        { label: "Navigation & GPS tracking", value: "Real-time" },
+        { label: "Shared iOS/Android code", value: "100%" },
+      ],
+      challenge:
+        "Motorcyclists rely on generic navigation apps that don't understand what a ride actually needs: routes chosen for corners, elevation profiles, ride stats, bike maintenance and road safety. The challenge was building a product that works identically on phone and web, with fast maps and data synced in real time.",
+      solution:
+        "We built the mobile app in React Native — a single codebase for iOS and Android — and the web platform in Next.js, both connected to the same API and database. Riders start a Free Ride or navigate turn-by-turn to a destination, and the app records distance, speed, elevation and the full route. Around that core, we built a digital garage (servicing, inspections, insurance), a community feed of shared rides, and an SOS button accessible mid-ride. The site exposes public routes optimised for search, making it the main acquisition channel for the app.",
+    },
   },
   {
     id: "4",
@@ -189,6 +245,23 @@ export const featuredProjects: FeaturedProject[] = [
     solution:
       "Am reconstruit platforma de la zero, cu o identitate vizuală caldă, fotografie de produs pusă în valoare și o ierarhie clară: categorii, Meniul Zilei, oferte și recomandări. Meniul este optimizat mobile-first, cu adăugare în coș dintr-un singur tap și un checkout scurt, cu plată online prin Netopia sau ramburs. Imaginile sunt servite optimizat prin Next.js, iar rescrierea completă a front-end-ului a adus o creștere de performanță de 60% față de vechea platformă, cu o încărcare percepută ca instantanee pe mobil. Pentru echipa restaurantului am construit un panou de control dedicat, din care comenzile sunt preluate, dispecerizate și urmărite în timp real, iar meniul, prețurile și ofertele se actualizează fără intervenție tehnică. Paginile de categorie și de produs sunt structurate pentru căutările locale — de la clătite în Timișoara până la livrare pizza în zona Pieței Traian.",
     liveUrl: "https://clatite-pinochio.ro/",
+    en: {
+      title: "La Pinocchio – A Full Redesign of the Online Ordering Platform",
+      categoryLabel: "Online store",
+      description:
+        "A full redesign of the online ordering platform for La Pinocchio, a restaurant in Piața Traian, Timișoara, running since 2004. We moved the entire experience onto a modern Next.js stack, with a digital menu by category, a Dish of the Day, offers, a fast cart, customer accounts and online payment — built for an order completed in a few taps, straight from a phone. Behind the scenes, a dedicated dashboard lets the restaurant team dispatch orders in real time, and the new architecture brought a 60% performance gain over the old platform.",
+      shortDescription:
+        "A modern redesign of the online ordering platform for La Pinocchio restaurant in Timișoara, with an order-dispatch dashboard and 60% better performance.",
+      results: [
+        { label: "Performance gain", value: "+60%" },
+        { label: "Page load", value: "Instant" },
+        { label: "Order dispatch dashboard", value: "Real-time" },
+      ],
+      challenge:
+        "The old ordering platform looked dated and put too many obstacles between the customer and the order button: a menu that was hard to navigate on mobile, slow images, a long checkout. In a city where the delivery decision gets made in seconds, every extra step meant a lost order.",
+      solution:
+        "We rebuilt the platform from scratch with a warm visual identity, product photography given real prominence, and a clear hierarchy: categories, Dish of the Day, offers and recommendations. The menu is mobile-first, with single-tap add-to-cart and a short checkout with online payment or cash on delivery. Images are served optimised through Next.js, and the complete front-end rewrite brought a 60% performance gain over the old platform, with load times that feel instant on mobile. For the restaurant team, we built a dedicated dashboard where orders are received, dispatched and tracked in real time, and the menu, prices and offers update with no technical work needed. Category and product pages are structured for local search.",
+    },
   },
   {
     id: "5",
@@ -374,6 +447,22 @@ export const featuredProjects: FeaturedProject[] = [
     solution:
       "Am modernizat prezența online a brandului printr-un design curat, adaptat identității vizuale Blue Phoenix, cu accent pe claritate, coerență și experiență de navigare. Platforma este optimizată pentru viteză de încărcare și utilizare fluentă pe toate dispozitivele, iar structura paginilor este gândită pentru a susține conversia — de la descoperirea produselor până la achiziție. Arhitectura permite extinderea ulterioară a funcționalităților, fără a compromite performanța sau simplitatea experienței.",
     liveUrl: "https://blue-phoenix.ro/",
+    en: {
+      title: "Blue Phoenix – Indonesian Lifestyle Products, Sold Online",
+      categoryLabel: "Online store",
+      description:
+        "An online store importing and showcasing natural products, teas, specialty coffee and traditional supplements from Java, Indonesia — aimed at consumers interested in wellbeing and healthy living. One of Website Factory's longest-running partners, on a maintenance retainer since March 2023.",
+      shortDescription: "An online store selling natural products from Indonesia, optimised for conversions and repeat customers.",
+      results: [
+        { label: "Conversions", value: "+120%" },
+        { label: "Growth over 2 years", value: "2329%" },
+        { label: "Cart abandonment", value: "-70%" },
+      ],
+      challenge:
+        "The brand needed a premium online presence that could speak to product origin, cultural values and natural benefits — pairing that story with a store that's genuinely easy to use.",
+      solution:
+        "We modernised the brand's online presence with a clean design matched to Blue Phoenix's visual identity, focused on clarity, consistency and a smooth browsing experience. The store is optimised for load speed and works fluidly across every device, with page structure built to support conversion from product discovery through to purchase. The architecture allows for new features to be added later without compromising performance or simplicity.",
+    },
   },
   {
     id: "9",
@@ -399,6 +488,22 @@ export const featuredProjects: FeaturedProject[] = [
     solution:
       "Am reconceput site-ul Merpano din temelii cu un focus puternic pe modernizare, profesionalism și adaptare vizuală la poziționarea companiei. Am construit un design curat și coerent, ferit de elemente învechite, astfel încât fiecare secțiune — de la servicii și produse până la echipă — să fie ușor de parcurs, intuitivă și credibilă vizual. Structura paginilor și elementele interactive sunt gândite pentru a susține claritatea mesajului și încrederea vizitatorului, în timp ce viteza de încărcare, navigarea și experiența pe mobil asigură o interacțiune eficientă pentru toți utilizatorii. Implementarea pe WordPress cu Elementor personalizat permite gestionarea facilă a conținutului și scalabilitate pe termen lung.",
     liveUrl: "https://merpano.ro/",
+    en: {
+      title: "Merpano – A Corporate Website",
+      categoryLabel: "Business website",
+      description:
+        "Merpano is a major player in Western Romania's agricultural sector, supplying equipment, solutions and consultancy to farmers and industry partners. The website serves as one of its main digital touchpoints: corporate profile, product portfolio, services, team and values.",
+      shortDescription: "A corporate website for a major agricultural equipment and services company.",
+      results: [
+        { label: "Core Web Vitals - SEO", value: "100%" },
+        { label: "Avg. time on site", value: "2:04 min" },
+        { label: "Retention", value: "68%" },
+      ],
+      challenge:
+        "The existing website didn't reflect the company's actual scale and professionalism: an outdated structure, visuals disconnected from the brand, and unoptimised UX. It needed a modern, coherent, trust-building digital presence that did justice to its broad product portfolio and team expertise.",
+      solution:
+        "We redesigned the Merpano site from the ground up, focused on modernisation, professionalism and visual alignment with the company's positioning. We built a clean, coherent design, free of dated elements, so every section — from services and products to the team — is easy to navigate, intuitive and visually credible. Page structure and interactive elements are built to support message clarity and visitor trust, while load speed, navigation and mobile experience keep the interaction smooth for every user. A custom WordPress + Elementor build makes content management easy and keeps the site scalable long-term.",
+    },
   },
   
 ]
@@ -466,6 +571,11 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Website de știri - Nigeria, Web Design, Design Grafic, Mentenanță, Găzduire domeniu, SEO",
     order: 43,
+    enOrder: 3,
+    en: {
+      categoryLabel: "News website",
+      shortDescription: "A news website for an international client based in Nigeria.",
+    },
   },
   {
     id: "s5",
@@ -586,7 +696,6 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare clinică de înfrumusețare, Web design, Graphic design, Consultanta, Web development, Mentenanță, domeniu, SEO",
     order: 3,
-    enOrder: 11,
   },
   {
     id: "s21",
@@ -623,7 +732,6 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare - Automatizări industriale, Web design, Web development, SEO",
     order: 24,
-    enOrder: 13,
   },
   {
     id: "s25",
@@ -962,7 +1070,6 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Magazin Online - Companie italiană de produse cosmetice, Web design, Web development, SEO",
     order: 10,
-    enOrder: 9,
   },
   {
     id: "s64",
@@ -1011,7 +1118,11 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Platformă online pentru organizarea evenimentelor, Web design, Web development, React-Next.js, Mentenanță, Găzduire, Logo & Branding design, SEO",
     order: 11,
-    enOrder: 10,
+    enOrder: 2,
+    en: {
+      categoryLabel: "Online store",
+      shortDescription: "Online store for an Italian cosmetics brand.",
+    },
   },
   {
     id: "s68",
@@ -1024,6 +1135,11 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Magazin online pentru produse cosmetice, sistem de fidelizare clienți, Web design, Web development, Mentenanță, SEO",
     order: 8,
+    enOrder: 1,
+    en: {
+      categoryLabel: "Online store",
+      shortDescription: "Online store for a UK cosmetics brand, with a customer loyalty system.",
+    },
   },
   // Platforme custom
   {

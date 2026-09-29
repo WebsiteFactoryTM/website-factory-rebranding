@@ -17,7 +17,14 @@ const roCopy = {
   text: "O selecție din proiectele pe care le-am livrat pentru clienți din diverse industrii.",
   viewProject: "Vezi proiect",
 }
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  eyebrow: "More projects",
+  title: "A few more",
+  titleHighlight: "projects worth a look",
+  text: "A selection of projects we've delivered for clients across different industries.",
+  viewProject: "View project",
+}
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function SimpleProjectsGrid() {
   const locale = useLocale()

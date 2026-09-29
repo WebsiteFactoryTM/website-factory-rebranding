@@ -26,17 +26,10 @@ describe("getProjects", () => {
 
   it("puts the prioritized simple projects first, then the rest in RO order", () => {
     const { simple } = getProjects("en")
-    expect(simple.slice(0, 4).map((p) => p.id)).toEqual(["s63", "s67", "s20", "s24"])
-    const rest = simple.slice(4).map((p) => p.id)
-    const roRest = getProjects("ro").simple.map((p) => p.id).filter((id) => !["s63", "s67", "s20", "s24"].includes(id))
+    expect(simple.slice(0, 3).map((p) => p.id)).toEqual(["s68", "s67", "s4"])
+    const rest = simple.slice(3).map((p) => p.id)
+    const roRest = getProjects("ro").simple.map((p) => p.id).filter((id) => !["s68", "s67", "s4"].includes(id))
     expect(rest).toEqual(roRest)
-  })
-
-  it("falls back to RO text when a project has no en block", () => {
-    const ro = getProjects("ro").featured.find((p) => p.slug === "merpano")!
-    const en = getProjects("en").featured.find((p) => p.slug === "merpano")!
-    expect(en.title).toBe(ro.title)
-    expect(en.challenge).toBe(ro.challenge)
   })
 
   it("applies en overrides when present", () => {
