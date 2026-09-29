@@ -25,6 +25,28 @@ import { testimonials } from "@/lib/testimonials-data"
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
   const { locale } = await params
+  if (locale === "en") {
+    return generatePageMetadata({
+      locale,
+      href: "/",
+      title: "Website Design & Development for Small Businesses",
+      description:
+        "We build fast, SEO-first websites that help small businesses attract customers and grow online — from idea to launch.",
+      image: "/website-factory-og-square.webp",
+      imageWidth: 1080,
+      imageHeight: 1080,
+      ogTitle: "Website Design & Development for Small Businesses | Website Factory",
+      imageAlt: "Website Factory - web design for small businesses",
+      keywords: [
+        "web design agency",
+        "website design for small business",
+        "website development",
+        "e-commerce website design",
+        "mobile app development",
+        "SEO-first web design",
+      ],
+    })
+  }
   return generatePageMetadata({
     locale,
     href: "/",

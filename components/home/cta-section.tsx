@@ -21,7 +21,19 @@ const roCopy = {
   customOffer: "Ofertă personalizată",
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  badge: "No-obligation consultation",
+  headingPrefix: "Ready to talk about your",
+  headingHighlight: "next website",
+  subtitle: "Tell us what you're building — we'll tell you exactly how we'd approach it, free of charge.",
+  ctaPrimary: "Get a free quote",
+  ctaSecondary: "Talk to us",
+  noObligation: "No obligation",
+  responseTime: "We reply within 24h",
+  customOffer: "A proposal built around your project",
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function CTASection() {
   const locale = useLocale()

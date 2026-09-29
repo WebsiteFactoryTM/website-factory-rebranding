@@ -41,7 +41,31 @@ const roCopy = {
   ],
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  teamImageAltSubject: "The Website Factory team at work",
+  teamImageAltLocation: "Timișoara",
+  badgeTitle: "Web Design & Development",
+  badgeLocation: "Timișoara, Romania",
+  sectionLabel: "About us",
+  headingPrefix: "A small team,",
+  headingHighlight: "hands-on",
+  headingSuffix: "on every project",
+  paragraph1:
+    "We're a small, Timișoara-based studio that's spent the last five years building websites for businesses across Romania and the rest of Europe.",
+  paragraph2Prefix:
+    "We keep you in the loop at every stage, explained in plain English, thanks to a ",
+  paragraph2Strong: "structured process behind every project",
+  paragraph2Suffix: " — so there's never any guessing what happens next.",
+  cta: "See how we work",
+  stats: [
+    { value: "150+", label: "Happy clients" },
+    { value: "5+", label: "Years in business" },
+    { value: "-24h", label: "Avg. response time" },
+    { value: "+95%", label: "On-time delivery" },
+  ],
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function AboutPreview() {
   const locale = useLocale()

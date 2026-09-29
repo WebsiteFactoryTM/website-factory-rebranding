@@ -61,7 +61,39 @@ const roCopy = {
   ],
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  sectionLabel: "Services",
+  heading: "Three ways we help you",
+  headingHighlight: "grow online",
+  subtitle:
+    "A business website, an online store, or a custom app — whichever fits, we build it to perform, not just to launch.",
+  learnMore: "See how",
+  services: [
+    {
+      id: "creare-website",
+      title: "Website Development",
+      description:
+        "A fast, well-structured website built to be found on Google and turn visitors into enquiries — not just something nice to look at.",
+      outcomes: ["Ranks on Google", "Looks sharp on every device", "Loads in a flash"],
+    },
+    {
+      id: "magazin-online",
+      title: "Online Store",
+      description:
+        "A fully working shop — payments, stock, loyalty tools and an easy back office — built around getting people to checkout, not just browse.",
+      outcomes: ["Payments, delivery & invoicing sorted", "Search, filters & product variants", "A checkout that doesn't lose sales"],
+    },
+    {
+      id: "aplicatie-mobile",
+      title: "Mobile App",
+      description:
+        "A native or cross-platform app for iOS and Android, built lean enough to launch fast and solid enough to scale once it takes off.",
+      outcomes: ["One codebase, iOS & Android", "Push, accounts, payments — as needed", "Store listing & ongoing upkeep"],
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function ServicesPreview() {
   const locale = useLocale()

@@ -26,7 +26,22 @@ const roCopy = {
   scroll: "Scroll",
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  badge: "SEO-First Web Design",
+  h1Line1: "A website that",
+  h1Line2: "brings in customers —",
+  h1Highlight: "not just visitors.",
+  subtitle:
+    "We design and build with one goal in mind: more enquiries. Every site we ship is fast, SEO-first, and built to convert — not just to look good.",
+  ctaPrimary: "Get a free quote",
+  ctaSecondary: "View our portfolio",
+  proofSeo: "SEO-first",
+  proofPerformance: "Built for speed",
+  proofConversions: "Designed to convert",
+  scroll: "Scroll",
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function Hero() {
   const locale = useLocale()

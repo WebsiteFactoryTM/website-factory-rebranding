@@ -22,9 +22,21 @@ const roCopy = {
   goToSlide: "Go to slide",
 }
 
-// The testimonial quotes themselves (lib/testimonials-data.ts) are RO-only for now
-// and are used as-is for the EN locale too — see task-8 brief step 6 item 7.
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  sectionLabel: "Testimonials",
+  headingPrefix: "What our",
+  headingHighlight: "clients say",
+  subtitle: "Real feedback from companies who chose to work with us.",
+  prevLabel: "Previous testimonial",
+  nextLabel: "Next testimonial",
+  goToSlide: "Go to slide",
+}
+
+// The testimonial quotes themselves (lib/testimonials-data.ts) are still RO-only and
+// used as-is on EN — flagged to the user at the Phase 2 review gate (Task 2.6), not
+// translated here: they're direct quotes attributed to named RO clients, and the
+// Review JSON-LD schema for them is already gated to locale === "ro" in page.tsx.
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function Testimonials() {
   const locale = useLocale()

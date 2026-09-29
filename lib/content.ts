@@ -163,7 +163,35 @@ const faqsRo = [
   },
 ]
 
-const faqsByLocale = { ro: faqsRo, en: withoutPrices(faqsRo) } satisfies Record<Locale, typeof faqsRo>
+const faqsEn = [
+  {
+    question: "What does a website cost?",
+    answer:
+      "It depends on what you need. A business website starts around €1,500; an online store from €3,000. Get in touch for a free consultation and a price scoped to your project.",
+  },
+  {
+    question: "How quickly can you build my site?",
+    answer:
+      "Most business websites are live within 2–4 weeks. Bigger builds — online stores, custom apps — typically take 6–12 weeks. Whatever we agree on, we stick to it.",
+  },
+  {
+    question: "Is SEO included?",
+    answer:
+      "Yes, by default. Every site we build has on-page SEO, proper heading structure, meta tags and schema markup baked in — not sold as an add-on.",
+  },
+  {
+    question: "Will I be able to update the site myself?",
+    answer:
+      "Yes. You get an easy-to-use admin panel plus free training once it's live. If you'd rather not deal with it, we also offer monthly maintenance plans.",
+  },
+  {
+    question: "What do you build with?",
+    answer:
+      "Mostly Next.js, React and TypeScript, paired with whichever back end fits the job — we pick the stack to match the project, not the other way round.",
+  },
+]
+
+const faqsByLocale = { ro: faqsRo, en: withoutPrices(faqsEn) } satisfies Record<Locale, typeof faqsRo>
 
 export function getFaqs(locale: Locale) {
   return faqsByLocale[locale]

@@ -42,9 +42,43 @@ const roCopy = {
   ],
 }
 
+const enCopy = {
+  sectionLabel: "FAQ",
+  headingPrefix: "Questions",
+  headingHighlight: "we hear often",
+  subtitle: "Straight answers to what people usually ask before starting a project with us.",
+  faqs: [
+    {
+      question: "What does a website cost?",
+      answer:
+        "It depends on what you need. A business website starts around €650; an online store from €1,000. Get in touch for a free consultation and a price scoped to your project.",
+    },
+    {
+      question: "How quickly can you build my site?",
+      answer:
+        "Most business websites are live within 2–4 weeks. Bigger builds — online stores, custom apps — typically take 5–12 weeks. Whatever we agree on, we stick to it.",
+    },
+    {
+      question: "Is SEO included?",
+      answer:
+        "Yes, by default. Every site we build has on-page SEO, proper heading structure, meta tags and schema markup baked in — not sold as an add-on.",
+    },
+    {
+      question: "Will I be able to update the site myself?",
+      answer:
+        "Yes. You get an easy-to-use admin panel and a walkthrough once it's live. If you'd rather not deal with it, we also offer monthly maintenance plans.",
+    },
+    {
+      question: "What do you build with?",
+      answer:
+        "Mostly Next.js, React and TypeScript, paired with whichever back end fits the job. For simpler sites that don't need a custom build, WordPress can be the better call — we pick the stack to match the project, not the other way round.",
+    },
+  ],
+}
+
 const copy = {
   ro: roCopy,
-  en: { ...roCopy, faqs: withoutPrices(roCopy.faqs) },
+  en: { ...enCopy, faqs: withoutPrices(enCopy.faqs) },
 } satisfies Record<Locale, typeof roCopy>
 
 export function FAQ() {

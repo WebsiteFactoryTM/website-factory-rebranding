@@ -28,7 +28,29 @@ const roCopy = {
   ],
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  sectionLabel: "Why choose us",
+  metrics: [
+    { value: 150, suffix: "+", label: "Projects delivered" },
+    { value: 5, suffix: "+", label: "Years of experience" },
+    { value: 100, suffix: "%", label: "SEO-first approach" },
+    { value: 150, suffix: "+", label: "Happy clients" },
+  ],
+  marqueeWords: [
+    "Web Design",
+    "E-Commerce",
+    "SEO Optimisation",
+    "UI/UX Design",
+    "Mobile Apps",
+    "Brand Identity",
+    "Performance",
+    "Conversions",
+    "Timișoara",
+    "Romania",
+  ],
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 function CounterItem({ value, suffix, label }: { value: number; suffix: string; label: string }) {
   const { count, ref } = useCounter({ end: value, duration: 2000 })

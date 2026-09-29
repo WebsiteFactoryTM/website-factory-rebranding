@@ -21,7 +21,16 @@ const roCopy = {
   defaultOutcome: "Rezultate măsurabile",
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  sectionLabel: "Portfolio",
+  heading: "Real projects,",
+  headingHighlight: "real numbers",
+  subtitle: "Performance scores, conversions, growth — the outcomes behind the screenshots.",
+  viewAll: "See the full portfolio",
+  defaultOutcome: "Real, measurable results",
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 // Map category to color gradient
 const getColorByCategory = (category: string): string => {

@@ -48,7 +48,46 @@ const roCopy = {
   ],
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  sectionLabel: "How we work",
+  headingPrefix: "From brief to launch,",
+  headingHighlight: "in six steps",
+  subtitle: "No surprises along the way — you'll always know what's happening, when, and why.",
+  steps: [
+    {
+      step: 1,
+      title: "Discovery",
+      description: "We start by understanding your business — goals, audience, competitors — before any design decisions get made.",
+    },
+    {
+      step: 2,
+      title: "Design & Prototype",
+      description: "Wireframes and interactive designs come next, so the big calls get made and agreed before development starts.",
+    },
+    {
+      step: 3,
+      title: "Development",
+      description: "Then we build — modern stack, clean code, SEO considered from line one, not bolted on afterwards.",
+    },
+    {
+      step: 4,
+      title: "Testing & QA",
+      description: "Every device, every browser, checked with you before launch — performance and security included.",
+    },
+    {
+      step: 5,
+      title: "Launch",
+      description: "We ship the site, wire up analytics, and make sure everything's working exactly as it should.",
+    },
+    {
+      step: 6,
+      title: "Support & Growth",
+      description: "From there, ongoing maintenance and improvements based on real data, whenever you need them.",
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function Process() {
   const locale = useLocale()

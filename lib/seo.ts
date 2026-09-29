@@ -63,7 +63,12 @@ export function generatePageMetadata({
   return {
     title,
     description,
-    keywords: [...keywords, "web design", "creare site", "Website Factory", "dezvoltare website", "creare magazin online"],
+    keywords: [
+      ...keywords,
+      "web design",
+      "Website Factory",
+      ...(isEn ? [] : ["creare site", "dezvoltare website", "creare magazin online"]),
+    ],
     ...(isEn && { robots: { index: false, follow: true } }),
     alternates: {
       canonical: url,
