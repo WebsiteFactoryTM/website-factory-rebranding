@@ -224,6 +224,23 @@ export const featuredProjects: FeaturedProject[] = [
     solution:
       "Am construit un website editorial, cu paletă naturală, tipografie elegantă și fotografie reală din salon, în care fiecare secțiune conduce spre o singură acțiune: rezervarea. Programarea se face prin integrarea cu sistemul de booking al salonului, iar cardurile cadou se cumpără online, cu plată securizată prin Stripe. Lista de prețuri, prezentarea echipei, galeria de lucrări și recenziile verificate construiesc încrederea înainte de rezervare. Optimizarea tehnică — imagini servite adaptiv, fonturi preîncărcate, structură semantică și date structurate LocalBusiness — a dus site-ul la 97/100 performance și 100/100 SEO.",
     liveUrl: "https://www.fernandflowhairsalon.co.uk/",
+    en: {
+      title: "Fern & Flow Hair – A Website for a London Hair Salon",
+      categoryLabel: "Business website",
+      description:
+        "A website for an independent hair salon in Beckenham, South London, specialising in organic hair care. Editorial, natural design with integrated online booking, digital gift cards, a price list, a portfolio gallery and reviews — built in Next.js and delivered at 97/100 performance and 100/100 SEO.",
+      shortDescription:
+        "A premium website for a London organic hair salon, with online booking and digital gift cards.",
+      results: [
+        { label: "Performance", value: "97/100" },
+        { label: "SEO", value: "100/100" },
+        { label: "Online booking", value: "24/7" },
+      ],
+      challenge:
+        "In an area with dozens of competing salons, Fern & Flow needed a site that could instantly communicate its premium, organic positioning — and turn a visitor into a booking without routing them through a clunky third-party system.",
+      solution:
+        "We built an editorial-style website with a natural colour palette, elegant typography and real salon photography, where every section leads toward one action: booking. Appointments run through the salon's own booking system, and gift cards are sold online with secure payment via Stripe. The price list, team profiles, work gallery and verified reviews build trust before someone books. Technical work — adaptive image delivery, preloaded fonts, semantic structure and LocalBusiness structured data — brought the site to 97/100 performance and 100/100 SEO.",
+    },
   },
   {
     id: "6",
@@ -261,8 +278,21 @@ export const featuredProjects: FeaturedProject[] = [
       "Am construit magazinul în Next.js, cu o estetică editorială și discretă, care lasă produsele în prim-plan. Catalogul este organizat pe categorii și branduri, cu filtre și pagini de produs clare, iar conturile PRO oferă saloanelor prețuri și avantaje dedicate, separat de fluxul clientului obișnuit. Bara de anunțuri comunică livrarea gratuită peste 80€, reducerea la prima comandă și înscrierile la Daylin Academy. Optimizarea imaginilor, încărcarea progresivă și structura mobile-first au dus scorul de performance pe mobil la 93/100.",
     liveUrl: "https://www.daylin.ie/",
     en: {
+      title: "Daylin Nail Supply – Online Store for a Dublin Beauty Brand",
+      categoryLabel: "Online store",
+      description:
+        "An online store built in Next.js for an Irish professional nail-care distributor, founded in 2018 by Diana, a nail technician who personally tests every product in the catalogue. Structured by category and brand, with PRO accounts for salons, an academy section, and 48-hour dispatch from Dublin — delivered at 93/100 mobile performance.",
+      shortDescription:
+        "A premium online store for professional nail-care products, with PRO accounts for salons and delivery across Ireland.",
+      results: [
+        { label: "Mobile performance", value: "93/100" },
+        { label: "Order dispatch", value: "48h" },
+        { label: "Accounts & pricing", value: "B2C + B2B" },
+      ],
+      challenge:
+        "Daylin sells to professional technicians and end customers at the same time, across a large catalogue split by brand and product type. The store needed to look premium, load fast on mobile — where most orders come from — and serve two different audiences, each with their own pricing and perks, without complicating either one's experience.",
       solution:
-        "Am construit magazinul în Next.js, cu o estetică editorială și discretă, care lasă produsele în prim-plan. Catalogul este organizat pe categorii și branduri, cu filtre și pagini de produs clare, iar conturile PRO oferă saloanelor prețuri și avantaje dedicate, separat de fluxul clientului obișnuit. Bara de anunțuri comunică livrarea gratuită peste un anumit prag, reducerea la prima comandă și înscrierile la Daylin Academy. Optimizarea imaginilor, încărcarea progresivă și structura mobile-first au dus scorul de performance pe mobil la 93/100.",
+        "We built the store in Next.js with a discreet, editorial look that keeps the products front and centre. The catalogue is organised by category and brand with clear filters and product pages, and PRO accounts give salons dedicated pricing and perks, kept separate from the regular customer flow. The announcement bar promotes free delivery over a set spend, a first-order discount, and sign-ups to the Daylin Academy. Image optimisation, progressive loading and a mobile-first build pushed mobile performance to 93/100.",
     },
   },
   {
@@ -303,6 +333,23 @@ export const featuredProjects: FeaturedProject[] = [
     solution:
       "Am digitalizat fluxul complet: studentul completează brief-ul, încarcă materialele și primește o ofertă detaliată, fără plată în avans. După acceptare, plata se face securizat prin Revolut Pay sau PayPal, iar comanda poate fi urmărită în timp real din contul de client, de la alocarea expertului până la livrare. Pentru echipă am construit un panou de control din care se administrează întreaga platformă: cererile primite, ofertele trimise, statusul comenzilor, conturile clienților și conținutul paginilor — totul dintr-un singur loc, fără intervenție tehnică. Am construit pagini dedicate pentru fiecare tip de serviciu și domeniu academic, optimizate pentru căutări specifice, plus contact instant prin WhatsApp. Designul dark-gold și comunicarea transparentă a politicii de utilizare susțin poziționarea premium și credibilitatea serviciului.",
     liveUrl: "https://www.roxassignmentsolution.com/",
+    en: {
+      title: "Rox Assignment Solution – Academic Support Platform, UK",
+      categoryLabel: "Digital platform",
+      description:
+        "A web platform for a UK academic support company: students submit a brief and materials, receive a tailored quote, pay securely via Revolut Pay or PayPal, and track progress in a dedicated dashboard. Behind the scenes, a full admin panel handles the whole platform — requests, quotes, orders and content — with no technical intervention needed. Built in Next.js, with authentication and instant WhatsApp contact — at 94/100 mobile performance.",
+      shortDescription:
+        "An academic support platform with a complete admin panel, secure payments via Revolut Pay and PayPal, and real-time order tracking.",
+      results: [
+        { label: "Mobile performance", value: "94/100" },
+        { label: "Admin panel", value: "Complete" },
+        { label: "Secure payments", value: "Revolut & PayPal" },
+      ],
+      challenge:
+        "The whole process ran across scattered channels — messages, emails and files sent manually — which slowed down quoting and left clients with no visibility into progress. In a market where trust decides everything, the platform needed to clearly signal legitimacy and bring the entire flow into one place.",
+      solution:
+        "We digitised the full flow: the student fills in a brief, uploads materials, and receives a detailed quote with no upfront payment. Once accepted, payment is handled securely via Revolut Pay or PayPal, and the order can be tracked in real time from the client account — from expert assignment through to delivery. For the team, we built an admin panel that runs the whole platform: incoming requests, quotes sent, order status, client accounts and page content, all from one place, with no technical intervention needed. We built dedicated pages for each service type and academic subject, optimised for specific searches, plus instant contact via WhatsApp. The dark-gold design and transparent communication of the usage policy support the platform's premium positioning and credibility.",
+    },
   },
   {
     id: "8",

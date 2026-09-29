@@ -27,7 +27,21 @@ const roCopy = {
   ctaText: "Hai să discutăm despre cum putem crea ceva extraordinar împreună.",
   ctaButton: "Solicită ofertă gratuită",
 }
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  backToPortfolio: "Back to portfolio",
+  client: "Client:",
+  visitLive: "Visit live site",
+  challenge: "The challenge",
+  solution: "Our solution",
+  technologies: "Technologies used",
+  prevProject: "Previous project",
+  nextProject: "Next project",
+  ctaTitle: "Want something like this?",
+  ctaText: "Let's talk about what we could build together.",
+  ctaButton: "Get a free quote",
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export async function generateStaticParams() {
   const { featured } = getProjects("ro")
@@ -42,12 +56,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {}
   }
 
+  const isEn = locale === "en"
   return generatePageMetadata({
     locale: locale as Locale,
     href: { pathname: "/portofoliu/[slug]", params: { slug } },
-    title: `${project.title} - Studiu de caz - Web design`,
+    title: isEn ? `${project.title} - Case Study - Web Design` : `${project.title} - Studiu de caz - Web design`,
     description: project.description,
-    keywords: [project.categoryLabel, project.client, "studiu de caz", "portofoliu web design"],
+    keywords: isEn
+      ? [project.categoryLabel, project.client, "case study", "web design portfolio"]
+      : [project.categoryLabel, project.client, "studiu de caz", "portofoliu web design"],
   })
 }
 
