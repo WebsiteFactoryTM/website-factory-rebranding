@@ -1059,7 +1059,14 @@ const categoryFiltersRo = [
   { value: "app", label: "Aplicații mobile" },
   { value: "custom", label: "Platforme custom" },
 ]
-const categoryFilters = { ro: categoryFiltersRo, en: categoryFiltersRo } satisfies Record<Locale, typeof categoryFiltersRo>
+const categoryFiltersEn = [
+  { value: "all", label: "All projects" },
+  { value: "website", label: "Websites" },
+  { value: "ecommerce", label: "Online stores" },
+  { value: "app", label: "Mobile apps" },
+  { value: "custom", label: "Custom platforms" },
+]
+const categoryFilters = { ro: categoryFiltersRo, en: categoryFiltersEn } satisfies Record<Locale, typeof categoryFiltersRo>
 
 export function getCategoryFilters(locale: Locale) {
   return categoryFilters[locale]

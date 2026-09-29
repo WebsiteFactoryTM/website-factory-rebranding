@@ -18,7 +18,15 @@ const roCopy = {
   callButton: "Sună-ne direct",
   trust: ["Răspuns în 24h", "Consultanță gratuită", "Fără obligații"],
 }
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  badge: "Open for new projects",
+  title: "Want a project like these?",
+  text: "Let's talk about turning your idea into something that works. Free consultation, no obligation.",
+  ctaButton: "Get a free quote",
+  callButton: "Call us directly",
+  trust: ["Reply within 24h", "Free consultation", "No obligation"],
+}
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function PortfolioCta() {
   const locale = useLocale()

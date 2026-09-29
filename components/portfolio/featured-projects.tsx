@@ -21,7 +21,15 @@ const roCopy = {
   viewCaseStudy: "Vezi studiul de caz",
   visitSite: "Vizitează site-ul",
 }
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  eyebrow: "Flagship projects",
+  title: "In-depth",
+  titleHighlight: "case studies",
+  text: "Complex projects with measurable results and the full story behind each one.",
+  viewCaseStudy: "View case study",
+  visitSite: "Visit the site",
+}
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function FeaturedProjects() {
   const locale = useLocale()

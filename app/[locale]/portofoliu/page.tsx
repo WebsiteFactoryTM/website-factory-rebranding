@@ -11,6 +11,21 @@ import { PortfolioCta } from "@/components/portfolio/portfolio-cta"
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
   const { locale } = await params
+  if (locale === "en") {
+    return generatePageMetadata({
+      locale,
+      href: "/portofoliu",
+      title: "Portfolio - Web Design Case Studies",
+      description:
+        "Real websites, online stores and custom apps we've built — with measurable results and full case studies.",
+      keywords: [
+        "web design portfolio",
+        "website case studies",
+        "e-commerce examples",
+        "web design agency portfolio",
+      ],
+    })
+  }
   return generatePageMetadata({
     locale,
     href: "/portofoliu",
@@ -43,8 +58,11 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
   const portfolioSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "Portofoliu Website Factory",
-    description: "Colecție de proiecte web design, magazine online și aplicații mobile create de Website Factory.",
+    name: locale === "en" ? "Website Factory Portfolio" : "Portofoliu Website Factory",
+    description:
+      locale === "en"
+        ? "A collection of web design, online store and mobile app projects built by Website Factory."
+        : "Colecție de proiecte web design, magazine online și aplicații mobile create de Website Factory.",
     url: `${siteConfig.url}${getPathname({ locale: locale as Locale, href: "/portofoliu" })}`,
     inLanguage: locale,
     isPartOf: {

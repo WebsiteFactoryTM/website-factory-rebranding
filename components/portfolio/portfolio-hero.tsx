@@ -20,7 +20,20 @@ const roCopy = {
   ],
   scrollLabel: "Explorează proiectele",
 }
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  eyebrow: "Website Factory Portfolio",
+  titlePrefix: "A look at",
+  titleHighlight: "projects we've shipped",
+  titleSuffix: "and the results behind them.",
+  text: "Digital work built for real business needs. Here are a few of the projects we're proud of.",
+  stats: [
+    { value: "+150", label: "Projects delivered" },
+    { value: "95%", label: "Delivered on time" },
+    { value: "∞", label: "Possibilities" },
+  ],
+  scrollLabel: "Explore the projects",
+}
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function PortfolioHero() {
   const locale = useLocale()
