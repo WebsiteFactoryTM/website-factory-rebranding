@@ -11,6 +11,16 @@ import { ContactFaq } from "@/components/contact/contact-faq"
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
   const { locale } = await params
+  if (locale === "en") {
+    return generatePageMetadata({
+      locale,
+      href: "/contact",
+      title: "Contact Us",
+      description:
+        "Get in touch for a free quote. We build websites, online stores and mobile apps — tell us what you're building and we'll get back to you within 24 hours.",
+      keywords: ["contact web design agency", "get a website quote", "web design consultation"],
+    })
+  }
   return generatePageMetadata({
     locale,
     href: "/contact",
@@ -40,7 +50,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
     { name: t("contact"), url: "/contact" },
   ])
 
-  const localBusinessSchema = generateLocalBusinessSchema()
+  const localBusinessSchema = generateLocalBusinessSchema(locale as Locale)
 
   return (
     <>

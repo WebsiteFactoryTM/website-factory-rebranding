@@ -14,7 +14,15 @@ const roCopy = {
   emailValue: "office@websitefactory.ro",
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  badge: "Let's talk",
+  title: "Get in touch",
+  paragraph: "Tell us what you want to build. Send us the details and we'll come back quickly with a tailored proposal.",
+  phoneValue: "+40 728 567 830",
+  emailValue: "office@websitefactory.ro",
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function ContactHero() {
   const locale = useLocale()

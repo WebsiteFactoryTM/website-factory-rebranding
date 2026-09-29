@@ -82,7 +82,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const t = await getTranslations("breadcrumb")
   // Generate JSON-LD schemas
   const localBusinessSchema =
-    locale === "ro" ? generateLocalBusinessSchemaWithReviews(testimonials) : generateLocalBusinessSchema()
+    locale === "ro" ? generateLocalBusinessSchemaWithReviews(testimonials) : generateLocalBusinessSchema("en")
   const breadcrumbSchema = generateBreadcrumbSchema([{ name: t("home"), url: "/" }])
   const faqSchema = generateFAQSchema(getFaqs(locale as Locale))
 

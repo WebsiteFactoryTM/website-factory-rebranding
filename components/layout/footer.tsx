@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Link } from "@/i18n/navigation"
 import NextLink from "next/link"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import Image from "next/image"
 import { useTheme } from "@/components/theme-provider"
 import { useConsent } from "@/components/consent/consent-provider"
@@ -12,6 +12,7 @@ import { ArrowUpRight, MapPin, Mail, Phone } from "lucide-react"
 export function Footer() {
   const t = useTranslations("footer")
   const tNav = useTranslations("nav")
+  const locale = useLocale()
   const footerLinks = {
     servicii: [
       { href: "/servicii/creare-website" as const, label: t("createWebsite") },
@@ -146,34 +147,36 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
-            <h3 className="font-heading font-semibold text-foreground mb-5">{t("locationsHeading")}</h3>
-            <ul className="space-y-3">
-              {footerLinks.cities.map((link) =>
-                link.roOnly ? (
-                  <li key={link.href}>
-                    <NextLink
-                      href={link.href}
-                      className="text-sm text-muted-foreground hover:text-brand transition-colors inline-flex items-center gap-1 group"
-                    >
-                      {link.label}
-                      <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
-                    </NextLink>
-                  </li>
-                ) : (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-muted-foreground hover:text-brand transition-colors inline-flex items-center gap-1 group"
-                    >
-                      {link.label}
-                      <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
-                    </Link>
-                  </li>
-                )
-              )}
-            </ul>
-          </div>
+          {locale === "ro" && (
+            <div>
+              <h3 className="font-heading font-semibold text-foreground mb-5">{t("locationsHeading")}</h3>
+              <ul className="space-y-3">
+                {footerLinks.cities.map((link) =>
+                  link.roOnly ? (
+                    <li key={link.href}>
+                      <NextLink
+                        href={link.href}
+                        className="text-sm text-muted-foreground hover:text-brand transition-colors inline-flex items-center gap-1 group"
+                      >
+                        {link.label}
+                        <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                      </NextLink>
+                    </li>
+                  ) : (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="text-sm text-muted-foreground hover:text-brand transition-colors inline-flex items-center gap-1 group"
+                      >
+                        {link.label}
+                        <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                      </Link>
+                    </li>
+                  )
+                )}
+              </ul>
+            </div>
+          )}
 
           {/* Legal Links */}
           <div>

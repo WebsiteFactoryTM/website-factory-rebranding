@@ -108,13 +108,16 @@ export function generatePageMetadata({
 }
 
 // JSON-LD Schema generators
-export function generateLocalBusinessSchema() {
+export function generateLocalBusinessSchema(locale: Locale = "ro") {
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "@id": `${siteConfig.url}/#organization`,
     name: siteConfig.name,
-    description: siteConfig.description,
+    description:
+      locale === "en"
+        ? "Professional website design and development, based in Timișoara. We build SEO-first websites optimised for performance and conversions."
+        : siteConfig.description,
     url: siteConfig.url,
     logo: `${siteConfig.url}/logo.png`,
     image: `${siteConfig.url}/website-factory-og.webp`,

@@ -43,7 +43,42 @@ const roCopy = {
   emailCta: "Trimite-ne un email direct",
 }
 
-const enCopy = { ...roCopy, faqs: withoutPrices(roCopy.faqs) }
+const enCopyBase = {
+  label: "FAQ",
+  heading: "Got questions? We've got answers.",
+  subtitle: "Find answers to the questions we hear most often about our services.",
+  faqs: [
+    {
+      question: "How long does it take to build a website?",
+      answer:
+        "Most business websites are ready in 2–4 weeks. Bigger builds — online stores, custom apps — usually take 5–12 weeks. We always stick to the deadlines we agree on.",
+    },
+    {
+      question: "What does a website cost?",
+      answer:
+        "It depends on what you need — a business website starts around €650, an online store from €1,000. Get in touch for a free consultation and a price scoped to your project.",
+    },
+    {
+      question: "Can I manage the site myself after launch?",
+      answer:
+        "Yes — we hand over sites with an easy admin panel and a walkthrough of how everything works. If you'd rather not deal with it, we also offer monthly maintenance plans.",
+    },
+    {
+      question: "How does the process work?",
+      answer:
+        "We work in six stages: discovery, strategy and planning, UI/UX design, development, testing and QA, and launch. You'll have regular check-ins and access to a dedicated project portal throughout.",
+    },
+    {
+      question: "Do you work with clients outside Timișoara?",
+      answer:
+        "Absolutely — while we're based in Timișoara, we work with clients across Romania and internationally. Video calls, email and project management tools keep things moving smoothly wherever you are.",
+    },
+  ],
+  noAnswer: "Didn't find the answer you're looking for?",
+  emailCta: "Send us an email directly",
+}
+
+const enCopy = { ...enCopyBase, faqs: withoutPrices(enCopyBase.faqs) }
 
 const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 

@@ -16,7 +16,17 @@ const roCopy = {
   openMaps: "Deschide în Google Maps",
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  label: "Our location",
+  heading: "Where to find us",
+  subtitle: "We're based in Timișoara, and work with clients across Romania and beyond.",
+  cardTitle: "Website Factory",
+  addressLine1: "Timișoara, Timiș",
+  addressLine2: "Romania",
+  openMaps: "Open in Google Maps",
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function ContactMap() {
   const locale = useLocale()

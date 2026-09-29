@@ -42,7 +42,43 @@ const roCopy = {
   quickResponse: "Răspundem la mesaje în cel mai scurt timp. Programează o întâlnire sau trimite-ne un mesaj.",
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  contactDetails: [
+    {
+      icon: Phone,
+      label: "Phone",
+      value: "+40 728 567 830",
+      href: "tel:+40728567830",
+      description: "Monday - Friday, 9am - 6pm",
+    },
+    {
+      icon: Mail,
+      label: "Email",
+      value: "office@websitefactory.ro",
+      href: "mailto:office@websitefactory.ro",
+      description: "We reply within 24h",
+    },
+    {
+      icon: MapPin,
+      label: "Location",
+      value: "Timișoara, Romania",
+      href: "https://maps.google.com/?q=Timisoara",
+      description: "We work remotely with clients everywhere",
+    },
+    {
+      icon: Clock,
+      label: "Hours",
+      value: "Monday - Friday",
+      href: null,
+      description: "9am - 6pm",
+    },
+  ],
+  followUs: "Follow us",
+  availableNow: "Available now",
+  quickResponse: "We reply to messages as quickly as we can. Book a call or send us a message.",
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 const socialLinks = [
   {
