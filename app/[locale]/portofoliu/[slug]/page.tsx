@@ -60,6 +60,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return generatePageMetadata({
     locale: locale as Locale,
     href: { pathname: "/portofoliu/[slug]", params: { slug } },
+    hreflang: true,
     title: isEn ? `${project.title} - Case Study - Web Design` : `${project.title} - Studiu de caz - Web design`,
     description: project.description,
     keywords: isEn

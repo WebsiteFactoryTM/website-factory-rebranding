@@ -15,6 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
     return generatePageMetadata({
       locale,
       href: "/portofoliu",
+      hreflang: true,
       title: "Portfolio - Web Design Case Studies",
       description:
         "Real websites, online stores and custom apps we've built — with measurable results and full case studies.",
@@ -29,6 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return generatePageMetadata({
     locale,
     href: "/portofoliu",
+    hreflang: true,
     title: "Portofoliu - Web design",
     description:
       "Descoperă proiectele noastre de web design, magazine online și aplicații custom. Portofoliu cu rezultate reale și studii de caz detaliate.",

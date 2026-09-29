@@ -19,6 +19,8 @@ const hreflangRoPath = {
   "/en/services/website-development": "/servicii/creare-website",
   "/en/services/ecommerce": "/servicii/magazin-online",
   "/en/services/app-development": "/servicii/dezvoltare-aplicatie",
+  "/en/portfolio": "/portofoliu",
+  ...Object.fromEntries(slugs.map((s) => [`/en/portfolio/${s}`, `/portofoliu/${s}`])),
 }
 
 let failures = 0
