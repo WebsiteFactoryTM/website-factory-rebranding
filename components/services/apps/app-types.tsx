@@ -104,7 +104,102 @@ const roCopy = {
   ],
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  eyebrow: "App Types",
+  headingPre: "What kind of ",
+  headingHighlight: "app",
+  headingEnd: " do you need?",
+  subtitle: "From mobile apps to enterprise SaaS platforms, we build custom software for whatever your business needs.",
+  technologiesLabel: "Technology used",
+  timelineLabel: "Estimated time",
+  idealForLabel: "Best for",
+  requestOffer: "Request a quote",
+  timePrefix: "Time: ",
+  types: [
+    {
+      id: "mobile",
+      title: "Mobile Apps",
+      subtitle: "React Native",
+      description:
+        "Native iOS and Android apps from a single React Native codebase — native performance, a premium user experience.",
+      features: [
+        "Cross-platform iOS & Android",
+        "60fps native performance",
+        "Push notifications",
+        "Offline support",
+        "In-app purchases",
+        "Hardware integration (camera, GPS, etc.)",
+      ],
+      technologies: ["React Native", "Expo", "TypeScript", "Firebase"],
+      timeline: "8–16 weeks",
+      idealFor: "Startups, e-commerce, on-demand services",
+      color: "from-[#61DAFB]/20 to-brand/20",
+      borderColor: "border-[#61DAFB]/30",
+    },
+    {
+      id: "webapp",
+      title: "Web Apps",
+      subtitle: "Next.js & Payload CMS",
+      description:
+        "Modern, fast, scalable web apps built with Next.js and Payload CMS — server-side rendering for SEO and top performance.",
+      features: [
+        "Server-side rendering (SSR)",
+        "Static site generation (SSG)",
+        "Built-in API routes",
+        "Headless CMS (Payload)",
+        "Authentication & authorisation",
+        "Real-time updates",
+      ],
+      technologies: ["Next.js", "React", "Payload CMS", "PostgreSQL"],
+      timeline: "6–12 weeks",
+      idealFor: "Platforms, dashboards, client portals",
+      color: "from-brand/20 to-glow-violet/20",
+      borderColor: "border-brand/30",
+    },
+    {
+      id: "saas",
+      title: "SaaS Platforms",
+      subtitle: "Scalable & Multi-tenant",
+      description:
+        "Complete SaaS platforms with subscriptions, multi-tenancy, analytics and APIs — cloud-native architecture built to scale.",
+      features: [
+        "Multi-tenant architecture",
+        "Subscription management",
+        "Usage analytics",
+        "API management",
+        "White-label support",
+        "Auto-scaling infrastructure",
+      ],
+      technologies: ["Next.js", "Stripe", "Vercel", "PostgreSQL"],
+      timeline: "12–24 weeks",
+      idealFor: "Software houses, B2B services, startups",
+      color: "from-glow-violet/20 to-glow-cyan/20",
+      borderColor: "border-glow-violet/30",
+    },
+    {
+      id: "digitalization",
+      title: "Digital Transformation",
+      subtitle: "Modernise your operations",
+      description:
+        "Custom solutions for digitising business processes — automation, ERP/CRM integrations, and management dashboards.",
+      features: [
+        "Process automation",
+        "ERP/CRM integrations",
+        "Business intelligence",
+        "Document management",
+        "Workflow automation",
+        "Custom dashboards",
+      ],
+      technologies: ["Next.js", "n8n", "APIs", "Cloud"],
+      timeline: "8–20 weeks",
+      idealFor: "Corporations, growing SMEs",
+      color: "from-glow-cyan/20 to-brand/20",
+      borderColor: "border-glow-cyan/30",
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 const typeIcons = [Smartphone, Monitor, Cloud, Cpu]
 

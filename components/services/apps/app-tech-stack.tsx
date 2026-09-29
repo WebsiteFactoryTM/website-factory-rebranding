@@ -56,7 +56,57 @@ const roCopy = {
   ],
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  eyebrow: "Tech Stack",
+  headingPre: "Next-generation ",
+  headingHighlight: "technology",
+  subtitle: "We build with modern technology for apps that perform, scale, and stay easy to maintain.",
+  securityBadge: "Enterprise-grade security • GDPR compliant • SOC 2 ready",
+  categories: [
+    {
+      title: "Mobile Development",
+      description: "Native cross-platform",
+      technologies: [
+        { name: "React Native", description: "Primary framework" },
+        { name: "Expo", description: "Tooling & builds" },
+        { name: "TypeScript", description: "Type safety" },
+        { name: "React Navigation", description: "Native routing" },
+      ],
+    },
+    {
+      title: "Web Applications",
+      description: "Modern full-stack",
+      technologies: [
+        { name: "Next.js 15", description: "React framework" },
+        { name: "Payload CMS", description: "Headless CMS" },
+        { name: "TailwindCSS", description: "Styling" },
+        { name: "Vercel", description: "Hosting & CDN" },
+      ],
+    },
+    {
+      title: "Backend & APIs",
+      description: "Scalable & secure",
+      technologies: [
+        { name: "Node.js", description: "Runtime" },
+        { name: "PostgreSQL", description: "Database" },
+        { name: "Redis", description: "Cache & sessions" },
+        { name: "GraphQL / REST", description: "API layer" },
+      ],
+    },
+    {
+      title: "Cloud & DevOps",
+      description: "Modern infrastructure",
+      technologies: [
+        { name: "Vercel / AWS", description: "Cloud hosting" },
+        { name: "Docker", description: "Containerisation" },
+        { name: "GitHub Actions", description: "CI/CD" },
+        { name: "Sentry", description: "Error tracking" },
+      ],
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 const categoryIcons = [Smartphone, Monitor, Database, Cloud]
 

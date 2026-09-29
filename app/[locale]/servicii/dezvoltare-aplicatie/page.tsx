@@ -14,6 +14,23 @@ import { AppCta } from "@/components/services/apps/app-cta"
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
   const { locale } = await params
+  if (locale === "en") {
+    return generatePageMetadata({
+      locale,
+      href: "/servicii/dezvoltare-aplicatie",
+      title: "App Development — Mobile, Web & SaaS",
+      description:
+        "We build mobile apps with React Native, web apps with Next.js & Payload CMS, and scalable SaaS platforms. Free consultation.",
+      keywords: [
+        "app development agency",
+        "mobile app development",
+        "react native development",
+        "saas development",
+        "custom software development",
+        "web app development",
+      ],
+    })
+  }
   return generatePageMetadata({
     locale,
     href: "/servicii/dezvoltare-aplicatie",
@@ -78,7 +95,50 @@ const faqsRo = [
   },
 ]
 
-const faqs = { ro: faqsRo, en: withoutPrices(faqsRo) } satisfies Record<Locale, typeof faqsRo>
+const faqsEn = [
+  {
+    question: "How much does it cost to develop a mobile app?",
+    answer:
+      "Cost varies a lot depending on complexity. A simple MVP starts from €4,000, mid-complexity apps range from €12,000–40,000, and enterprise apps can reach €100,000+. Get in touch for a free consultation to work out exactly what you need and a realistic budget.",
+  },
+  {
+    question: "React Native or separate native apps?",
+    answer:
+      "React Native lets us build one codebase for iOS and Android, cutting costs by 30–40% and speeding up development. Performance is nearly identical to native (60fps). We only recommend separate native builds for apps with very specific hardware requirements or intensive gaming.",
+  },
+  {
+    question: "How long does app development take?",
+    answer:
+      "A working MVP can be ready in 8–12 weeks. Full mid-complexity apps take 12–20 weeks, and enterprise SaaS platforms can need 24–40 weeks or more, depending on complexity. We work in 2-week sprints with regular demos.",
+  },
+  {
+    question: "What is Payload CMS, and why do you recommend it?",
+    answer:
+      "Payload CMS is a modern, open-source headless CMS built with TypeScript and React. It offers an intuitive admin panel, automatic GraphQL/REST APIs, built-in authentication, and full customisability — ideal for web apps that need flexible content management.",
+  },
+  {
+    question: "Can you build SaaS platforms with subscriptions?",
+    answer:
+      "Yes. We have experience building complete SaaS platforms: multi-tenant architecture, subscription management with Stripe, usage metering, analytics, API management and white-labelling. We design for scale from day one.",
+  },
+  {
+    question: "What does digital transformation mean for a business?",
+    answer:
+      "It means turning manual processes into automated workflows — management dashboards, ERP/CRM integrations, automation with n8n, document management, BI reporting, and custom internal tools. It can cut time spent on repetitive tasks by up to 70%.",
+  },
+  {
+    question: "Do you offer support and maintenance after launch?",
+    answer:
+      "Yes. We include 60 days of free post-launch support for bug fixes. After that, we offer monthly maintenance plans: security updates, monitoring, backups, technical support and ongoing development. Pricing starts from €200/month depending on complexity.",
+  },
+  {
+    question: "How do you ensure application security?",
+    answer:
+      "We follow security best practices: robust authentication (OAuth 2.0, JWT), data encryption, audit logging, OWASP compliance, and penetration testing. For enterprise apps, we offer SOC 2 compliance and GDPR by design.",
+  },
+]
+
+const faqs = { ro: faqsRo, en: withoutPrices(faqsEn) } satisfies Record<Locale, typeof faqsRo>
 
 export function generateStaticParams() {
   return allLocaleParams()
@@ -91,12 +151,21 @@ export default async function DezvoltareAplicatiePage({ params }: { params: Prom
   const pageFaqs = faqs[loc]
 
   const serviceSchema = {
-    ...generateServiceSchema({
-      name: "Dezvoltare Aplicații Mobile & Web",
-      description:
-        "Dezvoltare aplicații mobile cu React Native, web apps cu Next.js & Payload CMS, platforme SaaS scalabile și soluții de digitalizare pentru companii.",
-      url: "/servicii/dezvoltare-aplicatie",
-    }),
+    ...generateServiceSchema(
+      locale === "en"
+        ? {
+            name: "Mobile & Web App Development",
+            description:
+              "Mobile app development with React Native, web apps with Next.js & Payload CMS, and scalable SaaS platforms for growing companies.",
+            url: "/servicii/dezvoltare-aplicatie",
+          }
+        : {
+            name: "Dezvoltare Aplicații Mobile & Web",
+            description:
+              "Dezvoltare aplicații mobile cu React Native, web apps cu Next.js & Payload CMS, platforme SaaS scalabile și soluții de digitalizare pentru companii.",
+            url: "/servicii/dezvoltare-aplicatie",
+          },
+    ),
     inLanguage: locale,
   }
 
@@ -104,7 +173,7 @@ export default async function DezvoltareAplicatiePage({ params }: { params: Prom
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: tBreadcrumb("home"), url: "/" },
     { name: tBreadcrumb("services"), url: "/servicii" },
-    { name: "Dezvoltare Aplicații", url: "/servicii/dezvoltare-aplicatie" },
+    { name: locale === "en" ? "App Development" : "Dezvoltare Aplicații", url: "/servicii/dezvoltare-aplicatie" },
   ])
 
   const faqSchema = generateFAQSchema(pageFaqs)

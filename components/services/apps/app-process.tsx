@@ -55,7 +55,55 @@ const roCopy = {
   ],
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  eyebrow: "Development Process",
+  headingPre: "How we build ",
+  headingHighlight: "your app",
+  subtitle: "A structured Agile process with full transparency and predictable delivery.",
+  stepLabel: "Step ",
+  whatYouGet: "What you get:",
+  durationLabel: "Duration: ",
+  steps: [
+    {
+      title: "Discovery & Analysis",
+      duration: "1–2 weeks",
+      description: "We analyse requirements, define the feature set, and write the technical specification.",
+      deliverables: ["PRD document", "User stories", "Wireframes", "Estimate"],
+    },
+    {
+      title: "UX/UI Design",
+      duration: "2–3 weeks",
+      description: "User-centred design with interactive prototypes and a proper design system.",
+      deliverables: ["Figma designs", "Interactive prototype", "Design system", "Assets"],
+    },
+    {
+      title: "Development",
+      duration: "4–12 weeks",
+      description: "Iterative development in 2-week sprints with regular demos.",
+      deliverables: ["Source code", "API documentation", "Sprint reviews", "Builds"],
+    },
+    {
+      title: "QA & Testing",
+      duration: "1–2 weeks",
+      description: "Full testing: unit tests, integration tests, UAT and performance testing.",
+      deliverables: ["Test reports", "Bug fixes", "Performance audit", "Security scan"],
+    },
+    {
+      title: "Launch",
+      duration: "3–5 days",
+      description: "Deployed to the App Store/Google Play or your production server, with monitoring in place.",
+      deliverables: ["Store submission", "CI/CD setup", "Monitoring", "Documentation"],
+    },
+    {
+      title: "Support & Evolution",
+      duration: "Ongoing",
+      description: "Maintenance, updates, and new features as your product grows.",
+      deliverables: ["Updates", "Analytics", "Optimisations", "New features"],
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 const stepIcons = [Lightbulb, PenTool, Code2, TestTube, Rocket, Headphones]
 

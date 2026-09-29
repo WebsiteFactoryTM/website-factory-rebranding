@@ -44,7 +44,43 @@ const roCopy = {
   ],
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  eyebrow: "Measurable results",
+  headingPre: "Why choose ",
+  headingHighlight: "custom apps",
+  headingEnd: "?",
+  subtitle: "The apps we build generate real, concrete results for our clients.",
+  stats: [
+    {
+      value: 280,
+      suffix: "%",
+      label: "Engagement growth",
+      description: "Mobile apps boost how often people interact with your product.",
+    },
+    {
+      value: 99.9,
+      suffix: "%",
+      label: "Guaranteed uptime",
+      description: "Redundant cloud infrastructure.",
+      decimals: 1,
+    },
+    {
+      value: 50,
+      suffix: "K+",
+      label: "Active users",
+      description: "Across the apps we've built.",
+    },
+    {
+      value: 0.8,
+      suffix: "s",
+      label: "Load time",
+      description: "Optimised for performance.",
+      decimals: 1,
+    },
+  ],
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 const statIcons = [TrendingUp, Clock, Users, Zap]
 

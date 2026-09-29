@@ -20,7 +20,18 @@ const roCopy = {
   trustItems: ["Răspuns în 24h", "Consultanță gratuită", "NDA disponibil"],
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  headingLine1: "Ready to turn your",
+  headingLine2: "idea into reality",
+  subtitle: "Let's talk about your app. Free consultation and a price estimate within 48 hours.",
+  ctaPrimary: "Get a free consultation",
+  callNow: "Call now",
+  whatsapp: "WhatsApp",
+  scheduleMeeting: "Schedule a call",
+  trustItems: ["Reply within 24h", "Free consultation", "NDA available"],
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function AppCta() {
   const locale = useLocale()

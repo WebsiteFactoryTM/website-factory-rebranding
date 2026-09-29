@@ -38,7 +38,34 @@ const roCopy = {
   scrollHint: "Descoperă mai mult",
 }
 
-const copy = { ro: roCopy, en: roCopy } satisfies Record<Locale, typeof roCopy>
+const enCopy = {
+  breadcrumbCurrent: "App Development",
+  badge: "High-Performance Mobile & Web Apps",
+  h1Line1: "Custom App",
+  h1Highlight: "Development",
+  h1Line2: "built around your business",
+  subtitlePre: "We build mobile apps with ",
+  subtitleBold1: "React Native",
+  subtitleMid1: ", web apps with ",
+  subtitleBold2: "Next.js & Payload CMS",
+  subtitleMid2: ", ",
+  subtitleBold3: "scalable SaaS platforms",
+  subtitleMid3: ", and ",
+  subtitleBold4: "digital transformation",
+  subtitleEnd: " for ambitious companies.",
+  features: [
+    { label: "React Native" },
+    { label: "Next.js Apps" },
+    { label: "SaaS Platforms" },
+    { label: "Digitalisation" },
+  ],
+  ctaPrimary: "Discuss your project",
+  ctaSecondary: "See live apps",
+  trustBadges: ["iOS & Android", "Fast MVPs", "99.9% guaranteed uptime"],
+  scrollHint: "See more",
+}
+
+const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 const heroFeatureIcons = [Smartphone, Monitor, Cloud, Cpu]
 
