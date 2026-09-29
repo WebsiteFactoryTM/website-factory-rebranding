@@ -12,9 +12,6 @@ describe("messages", () => {
   it("en has exactly the same keys as ro", () => {
     expect(keys(en).sort()).toEqual(keys(ro).sort())
   })
-  it("en is a verbatim copy of ro in this phase", () => {
-    expect(en).toEqual(ro)
-  })
   it("contains the namespaces the layout and shared components use", () => {
     for (const ns of ["common", "nav", "switcher", "footer", "floatingCta", "consent", "notFound", "breadcrumb"]) {
       expect(ro).toHaveProperty(ns)
