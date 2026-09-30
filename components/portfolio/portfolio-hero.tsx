@@ -27,9 +27,9 @@ const enCopy = {
   titleSuffix: "and the results behind them.",
   text: "Digital work built for real business needs. Here are a few of the projects we're proud of.",
   stats: [
-    { value: "+150", label: "Projects delivered" },
+    { value: "150+", label: "Projects delivered" },
     { value: "95%", label: "Delivered on time" },
-    { value: "∞", label: "Possibilities" },
+    { value: "100%", label: "SEO-first builds" },
   ],
   scrollLabel: "Explore the projects",
 }

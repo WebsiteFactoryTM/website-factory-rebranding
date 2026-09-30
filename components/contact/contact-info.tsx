@@ -49,7 +49,7 @@ const enCopy = {
       label: "Phone",
       value: "+40 728 567 830",
       href: "tel:+40728567830",
-      description: "Monday - Friday, 9am - 6pm",
+      description: "Monday–Friday, 9am–6pm (EET)",
     },
     {
       icon: Mail,
@@ -68,9 +68,9 @@ const enCopy = {
     {
       icon: Clock,
       label: "Hours",
-      value: "Monday - Friday",
+      value: "Monday–Friday",
       href: null,
-      description: "9am - 6pm",
+      description: "9am–6pm (EET)",
     },
   ],
   followUs: "Follow us",

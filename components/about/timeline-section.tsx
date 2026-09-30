@@ -62,7 +62,7 @@ const enCopy = {
     {
       year: "Future",
       title: "Vision",
-      description: "We keep pushing to help businesses grow their presence in the digital space.",
+      description: "We keep pushing to help businesses grow online.",
     },
   ],
   launchDescriptionPrefix: "We're keeping every partnership going and still shipping quality work. Meanwhile, we're launching",

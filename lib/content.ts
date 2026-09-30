@@ -182,7 +182,7 @@ const faqsEn = [
   {
     question: "Will I be able to update the site myself?",
     answer:
-      "Yes. You get an easy-to-use admin panel plus free training once it's live. If you'd rather not deal with it, we also offer monthly maintenance plans.",
+      "Yes. You get an easy-to-use admin panel plus a walkthrough once it's live. If you'd rather not deal with it, we also offer monthly maintenance plans.",
   },
   {
     question: "What do you build with?",

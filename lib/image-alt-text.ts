@@ -6,9 +6,55 @@
 import type { Locale } from "@/i18n/routing"
 
 const ALT_WORDS = {
-  ro: { forClient: "pentru", by: "realizat de Website Factory", location: "Timișoara" },
-  en: { forClient: "pentru", by: "realizat de Website Factory", location: "Timișoara" },
-} satisfies Record<Locale, { forClient: string; by: string; location: string }>
+  ro: {
+    forClient: "pentru",
+    by: "realizat de Website Factory",
+    location: "Timișoara",
+    project: "Proiect",
+    with: "cu",
+    portfolio: "portofoliu Website Factory",
+    team: "Echipa Website Factory",
+    teamTagline: "Web Design și Dezvoltare",
+    partnerLogo: "Logo partener",
+    partnerOf: "Partener Website Factory - Web Design Timișoara",
+    categories: {
+      website: "Website de prezentare",
+      ecommerce: "Magazin online",
+      app: "Aplicație mobilă",
+      custom: "Platformă digitală",
+    },
+    categoriesLower: {
+      website: "website de prezentare",
+      ecommerce: "magazin online",
+      app: "aplicație mobilă",
+      custom: "platformă digitală",
+    },
+  },
+  en: {
+    forClient: "for",
+    by: "built by Website Factory",
+    location: "Timișoara",
+    project: "Project",
+    with: "with",
+    portfolio: "Website Factory portfolio",
+    team: "The Website Factory team",
+    teamTagline: "Web Design & Development",
+    partnerLogo: "Partner logo",
+    partnerOf: "Website Factory partner - Web Design",
+    categories: {
+      website: "Business website",
+      ecommerce: "Online store",
+      app: "Mobile app",
+      custom: "Digital platform",
+    },
+    categoriesLower: {
+      website: "business website",
+      ecommerce: "online store",
+      app: "mobile app",
+      custom: "digital platform",
+    },
+  },
+} satisfies Record<Locale, unknown>
 
 interface ProjectAltTextOptions {
   title: string
@@ -40,28 +86,18 @@ export function generateProjectAltText({
   const words = ALT_WORDS[locale]
   const parts: string[] = []
 
-  // Add project title
   parts.push(title)
 
-  // Add client if available
   if (client) {
     parts.push(`${words.forClient} ${client}`)
   }
 
-  // Add category
   if (categoryLabel) {
     parts.push(`- ${categoryLabel}`)
   } else if (category) {
-    const categoryMap: Record<string, string> = {
-      website: "Website de prezentare",
-      ecommerce: "Magazin online",
-      app: "Aplicație mobilă",
-      custom: "Platformă digitală",
-    }
-    parts.push(`- ${categoryMap[category] || category}`)
+    parts.push(`- ${(words.categories as Record<string, string>)[category] || category}`)
   }
 
-  // Add location for local SEO
   parts.push(`${words.by} ${location ?? words.location}`)
 
   return parts.join(" ")
@@ -92,18 +128,23 @@ export function generateServiceAltText({
 /**
  * Generate SEO-friendly alt text for testimonial logos
  */
-export function generateTestimonialLogoAltText(name: string, role: string, company?: string): string {
+export function generateTestimonialLogoAltText(
+  name: string,
+  role: string,
+  company?: string,
+  locale: Locale = "ro",
+): string {
+  const words = ALT_WORDS[locale]
   const parts: string[] = []
 
   if (company) {
     parts.push(`Logo ${company}`)
   } else {
-    // Extract company from role if available
     const companyMatch = role.match(/(?:,|–|-)\s*(.+)/)
     if (companyMatch) {
       parts.push(`Logo ${companyMatch[1].trim()}`)
     } else {
-      parts.push(`Logo partener`)
+      parts.push(words.partnerLogo)
     }
   }
 
@@ -120,25 +161,19 @@ export function generatePortfolioShowcaseAltText(
   projectTitle: string,
   category: string,
   result?: string,
+  locale: Locale = "ro",
 ): string {
+  const words = ALT_WORDS[locale]
   const parts: string[] = []
 
-  parts.push(`Proiect ${projectTitle}`)
-
-  const categoryMap: Record<string, string> = {
-    website: "website de prezentare",
-    ecommerce: "magazin online",
-    app: "aplicatie mobilă",
-    custom: "platformă digitală",
-  }
-
-  parts.push(categoryMap[category] || category)
+  parts.push(`${words.project} ${projectTitle}`)
+  parts.push((words.categoriesLower as Record<string, string>)[category] || category)
 
   if (result) {
-    parts.push(`cu ${result}`)
+    parts.push(`${words.with} ${result}`)
   }
 
-  parts.push(`- portofoliu Website Factory`)
+  parts.push(`- ${words.portfolio}`)
 
   return parts.join(" ")
 }
@@ -146,8 +181,9 @@ export function generatePortfolioShowcaseAltText(
 /**
  * Generate SEO-friendly alt text for team/company images
  */
-export function generateTeamImageAltText(context: string, location = "Timișoara"): string {
-  return `${context} - Echipa Website Factory ${location} - Web Design și Dezvoltare`
+export function generateTeamImageAltText(context: string, location = "Timișoara", locale: Locale = "ro"): string {
+  const words = ALT_WORDS[locale]
+  return `${context} - ${words.team} ${location} - ${words.teamTagline}`
 }
 
 /**
@@ -170,7 +206,7 @@ export function generateCityImageAltText(landmark: string, city: string, context
 /**
  * Generate SEO-friendly alt text for partner logos
  */
-export function generatePartnerLogoAltText(partnerName: string): string {
-  return `Logo ${partnerName} - Partener Website Factory - Web Design Timișoara`
+export function generatePartnerLogoAltText(partnerName: string, locale: Locale = "ro"): string {
+  const words = ALT_WORDS[locale]
+  return `Logo ${partnerName} - ${words.partnerOf}`
 }
-

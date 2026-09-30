@@ -133,7 +133,7 @@ const enCopy = {
       id: "magazin-online",
       title: "Online Store",
       description:
-        "A fully working online shop — integrated payments, loyalty tools, stock management — built around easy admin and even easier selling.",
+        "A fully working online store — integrated payments, loyalty tools, stock management — built around easy admin and even easier selling.",
       features: [
         "Payments, delivery & invoicing handled",
         "Filters, search & product variants",
@@ -144,7 +144,7 @@ const enCopy = {
     },
     {
       id: "dezvoltare-aplicatie",
-      title: "Mobile App Development",
+      title: "App Development",
       description:
         "Native or cross-platform apps for iOS and Android. Clean UX, strong performance — from first MVP to a product ready to scale.",
       features: [

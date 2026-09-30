@@ -38,7 +38,7 @@ const enCopy = {
   ],
   marqueeWords: [
     "Web Design",
-    "E-Commerce",
+    "E-commerce",
     "SEO Optimisation",
     "UI/UX Design",
     "Mobile Apps",

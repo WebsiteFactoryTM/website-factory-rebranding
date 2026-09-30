@@ -21,7 +21,7 @@ const enCopy = {
   heading: "Where to find us",
   subtitle: "We're based in Timișoara, and work with clients across Romania and beyond.",
   cardTitle: "Website Factory",
-  addressLine1: "Timișoara, Timiș",
+  addressLine1: "Timișoara",
   addressLine2: "Romania",
   openMaps: "Open in Google Maps",
 }

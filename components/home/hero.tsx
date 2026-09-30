@@ -27,7 +27,7 @@ const roCopy = {
 }
 
 const enCopy = {
-  badge: "SEO-First Web Design",
+  badge: "SEO-first Web Design",
   h1Line1: "A website that",
   h1Line2: "brings in customers —",
   h1Highlight: "not just visitors.",

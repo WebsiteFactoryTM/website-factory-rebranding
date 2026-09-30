@@ -57,7 +57,7 @@ export function EcommercePortfolio() {
         image: project.image,
         results: firstResult?.value || t.defaultResult,
         platform: project.technologies[0] || t.defaultPlatform,
-        altText: generatePortfolioShowcaseAltText(project.title, project.category, outcome),
+        altText: generatePortfolioShowcaseAltText(project.title, project.category, outcome, locale),
         isFeatured: true,
       }
     })
@@ -74,7 +74,7 @@ export function EcommercePortfolio() {
         image: project.image,
         results: project.year || t.recentProject,
         platform: "Wordpress",
-        altText: generatePortfolioShowcaseAltText(project.title, project.category, project.year || t.recentProject),
+        altText: generatePortfolioShowcaseAltText(project.title, project.category, project.year || t.recentProject, locale),
         isFeatured: false,
         isExternal: !!project.liveUrl,
         liveUrl: project.liveUrl,

@@ -96,7 +96,7 @@ const enCopy = {
         { name: "Premium Themes", desc: "Customisable design" },
         { name: "Pro Plugins", desc: "Unlimited extensibility" },
         { name: "PHP & MySQL", desc: "Proven technology" },
-        { name: "Optimised hosting", desc: "Guaranteed performance" },
+        { name: "Optimised hosting", desc: "Reliable performance" },
       ],
       benefits: ["Accessible cost", "Easy to manage", "A huge ecosystem"],
     },
@@ -108,7 +108,7 @@ const enCopy = {
       color: "from-brand to-cyan-500",
       recommended: true,
       features: [
-        { name: "Next.js 15", desc: "The #1 React framework" },
+        { name: "Next.js", desc: "The #1 React framework" },
         { name: "Payload CMS", desc: "Modern headless CMS" },
         { name: "TypeScript", desc: "Type-safe code" },
         { name: "Vercel Edge", desc: "Fast global CDN" },

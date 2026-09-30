@@ -26,7 +26,16 @@ export interface FeaturedProject {
   en?: Partial<
     Pick<
       FeaturedProject,
-      "title" | "categoryLabel" | "description" | "shortDescription" | "results" | "challenge" | "solution" | "testimonial"
+      | "title"
+      | "client"
+      | "categoryLabel"
+      | "description"
+      | "shortDescription"
+      | "results"
+      | "technologies"
+      | "challenge"
+      | "solution"
+      | "testimonial"
     >
   >
   enOrder?: number
@@ -43,7 +52,7 @@ export interface SimpleProject {
   year: string
   shortDescription?: string
   order?: number // For custom sorting in grid
-  en?: Partial<Pick<SimpleProject, "categoryLabel" | "shortDescription">>
+  en?: Partial<Pick<SimpleProject, "client" | "categoryLabel" | "shortDescription">>
   enOrder?: number
 }
 
@@ -87,6 +96,18 @@ export const featuredProjects: FeaturedProject[] = [
     en: {
       title: "Politehnica Timișoara – The Club's Official Digital Platform",
       categoryLabel: "Digital platform",
+      technologies: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Headless CMS",
+        "Results & standings API integration",
+        "ISR & Edge Caching",
+        "Vercel",
+        "Technical SEO",
+        "Agentic development",
+      ],
       description:
         "The official digital platform for Politehnica Timișoara football club: news, squads, fixtures, ticketing and an official shop, all in one fast, coherent experience. Results, the fixture list and league standings update automatically through a dedicated API integration, and the Next.js architecture delivers content almost instantly on any device.",
       shortDescription:
@@ -99,7 +120,7 @@ export const featuredProjects: FeaturedProject[] = [
       challenge:
         "A club with over 100 years of history and tens of thousands of supporters needed a single official digital hub: daily news, three squads, a fixture list, ticketing and a shop — all on a platform that could handle matchday traffic spikes and load instantly on mobile, where most of the audience is.",
       solution:
-        "We built the platform on Next.js, with server rendering and route-level caching so navigation between sections feels instant. Match results, fixtures and standings are pulled automatically through a dedicated API integration, removing manual updates entirely. Editors publish news and content directly from the CMS, and semantic structure, structured data and image optimisation deliver Core Web Vitals 3/3 and maximum search visibility. The whole project was delivered through an agentic development workflow that radically shortened the path from concept to production.",
+        "We built the platform on Next.js, with server rendering and route-level caching so navigation between sections feels instant. Match results, fixtures and standings are pulled automatically through a dedicated API integration, removing manual updates entirely. Editors publish news and content directly from the CMS, and semantic structure, structured data and image optimisation deliver Core Web Vitals 3/3 and maximum search visibility. The whole project was delivered through an agentic development workflow that significantly shortened the path from concept to production.",
     },
   },
   {
@@ -136,16 +157,16 @@ export const featuredProjects: FeaturedProject[] = [
       title: "UN:EVENT – A Platform for Venues, Services and Events",
       categoryLabel: "Digital platform",
       description:
-        "A digital platform connecting venues, suppliers and event organisers in one ecosystem. Smart filtering, verified listings, real visibility, and other integrated systems.",
+        "A digital platform connecting venues, suppliers and event organisers in one ecosystem — smart filtering, verified listings, maps and real visibility for everyone listed.",
       shortDescription: "A digital platform that simplifies finding venues, services and events.",
       results: [
         { label: "Listings in month one", value: "61+" },
         { label: "Load speed", value: "0.4s" },
-        { label: "Core Web Vitals - SEO", value: "100%" },
+        { label: "Core Web Vitals & SEO", value: "100%" },
       ],
       testimonial: {
         quote:
-          "UN:EVENT is our own product, still in active development. These reviews come from partners and early users already using the platform in its early stages.",
+          "UN:EVENT is our own product, still in active development. These reviews come from partners and users who were already on the platform in its first months.",
         author: "Ernest Slach",
         role: "Co-Founder, UN:EVENT & Website Factory",
       },
@@ -193,7 +214,20 @@ export const featuredProjects: FeaturedProject[] = [
     liveUrl: "https://ridersroute.app/",
     en: {
       title: "Rider's Route – Mobile App & Web Platform for Motorcyclists",
+      client: "Rider's Route SRL",
       categoryLabel: "Mobile app & website",
+      technologies: [
+        "React Native",
+        "Expo",
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Maps & GPS tracking",
+        "OpenStreetMap",
+        "PostgreSQL",
+        "Push notifications",
+        "Vercel",
+      ],
       description:
         "A digital ecosystem built for motorcyclists: a React Native mobile app with turn-by-turn navigation, GPS ride tracking, a digital garage and an SOS button, paired with a Next.js web platform where routes can be discovered, saved and shared. Community, maps and ride stats — the same product, on iOS, Android and the web.",
       shortDescription:
@@ -206,7 +240,7 @@ export const featuredProjects: FeaturedProject[] = [
       challenge:
         "Motorcyclists rely on generic navigation apps that don't understand what a ride actually needs: routes chosen for corners, elevation profiles, ride stats, bike maintenance and road safety. The challenge was building a product that works identically on phone and web, with fast maps and data synced in real time.",
       solution:
-        "We built the mobile app in React Native — a single codebase for iOS and Android — and the web platform in Next.js, both connected to the same API and database. Riders start a Free Ride or navigate turn-by-turn to a destination, and the app records distance, speed, elevation and the full route. Around that core, we built a digital garage (servicing, inspections, insurance), a community feed of shared rides, and an SOS button accessible mid-ride. The site exposes public routes optimised for search, making it the main acquisition channel for the app.",
+        "We built the mobile app in React Native — a single codebase for iOS and Android — and the web platform in Next.js, both connected to the same API and database. Riders start a Free Ride (open-ended ride recording) or navigate turn-by-turn to a destination, and the app records distance, speed, elevation and the full route. Around that core, we built a digital garage (servicing, inspections, insurance), a community feed of shared rides, and an SOS button accessible mid-ride. The site exposes public routes optimised for search, making it the main acquisition channel for the app.",
     },
   },
   {
@@ -248,8 +282,20 @@ export const featuredProjects: FeaturedProject[] = [
     en: {
       title: "La Pinocchio – A Full Redesign of the Online Ordering Platform",
       categoryLabel: "Online store",
+      technologies: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Custom cart & checkout",
+        "Netopia Payments",
+        "Customer accounts",
+        "Order dispatch dashboard",
+        "Local SEO",
+        "Vercel",
+      ],
       description:
-        "A full redesign of the online ordering platform for La Pinocchio, a restaurant in Piața Traian, Timișoara, running since 2004. We moved the entire experience onto a modern Next.js stack, with a digital menu by category, a Dish of the Day, offers, a fast cart, customer accounts and online payment — built for an order completed in a few taps, straight from a phone. Behind the scenes, a dedicated dashboard lets the restaurant team dispatch orders in real time, and the new architecture brought a 60% performance gain over the old platform.",
+        "A full redesign of the online ordering platform for La Pinocchio, a restaurant in Timișoara's Piața Traian square, running since 2004. We moved the entire experience onto a modern Next.js stack, with a digital menu by category, a Dish of the Day, offers, a fast cart, customer accounts and online payment — built for an order completed in a few taps, straight from a phone. Behind the scenes, a dedicated dashboard lets the restaurant team dispatch orders in real time, and the new architecture brought a 60% performance gain over the old platform.",
       shortDescription:
         "A modern redesign of the online ordering platform for La Pinocchio restaurant in Timișoara, with an order-dispatch dashboard and 60% better performance.",
       results: [
@@ -300,6 +346,16 @@ export const featuredProjects: FeaturedProject[] = [
     en: {
       title: "Fern & Flow Hair – A Website for a London Hair Salon",
       categoryLabel: "Business website",
+      technologies: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Booking system integration",
+        "Stripe (e-gift cards)",
+        "Vercel",
+        "UK local SEO",
+      ],
       description:
         "A website for an independent hair salon in Beckenham, South London, specialising in organic hair care. Editorial, natural design with integrated online booking, digital gift cards, a price list, a portfolio gallery and reviews — built in Next.js and delivered at 97/100 performance and 100/100 SEO.",
       shortDescription:
@@ -352,7 +408,19 @@ export const featuredProjects: FeaturedProject[] = [
     liveUrl: "https://www.daylin.ie/",
     en: {
       title: "Daylin Nail Supply – Online Store for a Dublin Beauty Brand",
+      client: "Daylin Nail Supply, Dublin – Ireland",
       categoryLabel: "Online store",
+      technologies: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Checkout & online payments",
+        "PRO accounts (B2B)",
+        "Catalogue & stock management",
+        "Vercel",
+        "Ireland SEO",
+      ],
       description:
         "An online store built in Next.js for an Irish professional nail-care distributor, founded in 2018 by Diana, a nail technician who personally tests every product in the catalogue. Structured by category and brand, with PRO accounts for salons, an academy section, and 48-hour dispatch from Dublin — delivered at 93/100 mobile performance.",
       shortDescription:
@@ -408,7 +476,22 @@ export const featuredProjects: FeaturedProject[] = [
     liveUrl: "https://www.roxassignmentsolution.com/",
     en: {
       title: "Rox Assignment Solution – Academic Support Platform, UK",
+      client: "Roxana Assignment Solution Ltd, London",
       categoryLabel: "Digital platform",
+      technologies: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Authentication & accounts",
+        "File uploads",
+        "Revolut Pay",
+        "PayPal",
+        "Admin panel",
+        "Order dashboard",
+        "WhatsApp integration",
+        "Vercel",
+      ],
       description:
         "A web platform for a UK academic support company: students submit a brief and materials, receive a tailored quote, pay securely via Revolut Pay or PayPal, and track progress in a dedicated dashboard. Behind the scenes, a full admin panel handles the whole platform — requests, quotes, orders and content — with no technical intervention needed. Built in Next.js, with authentication and instant WhatsApp contact — at 94/100 mobile performance.",
       shortDescription:
@@ -440,7 +523,7 @@ export const featuredProjects: FeaturedProject[] = [
       { label: "Creștere % în 2 ani", value: "2329%" },
       { label: "Rată abandon", value: "-70%" },
     ],
-    technologies: ["Wordpress", "WooCommerce", "MySQL", "Netopia Payments", "Sameday Courier", "Easybox", "SmartBill", "Klaviyo", "Meta Pixel", "Google Ads"],
+    technologies: ["WordPress", "WooCommerce", "MySQL", "Netopia Payments", "Sameday Courier", "Easybox", "SmartBill", "Klaviyo", "Meta Pixel", "Google Ads"],
     year: "2023",
     enOrder: 7,
     challenge: "Brandul avea nevoie de o prezență online premium care să vorbească despre originea produselor, valorile culturale și beneficiile naturale — combinând narativul cu un magazin ușor de folosit.",
@@ -451,7 +534,7 @@ export const featuredProjects: FeaturedProject[] = [
       title: "Blue Phoenix – Indonesian Lifestyle Products, Sold Online",
       categoryLabel: "Online store",
       description:
-        "An online store importing and showcasing natural products, teas, specialty coffee and traditional supplements from Java, Indonesia — aimed at consumers interested in wellbeing and healthy living. One of Website Factory's longest-running partners, on a maintenance retainer since March 2023.",
+        "An online store importing and showcasing natural products, teas, speciality coffee and traditional supplements from Java, Indonesia — aimed at consumers interested in wellbeing and healthy living. One of Website Factory's longest-running partners, on a maintenance retainer since March 2023.",
       shortDescription: "An online store selling natural products from Indonesia, optimised for conversions and repeat customers.",
       results: [
         { label: "Conversions", value: "+120%" },
@@ -480,7 +563,7 @@ export const featuredProjects: FeaturedProject[] = [
       { label: "Timp mediu petrecut pe site", value: "2:04 min" },
       { label: "Retenție", value: "68%" },
     ],
-    technologies: ["Wordpress", "Elementor", "SEO"],
+    technologies: ["WordPress", "Elementor", "SEO"],
     year: "2024",
     enOrder: 12,
     challenge:
@@ -492,10 +575,10 @@ export const featuredProjects: FeaturedProject[] = [
       title: "Merpano – A Corporate Website",
       categoryLabel: "Business website",
       description:
-        "Merpano is a major player in Western Romania's agricultural sector, supplying equipment, solutions and consultancy to farmers and industry partners. The website serves as one of its main digital touchpoints: corporate profile, product portfolio, services, team and values.",
-      shortDescription: "A corporate website for a major agricultural equipment and services company.",
+        "Merpano supplies agricultural equipment, solutions and consultancy to farmers and industry partners across Western Romania. The website serves as one of its main digital touchpoints: corporate profile, product portfolio, services, team and values.",
+      shortDescription: "A corporate website for an agricultural equipment and services supplier.",
       results: [
-        { label: "Core Web Vitals - SEO", value: "100%" },
+        { label: "Core Web Vitals & SEO", value: "100%" },
         { label: "Avg. time on site", value: "2:04 min" },
         { label: "Retention", value: "68%" },
       ],
@@ -577,8 +660,9 @@ export const simpleProjects: SimpleProject[] = [
     order: 43,
     enOrder: 3,
     en: {
+      client: "International client",
       categoryLabel: "News website",
-      shortDescription: "A news website for an international client based in Nigeria.",
+      shortDescription: "News website for a Nigerian media outlet.",
     },
   },
   {
@@ -618,7 +702,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Website de prezentare firmă de curățenie, Web Design, SEO",
     order: 61,
-    en: { categoryLabel: "Business website", shortDescription: "Business website for a cleaning company." },
+    en: { client: "Confidential (sole trader)", categoryLabel: "Business website", shortDescription: "Business website for a cleaning company." },
   },
   {
     id: "s8",
@@ -631,7 +715,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Pagină de prezentare - Designer de interior, Web design, Web development, SEO",
     order: 67,
-    en: { categoryLabel: "Business website", shortDescription: "A landing page for an interior designer." },
+    en: { client: "Confidential", categoryLabel: "Business website", shortDescription: "Landing page for an interior designer." },
   },
   {
     id: "s11",
@@ -644,7 +728,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare - Change agent, Web design, Web development, SEO, Mentenanta",
     order: 63,
-    en: { categoryLabel: "Business website", shortDescription: "Business website for a change management consultant." },
+    en: { client: "Confidential (sole trader)", categoryLabel: "Business website", shortDescription: "Business website for a change management consultant." },
   },
   {
     id: "s12",
@@ -670,7 +754,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2023",
     shortDescription: "Design landing page, Găzduire domeniu, SEO",
     order: 67,
-    en: { categoryLabel: "Business website", shortDescription: "A landing page for an Austrian apitherapy practice." },
+    en: { client: "Confidential (sole trader)", categoryLabel: "Business website", shortDescription: "Landing page for an Austrian apitherapy practice." },
   },
   {
     id: "s15",
@@ -696,7 +780,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Website de preszentare - Drone agricole, Web design, Web Development, SEO",
     order: 13,
-    en: { categoryLabel: "Business website", shortDescription: "Business website for an agricultural drone service." },
+    en: { client: "Confidential", categoryLabel: "Business website", shortDescription: "Business website for an agricultural drone service." },
   },
   {
     id: "s20",
@@ -774,7 +858,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare - Website de prezetare și vânzare auto, Web design, Web Development, SEO, Mentenanță",
     order: 26,
-    en: { categoryLabel: "Automotive website", shortDescription: "Business website for a car dealership." },
+    en: { categoryLabel: "Automotive website", shortDescription: "Website for a car dealership." },
   },
   {
     id: "s27",
@@ -787,7 +871,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Website prezentare - Terapie Energetică, Web design, Web development, Design Grafic",
     order: 27,
-    en: { categoryLabel: "Business website", shortDescription: "Business website for an energy therapy practice." },
+    en: { client: "Confidential", categoryLabel: "Business website", shortDescription: "Business website for an energy therapy practice." },
   },
   {
     id: "s28",
@@ -813,7 +897,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Website ONG, Sitem donație, Web design, Web development, Design Grafic",
     order: 29,
-    en: { categoryLabel: "Charity website", shortDescription: "Website for a charity, with an online donation system." },
+    en: { client: "Pâinea pe Ape Association", categoryLabel: "Charity website", shortDescription: "Website for a charity, with an online donation system." },
   },
   {
     id: "s30",
@@ -852,7 +936,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Pagină de prezentare - Închirierea ciubăr mobil, Web design, Web development, SEO, Design Logo și Branding",
     order: 32,
-    en: { categoryLabel: "Business website", shortDescription: "A landing page for a mobile hot-tub rental service." },
+    en: { client: "Confidential", categoryLabel: "Business website", shortDescription: "Landing page for a mobile hot-tub rental service." },
   },
   {
     id: "s34",
@@ -865,7 +949,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2023",
     shortDescription: "Website de prezentare avocați, Web design, Mentenanță, Găzduire domeniu, Design Logo, SEO",
     order: 15,
-    en: { categoryLabel: "Business website", shortDescription: "Business website for a law firm." },
+    en: { client: "Confidential", categoryLabel: "Business website", shortDescription: "Business website for a law firm." },
   },
   {
     id: "s35",
@@ -904,7 +988,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare asociație ONG, Web design, Web development, SEO, Găzduire domeniu",
     order: 39,
-    en: { categoryLabel: "Charity website", shortDescription: "Business website for a charity." },
+    en: { client: "Ame de Vie Association", categoryLabel: "Charity website", shortDescription: "Website for a charity." },
   },
   {
     id: "s40",
@@ -917,7 +1001,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare, Web Design, Web development, Design Logo, Găzduire domeniu, SEO",
     order: 40,
-    en: { categoryLabel: "Automotive website", shortDescription: "Business website for a car dealership." },
+    en: { client: "Confidential", categoryLabel: "Automotive website", shortDescription: "Website for a car dealership." },
   },
   {
     id: "s41",
@@ -969,7 +1053,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare avocat, Web design, Mentenanță, Găzduire domeniu, Design Logo, SEO",
     order: 44,
-    en: { categoryLabel: "Business website", shortDescription: "Business website for a lawyer." },
+    en: { client: "Confidential", categoryLabel: "Business website", shortDescription: "Business website for a lawyer." },
   },
   {
     id: "s46",
@@ -1010,7 +1094,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Aplicație online de vânzare haine adolescenți, Scanare QR unic Web design, Web Development, Next.js - React, Găzduire, SEO, Mentenanta",
     order: 5,
-    en: { categoryLabel: "Online store", shortDescription: "An online store for teen clothing, with unique QR-code scanning per item." },
+    en: { client: "Confidential", categoryLabel: "Online store", shortDescription: "Online store for teen clothing, with unique QR-code scanning per item." },
   },
   {
     id: "s51",
@@ -1023,7 +1107,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2024",
     shortDescription: "Magazin online - Firmă de construcții, Web design, Mentenanță, Design Logo, SEO",
     order: 51,
-    en: { categoryLabel: "Online store", shortDescription: "Online store for a construction company." },
+    en: { client: "Confidential", categoryLabel: "Online store", shortDescription: "Online store for a construction company." },
   },
   {
     id: "s52",
@@ -1127,7 +1211,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Magazin online și calculator sisteme panouri fotovoltaice complete, sistem prețuri în funcție de rolul utilizatorului, Web design, Web development, Mentenanță, domeniu, SEO",
     order: 2,
-    en: { categoryLabel: "Online store", shortDescription: "An online store and calculator for solar panel systems, with role-based pricing." },
+    en: { categoryLabel: "Online store", shortDescription: "Online store and calculator for solar panel systems, with role-based pricing." },
   },
   {
     id: "s65",
@@ -1201,7 +1285,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Platformă online pentru achizitionarea extraselor CF ANCPI, Web design, Web development, Mentenanță, Găzduire, SEO",
     order: 17,
-    en: { categoryLabel: "Custom platform", shortDescription: "A platform for ordering official Romanian land registry extracts." },
+    en: { categoryLabel: "Custom platform", shortDescription: "Platform for ordering official Romanian land registry extracts." },
   },
   {
     id: "s71",
@@ -1214,7 +1298,7 @@ export const simpleProjects: SimpleProject[] = [
     year: "2025",
     shortDescription: "Website de prezentare standuri expo, Web design, Web development, Mentenanță, SEO",
     order: 18,
-    en: { categoryLabel: "Online catalogue", shortDescription: "Business website for an exhibition stand manufacturer." },
+    en: { categoryLabel: "Online catalogue", shortDescription: "Online product catalogue for an exhibition-stand manufacturer." },
   },
 ]
 

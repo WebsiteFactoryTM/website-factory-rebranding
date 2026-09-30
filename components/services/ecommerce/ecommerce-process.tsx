@@ -114,7 +114,7 @@ const enCopy = {
   eyebrow: "Our Process",
   headingPre: "How we build ",
   headingHighlight: "your online store",
-  subtitle: "A transparent 30-day process, from concept to your first sale.",
+  subtitle: "A transparent step-by-step process, from concept to your first sale.",
   stepLabel: "Step ",
   whatYouGet: "What you get:",
   durationLabel: "Estimated time: ",

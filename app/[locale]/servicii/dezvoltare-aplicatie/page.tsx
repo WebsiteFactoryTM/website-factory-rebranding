@@ -131,7 +131,7 @@ const faqsEn = [
   {
     question: "Do you offer support and maintenance after launch?",
     answer:
-      "Yes. We include 60 days of free post-launch support for bug fixes. After that, we offer monthly maintenance plans: security updates, monitoring, backups, technical support and ongoing development. Pricing starts from €200/month depending on complexity.",
+      "Yes. We include 60 days of free post-launch support for bug fixes. After that, we offer monthly maintenance plans: security updates, monitoring, backups, technical support and ongoing development.",
   },
   {
     question: "How do you ensure application security?",

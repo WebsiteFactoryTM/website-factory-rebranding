@@ -100,7 +100,7 @@ const enCopy = {
     },
     {
       title: "Gamification",
-      description: "Badges, achievements and challenges that boost engagement and time spent in-store.",
+      description: "Badges, achievements and challenges that boost engagement and time spent on your store.",
       color: "from-teal-500 to-green-500",
     },
     {

@@ -27,9 +27,9 @@ const roCopy = {
       title: "Web Applications",
       description: "Full-stack modern",
       technologies: [
-        { name: "Next.js 15", description: "React framework" },
+        { name: "Next.js", description: "React framework" },
         { name: "Payload CMS", description: "Headless CMS" },
-        { name: "TailwindCSS", description: "Styling" },
+        { name: "Tailwind CSS", description: "Styling" },
         { name: "Vercel", description: "Hosting & CDN" },
       ],
     },
@@ -77,9 +77,9 @@ const enCopy = {
       title: "Web Applications",
       description: "Modern full-stack",
       technologies: [
-        { name: "Next.js 15", description: "React framework" },
+        { name: "Next.js", description: "React framework" },
         { name: "Payload CMS", description: "Headless CMS" },
-        { name: "TailwindCSS", description: "Styling" },
+        { name: "Tailwind CSS", description: "Styling" },
         { name: "Vercel", description: "Hosting & CDN" },
       ],
     },

@@ -93,7 +93,7 @@ const enCopy = {
       color: "from-purple-500 to-indigo-600",
       idealFor: "Small to medium stores, tighter budgets",
       features: [
-        { name: "Build time", value: "5–8 weeks", positive: true },
+        { name: "Build time", value: "3–8 weeks", positive: true },
         { name: "Upfront cost", value: "Accessible", positive: true },
         { name: "Plugin ecosystem", value: "50,000+", positive: true },
         { name: "Scalability", value: "Up to ~7,000 products", positive: true },
@@ -133,7 +133,7 @@ const enCopy = {
         "Sub-1-second performance",
         "Excellent native SEO",
         "Cloud-scale infrastructure",
-        "Zero WordPress vulnerabilities",
+        "No WordPress plugin exposure",
       ],
       recommendation:
         "Next.js + Payload is the right call for brands chasing rapid growth, high traffic volumes, and an ultra-fast buying experience on any device.",

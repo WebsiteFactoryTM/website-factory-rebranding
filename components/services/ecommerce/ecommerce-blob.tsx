@@ -290,7 +290,9 @@ export function EcommerceBlob({ className, size = "lg" }: EcommerceBlobProps) {
               {/* Add to Cart Button */}
               <div className="mt-3 sm:mt-4 h-8 sm:h-10 rounded-full bg-gradient-to-r from-brand to-brand-light flex items-center justify-center gap-2">
                 <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
-                <span className="text-white text-xs sm:text-sm font-semibold">Adaugă în coș</span>
+                <span className="text-white text-xs sm:text-sm font-semibold">
+                  {locale === "en" ? "Add to cart" : "Adaugă în coș"}
+                </span>
               </div>
 
               {/* Shimmer overlay */}

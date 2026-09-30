@@ -62,13 +62,13 @@ const enCopy = {
   subtitle: "A structured Agile process with full transparency and predictable delivery.",
   stepLabel: "Step ",
   whatYouGet: "What you get:",
-  durationLabel: "Duration: ",
+  durationLabel: "Estimated time: ",
   steps: [
     {
       title: "Discovery & Analysis",
       duration: "1–2 weeks",
       description: "We analyse requirements, define the feature set, and write the technical specification.",
-      deliverables: ["PRD document", "User stories", "Wireframes", "Estimate"],
+      deliverables: ["Requirements document", "User stories", "Wireframes", "Estimate"],
     },
     {
       title: "UX/UI Design",

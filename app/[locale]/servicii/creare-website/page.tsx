@@ -128,7 +128,7 @@ const faqsEn = [
   {
     question: "Will the site work on mobile and tablet?",
     answer:
-      "Completely. Every site is responsive by design — it looks and works exactly as it should on desktop, laptop, tablet or phone. We test across multiple devices before launch.",
+      "Yes, completely. Every site is responsive by design — it looks and works exactly as it should on desktop, laptop, tablet or phone. We test across multiple devices before launch.",
   },
   {
     question: "Do you provide hosting and a domain?",

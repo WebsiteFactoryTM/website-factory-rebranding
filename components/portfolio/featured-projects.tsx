@@ -27,7 +27,7 @@ const enCopy = {
   titleHighlight: "case studies",
   text: "Complex projects with measurable results and the full story behind each one.",
   viewCaseStudy: "View case study",
-  visitSite: "Visit the site",
+  visitSite: "Visit live site",
 }
 const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 

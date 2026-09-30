@@ -74,10 +74,10 @@ const enCopy = {
     {
       title: "The Vision",
       description:
-        "Clean design, solid technical foundations, SEO done properly, and communication that doesn't need a decoder ring. Modern, fast, accessible, and built to scale.",
+        "Clean design, solid technical foundations, SEO done properly, and communication you don't need a glossary for. Modern, fast, accessible, and built to scale.",
     },
     {
-      title: "The Passion",
+      title: "The Craft",
       description:
         "We sweat the details — micro-interactions, performance, security. To us, \"done\" means tested, optimised, and shipped with care, whatever the size of the project.",
     },
@@ -127,7 +127,7 @@ export function CompanyStory() {
             <div className="relative aspect-[3/4] rounded-3xl overflow-hidden">
               <Image
                 src="/Alex-Ernest-Website-Factory.webp"
-                alt={generateTeamImageAltText(t.teamImageAltSubject, t.teamImageAltLocation)}
+                alt={generateTeamImageAltText(t.teamImageAltSubject, t.teamImageAltLocation, locale)}
                 fill
                 className="object-cover"
               />

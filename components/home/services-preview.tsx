@@ -23,7 +23,7 @@ const serviceItems = [
   },
   {
     id: "aplicatie-mobile",
-    href: "/servicii/aplicatie-mobile" as const,
+    href: "/servicii/dezvoltare-aplicatie" as const,
     icon: Smartphone,
     gradient: "from-glow-cyan to-glow-violet",
   },
@@ -80,12 +80,12 @@ const enCopy = {
       id: "magazin-online",
       title: "Online Store",
       description:
-        "A fully working shop — payments, stock, loyalty tools and an easy back office — built around getting people to checkout, not just browse.",
+        "A fully working store — payments, stock, loyalty tools and an easy back office — built around getting people to checkout, not just browse.",
       outcomes: ["Payments, delivery & invoicing sorted", "Search, filters & product variants", "A checkout that doesn't lose sales"],
     },
     {
       id: "aplicatie-mobile",
-      title: "Mobile App",
+      title: "App Development",
       description:
         "A native or cross-platform app for iOS and Android, built lean enough to launch fast and solid enough to scale once it takes off.",
       outcomes: ["One codebase, iOS & Android", "Push, accounts, payments — as needed", "Store listing & ongoing upkeep"],

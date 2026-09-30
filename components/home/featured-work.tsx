@@ -70,7 +70,7 @@ export function FeaturedWork() {
         image: project.image,
         slug: project.slug,
         color: getColorByCategory(project.category),
-        altText: generatePortfolioShowcaseAltText(project.title, project.category, outcome),
+        altText: generatePortfolioShowcaseAltText(project.title, project.category, outcome, locale),
       }
     })
 

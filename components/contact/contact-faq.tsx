@@ -66,12 +66,12 @@ const enCopyBase = {
     {
       question: "How does the process work?",
       answer:
-        "We work in six stages: discovery, strategy and planning, UI/UX design, development, testing and QA, and launch. You'll have regular check-ins and access to a dedicated project portal throughout.",
+        "We work in six stages: discovery, design and prototyping, development, testing and QA, launch, and ongoing support. You'll have regular check-ins and access to a dedicated project portal throughout.",
     },
     {
-      question: "Do you work with clients outside Timișoara?",
+      question: "Do you work with clients outside Romania?",
       answer:
-        "Absolutely — while we're based in Timișoara, we work with clients across Romania and internationally. Video calls, email and project management tools keep things moving smoothly wherever you are.",
+        "Absolutely — we're based in Timișoara, but we work with clients across Europe, including the UK and Ireland. Video calls, email and project management tools keep things moving smoothly wherever you are.",
     },
   ],
   noAnswer: "Didn't find the answer you're looking for?",

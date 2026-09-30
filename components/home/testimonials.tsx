@@ -366,6 +366,7 @@ export function Testimonials() {
                         testimonial.name,
                         testimonial.role,
                         testimonial.role.match(/(?:,|–|-)\s*(.+)/)?.[1]?.trim(),
+                        locale,
                       )}
                       width={100}
                       height={56}

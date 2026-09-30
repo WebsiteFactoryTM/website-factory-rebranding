@@ -77,7 +77,7 @@ export default async function DespreNoiPage({ params }: { params: Promise<{ loca
       },
       {
         "@type": "Person",
-        name: "Alex Nedelia-Kereks",
+        name: "Alex Nedelia-Kerekes",
         jobTitle: "Co-Founder & CTO",
       },
     ],

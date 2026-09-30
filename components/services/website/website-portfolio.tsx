@@ -52,7 +52,7 @@ export function WebsitePortfolio() {
         image: project.image,
         results: firstResult?.value || t.defaultResult,
         slug: project.slug,
-        altText: generatePortfolioShowcaseAltText(project.title, project.category, outcome),
+        altText: generatePortfolioShowcaseAltText(project.title, project.category, outcome, locale),
         isFeatured: true,
       }
     })
@@ -68,7 +68,7 @@ export function WebsitePortfolio() {
         image: project.image,
         results: project.year || t.recentProject,
         href: project.liveUrl || "#",
-        altText: generatePortfolioShowcaseAltText(project.title, project.category, project.year || t.recentProject),
+        altText: generatePortfolioShowcaseAltText(project.title, project.category, project.year || t.recentProject, locale),
         isFeatured: false,
         isExternal: !!project.liveUrl,
       }

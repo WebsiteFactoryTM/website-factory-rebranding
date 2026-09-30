@@ -18,9 +18,9 @@ const roCopy = {
   viewProject: "Vezi proiect",
 }
 const enCopy = {
-  eyebrow: "More projects",
-  title: "A few more",
-  titleHighlight: "projects worth a look",
+  eyebrow: "The wider portfolio",
+  title: "More projects",
+  titleHighlight: "worth a look",
   text: "A selection of projects we've delivered for clients across different industries.",
   viewProject: "View project",
 }

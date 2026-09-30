@@ -209,7 +209,7 @@ export function Partners() {
               <div className="relative w-40 sm:w-48 lg:w-56 h-24 sm:h-28 lg:h-32 rounded-xl bg-white dark:bg-gray-800 backdrop-blur-sm border border-border/40 shadow-sm hover:shadow-md hover:border-border/60 transition-all duration-300 p-4 sm:p-5 lg:p-6 flex items-center justify-center">
                 <Image
                   src={partner.logo}
-                  alt={generatePartnerLogoAltText(partner.name)}
+                  alt={generatePartnerLogoAltText(partner.name, locale)}
                   width={200}
                   height={120}
                   className="w-full h-full object-contain filter grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"

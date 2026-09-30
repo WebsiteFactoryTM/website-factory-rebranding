@@ -23,7 +23,7 @@ const roCopy = {
 const enCopy = {
   headingLine1: "Ready to turn your",
   headingLine2: "idea into reality",
-  subtitle: "Let's talk about your app. Free consultation and a price estimate within 48 hours.",
+  subtitle: "Let's talk about your app. We reply within 24 hours, with a free consultation and a price estimate within 48.",
   ctaPrimary: "Get a free consultation",
   callNow: "Call now",
   whatsapp: "WhatsApp",

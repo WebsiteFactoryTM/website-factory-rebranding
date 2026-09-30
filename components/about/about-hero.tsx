@@ -31,7 +31,7 @@ const enCopy = {
   h1Outline: "grow",
   h1Suffix: "businesses",
   paragraph:
-    "Since 2023, we've been the go-to partner for companies across Romania and Europe that want a strong digital presence — combining design and technology to get results you can measure.",
+    "Since 2023, we've worked with companies across Romania and Europe that want a strong digital presence — combining design and technology to get results you can measure.",
   stats: [
     { value: "2023", label: "Founded" },
     { value: "150+", label: "Projects delivered" },

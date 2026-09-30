@@ -57,7 +57,7 @@ const enCopy = {
     { label: "React Native" },
     { label: "Next.js Apps" },
     { label: "SaaS Platforms" },
-    { label: "Digitalisation" },
+    { label: "Digital Transformation" },
   ],
   ctaPrimary: "Discuss your project",
   ctaSecondary: "See live apps",
