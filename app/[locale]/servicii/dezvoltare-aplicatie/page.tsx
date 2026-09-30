@@ -167,6 +167,7 @@ export default async function DezvoltareAplicatiePage({ params }: { params: Prom
               "Dezvoltare aplicații mobile cu React Native, web apps cu Next.js & Payload CMS, platforme SaaS scalabile și soluții de digitalizare pentru companii.",
             url: "/servicii/dezvoltare-aplicatie",
           },
+      locale as Locale,
     ),
     inLanguage: locale,
   }

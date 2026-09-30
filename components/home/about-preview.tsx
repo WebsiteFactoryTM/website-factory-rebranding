@@ -51,7 +51,7 @@ const enCopy = {
   headingHighlight: "hands-on",
   headingSuffix: "with every project",
   paragraph1:
-    "We're a small, Timișoara-based studio that's spent the last five years building websites for businesses across Romania and the rest of Europe.",
+    "We're a small, Timișoara-based studio, founded in 2023, building websites for businesses across Romania and the rest of Europe.",
   paragraph2Prefix:
     "We keep you in the loop at every stage, in plain English, thanks to a ",
   paragraph2Strong: "structured process behind every project",
@@ -59,7 +59,7 @@ const enCopy = {
   cta: "See how we work",
   stats: [
     { value: "150+", label: "Happy clients" },
-    { value: "5+", label: "Years in business" },
+    { value: "5+", label: "Years of experience" },
     { value: "<24h", label: "Avg. response time" },
     { value: "+95%", label: "On-time delivery" },
   ],

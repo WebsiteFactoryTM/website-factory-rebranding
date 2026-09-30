@@ -103,8 +103,8 @@ const roCopy = {
       shortTitle: "Suport",
       duration: "Ongoing",
       description:
-        "30 zile suport gratuit. Monitorizăm vânzările, rata de abandon coș, optimizăm conversiile și te ajutăm să scalezi afacerea.",
-      deliverables: ["Suport 30 zile", "Rapoarte vânzări", "Optimizări CRO"],
+        "60 zile suport gratuit. Monitorizăm vânzările, rata de abandon coș, optimizăm conversiile și te ajutăm să scalezi afacerea.",
+      deliverables: ["Suport 60 zile", "Rapoarte vânzări", "Optimizări CRO"],
       color: "from-brand-light to-brand",
     },
   ],
@@ -195,8 +195,8 @@ const enCopy = {
       shortTitle: "Support",
       duration: "Ongoing",
       description:
-        "30 days of free support. We monitor sales and cart abandonment, optimise conversions, and help you scale the business.",
-      deliverables: ["30 days' support", "Sales reports", "CRO optimisations"],
+        "60 days of free support. We monitor sales and cart abandonment, optimise conversions, and help you scale the business.",
+      deliverables: ["60 days' support", "Sales reports", "CRO optimisations"],
       color: "from-brand-light to-brand",
     },
   ],

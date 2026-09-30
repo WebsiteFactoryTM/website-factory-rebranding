@@ -169,6 +169,7 @@ export default async function CreareWebsitePage({ params }: { params: Promise<{ 
               "Servicii complete de creare website în Timișoara. Design modern, optimizare SEO, performanță maximă și conversii măsurabile.",
             url: "/servicii/creare-website",
           },
+      locale as Locale,
     ),
     inLanguage: locale,
   }

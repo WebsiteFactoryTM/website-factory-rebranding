@@ -10,7 +10,7 @@ import { FloatingElement } from "@/components/ui/floating-element"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { generateTestimonialLogoAltText } from "@/lib/image-alt-text"
-import { testimonials } from "@/lib/testimonials-data"
+import { getTestimonials } from "@/lib/testimonials-data"
 
 const roCopy = {
   sectionLabel: "Testimoniale",
@@ -32,15 +32,14 @@ const enCopy = {
   goToSlide: "Go to slide",
 }
 
-// The testimonial quotes themselves (lib/testimonials-data.ts) are still RO-only and
-// used as-is on EN — flagged to the user at the Phase 2 review gate (Task 2.6), not
-// translated here: they're direct quotes attributed to named RO clients, and the
-// Review JSON-LD schema for them is already gated to locale === "ro" in page.tsx.
+// Quotes are translated via getTestimonials(); the Review JSON-LD schema for them
+// stays gated to locale === "ro" in page.tsx.
 const copy = { ro: roCopy, en: enCopy } satisfies Record<Locale, typeof roCopy>
 
 export function Testimonials() {
   const locale = useLocale()
   const t = copy[locale]
+  const testimonials = getTestimonials(locale)
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal<HTMLDivElement>()
   const scrollRef = useRef<HTMLDivElement>(null)
   const [currentIndex, setCurrentIndex] = useState(0)

@@ -170,6 +170,7 @@ export default async function MagazinOnlinePage({ params }: { params: Promise<{ 
               "Dezvoltare magazine online cu WooCommerce și Next.js + Payload CMS. Funcționalități de loializare clienți, checkout optimizat și scalabilitate nelimitată.",
             url: "/servicii/magazin-online",
           },
+      locale as Locale,
     ),
     inLanguage: locale,
   }

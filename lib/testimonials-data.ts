@@ -1,5 +1,7 @@
 // Testimonials data - exported for use in both client components and server-side schema generation
 
+import type { Locale } from "@/i18n/routing"
+
 export interface Testimonial {
   id: number
   name: string
@@ -8,6 +10,7 @@ export interface Testimonial {
   logo: string
   rating: number
   datePublished?: string
+  en?: Pick<Testimonial, "role" | "content">
 }
 
 export const testimonials: Testimonial[] = [
@@ -20,6 +23,11 @@ export const testimonials: Testimonial[] = [
     logo: "/partners/ornella.webp",
     rating: 5,
     datePublished: "2024-03-15",
+    en: {
+      role: "Director, Ornella Design",
+      content:
+        "Great people — they quickly understood what we wanted and helped straight away. The team was brilliant and found fast solutions to any problem. Happy to recommend them!",
+    },
   },
   {
     id: 2,
@@ -30,6 +38,11 @@ export const testimonials: Testimonial[] = [
     logo: "/partners/logo-no-background-2-copy.webp",
     rating: 5,
     datePublished: "2024-06-20",
+    en: {
+      role: "Founder, The Radar – boutique consultancy",
+      content:
+        "Working with Website Factory was extremely smooth, even though we worked 100% remotely. Communication was clear, structured and efficient from the start right through to final delivery. The team quickly took on board my feedback about the specifics of a portfolio website — with some unusual elements compared to a commercial site — including video elements that are common in international markets but less usual in Romania. Post-delivery support was just as efficient and prompt, which is why I've already planned an upgrade to the site, again with Website Factory.",
+    },
   },
   {
     id: 3,
@@ -40,8 +53,13 @@ export const testimonials: Testimonial[] = [
     logo: "/partners/maravo-logo-landscape.webp",
     rating: 5,
     datePublished: "2024-08-10",
+    en: {
+      role: "Director, Maravo Clinic",
+      content:
+        "We had a very good experience working with Website Factory and with Ernest on creating our website. Ernest clearly understood the direction we wanted, delivered to the brief, and consistently incorporated our feedback, quickly adjusting the details we needed. We appreciated the promptness, openness and commitment, including the willingness to make changes even at the final stage, with the clear goal of delivering exactly the result we wanted. Thank you for the collaboration and professionalism — we wish you every success!",
+    },
   },
-    {
+  {
     id: 4,
     name: "Cristina Eros",
     role: "Fondator, YouPlus Agency",
@@ -50,6 +68,11 @@ export const testimonials: Testimonial[] = [
     logo: "/partners/youplus-partner.webp",
     rating: 5,
     datePublished: "2024-08-10",
+    en: {
+      role: "Founder, YouPlus Agency",
+      content:
+        "I've been working with Website Factory since 2023 and I'm very happy with the partnership! They're very responsive and quickly implement what we need, but they also bring extra ideas that improve the user experience or the flow. We've worked with them on our own site and on several of our agency clients' sites, and I always recommend them whenever someone needs to build a site or upgrade an existing one. I like that there are great people behind the brand who don't just focus on delivering the technical work, but on building a relationship, a partnership. I'd happily recommend them any time!",
+    },
   },
   {
     id: 5,
@@ -60,6 +83,11 @@ export const testimonials: Testimonial[] = [
     logo: "/partners/Logo-artimm-scaled.webp",
     rating: 5,
     datePublished: "2024-09-05",
+    en: {
+      role: "Co-founder, artimm.digital",
+      content:
+        "We worked with Website Factory on building our website and, overall, it was a real success. They understood what we wanted, came up with clear solutions and delivered a modern, clean, easy-to-use site. I liked that they were open to feedback, and we managed to reflect our business vision authentically. If you need a serious team for web design and development, Website Factory is the right choice.",
+    },
   },
   {
     id: 6,
@@ -70,6 +98,11 @@ export const testimonials: Testimonial[] = [
     logo: "/partners/geonordica-black-color.webp",
     rating: 5,
     datePublished: "2024-10-12",
+    en: {
+      role: "Director, Geonordica",
+      content:
+        "We worked with Website Factory on building our company's website. They showed seriousness, professionalism and attention to detail. They were responsive to the changes we requested during development, and analysed and corrected or improved the suggestions we brought. They also provided support and maintenance after the site went live. We confidently recommend Website Factory, as they added real value to our company's image.",
+    },
   },
   {
     id: 7,
@@ -80,7 +113,12 @@ export const testimonials: Testimonial[] = [
     logo: "/partners/The-Permanent-logof-scaled.webp",
     rating: 5,
     datePublished: "2024-10-12",
-  },  
+    en: {
+      role: "Director, The Permanent",
+      content:
+        "I recommend them with complete confidence! The collaboration was super easy from the start: clear communication, patience and quick solutions whenever I had questions or changes. The site turned out exactly as I wanted — clean, modern and well optimised. You can tell they know what they're doing and care about the result, not just about ticking off the project. Many thanks for the commitment!",
+    },
+  },
   {
     id: 8,
     name: "Alex Benchea",
@@ -90,8 +128,13 @@ export const testimonials: Testimonial[] = [
     logo: "/partners/Logo-Displayer-7.svg",
     rating: 5,
     datePublished: "2024-10-12",
+    en: {
+      role: "Director, Displayer",
+      content:
+        "We worked with this company on developing our website and the result met our expectations. The process was well structured, communication was efficient, and delivery was on the agreed schedule. The website is modern, functional and aligned with our business objectives.",
+    },
   },
-{
+  {
     id: 9,
     name: "Georgian Dumitru",
     role: "Production Manager, Radiotron Tehnologies",
@@ -100,6 +143,11 @@ export const testimonials: Testimonial[] = [
     logo: "/partners/Logo-full-radiotron-2048x378.webp",
     rating: 5,
     datePublished: "2024-10-12",
+    en: {
+      role: "Production Manager, Radiotron Tehnologies",
+      content:
+        "Thank you for the work on creating and developing our website. I particularly appreciate the team's commitment, openness to feedback and willingness to adjust the proposed solutions along the way. The overall design is modern and well aligned with the visual identity we discussed, and the site structure is clear and intuitive for users. The team showed professionalism, creativity and flexibility throughout the process. I especially appreciated the modern design approach, the openness to feedback, the clear and fast communication and the respect for agreed deadlines. I confidently recommend the team for similar projects and hope we'll work together again. Thank you once again!",
+    },
   },
   {
     id: 10,
@@ -110,6 +158,15 @@ export const testimonials: Testimonial[] = [
     logo: "/partners/bradluc-shop-logo.webp",
     rating: 5,
     datePublished: "2024-10-12",
+    en: {
+      role: "Director, Bradluc & Piscine Timiș",
+      content:
+        "I confidently recommend working with Website Factory. They were very attentive to detail, open to ideas and fully involved from start to finish. Communication was clear, deadlines were met, and the result was exactly what we wanted. Thanks to them we now have two well-structured, fully working sites: 👉 www.bradluc.ro and 👉 www.piscinetimis.ro. Thank you for the professionalism and patience — we'll definitely work together again!",
+    },
   },
 ]
 
+export function getTestimonials(locale: Locale): Testimonial[] {
+  if (locale !== "en") return testimonials
+  return testimonials.map((t) => (t.en ? { ...t, ...t.en } : t))
+}

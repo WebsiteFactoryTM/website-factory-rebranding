@@ -132,14 +132,22 @@ export function generateLocalBusinessSchema(locale: Locale = "ro") {
       latitude: 45.7489,
       longitude: 21.2087,
     },
-    areaServed: [
-      { "@type": "City", name: "Timișoara" },
-      { "@type": "City", name: "Cluj-Napoca" },
-      { "@type": "City", name: "București" },
-      { "@type": "City", name: "Brașov" },
-      { "@type": "City", name: "Iași" },
-      { "@type": "City", name: "Constanța" },
-    ],
+    areaServed:
+      locale === "en"
+        ? [
+            { "@type": "Country", name: "United Kingdom" },
+            { "@type": "Country", name: "Ireland" },
+            { "@type": "Country", name: "Netherlands" },
+            { "@type": "Country", name: "Romania" },
+          ]
+        : [
+            { "@type": "City", name: "Timișoara" },
+            { "@type": "City", name: "Cluj-Napoca" },
+            { "@type": "City", name: "București" },
+            { "@type": "City", name: "Brașov" },
+            { "@type": "City", name: "Iași" },
+            { "@type": "City", name: "Constanța" },
+          ],
     priceRange: "$$",
     openingHours: "Mo-Fr 09:00-18:00",
     sameAs: [
@@ -179,15 +187,18 @@ export function generateFAQSchema(faqs: { question: string; answer: string }[]) 
   }
 }
 
-export function generateServiceSchema({
-  name,
-  description,
-  url,
-}: {
-  name: string
-  description: string
-  url: string
-}) {
+export function generateServiceSchema(
+  {
+    name,
+    description,
+    url,
+  }: {
+    name: string
+    description: string
+    url: string
+  },
+  locale: Locale = "ro",
+) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -200,10 +211,15 @@ export function generateServiceSchema({
       name: siteConfig.name,
       url: siteConfig.url,
     },
-    areaServed: {
-      "@type": "Country",
-      name: "România",
-    },
+    areaServed:
+      locale === "en"
+        ? [
+            { "@type": "Country", name: "United Kingdom" },
+            { "@type": "Country", name: "Ireland" },
+            { "@type": "Country", name: "Netherlands" },
+            { "@type": "Country", name: "Romania" },
+          ]
+        : { "@type": "Country", name: "România" },
   }
 }
 

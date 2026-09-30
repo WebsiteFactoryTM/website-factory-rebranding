@@ -67,7 +67,7 @@ export default async function DespreNoiPage({ params }: { params: Promise<{ loca
     url: siteConfig.url,
     logo: `${siteConfig.url}/logo.png`,
     description: siteConfig.description,
-    foundingDate: "2021",
+    foundingDate: "2023",
     inLanguage: locale,
     founders: [
       {
@@ -91,7 +91,15 @@ export default async function DespreNoiPage({ params }: { params: Promise<{ loca
       email: siteConfig.contact.email,
       contactType: "customer service",
     },
-    areaServed: "România",
+    areaServed:
+      locale === "en"
+        ? [
+            { "@type": "Country", name: "United Kingdom" },
+            { "@type": "Country", name: "Ireland" },
+            { "@type": "Country", name: "Netherlands" },
+            { "@type": "Country", name: "Romania" },
+          ]
+        : "România",
     sameAs: [
       "https://www.facebook.com/profile.php?id=100087606842806",
       "https://instagram.com/websitefactorytm",

@@ -223,6 +223,7 @@ export default async function ServiciiPage({ params }: { params: Promise<{ local
               "Servicii complete de web design și dezvoltare în Timișoara: creare website, magazin online, aplicații mobile. Soluții profesionale pentru afacerea ta digitală.",
             url: "/servicii",
           },
+      locale as Locale,
     ),
     inLanguage: locale,
   }
